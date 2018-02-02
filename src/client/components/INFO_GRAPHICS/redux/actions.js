@@ -6,3 +6,4 @@ export const setIGBlog = (blob) => {
     data: blob
   }
 };
+ 

@@ -8,8 +8,9 @@ const InfoGraphic = (props) => {
   const image = props.image;
   const title = props.title;
   const blob = props.blob;
+  const color = props.color;
   return(
-    <div onClick={()=> props.actions.setIGBlog(blob || props.children)} className="IG-item">
+    <div onClick={()=> props.actions.setIGBlog(blob || props.children)} style={{backgroundColor:color}} className="IG-item">
       <div className="IG-item-img"><img src={image} width="100%" height="100%"/></div>
       <br />
       <div>{title}</div>
@@ -32,7 +33,11 @@ class IGList extends Component {
           {header}
           <div className="IG-list-wrap">
             {this.list.map((item, i) => {
-              return <InfoGraphic key={i} actions={this.props} title={item.title} image={item.image} blob={item.blob}>{this.defaultBlob}</InfoGraphic>
+              return (
+                <InfoGraphic key={i} color={item.color} actions={this.props} title={item.title} image={item.image} blob={item.blob}>
+                  {this.defaultBlob}
+                </InfoGraphic>
+              );
             })}
           </div>
         </div>

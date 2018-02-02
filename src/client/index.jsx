@@ -15,8 +15,8 @@ class App extends Component {
   render() {
     // // MOCK DATA
     const list = [
-      {title: 'ExaMple', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all'},
-      {title: 'EMANON', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all', 
+      {title: 'ExaMple', color: 'red', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all'},
+      {title: 'EMANON',color: 'red', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all', 
       blob:
         <div className="IG-display-blob">
           <div>NO CONTENT</div>
@@ -27,10 +27,10 @@ class App extends Component {
       <Provider store={store}>
         <div className="app">
           {/* INFO GRAPHICS */}
-          {/* 
+          
             <IGList list={list}/>
             <IGDisplay /> 
-          */}
+         
         </div>
       </Provider>
     );
