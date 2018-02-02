@@ -28,7 +28,7 @@ class App extends Component {
         <div className="app">
           {/* INFO GRAPHICS */}
           
-            <IGList list={list}/>
+            <IGList color="orange" list={list}/>
             <IGDisplay /> 
          
         </div>
