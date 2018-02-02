@@ -67,7 +67,6 @@
   color: white;
   font-family: 'Times New Roman', Times, serif;
   width: 100%;
-  margin-bottom: 2%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,6 +126,8 @@
   align-items: center;
   flex-direction: column;
   animation: IG-blob-load 1s ;
+  align-self: center;
+  //margin-top: 2%;
 }
 
 @keyframes IG-blob-load {

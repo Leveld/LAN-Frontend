@@ -31,7 +31,7 @@ class App extends Component {
               </div>
             </InfoGraphic>
           </InfoGraphicList>
-          <InfoGraphicDisplay />
+          <InfoGraphicDisplay toggle={true}/>
         </div>
       </Provider>
     );

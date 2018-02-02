@@ -7,11 +7,8 @@ import '../../styles/InfoGraphics.css';
 
 const InfoGraphic = (props) => {
   const getBlob = () => {
-    if (props.blob !== undefined) {
-      return blob;
-    }
-    if (props.children !== undefined)
-      return props.children;
+    if (props.blob !== undefined) return blob;
+    if (props.children !== undefined) return props.children;
     return ( <div> NO BLOB FOUND </div> );
   };
 

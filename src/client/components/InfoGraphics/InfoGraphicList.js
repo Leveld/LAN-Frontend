@@ -13,6 +13,9 @@ class InfoGraphicList extends Component {
     this.color = props.color;
   }
 
+  componentWillUnmount(){
+    this.props.setInfoGraphicBlob(null);
+  }
   render(){
     const header = <div className="IG-list-header">ACCOUNTS</div>;
 
