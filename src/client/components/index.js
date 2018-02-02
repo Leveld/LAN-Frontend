@@ -4,5 +4,6 @@ import InfoGraphic from './InfoGraphics/InfoGraphic';
 
 export {
   InfoGraphicList,
-  InfoGraphicDisplay
+  InfoGraphicDisplay,
+  InfoGraphic
 }
