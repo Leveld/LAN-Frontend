@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="app">
-          <InfoGraphicList color="orange">
+          <InfoGraphicList color="orange" title="ACCOUNTS">
             <InfoGraphic {...list[0]} />
             <InfoGraphic {...list[1]}>
               <div className="IG-display-blob">
@@ -31,7 +31,7 @@ class App extends Component {
               </div>
             </InfoGraphic>
           </InfoGraphicList>
-          <InfoGraphicDisplay toggle={true}/>
+          <InfoGraphicDisplay toggle={false}/>
         </div>
       </Provider>
     );
