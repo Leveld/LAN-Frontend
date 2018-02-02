@@ -10,12 +10,15 @@
     "dev-unix": "npm run build -- --watch & npm run watch",
     "devw": "npm run dev-win",
     "devm": "npm run dev-unix",
-    "devl": "npm run dev-unix"
+    "devl": "npm run dev-unix",
+    "default": "react-scripts start"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "css-loader": "^0.28.7",
     "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
@@ -23,6 +26,8 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "express": "^4.16.2",
+    "file-loader": "^1.1.6",
+    "image-webpack-loader": "^4.0.0",
     "mongoose": "^5.0.2",
     "node-sass": "^4.5.3",
     "react": "^16.0.0",
@@ -30,8 +35,10 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-with-props": "^0.1.1",
+    "react-scripts": "^1.1.0",
     "redux": "^3.7.2",
     "sass-loader": "^6.0.6",
+    "url-loader": "^0.6.2",
     "webpack": "^3.8.1"
   },
   "devDependencies": {
