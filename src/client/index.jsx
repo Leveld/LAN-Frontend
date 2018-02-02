@@ -15,8 +15,8 @@ class App extends Component {
   render() {
     // // MOCK DATA
     const list = [
-      {title: 'ExaMple', color: 'red', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all'},
-      {title: 'EMANON',color: 'red', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all', 
+      {title: 'ExaMple', bgColor: 'red', txtColor: 'white', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all'},
+      {title: 'EMANON',bgColor: 'red', txtColor: 'white', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all', 
       blob:
         <div className="IG-display-blob">
           <div>NO CONTENT</div>
@@ -28,7 +28,7 @@ class App extends Component {
         <div className="app">
           {/* INFO GRAPHICS */}
           
-            <IGList color="orange" list={list}/>
+            <IGList bgColor="orange"  list={list}/>
             <IGDisplay /> 
          
         </div>
