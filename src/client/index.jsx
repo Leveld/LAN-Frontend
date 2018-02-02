@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import {IGList, IGDisplay} from './components';
+import { InfoGraphicList, InfoGraphicDisplay } from './components';
 
 import reducers from './reducers';
 
@@ -16,7 +16,7 @@ class App extends Component {
     // // MOCK DATA
     const list = [
       {title: 'ExaMple', color: 'red', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all'},
-      {title: 'EMANON',color: 'red', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all', 
+      {title: 'EMANON',color: 'red', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all',
       blob:
         <div className="IG-display-blob">
           <div>NO CONTENT</div>
@@ -26,11 +26,8 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="app">
-          {/* INFO GRAPHICS */}
-          
-            <IGList color="orange" list={list}/>
-            <IGDisplay /> 
-         
+          <InfoGraphicList color="orange" list={list}/>
+          <InfoGraphicDisplay />
         </div>
       </Provider>
     );

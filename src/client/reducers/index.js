@@ -1,9 +1,9 @@
 import React from 'react';
 import { combineReducers } from 'redux';
-import IGReducer from '../components/INFO_GRAPHICS/redux/reducer';
+import InfoGraphicReducer from './infographicReducer';
 
 const rootReducer = combineReducers({
-  IGBlob: IGReducer
+  InfoGraphicBlob: InfoGraphicReducer
 });
 
 export default rootReducer;

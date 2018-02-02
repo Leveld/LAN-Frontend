@@ -1,7 +1,8 @@
-import IGList from './INFO_GRAPHICS/components/IGList';
-import IGDisplay from './INFO_GRAPHICS/components/IGDisplay';
+import InfoGraphicList from './InfoGraphics/InfoGraphicList';
+import InfoGraphicDisplay from './InfoGraphics/InfoGraphicDisplay';
+import InfoGraphic from './InfoGraphics/InfoGraphic';
 
 export {
-  IGList,
-  IGDisplay
+  InfoGraphicList,
+  InfoGraphicDisplay
 }
