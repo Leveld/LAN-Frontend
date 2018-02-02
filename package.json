@@ -11,7 +11,7 @@
     "devw": "npm run dev-win",
     "devm": "npm run dev-unix",
     "devl": "npm run dev-unix",
-    "react-web": "react-scripts start"
+    "default": "react-scripts start"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
