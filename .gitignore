@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+.clocexclude
+cloc.bat
+src/public/css
+src/public/js
+data/db/*
