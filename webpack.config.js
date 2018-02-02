@@ -23,8 +23,8 @@ module.exports = [
   {
     entry: ['babel-polyfill', './src/client/index.jsx'],
     output: {
-      path: path.resolve(__dirname,'./src/public'),
-      publicPath: path.resolve(__dirname,'./src/public'),
+      path: path.resolve(__dirname,'./src/public/'),
+      publicPath: path.resolve(__dirname,'./src/public/'),
       filename: 'js/bundle.js'
     },
     plugins: clientLoaders.concat([
@@ -51,11 +51,23 @@ module.exports = [
         {
           test: /\.css$/,
           loader: ExtractTextPlugin.extract('css-loader')
-        }
+        },
+        {
+          test: /\.(png|jpg|gif)$/,
+          exclude:/node_modules/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 8192
+              }
+            }
+          ]
+        }     
       ]
     },
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx', '.jpg', '.png']
     }
   }
 ];
