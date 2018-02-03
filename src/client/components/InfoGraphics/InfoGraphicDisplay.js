@@ -8,14 +8,20 @@ class InfoGraphicDisplay extends Component {
   constructor(props){
     super(props);
     this.toggle = props.toggle | false;
+    this.width = props.width;
+    this.height = props.height;
   }
   render(){
     return (
       <div className="IG-display" id="IG-Display" style={
-        this.props.blob ? {height: '70%'} : this.toggle ? {height: '0'} : {height:'70%'}
+        this.props.blob ? 
+          this.toggle ? 
+            {height: this.height, width: this.width} :  
+            {height: 'auto', width: this.width} : 
+          {height:'0', width: this.width}
         }>
-        {this.toggle ? <div className="IG-display-header"> <img onClick={()=>this.props.setInfoGraphicBlob(null)} src={'images/arrow.png'} width="30px"/> </div> : null}
-        <div className="IG-display-blob" style={!this.toggle ? {marginTop: '3%'} : null}>
+        {this.toggle ? <div className="IG-display-header"> <img onClick={()=>this.props.setInfoGraphicBlob(null)} src={'images/_btn/arrow.png'} width="30px"/> </div> : null}
+        <div className="IG-display-blob" >
           { this.props.blob }
         </div>
       </div>

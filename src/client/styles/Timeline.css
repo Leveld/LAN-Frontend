@@ -1,0 +1,31 @@
+.TL-wrapper{
+  width: 100%;
+  height: 250px;
+  background: teal;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+}
+.TL-section-A {
+  width: 15%; 
+  height: 100%; 
+  background: purple;
+}
+
+.TL-section-B {
+  width: 85%; 
+  height: 100%; 
+  background: orange;
+}
+.TL-chart-A, .TL-chart-B {
+  width: 100%; 
+  height: 50%; 
+  background: orange;
+  border: 1px solid black;
+}
+
+.TL-chart-B {
+  width: 100%; 
+  height: 50%; 
+  background: orange;
+}
