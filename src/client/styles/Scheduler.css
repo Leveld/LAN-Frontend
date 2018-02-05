@@ -1,0 +1,143 @@
+.Scheduler-wrapper {
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0);
+  display: flex;
+  border-bottom: 1px solid black;
+}
+
+.Scheduler-header {
+  width: 100%;
+  height: 5%;
+  background: black;
+  color: white;
+  padding: 1% 0;
+  display: flex;
+  font-size: 0.7rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.Scheduler-week {
+  width: 100%;
+  height: 100%; 
+  background: rgb(47, 47, 47);
+  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+ // display: flex;
+
+}
+
+.Scheduler-day {
+  width: 100px;
+  height: 100%;
+  border-right: 1px solid black;
+  background: rgb(132, 132, 132);
+  display: inline-block;
+}
+.Scheduler-day-title {
+  background: rgb(206, 206, 206);
+  color: rgb(0, 0, 0);
+  width: 100%;
+  padding: 1% 0;
+  font-size: 0.7rem;
+  overflow: hidden;
+}
+.Scheduler-events {
+  width: 100%;
+  height: 95%;
+  background: rgb(76, 76, 76);
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 0.7rem;
+  color:white;
+}
+.Scheduler-event {
+  width: 98%;
+  background: rgb(228, 228, 228);
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: 0.7s border;
+  color: black;
+}
+.Scheduler-event:hover{
+  border: 1px solid rgb(13, 122, 255);
+}
+.Scheduler-event-id {
+  background: rgb(64, 64, 64);
+  width: 20px;
+  height: 20px;
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Scheduler-event-name {
+  width: 100%;
+}
+
+.Scheduler-details {
+  width: 215px;
+  height: 100%;
+  background: blue;
+  border-left: 2px solid black; 
+  display: flex;
+  flex-direction: column;
+}
+
+.Scheduler-details-header {
+  width: 100%;
+  height: 5%;
+  padding: 5px 0;
+  background: rgb(198, 198, 198);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.5rem;
+  border-bottom: 1px solid black;
+}
+
+.Scheduler-details-total_events {
+  width: 100%;
+  height: 25%;
+  background: rgb(198, 198, 198);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.5rem;
+  border-bottom: 1px solid black;
+  text-align: start;
+}
+
+.Scheduler-details-extra {
+  width: 100%;
+  height: 70%;
+  background: rgb(198, 198, 198);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.5rem;
+  border-bottom: 1px solid black;
+  word-wrap: break-word;
+}
+.Scheduler-extra {
+  width: 100%;
+  height: 100%;
+  text-align: start;
+}
+
+.Scheduler-extra div, .Scheduler-details-total_events div {
+  width: 98%;
+  background: rgb(49, 49, 49); 
+  color: white;
+  border-bottom: 1px solid black; 
+  padding: 1%;
+}
+
+
