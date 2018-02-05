@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home } from './components';
+import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Stats } from './components';
 
 import reducers from './reducers';
 
@@ -17,7 +17,7 @@ class App extends Component {
       {title: 'PoTaTo3', bg: 'black', txt:'green', image: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg', blob: <CP_Home />},
       {title: 'Lambda', bg: 'blue', txt:'white', image: 'https://www.stratoscale.com/wp-content/uploads/AWS-Lambda.png', 
         blob: 
-          <iframe src="http://lambdaschool.com" height={document.body.scrollHeight + "px"} frameBorder="0" width="100%"/>
+          <iframe src="http://lambdaschool.com" height={document.body.scrollHeight + "px"} style={{overflowY: 'auto'}} frameBorder="0" width="100%"/>
       },          
       {title: 'EMANON', bg: 'red', txt:'purple', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all'},
     ];
@@ -41,24 +41,25 @@ class App extends Component {
             {list.map((item, i) => {
               return (
                 
-                <InfoGraphic {...item}>
-                  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'red', width: '100%', height: '100%'}}>
+                <InfoGraphic key={i} {...item}>
+                  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', color:'white', width: '100%', height: '100%'}}>
                     <div>NO CONTENT</div>
                     <div>¯\_(ツ)_/¯</div>
                   </div>
                 </InfoGraphic>
               );
             })}
-            <div className="IG-add" style={{background: 'red'}}><img src={'/images/_btn/plus.png'} height="100%" width="100%"/></div>
+            
+              <div style={{display: 'flex', justifyContent: 'center', alignContent:'center', marginLeft: '2%'}} >
+              <div className="IG-disabled" > DISABLED </div>
+                <img className="IG-add" style={{background: 'red'}}src={'/images/_btn/plus.png'} height="100%" width="100%"/>
+              </div>
 
           </InfoGraphicList>
 
           {/* DISPLAY */}
           <InfoGraphicDisplay width="100%" height="100%" toggle={0}/>
-          <InfoGraphicDisplay width="300px" height="500px" toggle={1}/>
-          <InfoGraphicDisplay width="100%" height="70%" toggle={1}/>
-
-          
+          <Stats />          
           
         </div>
       </Provider>
