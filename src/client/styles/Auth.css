@@ -1,0 +1,27 @@
+.App-signin, .App-signup {
+
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  background: blue;
+  top:70px;
+  overflow: hidden;
+  z-index: 1;
+  right: 0;
+  transition: 0.5s height;
+
+}
+
+.App-auth-link {
+  background: green;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
+  transition: 0.7s border;
+  border: 1px solid black;
+  white-space: nowrap;
+}
+
+.App-auth-link:hover {
+  border: 1px solid white;
+}

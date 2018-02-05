@@ -4,7 +4,7 @@
 }
 
 :::-webkit-scrollbar{
-  width: 5px
+  width: 5px;
 }
 
 /* Track */
@@ -30,6 +30,47 @@
   padding: 0;
   position: absolute;
   display: block
+}
+
+.App-header {
+  width: 100%;
+  height: 70px;
+  background: orange;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.App-header-logo {
+  background: brown;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-header-name{
+  background: teal;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.App-header-links {
+  background: pink;
+  height: 100%;
+  display: flex;
+}
+
+.App-auth {
+  height: 100%;
+  background: purple;
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
 }
 
 

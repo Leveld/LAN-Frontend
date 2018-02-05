@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import sign in action
 
-export class SignIn extends Component {
+export default class SignIn extends Component {
   constructor() {
     super();
     this.state = {
@@ -16,17 +16,17 @@ export class SignIn extends Component {
     this.handleTwitter = this.handleTwitter.bind(this);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(evt) {
+    evt.preventDefault();
     // call sign in action
   }
 
-  handleChangeEmail(event) {
-    this.setState({ email: event.target.value });
+  handleChangeEmail(evt) {
+    this.setState({ email: evt.target.value });
   }
 
-  handleChangePassword(event) {
-    this.setState({ password: event.target.value }); 
+  handleChangePassword(evt) {
+    this.setState({ password: evt.target.value }); 
   }
 
   handleGoogle() {
@@ -39,13 +39,13 @@ export class SignIn extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Auth-signin">
         <button onClick={this.handleGoogle}>Sign in with Google</button>
         <button onClick={this.handleTwitter}>Sign in with Twitter</button>
         <form onSubmit={this.handleSubmit}>
-          <label for='email'>Email</label>
+          <label for='Auth-signin-email'>Email</label>
           <input value={this.state.email} onChange={this.handleChangeEmail} id='email' type='email' placeholder='Enter email address' required />
-          <label for='password'>Password</label>
+          <label for='Auth-signin-password'>Password</label>
           <input value={this.state.password} onChange={this.handleChangePassword} id='password' type='password' placeholder='Enter password' required />
           <input type='submit' value='Sign In' />
         </form>

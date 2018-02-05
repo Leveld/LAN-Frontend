@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Stats } from './components';
+import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Stats, Header } from './components';
 
 import reducers from './reducers';
 
@@ -25,6 +25,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="app">
+          <Header />
 
           {/* LIST */}
           <InfoGraphicList color="orange" title="-DEVELOPMENT-">

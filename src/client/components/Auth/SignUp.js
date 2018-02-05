@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import sign up action
 
-export class SignUp extends Component {
+export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
