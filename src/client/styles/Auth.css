@@ -25,6 +25,21 @@
   font-size: 0.7rem;
 }
 
+.App-auth-type {
+  background: orange;
+  cursor: pointer;
+  color: black;
+  margin: 1%;
+  padding: 2%;
+  border-radius: 2px;
+  border: 1px solid black;
+  transition: 0.7s border;
+}
+
+.App-auth-type:hover {
+  border: 1px solid royalblue;
+}
+
 .App-auth-form button {
   margin-right: 2%;
   margin-top: 2%;

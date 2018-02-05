@@ -11,12 +11,25 @@ export default class SignUp extends Component {
       businessName: '',
       type: 'Content Creator'
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this); 
+    this.handleChangeBusinessName = this.handleChangeBusinessName.bind(this);
+    this.handleChangeTypeCC = this.handleChangeTypeCC.bind(this);
+    this.handleChangeTypeAdvertiser = this.handleChangeTypeAdvertiser.bind(this);
+    this.handleGoogle = this.handleGoogle.bind(this);
+    this.handleTwitter = this.handleTwitter.bind(this);
   }
   
   handleSubmit = (event) => {
     event.preventDefault();
-    if (this.state.password !== this.state.confirmPassword) return alert('Passwords do not match'); // in the future render a more user-friendly error message
+    if (this.state.password !== this.state.confirmPassword) {
+      alert('Passwords do not match'); // in the future render a more user-friendly error message
+    } else {
       // call sign up action
+    }
   }
 
   handleChangeEmail = (event) => {
@@ -35,28 +48,35 @@ export default class SignUp extends Component {
     this.setState({ businessName: event.target.value }); 
   }
 
-  handleChangeType = (type) => {
-    this.setState({type});
+  handleChangeTypeCC = () => {
+    this.setState({ 
+      type: 'Content Creator',
+      businessName: '' 
+    });
+  }
+
+  handleChangeTypeAdvertiser = () => {
+    this.setState({ type: 'Advertiser' });
   }
 
   handleGoogle = () => {
     // call action to sign up with google
   }
 
-  handleTwitter = () => {
+  handleTwitter = () =>{
     // call action to sign up with twitter
   }
 
   render() {
     return (
       <div className="App-auth-form">
-        <select style={{fontSize: '0.7rem'}} onChange={(e) => this.handleChangeType(e.target.value)}>
-          <option>Content Creator</option>
-          <option>Advertiser</option>
-        </select>
+        <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center', alignContent: 'center'}}>
+          <div className="App-auth-type" onClick={this.handleChangeTypeCC}>Content Creator</div>
+          <div className="App-auth-type" onClick={this.handleChangeTypeAdvertiser}>Advertiser</div> 
+        </div>
         <div style={{display: 'flex', flexDirection: 'row'}}>
           <button style={{color: 'white', background: 'red'}} onClick={this.handleGoogle}>Google</button>
-          <button style={{color: 'white', background: '#03A9F4'}} onClick={this.handleTwitter}>Twitter</button>
+          <button style={{color: 'white', background: '#03A9F4'}}onClick={this.handleTwitter}>Twitter</button>
         </div>
         <div> or </div>
         <form onSubmit={this.handleSubmit}>
@@ -72,8 +92,7 @@ export default class SignUp extends Component {
           <label for='password'>Password</label><br />
           <input value={this.state.password} onChange={this.handleChangePassword} id='password' type='password' placeholder='Enter password' required /><br />
           <label for='confirmPassword'>Confirm Password</label><br />
-          <input value={this.state.confirmPassword} onChange={this.handleChangeConfirmPassword} id='confirmPassword' type='password' placeholder="Confirm password" required/>
-          <br />
+          <input value={this.state.confirmPassword} onChange={this.handleChangeConfirmPassword} id='confirmPassword' type='password' placeholder="Confirm password" required/><br />
           <br />
           <input type='submit' value='Register' />
         </form>
