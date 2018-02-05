@@ -35,9 +35,7 @@
 
 .Campaign-item-id {
   height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+
   padding: 1%;
   background: red;
 }
