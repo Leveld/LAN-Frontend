@@ -34,19 +34,21 @@ export default class SignIn extends Component {
   render() {
     return (
       <div className="App-auth-form">
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <button style={{color: 'white', background: 'red'}} onClick={this.handleGoogle}>Google</button>
-          <button style={{color: 'white', background: '#03A9F4'}} onClick={this.handleTwitter}>Twitter</button>
-        </div>
-        <br />
-        <form onSubmit={this.handleSubmit}>
-          <label for='Auth-signin-email'>Email</label><br />
-          <input value={this.state.email} onChange={this.handleChangeEmail} id='email' type='email' placeholder='Enter email address' required /><br />
-          <label for='Auth-signin-password'>Password</label><br />
-          <input value={this.state.password} onChange={this.handleChangePassword} id='password' type='password' placeholder='Enter password' required /><br />
+        <div className="App-auth-form-inputs">
+          <div style={{display: 'flex', flexDirection: 'row'}}>
+            <button style={{color: 'white', background: 'red'}} onClick={this.handleGoogle}>Google</button>
+            <button style={{color: 'white', background: '#03A9F4'}} onClick={this.handleTwitter}>Twitter</button>
+          </div>
           <br />
-          <input type='submit' value='Sign In' />
-        </form>
+          <form onSubmit={this.handleSubmit}>
+            <label>Email</label><br />
+            <input value={this.state.email} onChange={this.handleChangeEmail} name='email' type='email' placeholder='Enter email address' required /><br />
+            <label>Password</label><br />
+            <input value={this.state.password} onChange={this.handleChangePassword} name='password' type='password' placeholder='Enter password' required /><br />
+            <br />
+            <input type='submit' value='Sign In' />
+          </form>
+        </div>
       </div>
     );
   }

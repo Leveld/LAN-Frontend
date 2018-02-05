@@ -71,31 +71,33 @@ export default class SignUp extends Component {
     return (
       <div className="App-auth-form">
         <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center', alignContent: 'center'}}>
-          <div className="App-auth-type" onClick={this.handleChangeTypeCC}>Content Creator</div>
-          <div className="App-auth-type" onClick={this.handleChangeTypeAdvertiser}>Advertiser</div> 
+          <div className="App-auth-type" style={this.state.type === 'Content Creator' ? {background: 'blue', color: 'white'} : {background: 'orange'}} onClick={this.handleChangeTypeCC}>Content Creator</div>
+          <div className="App-auth-type" style={this.state.type === 'Advertiser' ? {background: 'blue', color: 'white'} : {background: 'orange'}} onClick={this.handleChangeTypeAdvertiser}>Advertiser</div> 
         </div>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <button style={{color: 'white', background: 'red'}} onClick={this.handleGoogle}>Google</button>
-          <button style={{color: 'white', background: '#03A9F4'}}onClick={this.handleTwitter}>Twitter</button>
+        <div className="App-auth-form-inputs">
+          <div style={{display: 'flex', flexDirection: 'row'}}>
+            <button style={{color: 'white', background: 'red'}} onClick={this.handleGoogle}>Google</button>
+            <button style={{color: 'white', background: '#03A9F4'}}onClick={this.handleTwitter}>Twitter</button>
+          </div>
+          <div> or </div>
+          <form onSubmit={this.handleSubmit}>
+            { this.state.type === 'Advertiser' ? 
+              <div> 
+                <label>Business Name</label><br />
+                <input value={this.state.businessName} onChange={this.handleChangeBusinessName} name='businessName' type='type' placeholder='Enter business name' />
+              </div>
+              : null
+            }
+            <label >Email</label><br />
+            <input value={this.state.email} onChange={this.handleChangeEmail} name='email' type='email' placeholder='Enter email address' required /><br />
+            <label  >Password</label><br />
+            <input value={this.state.password} onChange={this.handleChangePassword} name='password' type='password' placeholder='Enter password' required /><br />
+            <label >Confirm Password</label><br />
+            <input value={this.state.confirmPassword} onChange={this.handleChangeConfirmPassword} name='confirmPassword' type='password' placeholder="Confirm password" required/><br />
+            <br />
+            <input type='submit' value='Register' />
+          </form>
         </div>
-        <div> or </div>
-        <form onSubmit={this.handleSubmit}>
-          { this.state.type === 'Advertiser' ? 
-            <div> 
-              <label for='businessName'>Business Name</label><br />
-              <input value={this.state.businessName} onChange={this.handleChangeBusinessName} id='businessName' type='type' placeholder='Enter business name' />
-            </div>
-            : null
-          }
-          <label for='email'>Email</label><br />
-          <input value={this.state.email} onChange={this.handleChangeEmail} id='email' type='email' placeholder='Enter email address' required /><br />
-          <label for='password'>Password</label><br />
-          <input value={this.state.password} onChange={this.handleChangePassword} id='password' type='password' placeholder='Enter password' required /><br />
-          <label for='confirmPassword'>Confirm Password</label><br />
-          <input value={this.state.confirmPassword} onChange={this.handleChangeConfirmPassword} id='confirmPassword' type='password' placeholder="Confirm password" required/><br />
-          <br />
-          <input type='submit' value='Register' />
-        </form>
       </div>
     );
   }

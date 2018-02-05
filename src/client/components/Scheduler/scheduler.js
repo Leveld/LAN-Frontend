@@ -31,7 +31,7 @@ class Scheduler extends Component {
             {
               days.map((day) => {
                 return (
-                  <div className="Scheduler-day" >
+                  <div key={day} className="Scheduler-day" >
                     <div className="Scheduler-day-title">{day}</div>
                     <div className="Scheduler-events" >
                       {this.findEvents(day)}
