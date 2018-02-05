@@ -35,15 +35,15 @@
 .App-header {
   width: 100%;
   height: 70px;
-  background: orange;
+  background: rgb(54, 54, 54);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  border-bottom: 1px solid white;
 }
 
 .App-header-logo {
-  background: brown;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -51,24 +51,21 @@
 }
 
 .App-header-name{
-  background: teal;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
+  color: white;
 }
 .App-header-links {
-  background: pink;
   height: 100%;
   display: flex;
 }
 
 .App-auth {
   height: 100%;
-  background: purple;
   display: flex;
-  padding: 5px;
   justify-content: center;
   align-items: center;
 }

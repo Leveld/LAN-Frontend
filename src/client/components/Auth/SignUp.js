@@ -11,84 +11,70 @@ export default class SignUp extends Component {
       businessName: '',
       type: 'Content Creator'
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this); 
-    this.handleChangeBusinessName = this.handleChangeBusinessName.bind(this);
-    this.handleChangeTypeCC = this.handleChangeTypeCC.bind(this);
-    this.handleChangeTypeAdvertiser = this.handleChangeTypeAdvertiser.bind(this);
-    this.handleGoogle = this.handleGoogle.bind(this);
-    this.handleTwitter = this.handleTwitter.bind(this);
   }
   
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
-    if (this.state.password !== this.state.confirmPassword) {
-      alert('Passwords do not match'); // in the future render a more user-friendly error message
-    } else {
+    if (this.state.password !== this.state.confirmPassword) return alert('Passwords do not match'); // in the future render a more user-friendly error message
       // call sign up action
-    }
   }
 
-  handleChangeEmail(event) {
+  handleChangeEmail = (event) => {
     this.setState({ email: event.target.value });
   }
 
-  handleChangePassword(event) {
+  handleChangePassword = (event) => {
     this.setState({ password: event.target.value }); 
   }
 
-  handleChangeConfirmPassword(event) {
+  handleChangeConfirmPassword = (event) => {
     this.setState({confirmPassword: event.target.value});
   }
 
-  handleChangeBusinessName(event) {
+  handleChangeBusinessName = (event) => {
     this.setState({ businessName: event.target.value }); 
   }
 
-  handleChangeTypeCC() {
-    this.setState({ 
-      type: 'Content Creator',
-      businessName: '' 
-    });
+  handleChangeType = (type) => {
+    this.setState({type});
   }
 
-  handleChangeTypeAdvertiser() {
-    this.setState({ type: 'Advertiser' });
-  }
-
-  handleGoogle() {
+  handleGoogle = () => {
     // call action to sign up with google
   }
 
-  handleTwitter(){
+  handleTwitter = () => {
     // call action to sign up with twitter
   }
 
   render() {
     return (
-      <div>
-        <p onClick={this.handleChangeTypeCC}>Content Creator</p>
-        <p onClick={this.handleChangeTypeAdvertiser}>Advertiser</p>
-        <button onClick={this.handleGoogle}>Sign up with Google</button>
-        <button onClick={this.handleTwitter}>Sign up with Twitter</button>
-        <p> or </p>
+      <div className="App-auth-form">
+        <select style={{fontSize: '0.7rem'}} onChange={(e) => this.handleChangeType(e.target.value)}>
+          <option>Content Creator</option>
+          <option>Advertiser</option>
+        </select>
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+          <button style={{color: 'white', background: 'red'}} onClick={this.handleGoogle}>Google</button>
+          <button style={{color: 'white', background: '#03A9F4'}} onClick={this.handleTwitter}>Twitter</button>
+        </div>
+        <div> or </div>
         <form onSubmit={this.handleSubmit}>
           { this.state.type === 'Advertiser' ? 
             <div> 
-              <label for='businessName'>Business Name</label>
+              <label for='businessName'>Business Name</label><br />
               <input value={this.state.businessName} onChange={this.handleChangeBusinessName} id='businessName' type='type' placeholder='Enter business name' />
             </div>
             : null
           }
-          <label for='email'>Email</label>
-          <input value={this.state.email} onChange={this.handleChangeEmail} id='email' type='email' placeholder='Enter email address' required />
-          <label for='password'>Password</label>
-          <input value={this.state.password} onChange={this.handleChangePassword} id='password' type='password' placeholder='Enter password' required />
-          <label for='confirmPassword'>Confirm Password</label>
+          <label for='email'>Email</label><br />
+          <input value={this.state.email} onChange={this.handleChangeEmail} id='email' type='email' placeholder='Enter email address' required /><br />
+          <label for='password'>Password</label><br />
+          <input value={this.state.password} onChange={this.handleChangePassword} id='password' type='password' placeholder='Enter password' required /><br />
+          <label for='confirmPassword'>Confirm Password</label><br />
           <input value={this.state.confirmPassword} onChange={this.handleChangeConfirmPassword} id='confirmPassword' type='password' placeholder="Confirm password" required/>
+          <br />
+          <br />
           <input type='submit' value='Register' />
         </form>
       </div>
