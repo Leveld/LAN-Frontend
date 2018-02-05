@@ -28,19 +28,8 @@ class App extends Component {
 
           {/* LIST */}
           <InfoGraphicList color="orange" title="-DEVELOPMENT-">
-
-
-            {/* <InfoGraphic {...list[0]} />
-            <InfoGraphic {...list[1]}>
-              <div className="IG-display-blob">
-                <div>NO CONTENT</div>
-                <div>¯\_(ツ)_/¯</div>
-              </div>
-            </InfoGraphic> */}
-
             {list.map((item, i) => {
               return (
-                
                 <InfoGraphic key={i} {...item}>
                   <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', color:'white', width: '100%', height: '100%'}}>
                     <div>NO CONTENT</div>
@@ -50,11 +39,10 @@ class App extends Component {
               );
             })}
             
-              <div style={{display: 'flex', justifyContent: 'center', alignContent:'center', marginLeft: '2%'}} >
-              <div className="IG-disabled" > DISABLED </div>
-                <img className="IG-add" style={{background: 'red'}}src={'/images/_btn/plus.png'} height="100%" width="100%"/>
-              </div>
-
+            <div style={{display: 'flex', justifyContent: 'center', alignContent:'center', marginLeft: '2%'}} >
+            <div className="IG-disabled" > DISABLED </div>
+              <img className="IG-add" style={{background: 'red'}}src={'/images/_btn/plus.png'} height="100%" width="100%"/>
+            </div>
           </InfoGraphicList>
 
           {/* DISPLAY */}

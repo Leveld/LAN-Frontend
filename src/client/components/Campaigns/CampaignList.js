@@ -6,7 +6,7 @@ import '../../styles/Campaigns.css';
 export default class CampaignList extends Component {
   constructor(props){
     super(props);
-    this.list = props.list || [{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"}];
+    this.list = props.list || /*MOCK DATA*/ [{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"},{title: "Campaign"}];
   }
   render(){
     return (

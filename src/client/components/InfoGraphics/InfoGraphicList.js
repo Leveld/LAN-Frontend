@@ -10,7 +10,7 @@ class InfoGraphicList extends Component {
   constructor(props){
     super(props);
     this.color = props.color;
-    this.title = props.title;
+    this.title = props.title || "TITLE";
   }
 
   componentWillUnmount(){
@@ -18,11 +18,9 @@ class InfoGraphicList extends Component {
   }
 
   render(){
-    const header = <div className="IG-list-header">{this.title || "TITLE"}</div>;
-
     return (
       <div className="IG-list">
-        {header}
+        <div className="IG-list-header">{this.title}</div>
         <div style={{background: this.color}} className="IG-list-wrap">
           {this.props.children}
         </div>

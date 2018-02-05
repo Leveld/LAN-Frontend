@@ -7,8 +7,7 @@ import '../../styles/InfoGraphics.css';
 
 const InfoGraphic = (props) => {
 
-  const getBlob = () => {
-    
+  const getBlob = () => { 
     if (props.blob) return props.blob;
     if (props.children) return props.children;
     return ( <div> NO BLOB FOUND </div> );

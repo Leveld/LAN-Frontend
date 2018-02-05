@@ -8,7 +8,6 @@ export default class OverviewPaneList extends Component {
         <OverviewPane />
         <OverviewPane />
         <OverviewPane />
-      
       </div>
     );
   }

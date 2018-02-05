@@ -8,9 +8,9 @@ export const setInfoGraphicBlob = (blob) => {
   };
 };
 
-export const setCurrentEvent = (env) => {
+export const setCurrentEvent = (evt) => {
   return {
     type: SET_CURRENT_EVENT,
-    data: env
+    data: evt
   };
 };

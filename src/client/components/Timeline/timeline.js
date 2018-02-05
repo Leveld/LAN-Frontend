@@ -16,8 +16,7 @@ export default class Timeline extends Component {
           <div style={tmpStyle}/>
           <div style={tmpStyle}/>
         </div>
-        <div className="TL-section-B">
-          
+        <div className="TL-section-B"> 
           <div className="TL-chart-A"><img src={this.chartA} /> </div>
           <div className="TL-chart-B"><img src={this.chartB} /></div>
         </div>
