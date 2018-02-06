@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware  } from 'redux';
 import { Provider } from 'react-redux';
-import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Profile, Stats, Header } from './components';
+import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Profile, Stats, Header, Notification } from './components';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
@@ -26,7 +26,7 @@ class App extends Component {
       <Provider store={createStoreWithMiddleware(reducers)}>
         <div className="app">
           <Header />
-
+          <Notification />
           {/* LIST */}
           <InfoGraphicList color="orange" title="-DEVELOPMENT-">
             {list.map((item, i) => {

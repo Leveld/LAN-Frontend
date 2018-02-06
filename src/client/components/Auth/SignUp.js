@@ -16,11 +16,7 @@ export class SignUp extends Component {
   
   handleSubmit = (event) => {
     event.preventDefault();
-    if (this.state.password !== this.state.confirmPassword) {
-      alert('Passwords do not match'); // in the future render a more user-friendly error message
-    } else {
-      this.props.signUp(this.state);
-    }
+    this.props.signUp(this.state);
   }
 
   handleChangeEmail = (event) => {
