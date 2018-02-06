@@ -5,6 +5,7 @@ import CP_Home from '../components/Pages/CP_Home';
 import Profile from '../components/Pages/Profile';
 import Stats from '../components/Stats/Stats';
 import Header from '../components/App/Header';
+import Notification from './Notification';
 
 export {
   InfoGraphicList,
@@ -13,5 +14,6 @@ export {
   CP_Home,
   Profile, 
   Stats,
-  Header
+  Header,
+  Notification
 }
