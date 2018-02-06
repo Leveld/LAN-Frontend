@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware  } from 'redux';
 import { Provider } from 'react-redux';
 import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Profile, Stats, Header } from './components';
-
+import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
 import './styles/index.css';
 
-const store = createStore(reducers);
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
 
 class App extends Component {
   render() {
@@ -23,7 +23,7 @@ class App extends Component {
     ];
 
     return (
-      <Provider store={store}>
+      <Provider store={createStoreWithMiddleware(reducers)}>
         <div className="app">
           <Header />
 

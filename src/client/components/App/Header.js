@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Signin from '../Auth/SignIn';
 import Signup from '../Auth/SignUp';
+
 import '../../styles/Auth.css';
 
-const isAuthenticated = false; // get this from the redux store in the future
-
-export default class Header extends Component {
+export class Header extends Component {
   constructor(){
     super();
     this.state = {signin: false, signup: false }
   }
   getLinks(){
-    if (isAuthenticated){
+    if (this.props.authenticated){
       return (
         <div> Link to Sign Out </div>
       );
@@ -42,3 +42,11 @@ export default class Header extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    authenticated: state.auth.authenticated
+  };
+};
+
+export default connect(mapStateToProps)(Header);

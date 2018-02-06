@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-// import sign up action
+import { signUp } from '../../actions';
+import { connect } from 'react-redux';
 
-export default class SignUp extends Component {
+export class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +29,7 @@ export default class SignUp extends Component {
     if (this.state.password !== this.state.confirmPassword) {
       alert('Passwords do not match'); // in the future render a more user-friendly error message
     } else {
-      // call sign up action
+      this.props.signUp(this.state);
     }
   }
 
@@ -102,3 +103,5 @@ export default class SignUp extends Component {
     );
   }
 }
+
+export default connect(null, { signUp })(SignUp);
