@@ -12,16 +12,6 @@ export class SignUp extends Component {
       businessName: '',
       type: 'Content Creator'
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this); 
-    this.handleChangeBusinessName = this.handleChangeBusinessName.bind(this);
-    this.handleChangeTypeCC = this.handleChangeTypeCC.bind(this);
-    this.handleChangeTypeAdvertiser = this.handleChangeTypeAdvertiser.bind(this);
-    this.handleGoogle = this.handleGoogle.bind(this);
-    this.handleTwitter = this.handleTwitter.bind(this);
   }
   
   handleSubmit = (event) => {
