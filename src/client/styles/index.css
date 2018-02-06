@@ -29,7 +29,8 @@
   margin: 0 auto;
   padding: 0;
   position: absolute;
-  display: block
+  display: block;
+  min-width: 400px;
 }
 
 .App-header {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Stats, Header } from './components';
+import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Profile, Stats, Header } from './components';
 
 import reducers from './reducers';
 
@@ -14,12 +14,12 @@ class App extends Component {
   render() {
     // // MOCK DATA
     const list = [
-      {title: 'PoTaTo3', bg: 'black', txt:'green', image: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg', blob: <CP_Home />},
+      {title: 'CP-HOME', bg: 'black', txt:'green', image: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg', blob: <CP_Home />},
       {title: 'Lambda', bg: 'blue', txt:'white', image: 'https://www.stratoscale.com/wp-content/uploads/AWS-Lambda.png', 
         blob: 
           <iframe src="http://lambdaschool.com" height={document.body.scrollHeight + "px"} style={{overflowY: 'auto'}} frameBorder="0" width="100%"/>
       },          
-      {title: 'EMANON', bg: 'red', txt:'purple', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all'},
+      {title: 'Profile', bg: 'red', txt:'purple', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all', blob: <Profile />},
     ];
 
     return (
@@ -41,7 +41,6 @@ class App extends Component {
             })}
             
             <div style={{display: 'flex', justifyContent: 'center', alignContent:'center', marginLeft: '2%'}} >
-            <div className="IG-disabled" > DISABLED </div>
               <img className="IG-add" style={{background: 'red'}}src={'/images/_btn/plus.png'} height="100%" width="100%"/>
             </div>
           </InfoGraphicList>

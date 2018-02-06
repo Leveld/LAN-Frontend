@@ -65,8 +65,9 @@
 }
 
 .IG-item {
-  width: 50px;
-  min-width: 50px;
+  width: 70px;
+  min-width: 70px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,8 +92,8 @@
   border: black;
   border-radius: 100%;
   overflow: hidden;
-  height: 30px;
-  width: 30px;
+  height: 50px;
+  width: 50px;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -100,22 +101,7 @@
   background: white;
   margin-bottom: 1%; 
 }
-.IG-disabled {
-  padding:0.5%;
-  color: rgb(236, 236, 236);
-  background: rgb(128, 128, 128);
-  border: 1px solid black;
-  opacity: 0;
-  font-size: 0.7rem;
-  z-index: 1;
-  position: absolute;
-  transition: 1s opacity;
-  cursor: not-allowed;
-  border-radius: 2px;
-}
-.IG-disabled:hover {
-  opacity: 1;
-}
+
 .IG-add {
   background: 'red';
   width: 20px;
