@@ -1,0 +1,139 @@
+.Profile-wrapper {
+  width: 100%;
+  background: purple;
+}
+
+.Profile-banner {
+  width: 100%;
+  height: 300px;
+  background: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid white;
+}
+
+.Profile-content {
+  width: 100%;
+  background: rgb(64, 64, 64);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.Profile-content-left {
+  height: 100%;
+  background: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid white; 
+  border-left: 1px solid white; 
+}
+
+.Profile-logo {
+  height: 250px;
+  width: 250px;
+  background: rgb(20, 20, 20);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid white;
+}
+.Profile-logo-img {
+  height: 80%;
+  width: 80%;
+  background: rgb(177, 177, 177);
+  border-radius: 100%;  
+  border: 2px solid white;
+}
+.Profile-content-right {
+  flex: 1;
+  background: rgb(46, 46, 46);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.Profile-header {
+  width: 100%;
+  height: 50px;
+  background: black;
+  color: white;
+  border-bottom: 1px solid white;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Profile-bio {
+  width: 80%;
+  height: 400px;
+  background: rgb(179, 179, 179);
+  margin: 30px;
+  min-width: 300px;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow:inset 0px 0px 5px 0px black;
+}
+
+.Profile-contact-list {
+  width: 100%;
+  background: orange;
+}
+.Profile-message {
+  width:100%;
+  height: 70px;
+  background: rgb(64, 64, 64);
+  display: flex;
+  justify-content: center;
+  align-items: center;                                                                                                                                
+}
+.Profile-message-btn {
+  background: orange;
+  height: 80%;
+  width: 80%;
+  display: flex;
+  font-size: 1.2em;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid black;
+  box-shadow: 0px 1px 2px 0px black;
+}
+.Profile-contact{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(111, 111, 111);
+  border-bottom: 1px solid rgb(15, 15, 15);
+  font-weight: 700;
+  color: rgb(27, 27, 27);
+}
+
+.disabled {
+  position: absolute;
+  width: 247px;
+  height: 70px;
+  color: rgb(236, 236, 236);
+  background: rgb(128, 128, 128);
+  border: 1px solid black;
+  opacity: 0;
+  font-size: 0.7rem;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  color: white;
+  transition: 1s opacity;
+  cursor: not-allowed;
+  border-radius: 2px;
+}
+.disabled:hover {
+  opacity: 1;
+}

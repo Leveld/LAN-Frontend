@@ -1,9 +1,11 @@
 import React from 'react';
 import { combineReducers } from 'redux';
-import IGReducer from '../components/INFO_GRAPHICS/redux/reducer';
+import InfoGraphicReducer from './infographicReducer';
+import SchedulerReducer from './schedulerReducer';
 
 const rootReducer = combineReducers({
-  IGBlob: IGReducer
+  InfoGraphicBlob: InfoGraphicReducer,
+  evt: SchedulerReducer
 });
 
 export default rootReducer;
