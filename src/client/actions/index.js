@@ -1,6 +1,5 @@
 export const SET_INFO_GRAPHIC_BLOB = 'SET_INFO_GRAPHIC_BLOB';
 export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
-export const FILTER_PLATFORMS = 'FILTER_PLATFORMS';
 export const SET_PLATFORMS = 'SET_PLATFORMS';
 
 export const setInfoGraphicBlob = (blob) => {
@@ -16,13 +15,6 @@ export const setCurrentEvent = (evt) => {
     data: evt
   };
 };
-
-export const filterPlatforms = (keyword) => {
-  return {
-    type: FILTER_PLATFORMS,
-    data: keyword
-  }
-}
 
 export const setPlatforms = (platforms) => {
   return {
