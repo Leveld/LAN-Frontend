@@ -4,6 +4,10 @@ import Platform from '../Platform/PlatformList';
 
 
 export default class Profile extends Component {
+  constructor(props){
+    super();
+    this.user = props.user;
+  }
   render(){
     return (
       <div className="Profile-wrapper">
@@ -25,22 +29,12 @@ export default class Profile extends Component {
               <div className="Profile-contact" >CONTACT</div>
               <div className="Profile-contact" >CONTACT</div>
               <div className="Profile-contact" >CONTACT</div>
-              <div className="Profile-contact" >CONTACT</div>
-              <div className="Profile-contact" >CONTACT</div>
-              <div className="Profile-contact" >CONTACT</div>
-              <div className="Profile-contact" >CONTACT</div>
-              <div className="Profile-contact" >CONTACT</div>
-              <div className="Profile-contact" >CONTACT</div>
-              <div className="Profile-contact" >CONTACT</div>
-              <div className="Profile-contact" >CONTACT</div>
-              <div className="Profile-contact" >CONTACT</div>
-              <div className="Profile-contact" >CONTACT</div>
             </div>
           </div>
           <div className="Profile-content-right">
             <div className="Profile-header">BUSINESS NAME </div>
             <div className="Profile-bio" />
-            <Platform />
+            {this.user === "CP" ? <Platform /> : <div className="Profile-no_user">No User</div>}
           </div>
         </div>
       </div>
