@@ -24,7 +24,7 @@ class InfoGraphicDisplay extends Component {
         }>
         {this.toggle ? 
           <div className="IG-display-header"> 
-            <img onClick={()=>this.props.setInfoGraphicBlob(null)} src={'images/_btn/arrow_up.png'} width="30px"/> 
+            <img onClick={()=>this.props.setInfoGraphicBlob(null)} src={'images/_btn/arrow_up.png'} alt="CLOSE" width="30px"/> 
           </div> :  null
         }
         <div className="IG-display-blob" >

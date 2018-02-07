@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { setInfoGraphicBlob } from '../../actions';
-import { InfoGraphicDisplay } from './InfoGraphicDisplay';
 
 import '../../styles/InfoGraphics.css';
 
@@ -15,7 +14,7 @@ const InfoGraphic = (props) => {
 
   return (
     <div onClick={() => props.setInfoGraphicBlob(getBlob())} style={{backgroundColor:props.bg, color: props.txt}} className="IG-item">
-      <div className="IG-item-img"><img src={props.image} width="100%" height="100%"/></div>
+      <div className="IG-item-img"><img src={props.image} alt={'Info Graphic'} width="100%" height="100%"/></div>
       <div>{props.title}</div>
     </div>
   );

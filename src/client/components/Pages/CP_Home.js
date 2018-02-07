@@ -5,10 +5,7 @@ import Scheduler from '../Scheduler/scheduler';
 import CampaignList from '../Campaigns/CampaignList';
 import '../../styles/CP-Home.css';
 
-export default class CP_Home extends Component {
-  constructor(props){
-    super(props);
-  }
+export default class CPHome extends Component {
   render(){
     return ( 
       <div className="CP-Home">

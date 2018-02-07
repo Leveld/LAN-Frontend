@@ -3,7 +3,7 @@ import '../../styles/Platform.css';
 import Platform from './Platform';
 import PlatformSearch from './PlatformSearch';
 import {connect} from 'react-redux';
-import {filterPlatforms, setPlatforms} from '../../actions';
+import {setPlatforms} from '../../actions';
 
 class PlatformList extends Component {
   constructor(props){
@@ -42,4 +42,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, {filterPlatforms, setPlatforms})(PlatformList);
+export default connect(mapStateToProps, {setPlatforms})(PlatformList);

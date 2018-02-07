@@ -8,7 +8,7 @@ export default class Profile extends Component {
     return (
       <div className="Profile-wrapper">
         <div className="Profile-banner">
-          <img src="http://colorfully.eu/wp-content/uploads/2012/10/the-clock-is-ticking-away-facebook-cover.jpg" height="100%" width="100%"/>
+          <img src="http://colorfully.eu/wp-content/uploads/2012/10/the-clock-is-ticking-away-facebook-cover.jpg" alt="Cover" height="100%" width="100%"/>
         </div>
         <div className="Profile-content">
           <div className="Profile-content-left">
