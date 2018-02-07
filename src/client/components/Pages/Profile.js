@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import '../../styles/Profile.css';
-import Platform from '../Platform/PlatformList';
+import PlatformList from '../Platform/PlatformList';
 
 
 export default class Profile extends Component {
   constructor(props){
-    super();
+    super(props);
     this.user = props.user;
   }
   render(){
@@ -34,7 +34,7 @@ export default class Profile extends Component {
           <div className="Profile-content-right">
             <div className="Profile-header">BUSINESS NAME </div>
             <div className="Profile-bio" />
-            {this.user === "CP" ? <Platform /> : <div className="Profile-no_user">No User</div>}
+            {this.user === "CP" ? <PlatformList /> : <div className="Profile-no_user">No User</div>}
           </div>
         </div>
       </div>
