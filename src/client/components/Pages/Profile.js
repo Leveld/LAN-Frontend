@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import '../../styles/Profile.css';
 import PlatformList from '../Platform/PlatformList';
+import ContractList from '../Contracts/ContractList';
 
 
 export default class Profile extends Component {
   constructor(props){
     super(props);
-    this.user = props.user || {name: 'Track Seven Development', type: 'CP', bio: null /*leave null for no bio*/}; 
+    this.user = props.user || {name: 'Track Seven Development', type: 'BA', bio: null /*leave null for no bio*/}; 
     this.types = ["BA", "CP"];
   }
   render(){
@@ -40,7 +41,7 @@ export default class Profile extends Component {
           <div className="Profile-content-right">
             <div className="Profile-header"> {user.name || "UNTITLED"} </div>
             <div style={!user.bio ? {display: 'none'}:{display: 'flex'}} className="Profile-bio">{user.bio}</div>
-            {user.type === "CP" ? <PlatformList /> : <div className="no_user_data">No Data</div>}
+            {user.type === "CP" ? <PlatformList /> : user.type === "BA" ? <ContractList /> : <div className="no_user_data">No Data</div>}
           </div>
         </div>
       </div>
