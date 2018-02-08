@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin: 20px 0;
   border: 1px solid white;
   border-radius: 5px;
   overflow: hidden;
@@ -66,7 +66,7 @@
   display: flex;
 }
 
-.Platform-tabs-tab {
+.Platform-tabs-tab, .Platform-tabs-contact {
   height: 100%;
   background: rgb(137, 136, 136);
   border: 1px solid black;
@@ -76,10 +76,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   transition: 0.5s border;
+  font-size: calc(5px + 0.9vw);
+  font-weight: 700;
+  overflow: hidden;
 }
-.Platform-tabs-tab:hover{
+.Platform-tabs-contact {
+  cursor: pointer;
+  background: red;
+}
+.Platform-tabs-contact:hover{
   border: 1px solid royalblue;
 }
 

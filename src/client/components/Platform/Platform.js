@@ -8,30 +8,26 @@ export default class Platform extends Component {
   componentWillReceiveProps(props){
     this.setState({platform: props.platform});
   }
+  contactUser = (viewer) => {
+    if(!viewer) return alert("NOT SIGNED IN")
+    //Contact Content Provider about this Platfom
+    alert(`${viewer} contacted ${this.state.platform.username}`);
+  }
   render(){
     const selected = {color: 'white', background: 'red', border: '1px solid white'};
+    const platform = this.state.platform;
+    const viewer = window.localStorage.getItem('username');
     return (
       <div className="Platform-item">
         <div className="Platform-tabs">
-          <div onClick={() => this.setState({selected: 0})} style={this.state.selected === 0 ? selected : {color: 'black'}} className="Platform-tabs-tab">PLATFORM</div>
-          <div onClick={() => this.setState({selected: 1})} style={this.state.selected === 1 ? selected : {color: 'black'}} className="Platform-tabs-tab">USERNAME</div>
-          <div onClick={() => this.setState({selected: 2})} style={this.state.selected === 2 ? selected : {color: 'black'}} className="Platform-tabs-tab">SUBSCRIBERS</div>
-          <div onClick={() => this.setState({selected: 3})} style={this.state.selected === 3 ? selected : {color: 'black'}} className="Platform-tabs-tab">AVG VIEWS</div>
-          <div onClick={() => this.setState({selected: 4})} style={this.state.selected === 4 ? selected : {color: 'black'}} className="Platform-tabs-tab">CONTACT</div>
+          <div className="Platform-tabs-tab">{platform.status}</div>
+          <div className="Platform-tabs-tab">{platform.username}</div>
+          <div className="Platform-tabs-tab">{platform.subscribers}</div>
+          <div className="Platform-tabs-tab">{platform.avgViews}/WEEK</div>
+          <div onClick={() => this.contactUser(viewer)} className="Platform-tabs-contact">CONTACT</div>
         </div>
         <div className="Platform-details">
-          {this.state.selected === 0 ?
-            <div>PLATFORM {this.state.platform.name.toUpperCase()} DETAILS</div> :
-          this.state.selected === 1 ?
-            <div>USERNAME DETAILS</div> :
-          this.state.selected === 2 ?
-            <div>SUBSCRIBERS DETAILS</div> :
-          this.state.selected === 3 ?
-            <div>AVG VIEWS DETAILS</div> :
-          this.state.selected === 4 ?
-            <div>CONTACT DETAILS</div> :
-          this.setState({selected: 0})
-          }
+            <div>{platform.details}</div>
         </div>
       </div>
     );
