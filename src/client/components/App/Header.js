@@ -1,31 +1,44 @@
 import React, { Component } from 'react';
 import Signin from '../Auth/SignIn';
 import Signup from '../Auth/SignUp';
+import {connect} from 'react-redux';
+import {signIn, signOut, setUser} from '../../actions';
+import {Link  } from 'react-router-dom';
+import {Redirect,Route} from 'react-router';
 import '../../styles/Auth.css';
+import axios from 'axios';
+const {dbServerIP} = require('../../../server/util');
+const serverIp = dbServerIP;
 
-const isAuthenticated = false; // get this from the redux store in the future
 
-export default class Header extends Component {
-  constructor(){
-    super();
-    this.state = {signin: false, signup: false }
+const token = window.localStorage.getItem('token');
+const email = window.localStorage.getItem('email');
+const auth = window.localStorage.getItem('authenticated');
+
+class Header extends Component {
+
+  componentWillMount(){ 
+    window.localStorage.getItem('authenticated') == 0 ? this.props.signOut():  
+    axios.get(`${serverIp}user?email=${email}`, {headers:{Authorization: token}})          
+    .then((res) => {this.props.setUser(res.data); this.props.signIn(); })
+    .catch((err) => alert(err.response.data.message));
   }
   getLinks(){
-    if (isAuthenticated){
+    if (this.props.authenticated){
       return (
-        <div> Link to Sign Out </div>
+        <div className="App-auth">
+          <div className="App-auth-link" onClick={() =>{window.localStorage.setItem('authenticated', 0);  this.props.signOut();}}>LOGOUT</div>
+        </div>
       );
     } else {
       return (
           <div className="App-auth">
-            <div className="App-auth-link" onClick={() => this.setState({signin: !this.state.signin, signup: false})}> Sign In </div>
-            <div className="App-auth-link" onClick={() => this.setState({signin: false, signup: !this.state.signup})}> Sign Up </div>
-            <div className="App-signin" style={this.state.signin ? {height: 300} : {height: 0, border: '1px solid transparent'}}>
-              <Signin />
-            </div>
-            <div className="App-signup" style={this.state.signup ? {height: 300} : {height: 0, border: '1px solid transparent'}}>
-              <Signup />
-            </div>
+            <div className="App-auth-link" onClick={() => {
+              window.localStorage.setItem('authenticated', 1); 
+                this.props.signIn();             
+              //window.location.replace('/')
+              
+            }}>SIGNIN/SIGNUP</div>
           </div>
           
       );
@@ -35,10 +48,18 @@ export default class Header extends Component {
   render(){
     return (
       <div className="App-header">
-        <div className="App-header-logo"><img  src='http://one-call.ca/wp-content/uploads/2013/08/logo.png' alt="Logo" style={{width: 70, height: 70}} /></div>
-        <h2 className="App-header-name">LevelD</h2>
+        <Link to={this.props.authenticated ? "/profile" : "/"} className="App-header-logo" ><img  src={this.props.authenticated ? 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} /></Link>
+        <Link to="/" className="App-header-name"><img src={'images/logo/NameLogo.png'} width="100px" /></Link>
           {this.getLinks()}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return { 
+    authenticated: state.auth
+  };
+};
+
+export default connect(mapStateToProps, {signIn, signOut, setUser})(Header);
