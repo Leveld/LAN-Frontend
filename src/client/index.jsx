@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware  } from 'redux';
 import { Provider } from 'react-redux';
 import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CPHome, Profile, Stats, Header } from './components';
 
-import reducers from './reducers';
 
+import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Profile, Stats, Header } from './components';
+import ReduxThunk from 'redux-thunk';
+
+import reducers from './reducers';
+import Auth from './components/Auth/Auth';
 import './styles/index.css';
 
+
 const store = createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); // <--- REDUX DEBUGGER
+
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
+const auth = new Auth();
+
 
 class App extends Component {
   render() {
@@ -34,9 +43,9 @@ class App extends Component {
     // #############
 
     return (
-      <Provider store={store}>
+      <Provider store={createStoreWithMiddleware(reducers)}>
         <div className="app">
-          <Header />
+          <Header auth={auth} />
 
           {/* LIST */}
           <InfoGraphicList color="orange" title="-DEVELOPMENT-">
