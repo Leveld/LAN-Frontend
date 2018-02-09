@@ -1,6 +1,10 @@
 export const SET_INFO_GRAPHIC_BLOB = 'SET_INFO_GRAPHIC_BLOB';
 export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
 export const SET_PLATFORMS = 'SET_PLATFORMS';
+export const SIGNIN = 'SIGNIN';
+export const SIGNOUT = 'SIGNOUT';
+export const SET_USER = 'SET_USER';
+
 
 export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
 export const USER_UNAUTHENTICATED = 'USER_UNAUTHENTICATED';
@@ -23,6 +27,28 @@ export const setPlatforms = (platforms) => {
   return {
     type: SET_PLATFORMS,
     data: platforms
+  }
+}
+
+export const signIn = () => {
+  return {
+    type: SIGNIN,
+    data: true
+  }
+}
+export const signOut = () => {
+  window.localStorage.setItem('authenticated', 0);
+  setUser({});
+  return {
+    type: SIGNOUT,
+    data: false
+  }
+}
+
+export const setUser = (user) => {
+  return {
+    type: SET_USER,
+    data: user
   }
 }
 

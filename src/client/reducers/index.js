@@ -3,13 +3,18 @@ import InfoGraphicReducer from './infographicReducer';
 import SchedulerReducer from './schedulerReducer';
 
 import PlatformReducer from './platformReducer';
+
+import AuthReducer from './AuthReducer';
+import UserReducer from './UserReducer';
 import AuthReducer from './authReducer';
 
 const rootReducer = combineReducers({
   InfoGraphicBlob: InfoGraphicReducer,
   evt: SchedulerReducer,
   platforms: PlatformReducer,
-  auth: AuthReducer
-});
+
+  auth: AuthReducer,
+  user: UserReducer
+}); 
 
 export default rootReducer;

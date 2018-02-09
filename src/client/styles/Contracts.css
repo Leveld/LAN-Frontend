@@ -8,6 +8,9 @@
   padding: 10px;
   background: orange;
   box-shadow: inset 0px 0px 5px 0px black; 
+  display: flex;
+  flex-direction: column;
+
   
 }
 
@@ -21,6 +24,7 @@
   flex-direction: row;
   height: 40px;
   width: 100%;
+  word-wrap: break-word;
 }
 
 .Contract-tabs-tab, .Contract-list-tabs-tab {
@@ -33,6 +37,8 @@
   align-items: center;
   border: 1px solid rgb(0, 0, 0);
   box-shadow: inset 0px 0px 5px 0px black; 
+  font-size: calc(5px + 0.7vw);
+  
 
 }
 
@@ -43,6 +49,7 @@
   border-top-right-radius: 10px;
   transition: 0.7s border;
   border: 1px solid rgb(189, 189, 189);
+  
   color:white;
 }
 
