@@ -18,18 +18,13 @@ import {
 } from './components';
 
 
-import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Profile, Stats, Header } from './components';
-import ReduxThunk from 'redux-thunk';
 
 import reducers from './reducers';
-import Auth from './components/Auth/Auth';
 import './styles/index.css';
 
 
 const store = createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); // <--- REDUX DEBUGGER
 
-const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
-const auth = new Auth();
 
 
 class App extends Component {
@@ -71,9 +66,7 @@ class App extends Component {
           <Route path="/error" component={Error} />
           <Route path='/register' component={Registration}/>
 
-      <Provider store={createStoreWithMiddleware(reducers)}>
-        <div className="app">
-          <Header auth={auth} />
+     
           
           {/* LIST */}
           {/*<InfoGraphicList color="orange" title="-DEVELOPMENT-">

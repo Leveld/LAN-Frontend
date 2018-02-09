@@ -6,9 +6,6 @@ export const SIGNOUT = 'SIGNOUT';
 export const SET_USER = 'SET_USER';
 
 
-export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
-export const USER_UNAUTHENTICATED = 'USER_UNAUTHENTICATED';
-
 export const setInfoGraphicBlob = (blob) => {
   return {
     type:  SET_INFO_GRAPHIC_BLOB,
