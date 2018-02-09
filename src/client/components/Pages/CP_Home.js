@@ -5,11 +5,15 @@ import Scheduler from '../Scheduler/scheduler';
 import CampaignList from '../Campaigns/CampaignList';
 import '../../styles/CP-Home.css';
 
-export default class CP_Home extends Component {
+export default class CPHome extends Component {
   constructor(props){
     super(props);
+    this.user = props.user || {type: "CP"};
+    this.types = ['BA','CP'];
   }
   render(){
+    if(!this.types.includes(this.user.type)) return <div className="no_user">NO ACCOUNT SET</div>;
+    if(this.user.type !== this.types[1]) return <div />;
     return ( 
       <div className="CP-Home">
         <OverviewPaneList />

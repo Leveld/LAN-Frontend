@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setInfoGraphicBlob } from '../../actions';
-import { InfoGraphicDisplay } from './InfoGraphicDisplay';
-import InfoGraphic from './InfoGraphic';
+
 
 import '../../styles/InfoGraphics.css';
 

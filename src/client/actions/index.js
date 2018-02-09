@@ -1,5 +1,6 @@
 export const SET_INFO_GRAPHIC_BLOB = 'SET_INFO_GRAPHIC_BLOB';
 export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
+export const SET_PLATFORMS = 'SET_PLATFORMS';
 
 export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
 export const USER_UNAUTHENTICATED = 'USER_UNAUTHENTICATED';
@@ -18,32 +19,10 @@ export const setCurrentEvent = (evt) => {
   };
 };
 
-export const signUp = ({username, password}) => {  // this is normal email/password registration.
-  return (dispatch) => {
-    // in the future use axios to send info to the sign up end point to implement actual authentication and account creation
-    // also need to redirect the user to their dashboard page, probably
-    dispatch({
-      type: USER_AUTHENTICATED
-    });
-  };
-};
+export const setPlatforms = (platforms) => {
+  return {
+    type: SET_PLATFORMS,
+    data: platforms
+  }
+}
 
-export const signIn = ({username, password}) => {  // this is just for logging in using email/password 
-  return (dispatch) => {
-    // in the future use axios to send info to the log in end point to implement actual authentication 
-    // also need to redirect the user to their dashboard page, probably
-    dispatch({
-      type: USER_AUTHENTICATED
-    });
-  };
-};
-
-
-export const signOut = () => {
-  return dispatch => {
-    // in the future use axios to send request to the log out end point
-    dispatch({
-      type: USER_UNAUTHENTICATED
-    });
-  };
-};
