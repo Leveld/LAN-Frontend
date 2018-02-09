@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware  } from 'redux';
 import { Provider } from 'react-redux';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import { 
@@ -17,11 +17,20 @@ import {
   Error
 } from './components';
 
-import reducers from './reducers';
 
+import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Profile, Stats, Header } from './components';
+import ReduxThunk from 'redux-thunk';
+
+import reducers from './reducers';
+import Auth from './components/Auth/Auth';
 import './styles/index.css';
 
+
 const store = createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); // <--- REDUX DEBUGGER
+
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
+const auth = new Auth();
+
 
 class App extends Component {
 
@@ -52,6 +61,7 @@ class App extends Component {
     // #############
 
     return (
+
       <Router>
       <Provider store={store}>
         <div className="app">
@@ -60,6 +70,11 @@ class App extends Component {
           <Route path="/profile" component={Profile}/>
           <Route path="/error" component={Error} />
           <Route path='/register' component={Registration}/>
+
+      <Provider store={createStoreWithMiddleware(reducers)}>
+        <div className="app">
+          <Header auth={auth} />
+          
           {/* LIST */}
           {/*<InfoGraphicList color="orange" title="-DEVELOPMENT-">
             {list.map((item, i) => {

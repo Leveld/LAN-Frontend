@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import Signin from '../Auth/SignIn';
 import Signup from '../Auth/SignUp';
@@ -5,11 +6,11 @@ import {connect} from 'react-redux';
 import {signIn, signOut, setUser} from '../../actions';
 import {Link  } from 'react-router-dom';
 import {Redirect,Route} from 'react-router';
+
 import '../../styles/Auth.css';
 import axios from 'axios';
 const {dbServerIP} = require('../../../server/util');
 const serverIp = dbServerIP;
-
 
 const token = window.localStorage.getItem('token');
 const email = window.localStorage.getItem('email');
@@ -63,3 +64,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {signIn, signOut, setUser})(Header);
+
+

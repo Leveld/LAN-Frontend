@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-// import sign in action
+import { signIn } from '../../actions';
+import { connect } from 'react-redux';
 
-export default class SignIn extends Component {
+export class SignIn extends Component {
   constructor() {
     super();
     this.state = {
@@ -12,7 +13,7 @@ export default class SignIn extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    // call sign in action
+    this.props.signIn(this.state);
   }
 
   handleChangeEmail = (evt) => {
@@ -53,3 +54,5 @@ export default class SignIn extends Component {
     );
   }
 }
+
+export default connect(null, { signIn })(SignIn);
