@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {signIn, signOut, setUser} from '../../actions';
@@ -35,7 +34,7 @@ class Header extends Component {
             <div className="App-auth-link" onClick={() => {
               window.localStorage.setItem('authenticated', 1); 
                 this.props.signIn();             
-              
+                this.props.auth.login();
             }}>SIGNIN/SIGNUP</div>
           </div>
           

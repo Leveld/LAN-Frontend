@@ -21,8 +21,8 @@ import {
 
 import reducers from './reducers';
 import './styles/index.css';
-
-
+import Auth from './components/Auth/Auth';
+const auth = new Auth();
 const store = createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); // <--- REDUX DEBUGGER
 
 
@@ -60,7 +60,7 @@ class App extends Component {
       <Router>
       <Provider store={store}>
         <div className="app">
-          <Header />
+          <Header auth={auth} />
           <Route exact path="/" component={Home} />
           <Route path="/profile" component={Profile}/>
           <Route path="/error" component={Error} />
