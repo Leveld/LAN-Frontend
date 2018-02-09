@@ -2,24 +2,33 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware  } from 'redux';
 import { Provider } from 'react-redux';
-import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CPHome, Profile, Stats, Header } from './components';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { 
+  InfoGraphic, 
+  InfoGraphicList, 
+  InfoGraphicDisplay,
+  CPHome, 
+  Profile, 
+  Home,
+  Registration, 
+  Stats, 
+  Header,
+  Footer, 
+  Error
+} from './components';
 
 
-import { InfoGraphic, InfoGraphicList, InfoGraphicDisplay, CP_Home, Profile, Stats, Header } from './components';
-import ReduxThunk from 'redux-thunk';
 
 import reducers from './reducers';
-import Auth from './components/Auth/Auth';
 import './styles/index.css';
 
 
 const store = createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); // <--- REDUX DEBUGGER
 
-const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
-const auth = new Auth();
 
 
 class App extends Component {
+
   render() {
     // // MOCK DATA
     // #############
@@ -36,6 +45,10 @@ class App extends Component {
         blob: <Profile user={null} />
       },
       {
+        title: 'Register', bg: 'green', txt:'white', image: 'http://d21toastmasters.org/wp-content/uploads/2016/06/iStock_000017157664XSmall_Register_Button.jpg', 
+        blob: <Registration />
+      },
+      {
         title: 'Lambda', bg: 'blue', txt:'white', image: 'https://www.stratoscale.com/wp-content/uploads/AWS-Lambda.png', 
         blob: <iframe title="LambdaSchool" src="http://lambdaschool.com" height={document.body.scrollHeight + "px"} style={{overflowY: 'auto'}} frameBorder="0" width="100%"/>
       },
@@ -43,12 +56,20 @@ class App extends Component {
     // #############
 
     return (
-      <Provider store={createStoreWithMiddleware(reducers)}>
-        <div className="app">
-          <Header auth={auth} />
 
+      <Router>
+      <Provider store={store}>
+        <div className="app">
+          <Header />
+          <Route exact path="/" component={Home} />
+          <Route path="/profile" component={Profile}/>
+          <Route path="/error" component={Error} />
+          <Route path='/register' component={Registration}/>
+
+     
+          
           {/* LIST */}
-          <InfoGraphicList color="orange" title="-DEVELOPMENT-">
+          {/*<InfoGraphicList color="orange" title="-DEVELOPMENT-">
             {list.map((item, i) => {
               return (
                 <InfoGraphic key={i} {...item}>
@@ -62,14 +83,17 @@ class App extends Component {
             <div style={{display: 'flex', justifyContent: 'center', alignContent:'center', marginLeft: '2%'}} >
               <img className="IG-add" style={{background: 'red'}}src={'/images/_btn/plus.png'} alt="Add" height="100%" width="100%"/>
             </div>
-          </InfoGraphicList>
+          </InfoGraphicList>*/}
 
           {/* DISPLAY */}
+          {/*}
           <InfoGraphicDisplay width="100%" height="100%" toggle={0}/>
-          <Stats />          
-          
+          <Stats /> }         
+        */}
+        <Footer />        
         </div>
       </Provider>
+      </Router>
     );
   }
 }
