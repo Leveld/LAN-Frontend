@@ -1,5 +1,6 @@
 export const SET_INFO_GRAPHIC_BLOB = 'SET_INFO_GRAPHIC_BLOB';
 export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
+export const SET_PLATFORMS = 'SET_PLATFORMS';
 
 export const setInfoGraphicBlob = (blob) => {
   return {
@@ -14,3 +15,10 @@ export const setCurrentEvent = (evt) => {
     data: evt
   };
 };
+
+export const setPlatforms = (platforms) => {
+  return {
+    type: SET_PLATFORMS,
+    data: platforms
+  }
+}

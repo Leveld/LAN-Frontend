@@ -1,0 +1,67 @@
+.Contract-list{
+  width: 80%;
+  margin: 20px 0;
+
+}
+
+.Contract-list-wrapper{
+  padding: 10px;
+  background: orange;
+  box-shadow: inset 0px 0px 5px 0px black; 
+  
+}
+
+.Contract-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.Contract-tabs, .Contract-list-tabs {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  width: 100%;
+}
+
+.Contract-tabs-tab, .Contract-list-tabs-tab {
+  background: rgb(172, 172, 172);
+  color: black;
+  flex:1;
+  height: 100%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(0, 0, 0);
+  box-shadow: inset 0px 0px 5px 0px black; 
+
+}
+
+.Contract-list-tabs-tab {
+  cursor: pointer;
+  background: rgb(34, 34, 34);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transition: 0.7s border;
+  border: 1px solid rgb(189, 189, 189);
+  color:white;
+}
+
+.Contract-list-tabs-tab:hover {
+  border: 1px solid red;
+}
+
+.Contract-tabs-apply {
+  background: red;
+  display: flex;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5px;
+  cursor: pointer;
+  box-shadow: inset 0px 0px 2px 0px black; 
+  
+}
+
+.Contract-tabs-apply:hover{
+  border: 1px solid white;
+}
