@@ -1,7 +1,5 @@
 
 import React, { Component } from 'react';
-import Signin from '../Auth/SignIn';
-import Signup from '../Auth/SignUp';
 import {connect} from 'react-redux';
 import {signIn, signOut, setUser} from '../../actions';
 import {Link  } from 'react-router-dom';
@@ -21,7 +19,7 @@ class Header extends Component {
   componentWillMount(){ 
     window.localStorage.getItem('authenticated') == 0 ? this.props.signOut():  
     axios.get(`${serverIp}user?email=${email}`, {headers:{Authorization: token}})          
-    .then((res) => {this.props.setUser(res.data); this.props.signIn(); })
+    .then((res) => {console.log(res.data); this.props.setUser(res.data); this.props.signIn(); })
     .catch((err) => alert(err.response.data.message));
   }
   getLinks(){
@@ -37,7 +35,6 @@ class Header extends Component {
             <div className="App-auth-link" onClick={() => {
               window.localStorage.setItem('authenticated', 1); 
                 this.props.signIn();             
-              //window.location.replace('/')
               
             }}>SIGNIN/SIGNUP</div>
           </div>
