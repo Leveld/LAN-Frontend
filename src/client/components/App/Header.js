@@ -1,43 +1,25 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {signIn, signOut, setUser} from '../../actions';
-import {Link  } from 'react-router-dom';
-import {Redirect,Route} from 'react-router';
+import {Link} from 'react-router-dom';
 
 import '../../styles/Auth.css';
 import axios from 'axios';
 const {dbServerIP} = require('../../../server/util');
 const serverIp = dbServerIP;
-
-const token = window.localStorage.getItem('token');
-const email = window.localStorage.getItem('email');
-const auth = window.localStorage.getItem('authenticated');
-
 class Header extends Component {
 
-  componentWillMount(){ 
-    // window.localStorage.getItem('authenticated') == 0 ? this.props.signOut():  
-    // axios.get(`${serverIp}user?email=${email}`, {headers:{Authorization: token}})          
-    // .then((res) => {console.log(res.data); this.props.setUser(res.data); /*this.props.signIn();*/ })
-    // .catch((err) => alert(err.response.data.message));
-  }
   getLinks(){
     if (this.props.authenticated){
       return (
         <div className="App-auth">
-          <div className="App-auth-link" onClick={() =>{window.localStorage.setItem('authenticated', 0);  this.props.signOut();}}>LOGOUT</div>
+          <div className="App-auth-link">LOGOUT</div>
         </div>
       );
     } else {
       return (
-          <div className="App-auth">
-            <div className="App-auth-link" onClick={() => {
-              window.localStorage.setItem('authenticated', 1); 
-                //this.props.signIn();             
-                this.props.auth.login();
-            }}>SIGNIN/SIGNUP</div>
-          </div>
-          
+        <div className="App-auth">
+          <div className="App-auth-link" onClick={() => this.props.auth.login()}>SIGNIN/SIGNUP</div>
+        </div>
       );
     }
   }
@@ -59,6 +41,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {signIn, signOut, setUser})(Header);
+export default connect(mapStateToProps, null)(Header);
 
 
