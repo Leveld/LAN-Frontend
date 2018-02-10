@@ -18,7 +18,7 @@ class Header extends Component {
   componentWillMount(){ 
     window.localStorage.getItem('authenticated') == 0 ? this.props.signOut():  
     axios.get(`${serverIp}user?email=${email}`, {headers:{Authorization: token}})          
-    .then((res) => {console.log(res.data); this.props.setUser(res.data); this.props.signIn(); })
+    .then((res) => {console.log(res.data); this.props.setUser(res.data); /*this.props.signIn();*/ })
     .catch((err) => alert(err.response.data.message));
   }
   getLinks(){
@@ -33,7 +33,7 @@ class Header extends Component {
           <div className="App-auth">
             <div className="App-auth-link" onClick={() => {
               window.localStorage.setItem('authenticated', 1); 
-                this.props.signIn();             
+                //this.props.signIn();             
                 this.props.auth.login();
             }}>SIGNIN/SIGNUP</div>
           </div>

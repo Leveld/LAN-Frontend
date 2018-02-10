@@ -7,7 +7,7 @@ export default class Auth {
     clientID: AUTH_CONFIG.clientId,
     redirectUri: AUTH_CONFIG.callbackUrl,
     audience: `https://${AUTH_CONFIG.domain}/userinfo`,
-    responseType: 'token id_token',
+    responseType: 'code',
     scope: 'openid'
   });
 
