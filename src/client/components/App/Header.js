@@ -16,10 +16,10 @@ const auth = window.localStorage.getItem('authenticated');
 class Header extends Component {
 
   componentWillMount(){ 
-    window.localStorage.getItem('authenticated') == 0 ? this.props.signOut():  
-    axios.get(`${serverIp}user?email=${email}`, {headers:{Authorization: token}})          
-    .then((res) => {console.log(res.data); this.props.setUser(res.data); /*this.props.signIn();*/ })
-    .catch((err) => alert(err.response.data.message));
+    // window.localStorage.getItem('authenticated') == 0 ? this.props.signOut():  
+    // axios.get(`${serverIp}user?email=${email}`, {headers:{Authorization: token}})          
+    // .then((res) => {console.log(res.data); this.props.setUser(res.data); /*this.props.signIn();*/ })
+    // .catch((err) => alert(err.response.data.message));
   }
   getLinks(){
     if (this.props.authenticated){
