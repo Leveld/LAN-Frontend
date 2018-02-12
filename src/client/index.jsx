@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware  } from 'redux';
-import { Provider } from 'react-redux';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { Provider, connect } from 'react-redux';
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
+import axios from 'axios';
 import { 
   InfoGraphic, 
   InfoGraphicList, 
@@ -16,6 +17,8 @@ import {
   Footer, 
   Error
 } from './components';
+import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
+const {apiServerIP} = require('../server/util');
 
 
 
@@ -24,12 +27,30 @@ import './styles/index.css';
 import Auth from './components/Auth/Auth';
 const auth = new Auth();
 const store = createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); // <--- REDUX DEBUGGER
-
+const cookie = new Cookies();
 
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {type: null};
+  }
+
+  componentWillMount(){
+    const akey = cookie.get('access_token');
+    if(akey && akey.length === 32){
+      axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${akey}`}})
+      .then((res) => {
+        this.setState({type: res.data.type});
+      })
+      .catch((err) => {
+        console.log(err); //LOG ERROR
+      });
+    }
+  }
 
   render() {
+    
     // // MOCK DATA
     // #############
     const list = [
@@ -55,47 +76,33 @@ class App extends Component {
     ];
     // #############
 
-    return (
+    const availableTypes = ['Business', 'ContentProducer'];
 
-      <Router>
-      <Provider store={store}>
+    return (
         <div className="app">
           <Header auth={auth} />
-          <Route exact path="/" component={Home} />
-          <Route path="/profile" component={Profile}/>
+          <Route exact path="/" component={() => 
+            this.state.type === 'User' ? <Registration auth={auth}/> :  <Home />
+            }/>
+          <Route path="/profile" component={() => 
+            availableTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Registration /> : <Home/>
+          }/>
           <Route path="/error" component={Error} />
           <Route path='/register' component={Registration}/>
 
-     
-          
-          {/* LIST */}
-          {/*<InfoGraphicList color="orange" title="-DEVELOPMENT-">
-            {list.map((item, i) => {
-              return (
-                <InfoGraphic key={i} {...item}>
-                  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', color:'white', width: '100%', height: '100%'}}>
-                    <div>NO DATA</div>
-                  </div>
-                </InfoGraphic>
-              );
-            })}
-            
-            <div style={{display: 'flex', justifyContent: 'center', alignContent:'center', marginLeft: '2%'}} >
-              <img className="IG-add" style={{background: 'red'}}src={'/images/_btn/plus.png'} alt="Add" height="100%" width="100%"/>
-            </div>
-          </InfoGraphicList>*/}
-
-          {/* DISPLAY */}
-          {/*}
-          <InfoGraphicDisplay width="100%" height="100%" toggle={0}/>
-          <Stats /> }         
-        */}
         <Footer />        
-        </div>
-      </Provider>
-      </Router>
+        </div>   
     );
   }
 }
 
-render(<App />, document.getElementById('root'));
+
+
+
+
+render(
+  <Router>
+    <Provider store={store}>
+      {<App />}
+    </Provider>
+  </Router>, document.getElementById('root'));

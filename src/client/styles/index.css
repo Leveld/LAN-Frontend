@@ -33,6 +33,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  flex-direction: column;
 }
 
 .App-header {
@@ -46,6 +47,10 @@
   border-bottom: 1.5px solid rgb(0, 47, 0);
   animation: headerGlow 2s alternate-reverse infinite;
 }
+.App-header-username {
+  text-decoration: none;
+  margin-left: 2%; 
+}
 
 .App-header-logo {
   height: 100%;
@@ -54,6 +59,16 @@
   margin-left: 10px;
   align-items: center;
   flex: 1;
+  text-decoration: none;
+  color: white;
+}
+.App-header-logo img {
+  border-radius: 100%;
+  border: 2px solid black;
+  transition: 0.7s border;
+}
+.App-header-logo img:hover {
+  border: 2px solid green;
 }
 
 .App-header-name{
@@ -96,14 +111,13 @@
   height: 40px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   position: relative;
   bottom: 0;
   border-top: 1px solid rgb(5, 236, 13);
 }
 .App-footer-wrapper-auth {
-  position: absolute;
   height: 80%;
   right:0;    
   display: flex;

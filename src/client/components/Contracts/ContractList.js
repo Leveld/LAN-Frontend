@@ -1,46 +1,47 @@
 import React, {Component} from 'react';
 import Contract from './Contract';
+import {connect} from 'react-redux';
 import '../../styles/Contracts.css';
+import {conTypes} from '../../../server/util';
 
-export default class ContractList extends Component {
+class ContractList extends Component {
   constructor(props) {
     super(props);
-    this.user = props.user || {name: "Track 7 Dev", 
-    contracts: [
-      {title: 'MA Contract 1', CP: 'Track 7 Dev', type: 'MA', head: "business name", owner:"JON"},
-      {title: 'MA Contract 2', CP: 'Track 7 Dev', type: 'MA', head: "business name", owner:"JAKE"},
-      {title: 'MA Contract 3', CP: 'Track 7 Dev', type: 'MA', head: "business name", owner:"BILL"},
-      {title: 'MA Contract 4', CP: 'Track 7 Dev', type: 'MA', head: "business name", owner:"BILL"},
-      {title: 'MA Contract 5', CP: 'Track 7 Dev', type: 'MA', head: "business name", owner:"PAT"},
-      {title: 'BA Contract 1', CP: 'Track 7 Dev', type: 'BA', head: "business name", owner:"BUSINESS"},
-      {title: 'BA Contract 2', CP: 'Track 7 Dev', type: 'BA', head: "business name", owner:"BUSINESS"},
-      {title: 'BA Contract 3', CP: 'Track 7 Dev', type: 'BA', head: "business name", owner:"BUSINESS"},
-      {title: 'BA Contract 4', CP: 'Track 7 Dev', type: 'BA', head: "business name", owner:"BUSINESS"},
-      {title: 'BA Contract 5', CP: 'Track 7 Dev', type: 'BA', head: "business name", owner:"BUSINESS"},
-
-    ], managers: ["JON", "JAKE", "BILL", "PAT"]};
     this.selected = 0;
-    this.state = {contracts:this.user.contracts.filter((contract) => (contract.head === 'business name' && contract.type === 'BA'))}
+    this.state = {contracts:null}
+    this.contracts = props.user.contracts || [];
   }
-  select = (i) => {
-    this.setState({selected: i});
+  componentWillMount(){
+    console.log(this.props.user.businessName);
+    this.setState({
+      contracts: this.contracts.filter((contract) => (contract.head === this.props.user.businessName && contract.type === conTypes[0]))
+    });
   }
+  select = (i) => this.setState({selected: i});
 
   render(){
     return (
       <div className="Contract-list"> 
         <div className="Contract-list-tabs">
-          <div onClick={() => this.setState({contracts:this.user.contracts.filter((contract) => (contract.head === 'business name' && contract.type === 'BA'))})} className="Contract-list-tabs-tab">BUSINESS CONTRACTS</div>
-          <div onClick={() =>  this.setState({contracts:this.user.contracts.filter((contract) => (contract.head === 'business name' && contract.type === 'MA' ))})} className="Contract-list-tabs-tab">MANAGER CONTRACTS</div>
+          <div onClick={() => this.setState({contracts:this.contracts.filter((contract) => (contract.head === this.props.user.businessName && contract.type === conTypes[0]))})} className="Contract-list-tabs-tab">BUSINESS CONTRACTS</div>
+          <div onClick={() =>  this.setState({contracts:this.contracts.filter((contract) => (contract.head === this.props.user.businessName && contract.type === conTypes[1] ))})} className="Contract-list-tabs-tab">MANAGER CONTRACTS</div>
         </div>
         <div className="Contract-list-wrapper">
           {
-            this.state.contracts.map((contract) => {
-              return <Contract contract={contract}/>;
-            })
+            this.state.contracts.length > 0 ? this.state.contracts.map((contract, i) => {
+              return <Contract key={i} contract={contract}/>;
+            }) : <div style={{width: '100%', textAlign: 'center'}}>NO CONTRACTS </div>
           }
         </div>
       </div>
     );
   }
-}   
+} 
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(ContractList);

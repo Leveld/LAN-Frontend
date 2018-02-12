@@ -1,3 +1,5 @@
+import {Cookies} from 'react-cookie';
+
 export const SET_INFO_GRAPHIC_BLOB = 'SET_INFO_GRAPHIC_BLOB';
 export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
 export const SET_PLATFORMS = 'SET_PLATFORMS';
@@ -34,7 +36,6 @@ export const signIn = () => {
   }
 }
 export const signOut = () => {
-  window.localStorage.setItem('authenticated', 0);
   setUser({});
   return {
     type: SIGNOUT,

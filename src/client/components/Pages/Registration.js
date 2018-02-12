@@ -1,57 +1,46 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 import '../../styles/Register.css';
-const {dbServerIP} = require('../../../server/util');
+const {apiServerIP, frontServerIP} = require('../../../server/util');
 const TestingData = require('../../../TesingsData');
+const {Cookies} = require('react-cookie');
+const {connect} = require('react-redux');
+const cookie = new Cookies();
 
-const serverIP = dbServerIP;
 
-export default class Registration extends Component {
+
+class Registration extends Component {
   constructor(){
     super();
-    this.state = {selected: 0, email: null};
-  }
-  componentDidMount(){
-    window.location.hash = ""; //Clear Hash
-
-    // GET EMAIL && SET BY AUTH0 TOKEN
-
+    this.state = {selected: 0, name: null, businessName: null, age: null, gender: null};
   }
 
-  componentWillMount(){
-    window.localStorage.setItem('token', window.location.hash.substring(1));
-    !window.localStorage.getItem('token') ? window.location.replace(`/error?m=NO TOKEN`) : null; // REDIRECT USER TO AUTO0    
-  }
-  
+
   submit = (evnt, type) => {
     evnt.preventDefault();
-
-    const dob = new Date(evnt.target.age.value);
+    const dob = new Date(this.state.age);
     const age =  Math.floor((Date.now() - dob)/((1000*60*60*24*365)));
-    const data = {
-      email: window.localStorage.getItem('email'),
+  
+     axios.put(`${apiServerIP}user`, {
       type,
-      fields:{
-        name: `${evnt.target.fName.value } ${evnt.target.lName.value}` ,
-        businessName: type.toLowerCase() === 'business' ? evnt.target.businessName.value : null,
+      fields: {
+        name: this.state.name,
+        businessName: this.state.businessName,
         age,
-        gender: evnt.target.gender.value,
-        auth0ID: window.localStorage.getItem('token'),
-        createdAt: Date.now()
+        gender: this.state.gender
       }
-    }
-    console.log(data);
-    axios.put(`${serverIP}user`,data, {headers:{Authorization: "Bearer" +  window.localStorage.getItem('token')}})
+    }, {headers:{Authorization:`Bearer ${cookie.get('access_token')}`}})
     .then((res) => {
-      if(res.data) {
-        alert('REGISTRATION COMPLETE');
-        window.location.replace('/');
-      }
+      this.props.auth.login();
+      
     })
-    .catch((err) => window.location.replace(`/error?m=${err.response.data.message}`))
+    .catch((err) => {
+      this.props.auth.login();
+    });
+    
   }
   render(){
-    if(!window.localStorage.getItem('token')) return <div/>;
     return (
       <div className="Register" >
         <div className="Register-wrapper">
@@ -64,15 +53,14 @@ export default class Registration extends Component {
           <form onSubmit={(e) => this.submit(e, "contentproducer")} style={!this.state.selected ? {display: 'flex'} : {display: 'none'}} className="Register-form">
             <label> CONTENT PROVIDER SIGNUP</label>
             <div style={{display: 'flex', flexDirection: 'row', flex: 1}}>
-              <input name="fName" placeholder="First Name" />
-              <input name="lName" placeholder="Last Name"/>
+              <input name="name" value={this.state.value} onChange={(e) => this.setState({name: e.target.value})} placeholder={this.props.user.name} />
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', alignContent: 'center', justifyContent: 'center'}}>
               <label>AGE</label>
-              <input style={{minWidth:'100px'}} name="age" type="date" />
+              <input onChange={(e) => this.setState({age: target.value})} style={{minWidth:'100px'}} name="age" type="date" />
               <div style={{whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row'}}>
                 <label>GENDER</label>
-                <select name="gender">
+                <select onClick={(e) => this.setState({gender: e.target.value})} name="gender">
                   <option>SELECT</option>
                   <option value="male">M</option>
                   <option value="female">F</option>
@@ -81,22 +69,24 @@ export default class Registration extends Component {
             </div>
             <input style={{cursor:'pointer'}} type="submit"/>
           </form>
+
+
           {/* ADVERTISER SIGNUP */}
           <form onSubmit={(e) => this.submit(e, "business")} style={this.state.selected ? {display: 'flex'} : {display: 'none'}} className="Register-form">
             <label> ADVERTISER SIGNUP</label>
             <div style={{display: 'flex', flexDirection: 'row', flex: 1}}>
-              <input name="fName" placeholder="First Name" />
-              <input name="lName" placeholder="Last Name"/>
+              <input name="name" onChange={(e) => this.setState({name: e.target.value})} placeholder={this.props.user.name} />
             </div>
+            <input type='file' onChange={(e) => this.upload(e)}/>
             <div style={{display: 'flex', flexDirection: 'row', flex: 1}}>
-              <input name="businessName" placeholder="Business Name" />
+              <input onChange={(e) => this.setState({businessName: e.target.value})} name="businessName" value={this.state.businessName} placeholder="Business Name" />
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', alignContent: 'center', justifyContent: 'center'}}>
               <label>AGE</label>
-              <input style={{minWidth:'100px'}} name="age" type="date" />
+              <input onChange={(e) => this.setState({age: e.target.value})} style={{minWidth:'100px'}} name="age" type="date" />
               <div style={{whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row'}}>
                 <label>GENDER</label>
-                <select name="gender">
+                <select onClick={(e) => this.setState({gender: e.target.value})} name="gender" value>
                   <option>SELECT</option>
                   <option value="male">M</option>
                   <option value="female">F</option>
@@ -112,3 +102,11 @@ export default class Registration extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(Registration); 

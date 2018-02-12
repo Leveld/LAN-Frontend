@@ -2,19 +2,18 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../../styles/Home.css';
 import { CPHome} from '../index';
-class Home extends Component {
-  constructor(){
-    super();
-    this.user = null;
-  }
-  render(){
-    let type;
-    if(this.props.user.type) type = this.props.user.type.toLowerCase();
+import {Cookies} from 'react-cookie';
+import { Redirect } from 'react-router-dom';
+const cookie = new Cookies();
 
+class Home extends Component {
+
+  render(){
+    const types = ['User', "Business", 'ContentProducer']
     return (
       <div className="Home-wrapper">
       {
-      !this.props.authenticated ?
+      !this.props.authenticated && !cookie.get('access_token')?
       <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <img className="Home-bg" alt="Logo" src={'images/logo/logo.png'}/>
         <div className="Home-welcome"><img src={'images/logo/logo.png'} width="20%" height="100%"/></div>
@@ -23,13 +22,13 @@ class Home extends Component {
             <div className="Home-Accounts-info-title">CONTENT PROVIDER</div>
           </div>
           <div className="Home-Accounts-info">
-            <div className="Home-Accounts-info-title">ADVERTISER</div>
+            <div className="Home-Accounts-info-title">ADVERTISER</div> 
           </div>
         </div>
       </div> :
-      type === "contentproducer" ?
+      this.props.user.type === types[2] ?
       <CPHome/> :
-      type === "business"?
+      this.props.user.type === types[1]?
       <div> BUSINESS HOME </div>:
       <div />
       

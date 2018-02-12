@@ -25,6 +25,22 @@ if (!process.env.PRODUCTION) {
   authServerIP  = 'http://auth.leveld.com:3002/';
   dbServerIP    = 'http://db.leveld.com:3003/';
 }
+const pages = [
+  "/",
+  "/profile",
+  "/register",
+  "/error"
+];
+
+const accTypes = [
+  "Business",
+  "ContentProducer"
+]
+
+const conTypes = [
+  "Business",
+  "Manager"
+]
 
 module.exports = {
   USER_ERROR,
@@ -34,5 +50,7 @@ module.exports = {
   apiServerIP,
   authServerIP,
   dbServerIP,
+  pages,
+  accTypes,
   ...require('./secret.json')
 };

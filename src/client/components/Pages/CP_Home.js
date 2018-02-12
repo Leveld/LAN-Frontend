@@ -5,21 +5,17 @@ import Scheduler from '../Scheduler/scheduler';
 import CampaignList from '../Campaigns/CampaignList';
 import '../../styles/CP-Home.css';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
+import {accTypes} from '../../../server/util';
+import {Cookies} from 'react-cookie';
+const cookie = new Cookies();
 
 class CPHome extends Component {
-  constructor(props){
-    super(props);
-    this.user = props.user || {type: "contentproducer"};
-    this.types = ['business','contentproducer'];
-  }
-  componentWillMount(){
-    if(!this.props.authenticated) return window.location.replace('/error?m=NOT AUTHENTICATED');    
-    
-  }
+
   render(){
-    if(this.user.type !== this.types[1] || !this.props.authenticated) return <div />;
+    if(this.props.user.type !== accTypes[1] || !this.props.authenticated || !cookie.get('access_token')) return <div />;
     
-    if(!this.types.includes(this.user.type)) return <div className="no_user">NO ACCOUNT SET</div>;
+    if(!accTypes.includes(this.props.user.type)) return <div className="no_user">NO ACCOUNT SET</div>;
     return ( 
       <div className="CP-Home">
         <OverviewPaneList />
@@ -33,7 +29,8 @@ class CPHome extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    authenticated: state.auth
+    authenticated: state.auth,
+    user: state.user
   };
 };
 
