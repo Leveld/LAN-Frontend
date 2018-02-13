@@ -77,7 +77,6 @@ class App extends Component {
     ];
     // #############
 
-    const availableTypes = ['Business', 'ContentProducer'];
 
     return (
         <div className="app">

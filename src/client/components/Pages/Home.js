@@ -11,10 +11,10 @@ const cookie = new Cookies();
 class Home extends Component {
 
   render(){
-    return (
+     return (
       <div className="Home-wrapper">
-      {
-      !this.props.authenticated && !cookie.get('access_token')?
+      {  
+      !this.props.authenticated && !cookie.get('access_token') ?
       <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <img className="Home-bg" alt="Logo" src={'images/logo/logo.png'}/>
         <div className="Home-welcome"><img src={'images/logo/logo.png'} width="20%" height="100%"/></div>
@@ -31,8 +31,7 @@ class Home extends Component {
       <CPHome/> :
       this.props.user.type === accTypes[0]?
       <div> BUSINESS HOME </div>:
-      <div />
-      
+        <div />
       }
       </div>
     );
