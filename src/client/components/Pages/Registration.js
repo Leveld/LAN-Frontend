@@ -24,9 +24,11 @@ class Registration extends Component {
     evnt.preventDefault();
     const eborder = '1.5px solid red';
     const gborder = '1.5px solid green';
+    const dob = new Date(evnt.target.age.value);
+    const age =  Math.floor((Date.now() - dob)/((1000*60*60*24*365)));
     (!this.state.name && !this.props.user.name) ? evnt.target.name.style.border = eborder : evnt.target.name.style.border = gborder;
     (!this.state.businessName && this.state.selected) ? evnt.target.businessName.style.border = eborder : evnt.target.businessName.style.border = gborder;
-    !this.state.age ? evnt.target.age.style.border = eborder : evnt.target.age.style.border = gborder;
+    !age || !dob ? evnt.target.age.style.border = eborder : evnt.target.age.style.border = gborder;
     !this.state.gender ? evnt.target.gender.style.border = eborder : evnt.target.gender.style.border = gborder;
 
     if(!this.state.name || !this.state.businessName || !this.state.age || !this.state.gender) {
@@ -35,8 +37,7 @@ class Registration extends Component {
       return ;
     }
   
-    const dob = new Date(evnt.target.age.value);
-    const age =  Math.floor((Date.now() - dob)/((1000*60*60*24*365)));
+   
   
      axios.put(`http://api.localhost.test:3001/user`, {
       type,
