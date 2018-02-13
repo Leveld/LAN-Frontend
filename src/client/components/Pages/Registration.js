@@ -31,7 +31,7 @@ class Registration extends Component {
     !age || !dob ? evnt.target.age.style.border = eborder : evnt.target.age.style.border = gborder;
     !this.state.gender ? evnt.target.gender.style.border = eborder : evnt.target.gender.style.border = gborder;
 
-    if(!this.state.name || !this.state.businessName || !this.state.age || !this.state.gender) {
+    if(!this.state.name || (!this.state.businessName && this.state.selected) || !age || !dob || !this.state.gender) {
       document.getElementById(`form`).style.animation = 'shake 0.5s';
       setTimeout(() => document.getElementById(`form`).style.animation = "none", 500 );
       return ;
