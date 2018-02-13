@@ -18,7 +18,8 @@ import {
   Error
 } from './components';
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
-const {apiServerIP} = require('../server/util');
+const {apiServerIP} = require('capstone-utils');
+const {accTypes} = require('../server/config.json');
 
 
 
@@ -82,13 +83,13 @@ class App extends Component {
         <div className="app">
           <Header auth={auth} />
           <Route exact path="/" component={() => 
-            this.state.type === 'User' ? <Registration auth={auth}/> :  <Home />
+            this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home />
             }/>
           <Route path="/profile" component={() => 
-            availableTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Registration /> : <Home/>
+            accTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Redirect to={'/register'} /> : <Redirect to={'/'}/>
           }/>
           <Route path="/error" component={Error} />
-          <Route path='/register' component={Registration}/>
+          <Route path='/register' component={() => <Registration auth={auth} /> }/>
 
         <Footer />        
         </div>   

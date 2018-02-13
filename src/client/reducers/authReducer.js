@@ -1,11 +1,13 @@
 import { SIGNIN, SIGNOUT } from '../actions';
 
-export default (authenticated = false, action) => {
+const AuthReducer = (authorized = false, action) => {
   switch (action.type) {
     case SIGNIN:
     case SIGNOUT:
     return action.data;
     default:
-      return authenticated;
+    return authorized;
   }
 };
+
+export default AuthReducer;

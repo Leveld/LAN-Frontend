@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Contract from './Contract';
 import {connect} from 'react-redux';
 import '../../styles/Contracts.css';
-import {conTypes} from '../../../server/util';
+import {conTypes} from '../../../server/config.json';
 
 class ContractList extends Component {
   constructor(props) {

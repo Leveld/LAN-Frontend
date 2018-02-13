@@ -6,7 +6,7 @@ import CampaignList from '../Campaigns/CampaignList';
 import '../../styles/CP-Home.css';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {accTypes} from '../../../server/util';
+import {accTypes} from '../../../server/config.json';
 import {Cookies} from 'react-cookie';
 const cookie = new Cookies();
 

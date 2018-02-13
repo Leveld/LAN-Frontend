@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const {Cookies} = require('react-cookie');
-const {apiServerIP} = require('../server/util');
-const { USER_ERROR, asyncMiddleware, errorHandler, pages } = require('./util');
+const {pages} = require('../server/config');
+const { USER_ERROR, asyncMiddleware, errorHandler,  apiServerIP } = require('capstone-utils');
 
 const PORT = process.env.PORT || '3000';
 

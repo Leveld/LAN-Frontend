@@ -5,15 +5,14 @@ import {Cookies} from 'react-cookie';
 import '../../styles/Auth.css';
 import axios from 'axios';
 import {setUser, signIn, signOut} from '../../actions';
-const {apiServerIP, frontServerIP, accTypes} = require('../../../server/util');
+const {apiServerIP, frontServerIP} = require('capstone-utils');
+const {accTypes} = require('../../../server/config.json');
 const cookies = new Cookies();
 
 
 class Header extends Component {
 
   componentWillMount(){
-   // this.props.signIn();
-      
     const akey = cookies.get('access_token');
     if(akey && akey.length === 32){
       axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${akey}`}})
@@ -24,7 +23,8 @@ class Header extends Component {
         }    
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.message);
+        this.props.auth.login();
       });
     }
   }

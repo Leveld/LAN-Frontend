@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import '../../styles/Profile.css';
 import PlatformList from '../Platform/PlatformList';
 import ContractList from '../Contracts/ContractList';
-import {frontServerIP, accTypes} from '../../../server/util';
+import {frontServerIP} from 'capstone-utils';
+import {accTypes} from '../../../server/config.json';
 import {connect} from 'react-redux';
 
 

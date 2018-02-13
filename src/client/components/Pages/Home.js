@@ -4,12 +4,13 @@ import '../../styles/Home.css';
 import { CPHome} from '../index';
 import {Cookies} from 'react-cookie';
 import { Redirect } from 'react-router-dom';
+const {accTypes} = require('../../../server/config.json');
 const cookie = new Cookies();
+
 
 class Home extends Component {
 
   render(){
-    const types = ['User', "Business", 'ContentProducer']
     return (
       <div className="Home-wrapper">
       {
@@ -26,9 +27,9 @@ class Home extends Component {
           </div>
         </div>
       </div> :
-      this.props.user.type === types[2] ?
+      this.props.user.type === accTypes[1] ?
       <CPHome/> :
-      this.props.user.type === types[1]?
+      this.props.user.type === accTypes[0]?
       <div> BUSINESS HOME </div>:
       <div />
       
