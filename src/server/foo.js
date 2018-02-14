@@ -1,3 +1,4 @@
+// IMGAGE UPLOADER: FEATURE IN PROGRESS
 const multer = require('multer');
 const {Cookies} = require('react-cookie');
 

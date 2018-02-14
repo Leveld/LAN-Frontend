@@ -1,8 +1,9 @@
 .Home-wrapper {
   background: rgb(157, 155, 155);
   width: 100%;
-  height: calc(100% - 72px - 40px);
+  height: 100%;
   display: flex;
+  flex: 1;
   justify-content: flex-start;
   align-items:center;
   flex-direction: column;
@@ -21,7 +22,8 @@
 
 .Home-welcome {
   width: 95%;
-  height: 20%;
+  flex: 1;
+  min-height: 20%;
   background: rgb(0, 0, 0);
   z-index: 1;
   margin: 20px 0;
@@ -37,36 +39,31 @@
 
 
 .Home-Accounts {
-  width: 80%;
-  height: 70%;
-  background: rgba(135, 135, 135, 0.05);
+  background: rgba(182, 182, 182, 0.05);
   display: flex;
   z-index: 1;
-  margin: 20px;
   opacity: 0.9;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   overflow-y: auto;
   overflow-x: hidden;
-  flex: 1;
 }
 
 .Home-Accounts-info {
-  height: flex 1;
   width: 350px;
   height: 300px;
-  flex: 1;
   background: rgb(96, 114, 122);
   border: 1px solid black;
   display: flex;
+  margin: 20px;
   justify-content: center;
   align-items: flex-start;
-  margin: 20px; 
   border-radius: 10px;
   overflow:hidden;
   color: white;
 }
+
 .Home-Accounts-info-title {
   width: 100%;
   background: rgb(49, 49, 49);
