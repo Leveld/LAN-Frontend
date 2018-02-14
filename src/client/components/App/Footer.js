@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {version} from '../../../server/version.json';
 
 class Footer extends Component {
   render(){
@@ -7,6 +8,7 @@ class Footer extends Component {
       <div className="App-footer-wrapper">
         
           <div className="App-footer-wrapper-auth">
+            <div style={{color: 'white', marginRight: 5, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}> {version} </div>
             {
               this.props.authenticated ? 
                 <div style={{background: 'green'}} className="App-footer-wrapper-auth-display">AUTHENTICATED</div> : 

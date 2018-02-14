@@ -20,6 +20,8 @@ import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
 const {apiServerIP} = require('capstone-utils');
 const {accTypes} = require('../server/config.json');
 
+const ver = 'v1.0';
+
 
 
 import reducers from './reducers';
@@ -64,7 +66,7 @@ class App extends Component {
           <Route path="/error" component={Error} />
           <Route path='/register' component={() => <Registration auth={auth} /> }/>
 
-        <Footer />        
+        <Footer/>        
         </div>   
     );
   }
