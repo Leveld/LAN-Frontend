@@ -26,6 +26,7 @@
   font-size: 0.7rem;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid white;
 }
 .Campaign-item {
   width: 100%;
@@ -70,17 +71,17 @@
 
 .Campaign-stat {
   height: 150px;
-  width: 150px;
+  min-width: 150px;
   background: rgb(108, 108, 108);
   margin: 1%;
-  display: inline-block;
+  display: flex;
   border-radius: 5px;
 }
 
 .Campaign-stats-wrapper {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
+
 }
