@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {version} from '../../../server/version.json';
+import {version} from '../../../server/config.json';
 
 class Footer extends Component {
   render(){
