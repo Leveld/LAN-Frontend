@@ -13,7 +13,7 @@ const cookie = new Cookies();
     // #############
     const list = [
       { 
-        title: 'CP-HOME', 
+        title: 'CS3-P0T4T03D', 
         bg: 'black', 
         txt:'green', 
         image: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg'
@@ -23,7 +23,7 @@ const cookie = new Cookies();
 
 
 
-class CPHome extends Component {
+class MemberHome extends Component {
   constructor(props){
     super(props);
     this.data = props.user.accounts ||  list
@@ -36,7 +36,7 @@ class CPHome extends Component {
 
     return ( 
       <div style={{width: '100%', height: '100%'}}>
-        <InfoGraphicList title="Accounts" color="red" >
+        <InfoGraphicList title="Accounts" color="rgb(32, 48, 62)" >
           
           {
             this.data.map((item, i) => {
@@ -63,4 +63,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {setInfoGraphicBlob})(CPHome);
+export default connect(mapStateToProps, {setInfoGraphicBlob})(MemberHome);

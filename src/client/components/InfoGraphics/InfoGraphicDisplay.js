@@ -28,7 +28,7 @@ class InfoGraphicDisplay extends Component {
           </div> :  null
         }
         <div className="IG-display-blob" >
-          { this.props.info.blob }
+          { this.props.info ? this.props.info.blob : <div/>}
         </div>
       </div>
     );

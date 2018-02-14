@@ -44,7 +44,7 @@ class Scheduler extends Component {
           <div className="Scheduler-details">
             <div className="Scheduler-details-header">CALENDER DETAILS</div>
             <div className="Scheduler-details-total_events">
-              <div>TOTAL EVENTS: {this.events.length}</div>
+              <div>TOTAL EVENTS: <span style={{color: 'red'}}>{this.events.length}</span></div>
             </div>
             <div className="Scheduler-details-extra">
               {
@@ -52,10 +52,10 @@ class Scheduler extends Component {
                   <div>NO DATA</div> 
                   : 
                   <div className="Scheduler-extra">
-                    <div> ID: {this.props.evt.id}</div>
-                    <div> NAME: {this.props.evt.name}</div>
-                    <div> DAY: {this.props.evt.day}</div>
-                    <div> DETAILS: {this.props.evt.details}</div>
+                    <div> <span>ID:</span> {this.props.evt.id}</div>
+                    <div> <span>NAME:</span> {this.props.evt.name}</div>
+                    <div> <span>DAY:</span> {this.props.evt.day}</div>
+                    <div> <span>DETAILS:</span> {this.props.evt.details}</div>
                   </div>
               }
             </div>

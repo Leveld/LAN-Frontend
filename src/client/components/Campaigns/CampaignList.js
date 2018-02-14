@@ -11,7 +11,7 @@ export default class CampaignList extends Component {
   render(){
     return (
       <div className="Campaign-list">
-        <div className="CP-home-header"> CAMPAIGNS </div>
+        <div className="Campaign-header"> CAMPAIGNS </div>
           <div className="Campaign-wrapper">
             {this.list.map((campaign, i) => {
               return <Campaign key={i} id={i+1} title={`${campaign.title} ${i+1}`} />
