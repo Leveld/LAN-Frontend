@@ -28,7 +28,7 @@ class InfoGraphicDisplay extends Component {
           </div> :  null
         }
         <div className="IG-display-blob" >
-          { this.props.blob }
+          { this.props.info.blob }
         </div>
       </div>
     );
@@ -37,7 +37,7 @@ class InfoGraphicDisplay extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    blob: state.InfoGraphicBlob
+    info: state.InfoGraphicBlob
   };
 };
 

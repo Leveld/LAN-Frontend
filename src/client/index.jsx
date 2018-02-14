@@ -8,7 +8,6 @@ import {
   InfoGraphic, 
   InfoGraphicList, 
   InfoGraphicDisplay,
-  CPHome, 
   Profile, 
   Home,
   Registration, 
@@ -52,32 +51,7 @@ class App extends Component {
 
   render() {
     
-    // // MOCK DATA
-    // #############
-    const list = [
-      { 
-        title: 'CP-HOME', 
-        bg: 'black', 
-        txt:'green', 
-        image: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg', 
-        blob: <CPHome user={null} />
-      },         
-      {
-        title: 'Profile', bg: 'red', txt:'purple', image: 'https://venturebeat.com/wp-content/uploads/2017/08/youtube_logo_old_new1.gif?fit=578%2C289&strip=all', 
-        blob: <Profile user={null} />
-      },
-      {
-        title: 'Register', bg: 'green', txt:'white', image: 'http://d21toastmasters.org/wp-content/uploads/2016/06/iStock_000017157664XSmall_Register_Button.jpg', 
-        blob: <Registration />
-      },
-      {
-        title: 'Lambda', bg: 'blue', txt:'white', image: 'https://www.stratoscale.com/wp-content/uploads/AWS-Lambda.png', 
-        blob: <iframe title="LambdaSchool" src="http://lambdaschool.com" height={document.body.scrollHeight + "px"} style={{overflowY: 'auto'}} frameBorder="0" width="100%"/>
-      },
-    ];
-    // #############
-
-
+ 
     return (
         <div className="app">
           <Header auth={auth} />

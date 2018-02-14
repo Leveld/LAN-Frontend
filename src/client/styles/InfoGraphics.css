@@ -2,7 +2,6 @@
 .IG-list {
   background: rgb(182, 182, 182);
   width: 100%;
-  height: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,13 +21,12 @@
 
 .IG-list-wrap {
   display: flex;
-  flex-wrap: wrap;
   overflow-y: auto;
   flex-direction: row;
-  padding: 0;
+  padding: 0 20px;
   width: 100%;
-  height:98%;
-  justify-content: center;
+  height:100%;
+  justify-content: flex-start;
   align-items: center;
 }
 

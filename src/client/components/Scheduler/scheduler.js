@@ -25,7 +25,7 @@ class Scheduler extends Component {
     const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
     return (
       <div style={{width: '100%', height: '300px', display: 'flex', flexDirection: 'column'}}>
-        <div className="CP-home-header">SCHEDULER</div>
+        <div className="Scheduler-header">SCHEDULER</div>
         <div className="Scheduler-wrapper">
           <div className="Scheduler-week">
             {
