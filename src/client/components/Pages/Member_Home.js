@@ -17,6 +17,13 @@ const cookie = new Cookies();
         bg: 'black', 
         txt:'green', 
         image: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg'
+      },
+      { 
+        title: 'New Account', 
+        bg: 'blue', 
+        txt:'green', 
+        image: 'https://orig00.deviantart.net/41fb/f/2012/351/a/2/random_character_1_by_mnrart-d5odgq0.gif',
+        blob:<div>YOOOOOO</div>
       }
     ];
     // #############
