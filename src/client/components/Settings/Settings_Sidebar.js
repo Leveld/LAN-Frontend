@@ -23,13 +23,18 @@ const SettingsBlock = (props) => {
 }
 
 class SettingsSidebar extends Component {
+  updateSettings = (e) => {
+    e.preventDefault();
+    //UJPDATE SETTINGG
+  }
+
   findSettings = (settings) => {
     let blob;
     const settingsKeys = Object.keys(settings);
     const settingsValues = Object.values(settings);
     if(this.props.user)
     blob = (
-      <div style={{width: 250, display: 'flex', flexDirection: 'column', borderBottom: '1px solid white' }}>
+      <form onSubmit={(e)=>this.updateSettings(e)} style={{width: 250, display: 'flex', flexDirection: 'column', borderBottom: '1px solid white' }}>
         {settingsKeys.map((key, i) => { 
           return (
             <div key={i} style={{width: '100%', display: 'flex', background: 'red', flexDirection: 'row'}}>
@@ -37,7 +42,7 @@ class SettingsSidebar extends Component {
                 {String(key).toUpperCase()}:
               </div> 
               <div style={{ borderBottom: '1px solid black', background: 'rgb(49,49,49)', textAlign: 'right', padding: '0 20px'}}>
-                <select>
+                <select name={key}>
                   <option value={settingsValues[i]}>{String(settingsValues[i])}</option>
                   <option value={!settingsValues[i]}>{String(!settingsValues[i])}</option>
                 </select>
@@ -45,7 +50,10 @@ class SettingsSidebar extends Component {
             </div>
           );
         })}
-      </div>
+        <div style={{display:'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-end', padding: 5, fontSize: 5, background: 'rgb(57,57,57)'}}> 
+          <input style={{cursor: 'pointer'}} type="submit" value="UPLOAD"/>
+        </div>
+      </form>
     );
 
     return blob;
