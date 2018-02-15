@@ -8,7 +8,9 @@ import Stats from '../components/Stats/Stats';
 import Header from '../components/App/Header';
 import Footer from '../components/App/Footer';
 import Registration from '../components/Pages/Registration';
+import SettingsSidebar from '../components/Settings/Settings_Sidebar';
 import Error from '../components/Pages/Error';
+
 
 export {
   InfoGraphicList,
@@ -21,5 +23,6 @@ export {
   Header,
   Footer,
   Registration,
+  SettingsSidebar,
   Error
 }

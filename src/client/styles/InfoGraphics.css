@@ -34,7 +34,6 @@
   background: rgb(57, 57, 57);
   display: flex;
   justify-content: flex-start;
-  transition: height 1s;
   align-items:center;
   overflow-y: hidden;
   overflow-x: hidden;
@@ -144,7 +143,6 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  animation: IG-blob-load 1s;
   overflow: auto;
   line-break: auto;
   text-align: center;

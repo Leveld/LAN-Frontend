@@ -14,7 +14,7 @@ class Footer extends Component {
                 <div style={{background: 'green'}} className="App-footer-wrapper-auth-display">AUTHENTICATED</div> : 
                 <div style={{background: 'red'}} className="App-footer-wrapper-auth-display"> NOT AUTHENTICATED</div>
             }
-            <div className="App-footer-lambda" ><div className="App-footer-lambda-wrapper" >POWERED BY <div style={{color: 'black', display: 'block'}}>LAMBDASCOOL</div></div></div>
+            <div className="App-footer-lambda" ><div className="App-footer-lambda-wrapper" >POWERED BY <div style={{color: 'black', display: 'block'}}>LAMBDASCHOOL</div></div></div>
           </div> 
       </div>
     );
