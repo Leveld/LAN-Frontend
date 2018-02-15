@@ -51,7 +51,7 @@ class SettingsSidebar extends Component {
           );
         })}
         <div style={{display:'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-end', padding: 5, fontSize: 5, background: 'rgb(57,57,57)'}}> 
-          <input style={{cursor: 'pointer'}} type="submit" value="UPLOAD"/>
+          <input style={{cursor: 'pointer'}} type="submit" value="UPDATE"/>
         </div>
       </form>
     );
