@@ -11,6 +11,11 @@ const cookies = new Cookies();
 
 
 class Header extends Component {
+  constructor(props){
+    super(props);
+    this.app = props.app;
+  }
+
 
   componentWillMount(){
     const akey = cookies.get('access_token');
@@ -56,10 +61,10 @@ class Header extends Component {
     console.log()
     return (
       <div className="App-header">
-        <Link to={this.props.authenticated ? "/profile" : "/"} className="App-header-logo" >
+        <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.app.setState({settings: !this.app.state.settings}) : null } className="App-header-logo" >
           <img  src={this.props.authenticated ? 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
           <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
-        </Link>
+        </div>
         <Link to="/" className="App-header-name"><img src={'images/logo/NameLogo.png'} width="100px" /></Link>
 
           {this.getLinks()}

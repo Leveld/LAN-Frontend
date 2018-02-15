@@ -14,7 +14,8 @@ import {
   Stats, 
   Header,
   Footer, 
-  Error
+  Error,
+  SettingsSidebar
 } from './components';
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
 const {apiServerIP} = require('capstone-utils');
@@ -35,10 +36,10 @@ const cookie = new Cookies();
 class App extends Component {
   constructor(){
     super();
-    this.state = {type: null};
+    this.state = {type: null, settings: false};
   }
 
-  componentWillMount(){
+  componentDidMount(){
     const akey = cookie.get('access_token');
     if(akey && akey.length === 32){
       axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${akey}`}})
@@ -56,16 +57,18 @@ class App extends Component {
  
     return (
         <div className="app">
-          <Header auth={auth} />
-          <Route exact path="/" component={() => 
-            this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home />
+          <Header auth={auth} app={this}/>
+          <div style={{display: 'flex',  flexDirection: 'row', width: '100%', height: '100%'}}>
+            <SettingsSidebar toggle={this.state.settings} />
+            <Route exact path="/" component={() => 
+              this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home />
+              }/>
+            <Route path="/profile" component={() => 
+              accTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Redirect to={'/register'} /> : <Redirect to={'/'}/>
             }/>
-          <Route path="/profile" component={() => 
-            accTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Redirect to={'/register'} /> : <Redirect to={'/'}/>
-          }/>
-          <Route path="/error" component={Error} />
-          <Route path='/register' component={() => <Registration auth={auth} /> }/>
-
+            <Route path="/error" component={Error} />
+            <Route path='/register' component={() => <Registration auth={auth} /> }/>
+          </div>
         <Footer/>        
         </div>   
     );
