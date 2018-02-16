@@ -28,8 +28,10 @@ class Header extends Component {
         repos.forEach((repo, i) => {
           axios.get(`https://api.github.com/repos/Leveld/LAN-${repo}/pulls`)
           .then((res) => {
-          console.log(res.data);
-          if(res.data.length > 0) this.setState({PR: true, repos: this.state.repos + shortRepo[i]}); 
+            if(res.data.length > 0) {
+              console.log(res.data);            
+              this.setState({PR: true, repos: this.state.repos + shortRepo[i]});
+            } 
           });
         });
       }, 10000);
