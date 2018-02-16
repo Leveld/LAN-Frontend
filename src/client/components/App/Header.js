@@ -54,7 +54,7 @@ class Header extends Component {
        console.log(res.data);
        if(res.data.length > 0){
         this.setState({PR: true});
-        this.repos += "API ";
+        this.repos += "AUTH ";
        } 
      });
     // API
