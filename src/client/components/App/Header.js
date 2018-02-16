@@ -15,7 +15,7 @@ class Header extends Component {
     super(props);
     this.app = props.app;
     this.state = {PR: false};
-    this.repos = ''
+    this.repos = []
   }
 
   componentWillMount(){
@@ -28,7 +28,7 @@ class Header extends Component {
        if(res.data.length > 0){
         this.setState({PR: true});
         this.repos += "FE ";
-       } 
+       }  
      });
     // DB
      axios.get('https://api.github.com/repos/Leveld/LAN-Api/pulls')
@@ -36,7 +36,7 @@ class Header extends Component {
        console.log(res.data);
        if(res.data.length > 0){
         this.setState({PR: true});
-        this.repos += "DB ";
+        this.repos += "API ";
        } 
      });
     // AUTH
@@ -45,7 +45,7 @@ class Header extends Component {
        console.log(res.data);
        if(res.data.length > 0){
         this.setState({PR: true});
-        this.repos += "AUTH ";
+        this.repos += "DB ";
        } 
      });
     // API
@@ -63,7 +63,7 @@ class Header extends Component {
        console.log(res.data);
        if(res.data.length > 0){
         this.setState({PR: true});
-        this.repos += "Util ";
+        this.repos += "UTIL ";
        } 
      });
     }
@@ -113,7 +113,7 @@ class Header extends Component {
         <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.app.setState({settings: !this.app.state.settings}) : null } className="App-header-logo" >
           <img  src={this.props.authenticated ? 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
           <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
-          <div style={this.state.PR ? {padding: 5, borderRadius: 5, background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.repos}</div>
+          <div style={this.state.PR ? { position: 'absolute', padding: 5, borderRadius: 5, background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.repos}</div>
         </div>
         <Link to="/" className="App-header-name"><img src={'images/logo/NameLogo.png'} width="100px" /></Link>
 
