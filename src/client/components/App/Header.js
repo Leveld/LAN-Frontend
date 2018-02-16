@@ -14,15 +14,18 @@ class Header extends Component {
   constructor(props){
     super(props);
     this.app = props.app;
+    this.state = {PR: false}
   }
 
-  componentWillMount(){
+  componentDidMount(){
      // CHECK PULL REQUESTS
+     if(!process.env.PRODUCTION){
      axios.get('https://api.github.com/repos/Leveld/LAN-Frontend/pulls')
      .then((res) => {
        console.log(res.data);
-       if(res.data.length > 0) alert('PULL REQUEST FOUND');
+       if(res.data.length > 0) this.setState({PR: true});
      });
+    }
     const akey = cookies.get('access_token');
     if(akey && akey.length === 32){
       axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${akey}`}})
@@ -69,6 +72,7 @@ class Header extends Component {
         <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.app.setState({settings: !this.app.state.settings}) : null } className="App-header-logo" >
           <img  src={this.props.authenticated ? 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
           <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
+          <div style={this.state.PR ? {padding: 5, borderRadius: 5, background: 'red'} : {display: 'none'}}>PULL REQUEST FOUND</div>
         </div>
         <Link to="/" className="App-header-name"><img src={'images/logo/NameLogo.png'} width="100px" /></Link>
 
