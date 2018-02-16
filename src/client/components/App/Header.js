@@ -14,26 +14,17 @@ class Header extends Component {
   constructor(props){
     super(props);
     this.app = props.app;
-    this.state = {PR: false, repos: ''};
+    this.state = {repos: '', data: []};
     this.repos = []
   }
 
   componentWillMount(){
     // CHECK PULL REQUESTS
+    this.checkPR();
     if(!process.env.PRODUCTION){
-      const repos = ['Frontend', 'Api', 'DB', 'Auth', 'Utils'];
-      const shortRepo = ['FE-', 'API-', 'DB-', 'AUTH-', 'UTIL-'];
       setInterval(() => {
-        this.setState({repos: ''});
-        repos.forEach((repo, i) => {
-          axios.get(`https://api.github.com/repos/Leveld/LAN-${repo}/pulls`)
-          .then((res) => {
-            if(res.data.length > 0) {
-              console.log(res.data);            
-              this.setState({PR: true, repos: this.state.repos + shortRepo[i]});
-            } 
-          });
-        });
+        this.setState({repos: '', data: []});
+        this.checkPR(); 
       }, 10000);
     }
     const akey = cookies.get('access_token');
@@ -51,6 +42,21 @@ class Header extends Component {
       });
     }
   }
+
+  checkPR = () => {
+    const repos = ['Frontend', 'Api', 'DB', 'Auth', 'Utils'];
+    const shortRepo = ['FE-', 'API-', 'DB-', 'AUTH-', 'UTIL-'];
+    repos.forEach((repo, i) => {
+      axios.get(`https://api.github.com/repos/Leveld/LAN-${repo}/pulls`)
+      .then((res) => {
+        if(res.data.length > 0) {
+          const newdata = this.state.data.concat();
+          newdata.push(res.data);           
+          this.setState({repos: this.state.repos + shortRepo[i], data: newdata});
+        } 
+      });
+    });
+  };
 
   signOut = () => {
     const domain = /^(https?:\/\/)?([^:^\/]*)(:[0-9]*)(\/[^#^?]*)(.*)/g.exec(frontServerIP);
@@ -82,8 +88,9 @@ class Header extends Component {
         <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.app.setState({settings: !this.app.state.settings}) : null } className="App-header-logo" >
           <img  src={this.props.authenticated ? 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
           <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
-          <div style={this.state.PR ? { position: 'absolute', padding: 5, borderRadius: 5, background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
+
         </div>
+        <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, cursor: 'pointer', padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
         <Link to="/" className="App-header-name"><img src={'images/logo/NameLogo.png'} width="100px" /></Link>
 
           {this.getLinks()}
