@@ -16,8 +16,13 @@ class Header extends Component {
     this.app = props.app;
   }
 
-
   componentWillMount(){
+     // CHECK PULL REQUESTS
+     axios.get('https://api.github.com/repos/Leveld/LAN-Frontend/pulls')
+     .then((res) => {
+       console.log(res.data);
+       if(res.data.length > 0) alert('PULL REQUEST FOUND');
+     });
     const akey = cookies.get('access_token');
     if(akey && akey.length === 32){
       axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${akey}`}})
