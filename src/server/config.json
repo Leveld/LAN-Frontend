@@ -1,0 +1,16 @@
+{
+  "version": "v0.1",
+  "pages": [
+  "/",
+  "/profile",
+  "/register",
+  "/error"
+],
+"accTypes": [
+  "Business",
+  "ContentProducer"
+],
+"conTypes": [
+  "Business",
+  "Manager"
+]}

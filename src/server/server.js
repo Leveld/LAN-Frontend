@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const path = require('path');
-
-const { USER_ERROR, asyncMiddleware, errorHandler } = require('./util');
+const {Cookies} = require('react-cookie');
+const {pages} = require('../server/config');
+const { USER_ERROR, asyncMiddleware, errorHandler,  apiServerIP } = require('capstone-utils');
 
 const PORT = process.env.PORT || '3000';
 
@@ -16,8 +16,14 @@ app.use(express.static('./src/public', {
   index: false
 }));
 
-app.get('/', asyncMiddleware(async (req, res, next) => {
-  await res.sendFile(path.resolve(__dirname, '../public/index.html'));
+app.get('/error', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../public/index.html'));  
+});
+
+
+app.get('/*', asyncMiddleware(async (req, res, next) => {
+  if(!pages.includes(req.url)) return res.redirect('/error');
+  res.sendFile(path.resolve(__dirname, '../public/index.html'));
 }));
 
 app.listen(PORT, () => {
