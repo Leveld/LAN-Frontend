@@ -64,3 +64,4 @@ src/public/js
 data/db/*
 src/server/secret.json
 src/TestingData/*
+keys.json

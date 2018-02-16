@@ -15,14 +15,13 @@ class Header extends Component {
     super(props);
     this.app = props.app;
     this.state = {repos: '', data: []};
-    this.repos = []
-  }
-
-  componentDidMount(){
-    this.checkPR();
   }
 
   componentWillMount(){
+    this.checkPR();
+  }
+
+  componentDidMount(){
     // CHECK PULL REQUESTS
     if(!process.env.PRODUCTION){
       setInterval(() => {
