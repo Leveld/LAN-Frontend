@@ -19,48 +19,19 @@ class Header extends Component {
   }
 
   componentWillMount(){
-     // CHECK PULL REQUESTS
-     if(!process.env.PRODUCTION){
-    // FRONTEND
-     axios.get('https://api.github.com/repos/Leveld/LAN-Frontend/pulls')
-     .then((res) => {
-       console.log(res.data);
-       if(res.data.length > 0){
-        this.setState({PR: true, repos: this.state.repos + 'FE-'});
-       }  
-     });
-    // DB
-     axios.get('https://api.github.com/repos/Leveld/LAN-Api/pulls')
-     .then((res) => {
-       console.log(res.data);
-       if(res.data.length > 0){
-        this.setState({PR: true, repos: this.state.repos + 'API-'});
-       } 
-     });
-    // AUTH
-     axios.get('https://api.github.com/repos/Leveld/LAN-DB/pulls')
-     .then((res) => {
-       console.log(res.data);
-       if(res.data.length > 0){
-        this.setState({PR: true, repos: this.state.repos + 'DB-'});
-       } 
-     });
-    // API
-     axios.get('https://api.github.com/repos/Leveld/LAN-Auth/pulls')
-     .then((res) => {
-       console.log(res.data);
-       if(res.data.length > 0){
-        this.setState({PR: true, repos: this.state.repos + 'AUTH-'});
-       } 
-     });
-    // API
-     axios.get('https://api.github.com/repos/Leveld/LAN-Utils/pulls')
-     .then((res) => {
-       console.log(res.data);
-       if(res.data.length > 0){
-        this.setState({PR: true, repos: this.state.repos + 'UTIL-'});
-       } 
-     });
+    // CHECK PULL REQUESTS
+    if(!process.env.PRODUCTION){
+      const repos = ['Frontend', 'Api', 'DB', 'Auth', 'Utils'];
+      const shortRepo = ['FE-', 'API-', 'DB-', 'AUTH-', 'UTIL-'];
+      setInterval(() => {
+        repos.forEach((repo, i) => {
+          axios.get(`https://api.github.com/repos/Leveld/LAN-${repo}/pulls`)
+          .then((res) => {
+          console.log(res.data);
+          if(res.data.length > 0) this.setState({PR: true, repos: this.state.repos + shortRepo[i]}); 
+          });
+        });
+      }, 10000);
     }
     const akey = cookies.get('access_token');
     if(akey && akey.length === 32){
