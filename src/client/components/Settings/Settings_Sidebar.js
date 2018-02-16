@@ -38,7 +38,7 @@ class SettingsSidebar extends Component {
         {settingsKeys.map((key, i) => { 
           return (
             <div key={i} style={{width: '100%', display: 'flex', background: 'red', flexDirection: 'row'}}>
-              <div style={{flex:1, fontSize: '1vw', display: 'flex', alignItems: 'center', background: 'rgb(39,69,100)', color: 'white',borderRight:'1px solid black', borderBottom: '1px solid black', paddingLeft: 5}}>
+              <div style={{flex:1, fontSize: '0.7vw', display: 'flex', alignItems: 'center', background: 'rgb(39,69,100)', color: 'white',borderRight:'1px solid black', borderBottom: '1px solid black', paddingLeft: 5}}>
                 {String(key).toUpperCase()}:
               </div> 
               <div style={{ borderBottom: '1px solid black', background: 'rgb(49,49,49)', textAlign: 'right', padding: '0 20px'}}>

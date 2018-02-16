@@ -45,8 +45,8 @@ class Registration extends Component {
       }
     }, {headers:{Authorization:`Bearer ${cookie.get('access_token')}`}})
     .then((res) => {
-      alert("Registration Complete Please Log Back In");
-      this.props.auth.login();
+      alert("Registration Complete");
+      window.location.replace('/');
     })
     .catch((err) => {
       alert(err.response.data.message);

@@ -23,7 +23,7 @@ const cookie = new Cookies();
         bg: 'blue', 
         txt:'green', 
         image: 'https://orig00.deviantart.net/41fb/f/2012/351/a/2/random_character_1_by_mnrart-d5odgq0.gif',
-        blob:<div>YOOOOOO</div>
+        blob:<div style={{color: 'white'}}>SOME OTHER DATA</div>
       }
     ];
     // #############

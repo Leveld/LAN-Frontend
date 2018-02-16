@@ -22,7 +22,7 @@ app.get('/error', (req, res) => {
 
 
 app.get('/*', asyncMiddleware(async (req, res, next) => {
-  if(!pages.includes(req.url)) return res.redirect('/error');
+  //if(!pages.includes(req.url)) return res.redirect('/error');
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 }));
 
