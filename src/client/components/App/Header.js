@@ -14,16 +14,57 @@ class Header extends Component {
   constructor(props){
     super(props);
     this.app = props.app;
-    this.state = {PR: false}
+    this.state = {PR: false};
+    this.repos = ''
   }
 
-  componentDidMount(){
+  componentWillMount(){
      // CHECK PULL REQUESTS
      if(!process.env.PRODUCTION){
+    // FRONTEND
      axios.get('https://api.github.com/repos/Leveld/LAN-Frontend/pulls')
      .then((res) => {
        console.log(res.data);
-       if(res.data.length > 0) this.setState({PR: true});
+       if(res.data.length > 0){
+        this.setState({PR: true});
+        this.repos += "FE ";
+       } 
+     });
+    // DB
+     axios.get('https://api.github.com/repos/Leveld/LAN-Api/pulls')
+     .then((res) => {
+       console.log(res.data);
+       if(res.data.length > 0){
+        this.setState({PR: true});
+        this.repos += "DB ";
+       } 
+     });
+    // AUTH
+     axios.get('https://api.github.com/repos/Leveld/LAN-DB/pulls')
+     .then((res) => {
+       console.log(res.data);
+       if(res.data.length > 0){
+        this.setState({PR: true});
+        this.repos += "AUTH ";
+       } 
+     });
+    // API
+     axios.get('https://api.github.com/repos/Leveld/LAN-Auth/pulls')
+     .then((res) => {
+       console.log(res.data);
+       if(res.data.length > 0){
+        this.setState({PR: true});
+        this.repos += "API ";
+       } 
+     });
+    // API
+     axios.get('https://api.github.com/repos/Leveld/LAN-Utils/pulls')
+     .then((res) => {
+       console.log(res.data);
+       if(res.data.length > 0){
+        this.setState({PR: true});
+        this.repos += "Util ";
+       } 
      });
     }
     const akey = cookies.get('access_token');
@@ -72,7 +113,7 @@ class Header extends Component {
         <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.app.setState({settings: !this.app.state.settings}) : null } className="App-header-logo" >
           <img  src={this.props.authenticated ? 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
           <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
-          <div style={this.state.PR ? {padding: 5, borderRadius: 5, background: 'red'} : {display: 'none'}}>PULL REQUEST FOUND</div>
+          <div style={this.state.PR ? {padding: 5, borderRadius: 5, background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.repos}</div>
         </div>
         <Link to="/" className="App-header-name"><img src={'images/logo/NameLogo.png'} width="100px" /></Link>
 
