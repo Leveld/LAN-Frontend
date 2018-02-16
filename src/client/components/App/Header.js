@@ -24,6 +24,7 @@ class Header extends Component {
       const repos = ['Frontend', 'Api', 'DB', 'Auth', 'Utils'];
       const shortRepo = ['FE-', 'API-', 'DB-', 'AUTH-', 'UTIL-'];
       setInterval(() => {
+        this.setState({repos: ''});
         repos.forEach((repo, i) => {
           axios.get(`https://api.github.com/repos/Leveld/LAN-${repo}/pulls`)
           .then((res) => {
