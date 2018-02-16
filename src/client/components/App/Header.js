@@ -18,9 +18,12 @@ class Header extends Component {
     this.repos = []
   }
 
+  componentDidMount(){
+    this.checkPR();
+  }
+
   componentWillMount(){
     // CHECK PULL REQUESTS
-    this.checkPR();
     if(!process.env.PRODUCTION){
       setInterval(() => {
         this.setState({repos: '', data: []});
