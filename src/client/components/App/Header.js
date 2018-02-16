@@ -14,7 +14,7 @@ class Header extends Component {
   constructor(props){
     super(props);
     this.app = props.app;
-    this.state = {PR: false};
+    this.state = {PR: false, repos: ''};
     this.repos = []
   }
 
@@ -26,8 +26,7 @@ class Header extends Component {
      .then((res) => {
        console.log(res.data);
        if(res.data.length > 0){
-        this.setState({PR: true});
-        this.repos += "FE ";
+        this.setState({PR: true, repos: this.state.repos + 'FE-'});
        }  
      });
     // DB
@@ -35,8 +34,7 @@ class Header extends Component {
      .then((res) => {
        console.log(res.data);
        if(res.data.length > 0){
-        this.setState({PR: true});
-        this.repos += "API ";
+        this.setState({PR: true, repos: this.state.repos + 'API-'});
        } 
      });
     // AUTH
@@ -44,8 +42,7 @@ class Header extends Component {
      .then((res) => {
        console.log(res.data);
        if(res.data.length > 0){
-        this.setState({PR: true});
-        this.repos += "DB ";
+        this.setState({PR: true, repos: this.state.repos + 'DB-'});
        } 
      });
     // API
@@ -53,8 +50,7 @@ class Header extends Component {
      .then((res) => {
        console.log(res.data);
        if(res.data.length > 0){
-        this.setState({PR: true});
-        this.repos += "AUTH ";
+        this.setState({PR: true, repos: this.state.repos + 'AUTH-'});
        } 
      });
     // API
@@ -62,8 +58,7 @@ class Header extends Component {
      .then((res) => {
        console.log(res.data);
        if(res.data.length > 0){
-        this.setState({PR: true});
-        this.repos += "UTIL ";
+        this.setState({PR: true, repos: this.state.repos + 'UTIL-'});
        } 
      });
     }
@@ -113,7 +108,7 @@ class Header extends Component {
         <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.app.setState({settings: !this.app.state.settings}) : null } className="App-header-logo" >
           <img  src={this.props.authenticated ? 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
           <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
-          <div style={this.state.PR ? { position: 'absolute', padding: 5, borderRadius: 5, background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.repos}</div>
+          <div style={this.state.PR ? { position: 'absolute', padding: 5, borderRadius: 5, background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
         </div>
         <Link to="/" className="App-header-name"><img src={'images/logo/NameLogo.png'} width="100px" /></Link>
 
