@@ -1,0 +1,8 @@
+{
+  "pages": [
+    "/",
+    "/profile",
+    "/register",
+    "/error"
+  ]
+}
