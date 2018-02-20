@@ -15,7 +15,8 @@ import {
   Header,
   Footer, 
   Error,
-  SettingsSidebar
+  SettingsSidebar,
+  Github
 } from './components';
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
 const {apiServerIP} = require('capstone-utils');
@@ -58,9 +59,13 @@ class App extends Component {
  
     return (
         <div className="app">
+
           <Header auth={auth} app={this}/>
+          
           <div style={{display: 'flex',  flexDirection: 'row', width: '100%', height: '100%'}}>
             <SettingsSidebar toggle={this.state.settings} />
+          {!process.env.PRODUCTION ? <Route path="/git" component={Github} /> : null}
+            
             <Route exact path="/" component={() => 
               this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home />
               }/>

@@ -1,0 +1,56 @@
+.GH-client {
+  background: #040036;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.GH-form {
+  width: 50%;
+  height: 50%;
+  background: rgb(37, 21, 105);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.5rem;
+  border: 1px solid white;
+}
+
+.GH-form input {
+  margin: 5px;
+  height: 20%;
+  width: 80%;
+  border-radius: 10px;
+  background: rgb(1, 1, 64);
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.GH-client-content {
+  width: 90%;
+  height: 90%;
+  background: orange;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.GH-client-nav {
+  width: 100%;
+  background: midnightblue;
+  display: flex;
+  flex-direction: row;
+}
+
+.GH-client-nav-btn {
+  width: 70px;
+  height: 70px;
+  margin: 5px;
+  background: green;
+}
