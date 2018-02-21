@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import '../../styles/Settings.css';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {apiServerIP} from 'capstone-utils';
+import axios from 'axios';
+import {toggleSettings} from '../../actions';
+import {Cookies} from 'react-cookie';
+const cookie = new Cookies();
 
 const SettingsItem = (props) => {
   return (
@@ -28,6 +34,8 @@ class SettingsSidebar extends Component {
     //UJPDATE SETTINGG
   }
 
+  
+
   findSettings = (settings) => {
     let blob;
     const settingsKeys = Object.keys(settings);
@@ -38,7 +46,7 @@ class SettingsSidebar extends Component {
         {settingsKeys.map((key, i) => { 
           return (
             <div key={i} style={{width: '100%', display: 'flex', background: 'red', flexDirection: 'row'}}>
-              <div style={{flex:1, fontSize: '0.7vw', display: 'flex', alignItems: 'center', background: 'rgb(39,69,100)', color: 'white',borderRight:'1px solid black', borderBottom: '1px solid black', paddingLeft: 5}}>
+              <div style={{flex:1, fontSize: '0.7rem', display: 'flex', alignItems: 'center', background: 'rgb(39,69,100)', color: 'white',borderRight:'1px solid black', borderBottom: '1px solid black', paddingLeft: 5}}>
                 {String(key).toUpperCase()}:
               </div> 
               <div style={{ borderBottom: '1px solid black', background: 'rgb(49,49,49)', textAlign: 'right', padding: '0 20px'}}>
@@ -71,15 +79,17 @@ class SettingsSidebar extends Component {
       showPhoneNumber: false,
       showTwitter: false
     };
-    this.props.user.settings ? userSettings = this.props.user.settings : null; 
-   
+    this.props.user.settings ? userSettings = this.props.user.settings : null;    
 
     const blocks = [
       {title: 'SETTINGS', data: [this.findSettings(userSettings)]}
     ];
+
+    if(!this.props.authenticated) return <div />;
     
     return (
-      <div className="Settings-sidebar" style={this.props.toggle ? {width:250} : {width: 0}}>
+      <div className="Settings-sidebar" style={this.props.settings ? {width:250} : {width: 0}}>
+        <Link onClick={()=>this.props.toggleSettings()} className="Settings-profile" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>VIEW PROFILE</Link>
         {
           blocks.map((block, i) => <SettingsBlock key={i} title={block.title} data={block.data}/>)
         }
@@ -90,8 +100,10 @@ class SettingsSidebar extends Component {
 
 const mapStateToProps = (state) => {
  return {
-    user: state.user
+    authenticated: state.auth,
+    user: state.user,
+    settings: state.settings
   }
 }
 
-export default connect(mapStateToProps, null)(SettingsSidebar);
+export default connect(mapStateToProps, {toggleSettings})(SettingsSidebar);

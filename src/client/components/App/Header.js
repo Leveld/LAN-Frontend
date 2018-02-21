@@ -4,7 +4,7 @@ import {Link, Redirect} from 'react-router-dom';
 import {Cookies} from 'react-cookie';
 import '../../styles/Auth.css';
 import axios from 'axios';
-import {setUser, signIn, signOut} from '../../actions';
+import {setUser, signIn, signOut, toggleSettings} from '../../actions';
 const {apiServerIP, frontServerIP} = require('capstone-utils');
 const {accTypes} = require('../../../server/config.json');
 const cookies = new Cookies();
@@ -19,6 +19,7 @@ class Header extends Component {
 
   componentWillMount(){
     this.checkPR();
+    console.log(this.props.user);
   }
 
   componentDidMount(){
@@ -87,7 +88,7 @@ class Header extends Component {
     console.log()
     return (
       <div className="App-header">
-        <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.app.setState({settings: !this.app.state.settings}) : null } className="App-header-logo" >
+        <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.props.toggleSettings() : null } className="App-header-logo" >
           <img  src={this.props.authenticated ? 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
           <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
 
@@ -108,6 +109,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {setUser, signIn, signOut })(Header);
+export default connect(mapStateToProps, {setUser, signIn, signOut, toggleSettings })(Header);
 
 

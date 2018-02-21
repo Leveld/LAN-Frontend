@@ -36,7 +36,7 @@ const cookie = new Cookies();
 class App extends Component {
   constructor(){
     super();
-    this.state = {type: null, settings: false};
+    this.state = {type: null};
   }
 
   componentDidMount(){
@@ -60,7 +60,7 @@ class App extends Component {
         <div className="app">
           <Header auth={auth} app={this}/>
           <div style={{display: 'flex',  flexDirection: 'row', width: '100%', height: '100%'}}>
-            <SettingsSidebar toggle={this.state.settings} />
+            <SettingsSidebar />
             <Route exact path="/" component={() => 
               this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home />
               }/>

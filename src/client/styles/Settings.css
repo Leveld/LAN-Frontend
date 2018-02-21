@@ -29,3 +29,17 @@
   align-items: center;
 
 }
+
+.Settings-profile{
+  padding: 5px 2%;
+  width: 96%;
+  background: rgb(18, 28, 35);
+  text-decoration: none;
+  color: white;
+  transition: 0.5s color;
+  font-size: 0.7rem;
+}
+
+.Settings-profile:hover{
+  color:green;
+}

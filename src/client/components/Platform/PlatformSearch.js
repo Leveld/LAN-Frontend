@@ -11,10 +11,8 @@ export default class PlatformSearch extends Component {
           <div className="Platform-search-wrapper">
             <label>Filter</label>
             <select className="Platform-search-dropdown" onChange={(e) => this.parent.setState({searchBy: e.target.value})}>
-              <option value="status">TYPE</option>
-              <option value="username">USERNAME</option>
-              <option value="subscribers">SUBSCRIBERS</option>
-              <option value="avgViews">AVG VIEWS</option>
+              <option value="channelID">ID</option>
+              <option value="channelName">NAME</option>
             </select>
             <input  onChange={(e) => this.parent.setKey(e.target.value)}/>
           </div>

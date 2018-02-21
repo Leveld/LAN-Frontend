@@ -7,12 +7,15 @@ import PlatformReducer from './platformReducer';
 import UserReducer from './UserReducer';
 import AuthReducer from './authReducer';
 
+import SettingsReducer from './SettingsReducer';
+
 const rootReducer = combineReducers({
   InfoGraphicBlob: InfoGraphicReducer,
   evt: SchedulerReducer,
   platforms: PlatformReducer,
   auth: AuthReducer,
-  user: UserReducer
+  user: UserReducer,
+  settings: SettingsReducer
 }); 
 
 export default rootReducer;

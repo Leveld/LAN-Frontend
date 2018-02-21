@@ -8,12 +8,23 @@ import {setPlatforms} from '../../actions';
 class PlatformList extends Component {
   constructor(props){
     super(props);
-    this.state = {filtered: [], keyword: '', searchBy: 'status'};
+    this.state = {filtered: [], keyword: '', searchBy: 'channelID'};
     this.filtered = [];
-    this.platforms = props.user.platforms || [];
+    this.platforms = this.removeDups(props.list) || [];
   }
 
+  removeDups = (accounts) => {
+    const filtered = [];
+    const reduced = accounts.filter((account) => {
+      if(!filtered.includes(account.channelID)) {
+        filtered.push(account.channelID);
+        return true;
+      }
+      return false;
+    });
 
+    return reduced;
+  }
 
   setKey = (keyword) => {
     this.filtered = this.platforms.filter((plat) => {

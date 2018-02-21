@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setInfoGraphicBlob } from '../../actions';
+import {apiServerIP} from 'capstone-utils';
+import axios from 'axios';
+import {Cookies} from 'react-cookie';
+const cookie = new Cookies();
 
 
 import '../../styles/InfoGraphics.css';
@@ -14,11 +18,19 @@ class InfoGraphicList extends Component {
   }
   componentDidMount(){
     if(this.props.children.length > 0)
-      this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.image || 'images/noPhoto.jpg', blob:this.props.children[0].props.children});
+      this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children});
   }
 
   componentWillUnmount(){
     this.props.setInfoGraphicBlob(null);
+  }
+
+  addCO = () => {
+    axios.get(`${apiServerIP}coURL`, {params: {type: 'google'},headers: {Authorization: `Bearer ${cookie.get('access_token')}`}})
+    .then((res) => {
+      console.log(res.data);
+      window.location.replace(res.data.url);
+    });
   }
 
   render(){
@@ -36,7 +48,7 @@ class InfoGraphicList extends Component {
             </div>
             <div style={{background: this.color}} className="IG-list-wrap">
                 {this.props.children}
-                <div onClick={()=>this.setState({addItem: !this.state.addItem})} className="IG-add" > +</div>
+                <div onClick={()=>this.addCO()} className="IG-add" > +</div>
             </div>
           </div>
         </div>

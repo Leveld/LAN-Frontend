@@ -6,6 +6,8 @@ export const SET_PLATFORMS = 'SET_PLATFORMS';
 export const SIGNIN = 'SIGNIN';
 export const SIGNOUT = 'SIGNOUT';
 export const SET_USER = 'SET_USER';
+export const TOGGLE_SETTINGS = 'TOGGLE_SETTINGS';
+
 
 
 export const setInfoGraphicBlob = (blob) => {
@@ -49,4 +51,11 @@ export const setUser = (user) => {
     data: user
   }
 }
+
+export const toggleSettings = () => {
+  return {
+    type: TOGGLE_SETTINGS
+  }
+}
+
 

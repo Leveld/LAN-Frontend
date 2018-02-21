@@ -16,14 +16,17 @@ class Home extends Component {
       {  
       !this.props.authenticated && !cookie.get('access_token') ?
       <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <img className="Home-bg" alt="Logo" src={'images/logo/logo.png'}/>
-        <div className="Home-welcome"><img src={'images/logo/logo.png'} width="20%" height="100%"/></div>
+        <img className="Home-bg" alt="Logo" src={'images/logo/banner.png'}/>
         <div className="Home-Accounts">
           <div className="Home-Accounts-info">
             <div className="Home-Accounts-info-title">CONTENT PROVIDER</div>
+            <div className="Home-Accounts-info-content"> ● CONTENT PROVIDER INFO</div>
+
           </div>
           <div className="Home-Accounts-info">
-            <div className="Home-Accounts-info-title">ADVERTISER</div> 
+            <div className="Home-Accounts-info-title">ADVERTISER</div>
+            <div className="Home-Accounts-info-content">● ADVERTISER INFO</div>
+             
           </div>
         </div>
       </div> :

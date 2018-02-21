@@ -1,5 +1,5 @@
 .Home-wrapper {
-  background: rgb(157, 155, 155);
+  background: rgb(3, 20, 35);
   width: 100%;
   height: 100%;
   display: flex;
@@ -12,37 +12,32 @@
 }
 
 .Home-bg {
-  width: 50%;
-  max-width: 600px;
+  width: 100%;
+  height: 100%;
   align-self: center;
-  position: absolute;
-  opacity: 0.2;
+  position: fixed;
+  opacity: 0.98;
   z-index: 0;
 }
 
 .Home-welcome {
-  width: 95%;
-  flex: 1;
-  min-height: 20%;
+  max-height: 30%;
+  width: 100%;
   background: rgb(0, 0, 0);
   z-index: 1;
-  margin: 20px 0;
   opacity: 0.9;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   border: 1px solid rgb(73, 73, 73);
-  padding: 10px;
   border-radius: 5px;
 }
 
-
 .Home-Accounts {
-  background: rgba(182, 182, 182, 0.05);
   display: flex;
+  flex: 1;
   z-index: 1;
-  opacity: 0.9;
+  opacity: 0.90;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -57,10 +52,12 @@
   border: 1px solid black;
   display: flex;
   margin: 20px;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
   border-radius: 10px;
   overflow:hidden;
+  flex-direction: column;
+  
   color: white;
 }
 
@@ -69,4 +66,13 @@
   background: rgb(49, 49, 49);
   text-align: center;
   padding: 10px 0;
+}
+
+.Home-Accounts-info-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 5px 0;
+  width: 90%;
+  flex: 1;
 }

@@ -1,6 +1,6 @@
 .Profile-wrapper {
   width: 100%;
-  background: purple;
+  background: rgb(0, 0, 0);
   height: 100%;
   overflow-y: auto;
   display: flex;
@@ -26,7 +26,7 @@
 }
 .Profile-content {
   width: 100%;
-  background: rgb(64, 64, 64);
+  background: rgb(35, 69, 100);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -46,7 +46,7 @@
 .Profile-logo {
   height: 250px;
   width: 250px;
-  background: rgb(20, 20, 20);
+  background: rgb(3, 20, 35);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +65,7 @@
 }
 .Profile-content-right {
   flex: 1;
-  background: rgb(46, 46, 46);
+  background: rgb(3, 20, 35);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,7 +104,7 @@
 .Profile-tag{
   width: 100%;
   height: 40px;
-  background: rgb(44, 44, 44);
+  background: rgb(1, 6, 10);
   display: flex;
   justify-content: center;
   align-items: center;
