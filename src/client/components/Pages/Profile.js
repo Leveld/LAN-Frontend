@@ -20,7 +20,8 @@ class Profile extends Component {
     const params = (new URL(document.location)).searchParams;
     const id = params.get('id');
     const type = params.get('type');
-    axios.get(`${apiServerIP}user?id=${id}&type=${type}`, {headers:{Authorization:cookie.get('access_token')}})
+    const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
+    axios.get(`${apiServerIP}user?id=${id}&type=${type}`, {headers:{Authorization: token}})
     .then((res) => this.setState({user: res.data}))
     .catch((err) => console.log(err));
   }

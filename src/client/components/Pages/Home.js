@@ -14,7 +14,7 @@ class Home extends Component {
      return (
       <div className="Home-wrapper">
       {  
-      !this.props.authenticated && !cookie.get('access_token') ?
+      !this.props.authenticated && (!cookie.get('access_token') && !window.localStorage.getItem('access_token')) ?
       <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <img className="Home-bg" alt="Logo" src={'images/logo/banner.png'}/>
         <div className="Home-Accounts">

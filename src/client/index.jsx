@@ -41,9 +41,9 @@ class App extends Component {
 
   componentDidMount(){
     if (window.location.href.endsWith('#')) window.location.href = window.location.href.substring(0, window.location.href.length - 1);
-    const akey = cookie.get('access_token');
-    if(akey && akey.length === 32){
-      axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${akey}`}})
+    const token = window.localStorage.getItem('access_token') || cookie.get('access_token');    
+    if(token && token.length === 32){
+      axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${token}`}})
       .then((res) => {
         this.setState({type: res.data.type});
       })

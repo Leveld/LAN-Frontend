@@ -34,8 +34,8 @@ class Registration extends Component {
       setTimeout(() => document.getElementById(`form`).style.animation = "none", 500 );
       return ;
     }
-
-     axios.put(`http://api.localhost.test:3001/user`, {
+    const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
+    axios.put(`http://api.localhost.test:3001/user`, {
       type,
       fields: {
         name: this.state.name,
@@ -43,7 +43,7 @@ class Registration extends Component {
         age,
         gender: this.state.gender
       }
-    }, {headers:{Authorization:`Bearer ${cookie.get('access_token')}`}})
+    }, {headers:{Authorization:`Bearer ${token}`}})
     .then((res) => {
       alert("Registration Complete");
       window.location.replace('/');

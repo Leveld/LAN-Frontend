@@ -23,10 +23,10 @@ class Platform extends Component {
     return (
       <div className="Platform-item">
         <div className="Platform-tabs">
-          <div  className="Platform-tabs-tab"><nobr style={{overflow: 'hidden', width: '100%'}}>{platform.channelID}</nobr></div>
-          <div className="Platform-tabs-tab"><div style={{overflow: 'hidden', width: '100%'}}>{platform.channelName}</div></div>
-          <div className="Platform-tabs-tab">Subscribers: {platform.subscribers || 0}</div>
-          <div className="Platform-tabs-tab">Avg Views: {platform.avgViews || 0}/WEEK</div>
+          <div  className="Platform-tabs-tab"><nobr>{platform.channelID}</nobr></div>
+          <div className="Platform-tabs-tab"><nobr>{platform.channelName}</nobr></div>
+          <div className="Platform-tabs-tab"><nobr>Subscribers: {platform.subscribers || 0}</nobr></div>
+          <div className="Platform-tabs-tab"><nobr>Avg Views: {platform.avgViews || 0}/WEEK</nobr></div>
           <div onClick={() => this.contactUser(viewer)} className="Platform-tabs-contact">CONTACT</div>
         </div>
         <div className="Platform-details">

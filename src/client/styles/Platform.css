@@ -61,9 +61,10 @@
 
 .Platform-tabs{
   width: 100%;
-  background: red;
+  background: rgb(27, 27, 27);
   display: flex;
   position: relative;
+  overflow: hidden;
 }
 
 .Platform-tabs-tab, .Platform-tabs-contact {
@@ -83,6 +84,10 @@
   padding: 0 5px;
   text-align: left;
   overflow: hidden;
+}
+.Platform-tabs-tab nobr {
+  overflow: hidden;
+  width: 100%;
 }
 .Platform-tabs-contact {
   cursor: pointer;

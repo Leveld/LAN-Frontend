@@ -14,7 +14,6 @@ class InfoGraphicList extends Component {
     super(props);
     this.color = props.color;
     this.title = props.title || "TITLE";
-    this.state = {addItem: false};
   }
   componentDidMount(){
     if(this.props.children.length > 0)
@@ -26,7 +25,8 @@ class InfoGraphicList extends Component {
   }
 
   addCO = () => {
-    axios.get(`${apiServerIP}coURL`, {params: {type: 'google'},headers: {Authorization: `Bearer ${cookie.get('access_token')}`}})
+    const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
+    axios.get(`${apiServerIP}coURL`, {params: {type: 'google'},headers: {Authorization: `Bearer ${token}`}})
     .then((res) => {
       console.log(res.data);
       window.location.replace(res.data.url);
@@ -35,7 +35,7 @@ class InfoGraphicList extends Component {
 
   render(){
     let blobImage;
-    blobImage = this.props.user.profileImage || 'images/noPhoto.jpg' ;
+    blobImage = this.props.user.profilePicture || 'images/noPhoto.jpg' ;
     if(this.props.info) blobImage = this.props.info.accountImg || 'images/noPhoto.jpg';
 
     return (
@@ -51,11 +51,6 @@ class InfoGraphicList extends Component {
                 <div onClick={()=>this.addCO()} className="IG-add" > +</div>
             </div>
           </div>
-        </div>
-        <div  style={this.state.addItem ? {height:400} : {height: 0}} className="IG-add-item">
-          <form className="IG-add-form">
-            ADD ITEM FORM
-          </form>
         </div>
       </div>
     );
