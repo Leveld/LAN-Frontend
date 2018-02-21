@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    if (window.location.href.endsWith('#')) window.location.href = window.location.href.substring(0, window.location.href.length - 2);
+    if (window.location.href.endsWith('#')) window.location.href = window.location.href.substring(0, window.location.href.length - 1);
     const akey = cookie.get('access_token');
     if(akey && akey.length === 32){
       axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${akey}`}})
