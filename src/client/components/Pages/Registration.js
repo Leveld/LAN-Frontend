@@ -23,13 +23,16 @@ class Registration extends Component {
     const gborder = '1.5px solid green';
     const dob = new Date(evnt.target.age.value);
     const age =  Math.floor((Date.now() - dob)/((1000*60*60*24*365)));
+    const ageError = document.getElementById(`ageError-${type}`);
+    console.log(ageError);
     !this.state.name ? this.setState({name: this.props.user.name}) : null;
     (!this.state.name && !this.props.user.name) ? evnt.target.name.style.border = eborder : evnt.target.name.style.border = gborder;
     (!this.state.businessName && this.state.selected) ? evnt.target.businessName.style.border = eborder : evnt.target.businessName.style.border = gborder;
-    !age || !dob ? evnt.target.age.style.border = eborder : evnt.target.age.style.border = gborder;
+    !age || !dob ? evnt.target.age.style.border = eborder : age >= 18 ? evnt.target.age.style.border = gborder : evnt.target.age.style.border = eborder;
+    age < 18 ? ageError.style.opacity = 1 : ageError.style.opacity = 0;
     !this.state.gender ? evnt.target.gender.style.border = eborder : evnt.target.gender.style.border = gborder;
 
-    if(!this.state.name || (!this.state.businessName && this.state.selected) || !age || !dob || !this.state.gender) {
+    if(!this.state.name || (!this.state.businessName && this.state.selected) || !age || age < 18 || !dob || !this.state.gender) {
       document.getElementById(`form`).style.animation = 'shake 0.5s';
       setTimeout(() => document.getElementById(`form`).style.animation = "none", 500 );
       return ;
@@ -59,14 +62,14 @@ class Registration extends Component {
         <div id="Register-wrapper" className="Register-wrapper">
           <div id="form" style={{display: 'flex', flexDirection: 'column', background: 'red', width: '80%'}}>
           <div className="Register-types">
-            <div onClick={()=> this.setState({selected: 0})} style={this.state.selected ? {border: '1px solid black'} : {border: '1px solid white'}} className="Register-type"> CONTENT PROVIDER</div>
-            <div onClick={()=> this.setState({selected: 1})} style={!this.state.selected ? {border: '1px solid black'} : {border: '1px solid white'}}className="Register-type"> ADVERTISER</div>
+            <div onClick={()=> this.setState({selected: 0})} style={this.state.selected ? {border: '1px solid black'} : {borderBottom: '1px solid black', borderLeft: '1px solid green',borderTop: '1px solid green',borderRight: '1px solid green'}} className="Register-type"> CONTENT PROVIDER</div>
+            <div onClick={()=> this.setState({selected: 1})} style={!this.state.selected ? {border: '1px solid black'} : {borderBottom: '1px solid black', borderLeft: '1px solid green',borderTop: '1px solid green',borderRight: '1px solid green'}}className="Register-type"> ADVERTISER</div>
           </div>
          
           {/* CONTENT PROVIDER SIGNUP */}
           <form onSubmit={(e) => this.submit(e, "contentproducer")} style={!this.state.selected ? {display: 'flex'} : {display: 'none'}} id="form0" className="Register-form">
             <label> CONTENT PROVIDER SIGNUP</label>
-            <div id="val0">FORM MUST BE COMPLETED</div>
+            <nobr id="ageError-contentproducer" >Must Be 18 years or older to continue registration</nobr>
             
             <div  style={{display: 'flex', flexDirection: 'row', flex: 1}}>
               <input name="name" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} placeholder={this.props.user.name} />
@@ -91,7 +94,7 @@ class Registration extends Component {
           {/* ADVERTISER SIGNUP */}
           <form onSubmit={(e) => this.submit(e, "business")} style={this.state.selected ? {display: 'flex'} : {display: 'none'}} id="form1"  className="Register-form">
             <label> ADVERTISER SIGNUP</label>
-            <div id="val1">FORM MUST BE COMPLETED</div>            
+            <div id="ageError-business" >Must Be 18 years or older to continue registration</div>           
             {/*<input type='file' onChange={(e) => this.upload(e)}/>*/}
             <div style={{display: 'flex', flexDirection: 'row', flex: 1}}>
               <input name="name" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} placeholder={this.props.user.name} />

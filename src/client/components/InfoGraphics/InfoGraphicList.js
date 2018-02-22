@@ -4,6 +4,7 @@ import { setInfoGraphicBlob } from '../../actions';
 import {apiServerIP} from 'capstone-utils';
 import axios from 'axios';
 import {Cookies} from 'react-cookie';
+import {accTypes} from '../../../server/config.json';
 const cookie = new Cookies();
 
 
@@ -15,10 +16,10 @@ class InfoGraphicList extends Component {
     this.color = props.color;
     this.title = props.title || "TITLE";
   }
-  componentDidMount(){
-    if(this.props.children.length > 0)
-      this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children});
-  }
+  // componentDidMount(){
+  //   if(this.props.children.length > 0)
+  //     this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children});
+  // }
 
   componentWillUnmount(){
     this.props.setInfoGraphicBlob(null);
@@ -48,7 +49,7 @@ class InfoGraphicList extends Component {
             </div>
             <div style={{background: this.color}} className="IG-list-wrap">
                 {this.props.children}
-                <div onClick={()=>this.addCO()} className="IG-add" > +</div>
+                <div onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')} className="IG-add" > +</div>
             </div>
           </div>
         </div>

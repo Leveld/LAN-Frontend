@@ -12,12 +12,14 @@ const cookie = new Cookies();
    // // MOCK DATA
     // #############
     const list = [
-      { 
-        title: 'CS3-P0T4T03D',
-        profilePicture: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg'
+      { _id: '34344j34j34j34k34',
+        name: 'CS3-P0T4T03D',
+        profilePicture: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg',
+        type: accTypes[0]
       },
       { 
-        title: 'New Account', 
+        _id: 'jhsdkjhsdkjhsdkjhsd',
+        name: 'New Account', 
         profilePicture: 'https://orig00.deviantart.net/41fb/f/2012/351/a/2/random_character_1_by_mnrart-d5odgq0.gif',
         blob:<div style={{color: 'white'}}>SOME OTHER DATA</div>
       }
@@ -59,12 +61,19 @@ class MemberHome extends Component {
     return ( 
       <div style={{width: '100%', height: '100%'}}>
         <InfoGraphicList title="Accounts" color="rgb(32, 48, 62)" >
-          
+          {
+            this.props.user.type === accTypes[0] ? (
+              <InfoGraphic {...this.props.user} >
+                <AccountData {...this.props.user} />
+              </InfoGraphic>
+            )
+            :null
+          }
           {
             accounts.map((item, i) => {
               return (
                 <InfoGraphic key={i} {...item} >
-                  <AccountData {...item}/>
+                  <AccountData {...item} />
                 </InfoGraphic>
               );
             })
