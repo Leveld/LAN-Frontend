@@ -15,7 +15,7 @@ import {
   Header,
   Footer, 
   Error,
-  SettingsSidebar
+  SettingsSidebar,
 } from './components';
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
 const {apiServerIP} = require('capstone-utils');

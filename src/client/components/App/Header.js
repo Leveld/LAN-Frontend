@@ -27,7 +27,7 @@ class Header extends Component {
       }, 10000);
     }
     const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
-    if(token && token.length === 32){
+    if(token && token.length === 32 ){
       axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${token}`}})
       .then((res) => {
         if(res.data.type){
@@ -37,6 +37,8 @@ class Header extends Component {
       })
       .catch((err) => {
         alert(err.response.data.message);
+        cookie.remove('access_token');
+        window.localStorage.clear();
         this.props.auth.login();
       });
     }

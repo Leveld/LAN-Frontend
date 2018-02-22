@@ -40,12 +40,11 @@ class Profile extends Component {
  );
     return (
       <div className="Profile-wrapper">
-        
         <div className="Profile-content">
           <div className="Profile-content-left">
             <div className="Profile-logo">
               <div className="Profile-logo-img">
-                <img src={`${frontServerIP}images/${user.email/* JWT TOKEN NAME*/}/profile.jpg`} onError={(e) => e.target.src = 'images/noPhoto.jpg'} width="100%"/>
+                <img src={this.state.user.profilePicture || 'images/noPhoto.jpg'} width="100%"/>
               </div>
             </div>
             <div className="Profile-contact-list">

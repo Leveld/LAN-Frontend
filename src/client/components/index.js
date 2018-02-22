@@ -9,6 +9,7 @@ import Header from '../components/App/Header';
 import Footer from '../components/App/Footer';
 import Registration from '../components/Pages/Registration';
 import SettingsSidebar from '../components/Settings/Settings_Sidebar';
+import CampaignAdd from '../components/Campaigns/CampaignAdd';
 import Error from '../components/Pages/Error';
 
 
@@ -24,5 +25,6 @@ export {
   Footer,
   Registration,
   SettingsSidebar,
-  Error
+  Error,
+  CampaignAdd
 }
