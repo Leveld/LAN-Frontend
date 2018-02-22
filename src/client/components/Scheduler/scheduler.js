@@ -7,10 +7,7 @@ import Evnt from './event';
 class Scheduler extends Component {
   constructor(props){
     super(props);
-    const event1 = {day:'SUNDAY', name:'sunday', details: "These are the details1" };
-    const event2 = {day:'FRIDAY', name:'friday', details: "These are the details2" };
-    const event3 = {day:'TUESDAY', name:'tuesday', details: "THIS IS A VERY LONG MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, " };
-    this.events = props.events || /*MOCK DATA */ [event1, event2, event2, event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3];
+    this.events = props.events || /*MOCK DATA */ [];
   }
 
   findEvents(day){
