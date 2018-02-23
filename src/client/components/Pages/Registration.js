@@ -38,7 +38,7 @@ class Registration extends Component {
       return ;
     }
     const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
-    axios.put(`http://api.localhost.test:3001/user`, {
+    axios.put(`${apiServerIP}/user`, {
       type,
       fields: {
         name: this.state.name,
