@@ -91,7 +91,7 @@ class Header extends Component {
     return (
       <div className="App-header">
         <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.props.toggleSettings() : null } className="App-header-logo" >
-          <img  src={this.props.authenticated ? 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
+          <img  src={this.props.authenticated ? this.props.user.profilePicture || 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
           <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
 
         </div>
