@@ -5,6 +5,7 @@ import {apiServerIP} from 'capstone-utils';
 import axios from 'axios';
 import {Cookies} from 'react-cookie';
 import {accTypes} from '../../../server/config.json';
+import AccountData, { accountData } from '../Pages/Account_Data';
 const cookie = new Cookies();
 
 
@@ -16,10 +17,11 @@ class InfoGraphicList extends Component {
     this.color = props.color;
     this.title = props.title || "TITLE";
   }
-  // componentDidMount(){
-  //   if(this.props.children.length > 0)
-  //     this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children});
-  // }
+  componentDidMount(){
+    if(this.props.children[0])
+      return this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
+    this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props.profilePicture, blob: <AccountData />});
+  }
 
   componentWillUnmount(){
     this.props.setInfoGraphicBlob(null);
@@ -29,7 +31,6 @@ class InfoGraphicList extends Component {
     const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
     axios.get(`${apiServerIP}coURL`, {params: {type: 'google'},headers: {Authorization: `Bearer ${token}`}})
     .then((res) => {
-      console.log(res.data);
       window.location.replace(res.data.url);
     });
   }

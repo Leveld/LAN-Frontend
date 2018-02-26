@@ -25,7 +25,9 @@ import '../../styles/Campaigns.css';
       <div className="Campaign-list">
         {this.state.form ? <CampaignAdd parent={this}/> : null}
         <div className="Campaign-header"> CAMPAIGNS </div>
-        {this.state.type === accTypes[0] && this.state.owner === this.props.user._id ? <div style={{width: '100%', display: 'flex', padding: '1% 0', justifyContent: 'flex-end', paddingRight: '1%',  background: 'rgb(57,57,57)'}}><button style={{cursor: 'pointer'}} onClick={()=>this.toggleForm()}>Add Campaign</button></div> : null}
+        {this.state.type === accTypes[0] && this.state.owner === this.props.user._id ? 
+        <div style={{width: '100%', display: 'flex', padding: '1% 0', justifyContent: 'flex-end', paddingRight: '1%',  background: 'rgb(57,57,57)'}}>
+        <button className="App-auth-link" style={{fontSize: '12px'}} onClick={()=>this.toggleForm()}>Add Campaign</button></div> : null}
           <div className="Campaign-wrapper">
             {this.list.length === 0 ? <div style={{color: 'white', padding: '1% 0'}}>NO CAMPAIGNS</div> : null} 
             {this.list.map((campaign, i) => {

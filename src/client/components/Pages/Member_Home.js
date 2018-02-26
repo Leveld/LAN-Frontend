@@ -55,7 +55,6 @@ class MemberHome extends Component {
     if(!accTypes.includes(this.props.user.type)) return <div className="no_user">NO ACCOUNT SET</div>;
 
 
-    console.log(this.removeDups(this.data));
     const accounts = this.props.user.type === accTypes[1] ? this.removeDups(this.data) : list;
 
     return ( 
