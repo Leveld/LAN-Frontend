@@ -59,7 +59,7 @@ class MemberHome extends Component {
 
     return ( 
       <div style={{width: '100%', height: '100%'}}>
-        <InfoGraphicList title="Accounts" color="rgb(32, 48, 62)" >
+        <InfoGraphicList title="Accounts" accounts={accounts.length} color="rgb(32, 48, 62)" >
           {
             this.props.user.type === accTypes[0] ? (
               <InfoGraphic {...this.props.user} >

@@ -4,7 +4,8 @@
     "/",
     "/profile",
     "/register",
-    "/error"
+    "/error",
+    "/messages"
   ],
   "accTypes": [
     "Business",

@@ -57,6 +57,7 @@ class Registration extends Component {
     
   }
   render(){
+    if(this.props.user.type !== "User") return <Redirect to='/' />;
     return (
       <div className="Register" >
         <div id="Register-wrapper" className="Register-wrapper">

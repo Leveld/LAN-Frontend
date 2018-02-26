@@ -18,9 +18,11 @@ class InfoGraphicList extends Component {
     this.title = props.title || "TITLE";
   }
   componentDidMount(){
-    if(this.props.children[0])
-      return this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
-    this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props.profilePicture, blob: <AccountData />});
+    if(this.props.accounts === 0 && this.props.user.type !== accTypes[0] ) return;
+      if(this.props.children[0]){
+        return this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
+      }
+      this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props.profilePicture, blob: <AccountData />});
   }
 
   componentWillUnmount(){

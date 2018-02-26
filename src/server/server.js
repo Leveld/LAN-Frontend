@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const {Cookies} = require('react-cookie');
-const {pages} = require('../server/config');
+const {pages} = require('./config.json');
 const { USER_ERROR, asyncMiddleware, errorHandler,  apiServerIP } = require('capstone-utils');
 
 const PORT = process.env.PORT || '3000';
@@ -22,7 +22,8 @@ app.get('/error', (req, res) => {
 
 
 app.get('/*', asyncMiddleware(async (req, res, next) => {
-  //if(!pages.includes(req.url)) return res.redirect('/error');
+  const page = String(req.url).toLocaleLowerCase().split('?')[0];
+  if(!pages.includes(page)) return res.redirect('/error');
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 }));
 
