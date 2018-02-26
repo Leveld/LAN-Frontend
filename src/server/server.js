@@ -28,6 +28,9 @@ app.get('/*', asyncMiddleware(async (req, res, next) => {
 
 app.listen(PORT, () => {
   console.log('Server running on port ' + PORT);
+  process.env.NODE_ENV === 'production' || process.env.PRODUCTION ?
+    console.log("Running In Production") :
+    console.log("Running In Development");
 });
 
 module.exports = app;
