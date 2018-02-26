@@ -119,6 +119,11 @@
   border-top: 1px solid rgb(5, 236, 13);
   z-index: 2;
 }
+
+.App-footer-dev-indicator {
+  color: white;
+  margin-right: 1%;
+}
 .App-footer-wrapper-auth {
   height: 80%;
   right:0;    
