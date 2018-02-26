@@ -7,10 +7,7 @@ import Evnt from './event';
 class Scheduler extends Component {
   constructor(props){
     super(props);
-    const event1 = {day:'SUNDAY', name:'sunday', details: "These are the details1" };
-    const event2 = {day:'FRIDAY', name:'friday', details: "These are the details2" };
-    const event3 = {day:'TUESDAY', name:'tuesday', details: "THIS IS A VERY LONG MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, MESSAGE, " };
-    this.events = props.events || /*MOCK DATA */ [event1, event2, event2, event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3,event3];
+    this.events = props.events || /*MOCK DATA */ [];
   }
 
   findEvents(day){
@@ -25,7 +22,7 @@ class Scheduler extends Component {
     const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
     return (
       <div style={{width: '100%', height: '300px', display: 'flex', flexDirection: 'column'}}>
-        <div className="CP-home-header">SCHEDULER</div>
+        <div className="Scheduler-header">SCHEDULER</div>
         <div className="Scheduler-wrapper">
           <div className="Scheduler-week">
             {
@@ -44,7 +41,7 @@ class Scheduler extends Component {
           <div className="Scheduler-details">
             <div className="Scheduler-details-header">CALENDER DETAILS</div>
             <div className="Scheduler-details-total_events">
-              <div>TOTAL EVENTS: {this.events.length}</div>
+              <div>TOTAL EVENTS: <span style={{color: 'red'}}>{this.events.length}</span></div>
             </div>
             <div className="Scheduler-details-extra">
               {
@@ -52,10 +49,10 @@ class Scheduler extends Component {
                   <div>NO DATA</div> 
                   : 
                   <div className="Scheduler-extra">
-                    <div> ID: {this.props.evt.id}</div>
-                    <div> NAME: {this.props.evt.name}</div>
-                    <div> DAY: {this.props.evt.day}</div>
-                    <div> DETAILS: {this.props.evt.details}</div>
+                    <div> <span>ID:</span> {this.props.evt.id}</div>
+                    <div> <span>NAME:</span> {this.props.evt.name}</div>
+                    <div> <span>DAY:</span> {this.props.evt.day}</div>
+                    <div> <span>DETAILS:</span> {this.props.evt.details}</div>
                   </div>
               }
             </div>

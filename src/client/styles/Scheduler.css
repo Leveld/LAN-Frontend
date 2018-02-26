@@ -21,38 +21,44 @@
 .Scheduler-week {
 
   height: 100%; 
+  max-width: 7500px;
+  min-width: 100px;
   background: rgb(25, 115, 0);
   overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-
+  display: flex;
+  flex-direction: row;
 }
 
 .Scheduler-day {
-  width: 150px;
+  min-width: 100px;
   height: 100%;
   border-right: 1px solid black;
   background: rgb(132, 132, 132);
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-x: auto;
 }
 .Scheduler-day-title {
-  background: rgb(206, 206, 206);
+  background: rgb(42, 81, 118);
   color: rgb(0, 0, 0);
   width: 100%;
   padding: 1% 0;
   font-size: 0.7rem;
   overflow: hidden;
+  color: white;
   border-bottom: 1px solid black;
 }
 .Scheduler-events {
   width: 100%;
   height: 95%;
-  background: rgb(76, 76, 76);
+  background: rgb(32, 48, 62);
   overflow-y: auto;
   overflow-x: hidden;
   font-size: 0.7rem;
   color:white;
 }
+
 .Scheduler-event {
   width: 98%;
   background: rgb(228, 228, 228);
@@ -100,18 +106,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   border-bottom: 1px solid black;
 }
 
 .Scheduler-details-total_events {
   width: 100%;
   height: 25%;
-  background: rgb(198, 198, 198);
+  background: rgb(87, 113, 137);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   border-bottom: 1px solid black;
   text-align: start;
 }
@@ -119,18 +125,25 @@
 .Scheduler-details-extra {
   width: 100%;
   height: 70%;
-  background: rgb(198, 198, 198);
+  background: rgb(35, 69, 100);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   border-bottom: 1px solid black;
   word-wrap: break-word;
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: white;
 }
 .Scheduler-extra {
   width: 100%;
   height: 100%;
   text-align: start;
+}
+.Scheduler-extra span {
+  color: red;
+  font-weight: 700;
 }
 
 .Scheduler-extra div, .Scheduler-details-total_events div {

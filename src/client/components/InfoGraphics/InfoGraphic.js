@@ -11,11 +11,11 @@ const InfoGraphic = (props) => {
     if (props.children) return props.children;
     return ( <div> NO BLOB FOUND </div> );
   };
-
+  console.log(props);
   return (
-    <div onClick={() => props.setInfoGraphicBlob(getBlob())} style={{backgroundColor:props.bg, color: props.txt}} className="IG-item">
-      <div className="IG-item-img"><img src={props.image} alt={'Info Graphic'} width="100%" height="100%"/></div>
-      <div>{props.title}</div>
+    <div onClick={() => props.setInfoGraphicBlob({accountImg: props.profilePicture, blob: getBlob()})} style={{backgroundColor:"grey", color: "white"}} className="IG-item">
+      <div className="IG-item-img"><img src={props.profilePicture || 'images/noPhoto.jpg'} alt={'Info Graphic'} width="100%" height="100%"/></div>
+      <div className="IG-item-title">{props.channelName ? props.channelName.split('@')[0] : props.name}</div>
     </div>
   );
 }

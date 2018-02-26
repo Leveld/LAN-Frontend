@@ -2,7 +2,6 @@
 .IG-list {
   background: rgb(182, 182, 182);
   width: 100%;
-  height: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,13 +21,12 @@
 
 .IG-list-wrap {
   display: flex;
-  flex-wrap: wrap;
   overflow-y: auto;
   flex-direction: row;
-  padding: 0;
+  padding: 0 20px;
   width: 100%;
-  height:98%;
-  justify-content: center;
+  height:100%;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -36,7 +34,6 @@
   background: rgb(57, 57, 57);
   display: flex;
   justify-content: flex-start;
-  transition: height 1s;
   align-items:center;
   overflow-y: hidden;
   overflow-x: hidden;
@@ -64,6 +61,14 @@
   opacity: 1;
 }
 
+.IG-add-item {
+  background: rgb(78, 78, 77);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s height;
+}
+
 .IG-item {
   width: 70px;
   min-width: 70px;
@@ -72,13 +77,12 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 0.5rem;
+  font-size: 10px;
   padding: 5px 2.5px;
   border-radius: 10px;
   border: 1px solid black;
   margin-right: 10px;
   color: white;
-  font-weight: 700;
   text-shadow: 0px 0px black;
   box-shadow: 0px 0px 2px 0px black;
   cursor: pointer;
@@ -86,6 +90,10 @@
 }
 .IG-item:hover {
   border: 1px solid white;
+}
+
+.IG-item-title{
+  overflow: hidden;
 }
 
 .IG-item-img {
@@ -103,21 +111,32 @@
 }
 
 .IG-add {
-  background: 'red';
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  border: 1px solid black;
-  border-radius: 100%;
-  cursor: pointer;
-  transition: border 0.7s;
-  z-index: 0;
+  background: green; 
+  height:20px; 
+  width: 20px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  border: 1px solid black; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  transition: 0.7s border;
 }
 
 .IG-add:hover {
   border: 1px solid white;
 }
-
+.IG-add-form {
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid black;
+  overflow: hidden;
+}
 .IG-display-blob {
   background: rgb(78, 78, 78);
   border-radius: 0;
@@ -127,7 +146,6 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  animation: IG-blob-load 1s;
   overflow: auto;
   line-break: auto;
   text-align: center;

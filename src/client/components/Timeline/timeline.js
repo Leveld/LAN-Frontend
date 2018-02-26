@@ -9,7 +9,7 @@ export default class Timeline extends Component {
   }
 
   render(){
-    const tmpStyle = {width: '100%', height: '50%', background: 'grey', border: '1px solid black'}; 
+    const tmpStyle = {width: '100%', height: '50%', background: 'rgb(35, 69, 100)', border: '1px solid black'}; 
     return (
       <div className="TL-wrapper">
         <div className="TL-section-A">

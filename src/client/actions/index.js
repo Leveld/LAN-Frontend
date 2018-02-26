@@ -1,9 +1,14 @@
+import {Cookies} from 'react-cookie';
+
 export const SET_INFO_GRAPHIC_BLOB = 'SET_INFO_GRAPHIC_BLOB';
 export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
 export const SET_PLATFORMS = 'SET_PLATFORMS';
+export const SIGNIN = 'SIGNIN';
+export const SIGNOUT = 'SIGNOUT';
+export const SET_USER = 'SET_USER';
+export const TOGGLE_SETTINGS = 'TOGGLE_SETTINGS';
 
-export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
-export const USER_UNAUTHENTICATED = 'USER_UNAUTHENTICATED';
+
 
 export const setInfoGraphicBlob = (blob) => {
   return {
@@ -25,4 +30,32 @@ export const setPlatforms = (platforms) => {
     data: platforms
   }
 }
+
+export const signIn = () => {
+  return {
+    type: SIGNIN,
+    data: true
+  }
+}
+export const signOut = () => {
+  setUser({});
+  return {
+    type: SIGNOUT,
+    data: false
+  }
+}
+
+export const setUser = (user) => {
+  return {
+    type: SET_USER,
+    data: user
+  }
+}
+
+export const toggleSettings = () => {
+  return {
+    type: TOGGLE_SETTINGS
+  }
+}
+
 
