@@ -244,6 +244,7 @@
 .Campaign-add-info input,textarea, select {
   flex: 1;
   margin  : 1%;
+  padding: 0 5px;
 }
 
 #rule-input, #tag-input {
