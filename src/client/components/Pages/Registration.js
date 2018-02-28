@@ -68,8 +68,8 @@ class Registration extends Component {
       alert("Registration Complete");
       const file = new FormData();
       file.append('image',this.state.file);
-      axios.post(`${frontServerIP}upload`, file, {headers:{Authorization: 'Bearer ' + token}});
-      //window.location.replace('/');
+      axios.post(`${frontServerIP}upload`, file, {headers:{Authorization: 'Bearer ' + token}})
+      .then(() => window.location.replace('/'));
     })
     .catch((err) => {
       alert(err.response.data.message);
