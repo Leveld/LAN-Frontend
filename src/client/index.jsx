@@ -11,6 +11,7 @@ import {
   Profile, 
   Home,
   Registration, 
+  Messages,
   Stats, 
   Header,
   Footer, 
@@ -70,7 +71,7 @@ class App extends Component {
             }/>
             <Route path="/error" component={Error} />
             <Route path='/register' component={() => <Registration auth={auth} /> }/>
-            <Route path='/test' component={Test_Form}/>
+            <Route path='/messages' component={Messages}/>
           </div>
         <Footer/>        
         </div>   

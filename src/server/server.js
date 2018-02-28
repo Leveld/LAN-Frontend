@@ -11,6 +11,39 @@ const jwt = require('jsonwebtoken');
 const {clientSecret} = require('./secret.json');
 const fs = require('fs');
 
+const convos = [
+  {
+    id: 'convo ID 1',
+    messages:[
+      {
+        from: '5a9676d9a504fb36602af75a',
+        message: 'this is a message from User 1',
+        timestamp: Date.now()
+      }
+    ]
+  },
+  {
+    id: 'convo ID 2',
+    messages:[
+      {
+        from: '5a9676d9a504fb36602af75a',
+        message: 'this is a message from User 5a9676d9a504fb36602af75a',
+        timestamp: Date.now()
+      },
+      {
+        from: 'bob',
+        message: 'this is a message from User bob',
+        timestamp: Date.now()
+      },
+      {
+        from: 'george',
+        message: 'this is a message from User george',
+        timestamp: Date.now()
+      }
+    ]
+  }
+]
+
 
 
 
@@ -63,13 +96,28 @@ app.post('/upload', upload, (req, res) => {
 app.get('/error', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));  
 });
+app.get('/messages', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../public/index.html'));  
+});
 
 
-app.get('/*', asyncMiddleware(async (req, res, next) => {
+app.get('/', asyncMiddleware(async (req, res, next) => {
   const page = String(req.url).toLocaleLowerCase().split('?')[0];
+  if(req.url === '/convos') return res.send(convos);
   //if(!pages.includes(page)) return res.redirect('/error');
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 }));
+
+app.get('/convos', (req, res) => {
+  res.json(convos);
+})
+
+app.post('/message', (req, res) => {;
+  for(let i = 0; i < convos.length; i++){
+    if(convos[i].id === req.body.convoID) convos[i].messages.push({from:req.body.from, message: req.body.message, timestamp: Date.now()});
+  }
+  res.json(convos);
+});
 
 app.listen(PORT, () => {
   console.log('Server running on port ' + PORT);
