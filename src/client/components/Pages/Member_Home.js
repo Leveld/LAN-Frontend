@@ -12,17 +12,17 @@ const cookie = new Cookies();
    // // MOCK DATA
     // #############
     const list = [
-      { _id: '34344j34j34j34k34',
-        name: 'CS3-P0T4T03D',
-        profilePicture: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg',
-        type: accTypes[0]
-      },
-      { 
-        _id: 'jhsdkjhsdkjhsdkjhsd',
-        name: 'New Account', 
-        profilePicture: 'https://orig00.deviantart.net/41fb/f/2012/351/a/2/random_character_1_by_mnrart-d5odgq0.gif',
-        blob:<div style={{color: 'white'}}>SOME OTHER DATA</div>
-      }
+      // { _id: '34344j34j34j34k34',
+      //   name: 'CS3-P0T4T03D',
+      //   profilePicture: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg',
+      //   type: accTypes[0]
+      // },
+      // { 
+      //   _id: 'jhsdkjhsdkjhsdkjhsd',
+      //   name: 'New Account', 
+      //   profilePicture: 'https://orig00.deviantart.net/41fb/f/2012/351/a/2/random_character_1_by_mnrart-d5odgq0.gif',
+      //   blob:<div style={{color: 'white'}}>SOME OTHER DATA</div>
+      // }
     ];
     // #############
 
@@ -55,12 +55,11 @@ class MemberHome extends Component {
     if(!accTypes.includes(this.props.user.type)) return <div className="no_user">NO ACCOUNT SET</div>;
 
 
-    console.log(this.removeDups(this.data));
     const accounts = this.props.user.type === accTypes[1] ? this.removeDups(this.data) : list;
 
     return ( 
       <div style={{width: '100%', height: '100%'}}>
-        <InfoGraphicList title="Accounts" color="rgb(32, 48, 62)" >
+        <InfoGraphicList title="Accounts" accounts={accounts.length} color="rgb(32, 48, 62)" >
           {
             this.props.user.type === accTypes[0] ? (
               <InfoGraphic {...this.props.user} >
