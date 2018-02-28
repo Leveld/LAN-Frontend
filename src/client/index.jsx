@@ -17,6 +17,7 @@ import {
   Error,
   SettingsSidebar,
 } from './components';
+import Test_Form from '../../test';
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
 const {apiServerIP} = require('capstone-utils');
 const {accTypes} = require('../server/config.json');
@@ -65,20 +66,17 @@ class App extends Component {
               this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home />
               }/>
             <Route path="/profile" component={() => 
-              accTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Redirect to={'/register'} /> : <Redirect to={'/'}/>
+              accTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Redirect to={'/register'} /> : history.back()
             }/>
             <Route path="/error" component={Error} />
             <Route path='/register' component={() => <Registration auth={auth} /> }/>
+            <Route path='/test' component={Test_Form}/>
           </div>
         <Footer/>        
         </div>   
     );
   }
 }
-
-
-
-
 
 render(
   <Router>

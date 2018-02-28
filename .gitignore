@@ -65,3 +65,4 @@ data/db/*
 src/server/secret.json
 src/TestingData/*
 keys.json
+data
