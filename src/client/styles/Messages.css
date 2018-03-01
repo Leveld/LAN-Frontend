@@ -3,7 +3,6 @@
   flex-direction: row;
   width: 100%;
   height: 100%;
-  background: blue;
 }
 
 .Messages-ls {
@@ -11,13 +10,66 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: red;
+  border-right: 1px solid black;
+}
+
+.Messages-ls-controls {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background: rgb(9, 25, 83);
+  color: white;
+  padding: 1% 0;
+}
+
+.Messages-ls-controls div {
+  background: gray;
+  flex: 1;
+  text-align: center;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.Messages-ls-controls div:hover {
+  border: 1px solid royalblue;
+}
+
+.Messages-ls-personal-wrapper {
+  display: flex;
+  flex:1;
+}
+
+.Messages-ls-user {
+  background: orange;
 }
 
 .Messages-ls-content {
   width: 100%;
-  background: teal;
+  background:rgb(42, 43, 46);
   flex: 1;
+}
+
+.Messages-ls-content-title {
+  background: rgb(32, 32, 32);
+  color: white;
+  font-size: 1.2rem;
+  padding:1%;
+  border-bottom: 1px solid green;
+}
+
+.Messages-ls-convo_btn {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  background: rgb(203, 203, 203);
+  padding: 1%;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: 0.7s border, 0.7s background;
+}
+.Messages-ls-convo_btn:hover {
+  border: 1px solid royalblue;
+  background: rgb(225, 225, 225);
 }
 
 .Messages-header {
@@ -32,22 +84,91 @@
 
 .Messages-rs {
   flex: 1;
-  background: green;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid black; 
+}
+
+.Messages-rs-profile_picture {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  justify-content: center;
+  align-content: center;
+  overflow: hidden;
+}
+
+.Messages-rs-msg-wrapper {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.Messages-rs-msg-user {
+  display: flex;
+  background: rgb(43, 98, 137);
+  align-items: center;
+  padding: 1%;
+  
+}
+
+.Messages-rs-msg-data {
+  display: flex;
+  background: rgb(204, 204, 204);
+  padding: 1%;
+  white-space: pre-wrap;
 }
 
 .Messages-rs-form {
-  height: 15%;
+  height: 10%;
   padding:1%;
-  background: chartreuse;
+  background: rgb(29, 29, 29);
   display: flex;
   flex-direction: row;
   align-items: center;
-  flex: 1;
+  border-top: 1px solid white;
+  
 }
+
+.Messages-rs-form input {
+  height: 100%;
+  cursor: pointer;
+  border: 1px solid white;
+  background: rgb(53, 54, 56);
+  color: white;
+  transition: 0.7s border;
+  font-weight: 700;
+}
+
+.Messages-rs-form input:hover {
+  border: 1px solid royalblue;
+}
+
 .Messages-rs-form-input {
   height: 70%;
-  flex: 1;
   padding: 1%;
+  flex: 1;
   border-radius: 5px;
   white-space: pre-wrap;
+  font-weight: 700;
+}
+
+.Messages-rs-content {
+  background: rgb(7, 24, 74);
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.Messages-warning {
+  background: rgb(57,57,57);
+  width: 100%;
+  color: red;
+  display: flex;
+  justify-content: center;
+  padding: 1% 0;
 }

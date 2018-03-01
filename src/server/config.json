@@ -9,7 +9,9 @@
   ],
   "accTypes": [
     "Business",
-    "ContentProducer"
+    "ContentProducer",
+    "Mangager",
+    "Admin"
   ],
   "conTypes": [
     "Business",

@@ -16,8 +16,8 @@ const convos = [
     id: 'convo ID 1',
     messages:[
       {
-        from: '5a9676d9a504fb36602af75a',
-        message: 'this is a message from User 1',
+        from: ['5a971d15666ac22ef434135b', 'business'],
+        message: 'this is a message from Brandon',
         timestamp: Date.now()
       }
     ]
@@ -26,17 +26,32 @@ const convos = [
     id: 'convo ID 2',
     messages:[
       {
-        from: '5a9676d9a504fb36602af75a',
-        message: 'this is a message from User 5a9676d9a504fb36602af75a',
+        from: ['5a97a2ddf808ba7cb8682dde', 'business'],
+        message: 'this is a message from User Brandon',
         timestamp: Date.now()
       },
       {
-        from: 'bob',
+        from: ['jason', ''],
+        message: 'this is a message from User jason',
+        timestamp: Date.now()
+      },
+      {
+        from: ['bob', ''],
         message: 'this is a message from User bob',
         timestamp: Date.now()
+      }
+    ]
+  },
+  {
+    id: 'convo ID 3',
+    messages:[
+      {
+        from: ['5a971d15666ac22ef434135b', 'business'],
+        message: 'this is a message from User Brandon',
+        timestamp: Date.now()
       },
       {
-        from: 'george',
+        from: ['george', ''],
         message: 'this is a message from User george',
         timestamp: Date.now()
       }
@@ -103,20 +118,38 @@ app.get('/messages', (req, res) => {
 
 app.get('/', asyncMiddleware(async (req, res, next) => {
   const page = String(req.url).toLocaleLowerCase().split('?')[0];
-  if(req.url === '/convos') return res.send(convos);
+  //if(req.url === '/convos') return res.send(convos);
   //if(!pages.includes(page)) return res.redirect('/error');
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 }));
 
 app.get('/convos', (req, res) => {
-  res.json(convos);
-})
+  axios.get(`${apiServerIP}user`, {headers:{Authorization: req.headers.authorization}})
+  .then((r) =>{
+    
+  
+    res.json(convos);
+  })
+});
 
 app.post('/message', (req, res) => {;
-  for(let i = 0; i < convos.length; i++){
-    if(convos[i].id === req.body.convoID) convos[i].messages.push({from:req.body.from, message: req.body.message, timestamp: Date.now()});
-  }
-  res.json(convos);
+  let found = false;
+  
+  convos.forEach((convo, i) => {
+    const userids = [];
+    let found = true;
+    convo.messages.forEach((message) => {
+      if(!userids.includes(message.from[0])) userids.push(message.from[0]);
+    });
+    req.body.to.forEach((id) => {
+      if(!userids.includes(req.body.from[0]) || !userids.includes(id)) return found = false;      
+    });
+    if(found === true) {
+      convo.messages.push({from:req.body.from, message: req.body.message, timestamp: Date.now()});
+      return res.json({convos: convos, convo: convo, messages: convo.messages});
+    }
+  })
+  
 });
 
 app.listen(PORT, () => {

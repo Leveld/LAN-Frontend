@@ -7,7 +7,6 @@ import jwt from 'jsonwebtoken';
 import lz from 'lz-string';
 const {clientSecret} = require('../../../server/secret.json');
 const {apiServerIP, frontServerIP} = require('capstone-utils');
-const TestingData = require('../../../TesingsData');
 const {Cookies} = require('react-cookie');
 const {connect} = require('react-redux');
 const cookie = new Cookies();

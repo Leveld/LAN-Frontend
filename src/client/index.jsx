@@ -18,7 +18,6 @@ import {
   Error,
   SettingsSidebar,
 } from './components';
-import Test_Form from '../../test';
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
 const {apiServerIP} = require('capstone-utils');
 const {accTypes} = require('../server/config.json');
