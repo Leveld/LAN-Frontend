@@ -14,7 +14,7 @@ let warning = null;
 class Message extends Component {
   constructor(props){
     super(props);
-    this.state = {id: props.from[0], type:props.from[1], name: null, profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Question-mark-blackandwhite.png', message: props.message};
+    this.state = {id: props.from.id, type:props.from.type, name: null, profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Question-mark-blackandwhite.png', message: props.message};
     this.parent = props.parent;
     
   }
@@ -78,7 +78,7 @@ class Message extends Component {
 class Messages extends Component {
   constructor(){
     super();
-    this.state = {convo: {}, convos: [], convoID: null, messages: [], warning: null}
+    this.state = {convo: {}, convos: [], warning: null}
     this.warning = null;
   }
 
@@ -103,31 +103,34 @@ class Messages extends Component {
       })[0];
       console.log(convo);
       
-      this.setState({convos: res.data, convo, convoID: convo.id, messages: convo.messages});
+      this.setState({convos: res.data, convo});
     })
     .catch((err) => console.log(err));
   }
 
   addMessage = (e) => {
     e.preventDefault();
-    const message = this.encode(e.target.msg.value);
+
+    const message = this.encode(e.target.msg ? e.target.msg.value : e.target.value);
     const msg = {
-      from: [this.props.user._id, this.props.user.type],
-      to: this.state.userids,
+      from: {id:this.props.user._id, type: this.props.user.type.toLocaleLowerCase()},
+      to: this.state.convo.userids,
       message,
       timestamp: Date.now()
     }
-    e.target.msg.value = "";
+    e.target.msg ? e.target.msg.value = "": e.target.value = "";
     axios.post(`${frontServerIP}message`, msg, {headers:{Authorization: token}})
     .then((res) => {
       console.log(res.data);
       
-      this.setState({convos: res.data.convos,convo: res.data.convo, convoID: res.data.convo.id,messages: res.data.messages});
+      this.setState({convos: res.data.convos,convo: res.data.convo});
     })
     .catch((err) => {
       alert(err);
     });
   }
+
+  inputKey = (e) => e.keyCode === 13 && e.keyCode !== 16 ? this.addMessage(e) : null;
 
   
 
@@ -147,13 +150,10 @@ class Messages extends Component {
               <div>OUTBOX</div>
             </div>
             {cons.map((convo, i) => {
-              if(convo.messages.length === 1 && convo.messages[0].from === this.props.user._id) return;
-              const userids = [];
-              for(let i = 0; i < convo.messages.length; i++){
-                if(convo.messages[i].from[0] !== this.props.user._id) userids.push(convo.messages[i].from[0]);
-              }
-              const convoBtn = <div className="Messages-ls-convo_btn" key={i} onClick={() =>{this.setState({userids}); this.getConvo(this.state.convos[i].id);}}>{userids}</div>;
-              userids.length > 1 ? groups.push(convoBtn) : personal.push(convoBtn);              
+              if(convo.messages.length === 1 && convo.messages[0].from.id === this.props.user._id) return;
+              
+              const convoBtn = <div className="Messages-ls-convo_btn" key={i} onClick={() =>{this.getConvo(convo.id);}}>{convo.userids.length > 2 ? convo.userids.length + ' - Users' : convo.userids.map((user) => user.id !== this.props.user._id ? user.id : undefined)}</div>;
+              convo.userids.length > 2 ? groups.push(convoBtn) : personal.push(convoBtn);              
             })}
             <div className="Messages-ls-cat-wrapper">
               {personal}
@@ -168,7 +168,7 @@ class Messages extends Component {
           <div className="Messages-header">MESSAGES</div>
           {this.state.warning ? <div className="Messages-warning">[WARNING UNPROTECTED MESSAGES FOUND]</div> : null }
           
-          {!process.env.PRODUCTION && this.state.convoID ? <div className="Messages-header">USERS: {this.state.userids.join(' ')} | convo ID: {this.state.convoID}</div> : null}
+          {!process.env.PRODUCTION && this.state.convo.id ? <div className="Messages-header"> {this.state.convo.userids.map((user) => user.id !== this.props.user._id ? user.id : null).join(' ')} <br/> convo ID: {this.state.convo.id}</div> : null}
           
           <div className="Messages-rs-content">
            {
@@ -177,8 +177,8 @@ class Messages extends Component {
               return <Message key={i} parent={this} {...item} />;
             })}
           </div>
-          {this.state.convoID ? <form onSubmit= {(e) => this.addMessage(e)} className="Messages-rs-form">
-            <textarea name="msg" className="Messages-rs-form-input" type="text"/>
+          {this.state.convo.id ? <form id='form' onSubmit= {(e) => this.addMessage(e)} className="Messages-rs-form">
+            <textarea onKeyDown={(e) => this.inputKey(e)} name="msg" className="Messages-rs-form-input" type="text"/>
             <input type="submit" value="SEND" />
           </form> : null}
         </div>

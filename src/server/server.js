@@ -14,9 +14,10 @@ const fs = require('fs');
 const convos = [
   {
     id: 'convo ID 1',
+    userids:[{id:'5a97a2ddf808ba7cb8682dde', type:'business'}],
     messages:[
       {
-        from: ['5a971d15666ac22ef434135b', 'business'],
+        from: {id:'5a97a2ddf808ba7cb8682dde', type:'business'},
         message: 'this is a message from Brandon',
         timestamp: Date.now()
       }
@@ -24,19 +25,20 @@ const convos = [
   },
   {
     id: 'convo ID 2',
+    userids: [{id:'5a97a2ddf808ba7cb8682dde', type:'business'}, {id:'Jason', type:''}, {id:'bob', type:''}],
     messages:[
       {
-        from: ['5a97a2ddf808ba7cb8682dde', 'business'],
+        from: {id:'5a97a2ddf808ba7cb8682dde', type:'business'},
         message: 'this is a message from User Brandon',
         timestamp: Date.now()
       },
       {
-        from: ['jason', ''],
+        from: {id:'Jason', type:''},
         message: 'this is a message from User jason',
         timestamp: Date.now()
       },
       {
-        from: ['bob', ''],
+        from: {id:'bob', type:''},
         message: 'this is a message from User bob',
         timestamp: Date.now()
       }
@@ -44,15 +46,16 @@ const convos = [
   },
   {
     id: 'convo ID 3',
+    userids: [{id:'5a97a2ddf808ba7cb8682dde', type:'business'}, {id:'Jon', type:''}],
     messages:[
       {
-        from: ['5a971d15666ac22ef434135b', 'business'],
+        from: {id:'5a97a2ddf808ba7cb8682dde', type: 'business'},
         message: 'this is a message from User Brandon',
         timestamp: Date.now()
       },
       {
-        from: ['george', ''],
-        message: 'this is a message from User george',
+        from: {id:'Jon', type:''},
+        message: 'this is a message from User Jon',
         timestamp: Date.now()
       }
     ]
@@ -133,20 +136,22 @@ app.get('/convos', (req, res) => {
 });
 
 app.post('/message', (req, res) => {;
-  let found = false;
+
   
   convos.forEach((convo, i) => {
-    const userids = [];
     let found = true;
-    convo.messages.forEach((message) => {
-      if(!userids.includes(message.from[0])) userids.push(message.from[0]);
-    });
-    req.body.to.forEach((id) => {
-      if(!userids.includes(req.body.from[0]) || !userids.includes(id)) return found = false;      
+    req.body.to.forEach((user,j) => {
+      const userids = [];
+      convo.userids.forEach((item) => userids.push(item.id) );
+      
+      if(!userids.includes(req.body.from.id) || !userids.includes(user.id)) return found = false;
+      if(j === req.body.to.length - 1 && found === false)return  res.send({});
+            
     });
     if(found === true) {
+      console.log(found);
       convo.messages.push({from:req.body.from, message: req.body.message, timestamp: Date.now()});
-      return res.json({convos: convos, convo: convo, messages: convo.messages});
+      return res.send({convos: convos, convo: convo});
     }
   })
   

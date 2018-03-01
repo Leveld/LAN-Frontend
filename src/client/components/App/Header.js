@@ -20,11 +20,11 @@ class Header extends Component {
   componentDidMount(){
     // CHECK PULL REQUESTS
     if(!process.env.PRODUCTION){
-      this.checkPR();      
-      setInterval(() => {
-        this.setState({repos: '', data: []});
-        this.checkPR(); 
-      }, 10000);
+      // this.checkPR();      
+      // setInterval(() => {
+      //   this.setState({repos: '', data: []});
+      //   this.checkPR(); 
+      // }, 10000);
     }
     const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
     if(token && token.length === 32 ){
