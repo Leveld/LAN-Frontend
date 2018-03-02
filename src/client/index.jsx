@@ -4,20 +4,20 @@ import { createStore, applyMiddleware  } from 'redux';
 import { Provider, connect } from 'react-redux';
 import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import axios from 'axios';
-import { 
-  InfoGraphic, 
-  InfoGraphicList, 
+import {
+  InfoGraphic,
+  InfoGraphicList,
   InfoGraphicDisplay,
-  Profile, 
+  Profile,
   Home,
-  Registration, 
-  Stats, 
+  Registration,
+  Stats,
   Header,
-  Footer, 
+  Footer,
   Error,
   SettingsSidebar,
 } from './components';
-import Test_Form from '../../test';
+import Test_Form from '../TesingsData';
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
 const {apiServerIP} = require('capstone-utils');
 const {accTypes} = require('../server/config.json');
@@ -42,7 +42,7 @@ class App extends Component {
 
   componentDidMount(){
     if (window.location.href.endsWith('#')) window.location.href = window.location.href.substring(0, window.location.href.length - 1);
-    const token = window.localStorage.getItem('access_token') || cookie.get('access_token');    
+    const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
     if(token && token.length === 32){
       axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${token}`}})
       .then((res) => {
@@ -55,25 +55,25 @@ class App extends Component {
   }
 
   render() {
-    
- 
+
+
     return (
         <div className="app">
           <Header auth={auth} app={this}/>
           <div style={{display: 'flex',  flexDirection: 'row', width: '100%', height: '100%'}}>
             <SettingsSidebar />
-            <Route exact path="/" component={() => 
+            <Route exact path="/" component={() =>
               this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home />
               }/>
-            <Route path="/profile" component={() => 
+            <Route path="/profile" component={() =>
               accTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Redirect to={'/register'} /> : history.back()
             }/>
             <Route path="/error" component={Error} />
             <Route path='/register' component={() => <Registration auth={auth} /> }/>
             <Route path='/test' component={Test_Form}/>
           </div>
-        <Footer/>        
-        </div>   
+        <Footer/>
+        </div>
     );
   }
 }
