@@ -80,7 +80,7 @@ class Header extends Component {
           <div className="App-auth-link" onClick={() => { 
             this.props.auth.login();
             window.localStorage.clear();
-          }}>SIGNIN/SIGNUP</div>
+          }}>SIGNIN / SIGNUP</div>
         </div>
       );
     }
@@ -90,13 +90,14 @@ class Header extends Component {
     if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token')) window.localStorage.setItem('access_token', cookie.get('access_token'));
     return (
       <div className="App-header">
-        <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.props.toggleSettings() : null } className="App-header-logo" >
+      <Link to="/" ><img src={'images/logo/logo.png'} style={{marginLeft: '20px'}} width="10%" /></Link>
+        {/* <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.props.toggleSettings() : null } className="App-header-logo" > 
           <img  src={this.props.authenticated ? this.props.user.profilePicture || 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
           <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
 
-        </div>
+        </div> */}
         <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, cursor: 'pointer', padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
-        <Link to="/" className="App-header-name"><img src={'images/logo/NameLogo.png'} width="100px" /></Link>
+        
 
           {this.getLinks()}
       </div>

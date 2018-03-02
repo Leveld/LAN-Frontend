@@ -1,5 +1,5 @@
 .Home-wrapper {
-  background: rgb(3, 20, 35);
+  background: rgb(240, 240, 240);
   width: 100%;
   height: 100%;
   display: flex;
@@ -65,10 +65,12 @@
   width: 100%;
   background: rgb(49, 49, 49);
   text-align: center;
-  padding: 10px 0;
+  padding: 40px 0;
 }
 
 .Home-Accounts-info-content {
+  margin-top: 110px;
+  
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
