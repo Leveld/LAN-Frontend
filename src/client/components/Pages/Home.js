@@ -16,18 +16,12 @@ class Home extends Component {
       {  
       !this.props.authenticated && (!cookie.get('access_token') && !window.localStorage.getItem('access_token')) ?
       <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <img className="Home-bg" alt="Logo" src={'images/logo/banner.png'}/>
         <div className="Home-Accounts">
-          <div className="Home-Accounts-info">
-            <div className="Home-Accounts-info-title">CONTENT PROVIDER</div>
-            <div className="Home-Accounts-info-content"> ● CONTENT PROVIDER INFO</div>
-
-          </div>
-          <div className="Home-Accounts-info">
-            <div className="Home-Accounts-info-title">ADVERTISER</div>
-            <div className="Home-Accounts-info-content">● ADVERTISER INFO</div>
-             
-          </div>
+          <h1 style={{fontSize: '70px'}}>START ADVERTISING TODAY!</h1>
+          <div onClick={() => { 
+            this.props.auth.login();
+            window.localStorage.clear();
+          }} style={{fontSize: '30px', background: 'green', padding: '20px', borderRadius: '5px', border: '1px solid black', cursor: 'pointer', color: 'white'}}>Get Started Now!</div>
         </div>
       </div> :
       accTypes.includes(this.props.user.type) ?

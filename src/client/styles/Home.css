@@ -1,5 +1,5 @@
 .Home-wrapper {
-  background: rgb(3, 20, 35);
+  background: rgb(243, 243, 243);
   width: 100%;
   height: 100%;
   display: flex;
@@ -39,10 +39,11 @@
   z-index: 1;
   opacity: 0.90;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   overflow-y: auto;
   overflow-x: hidden;
+  flex-direction: column;
 }
 
 .Home-Accounts-info {

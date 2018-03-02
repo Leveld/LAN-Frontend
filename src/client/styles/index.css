@@ -35,13 +35,21 @@
   align-items: center;
   flex-direction: column;
   overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Varela Round', sans-serif;
+  
 }
 
 .App-header {
   width: 100%;
-  height: 70px;
+  height: 100px;
   background: rgb(25, 25, 25);
   display: flex;
+  padding: 20px 0;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
