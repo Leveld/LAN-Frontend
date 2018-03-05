@@ -121,7 +121,7 @@ class MemberHome extends Component {
           {
             this.props.user.type === accTypes[0] ? (
               <InfoGraphic {...this.props.user} >
-                <AccountData {...this.props.user} overviewDataPoints={this.testGraphData} />
+                <AccountData overviewDataPoints={this.testGraphData} {...this.props.user} />
               </InfoGraphic>
             )
             :null
@@ -130,7 +130,7 @@ class MemberHome extends Component {
             accounts.map((item, i) => {
               return (
                 <InfoGraphic key={i} {...item} >
-                  <AccountData {...item} overviewDataPoints={this.testGraphData} />
+                  <AccountData overviewDataPoints={this.testGraphData} {...item} />
                 </InfoGraphic>
               );
             })

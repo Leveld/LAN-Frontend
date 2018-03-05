@@ -51,13 +51,13 @@ const ChartView = (props) => {
       (() => {
         switch (props.type) {
         case 'Doughnut':
-          return <Doughnut data={props.data} />;
+          return <Doughnut {...props} />;
         case 'Radar':
-          return <Radar data={props.data} />;
+          return <Radar {...props} />;
         case 'Line':
-          return <Line data={props.data} />;
+          return <Line {...props} />;
         case 'Bar':
-          return <Bar data={props.data} />;
+          return <Bar {...props} />;
         case 'Number':
           <em>{props.data}</em>;
         default:
