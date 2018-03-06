@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
+const { IS_PRODUCTION } = require('capstone-utils');
 var path = require('path');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -46,10 +47,12 @@ module.exports = [
         },
         {
           test: /\.scss$/,
-          loader: ExtractTextPlugin.extract('css!sass')
+          exclude: /node_modules/,
+          loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: [ 'css-loader', 'sass-loader' ] })
         },
         {
           test: /\.css$/,
+          exclude: /node_modules/,
           loader: ExtractTextPlugin.extract('css-loader')
         },
         {
@@ -63,7 +66,7 @@ module.exports = [
               }
             }
           ]
-        }     
+        }
       ]
     },
     resolve: {
