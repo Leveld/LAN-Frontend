@@ -17,9 +17,9 @@ const cookie = new Cookies();
       //   profilePicture: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg',
       //   type: accTypes[0]
       // },
-      // { 
+      // {
       //   _id: 'jhsdkjhsdkjhsdkjhsd',
-      //   name: 'New Account', 
+      //   name: 'New Account',
       //   profilePicture: 'https://orig00.deviantart.net/41fb/f/2012/351/a/2/random_character_1_by_mnrart-d5odgq0.gif',
       //   blob:<div>SOME OTHER DATA</div>
       // }
@@ -33,7 +33,7 @@ class MemberHome extends Component {
     super(props);
     this.data = props.user.contentOutlets ||  list
   }
-  
+
   removeDups = (accounts) => {
     const filtered = [];
     const reduced = accounts.filter((account) => {
@@ -47,18 +47,18 @@ class MemberHome extends Component {
     return reduced;
   }
 
-  
+
 
   render(){
     if(!accTypes.includes(this.props.user.type) || !this.props.authenticated || (!cookie.get('access_token') && !window.localStorage.getItem('access_token'))) return <div />;
-    
+
     if(!accTypes.includes(this.props.user.type)) return <div className="no_user">NO ACCOUNT SET</div>;
 
 
     const accounts = this.props.user.type === accTypes[1] ? this.removeDups(this.data) : list;
 
-    return ( 
-      <div>
+    return (
+      <div className='controlpanel'>
         <InfoGraphicList title="Accounts" accounts={accounts.length} color="rgb(32, 48, 62)" >
           {
             this.props.user.type === accTypes[0] ? (
@@ -77,12 +77,12 @@ class MemberHome extends Component {
               );
             })
           }
-          
+
         </InfoGraphicList>
         <InfoGraphicDisplay toggle={0}/>
       </div>
 
-    );  
+    );
   }
 }
 

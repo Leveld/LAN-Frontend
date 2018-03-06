@@ -43,7 +43,7 @@ class InfoGraphicList extends Component {
     if(this.props.info) blobImage = this.props.info.accountImg || 'images/noPhoto.jpg';
 
     return (
-      <div>
+      <div className='inline-list account-list'>
         <div className="IG-list">
           <div className="IG-list-header">{this.title}</div>
           <div>
