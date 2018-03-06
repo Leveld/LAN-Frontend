@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const { IS_PRODUCTION } = require('capstone-utils');
@@ -12,9 +13,8 @@ const productionPluginDefine = isProduction ? [
   }),
 ] : [];
 const clientLoaders = isProduction ? productionPluginDefine.concat([
-  new webpack.optimize.DedupePlugin(),
   new webpack.optimize.OccurrenceOrderPlugin(),
-  new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false }, sourceMap: false }),
+  new UglifyJsPlugin({ compress: { warnings: false }, sourceMap: false }),
   new webpack.DefinePlugin({
     'process.env.BROWSER': true
   }),
