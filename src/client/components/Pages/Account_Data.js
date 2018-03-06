@@ -3,7 +3,7 @@ import OverviewPaneList from '../OverviewPane/OverviewPaneList';
 import Timeline from '../Timeline/timeline';
 import Scheduler from '../Scheduler/scheduler';
 import CampaignList from '../Campaigns/CampaignList';
-import '../../styles/MHome.css';
+//import '../../styles/MHome.css';
 
 const AccountData = (props) => {
   return (

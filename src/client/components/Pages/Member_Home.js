@@ -21,7 +21,7 @@ const cookie = new Cookies();
       //   _id: 'jhsdkjhsdkjhsdkjhsd',
       //   name: 'New Account', 
       //   profilePicture: 'https://orig00.deviantart.net/41fb/f/2012/351/a/2/random_character_1_by_mnrart-d5odgq0.gif',
-      //   blob:<div style={{color: 'white'}}>SOME OTHER DATA</div>
+      //   blob:<div>SOME OTHER DATA</div>
       // }
     ];
     // #############
@@ -58,7 +58,7 @@ class MemberHome extends Component {
     const accounts = this.props.user.type === accTypes[1] ? this.removeDups(this.data) : list;
 
     return ( 
-      <div style={{width: '100%', height: '100%'}}>
+      <div>
         <InfoGraphicList title="Accounts" accounts={accounts.length} color="rgb(32, 48, 62)" >
           {
             this.props.user.type === accTypes[0] ? (

@@ -27,7 +27,7 @@ const ver = 'v1.0';
 
 
 import reducers from './reducers';
-//import './styles/index.css';
+////import './styles/index.css';
 import './styles/scss/main.scss';
 import Auth from './components/Auth/Auth';
 const auth = new Auth();
@@ -61,7 +61,7 @@ class App extends Component {
     return (
         <div className="app">
           <Header auth={auth} app={this}/>
-          <div style={{display: 'flex',  flexDirection: 'row', width: '100%', height: '100%'}}>
+          <div>
             <SettingsSidebar />
             <Route exact path="/" component={() => 
               this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home />

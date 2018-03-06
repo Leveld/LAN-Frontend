@@ -7,7 +7,7 @@ export default class CampaignStats extends Component {
       <div className="Campaign-stats">
         <div className="Campaign-stats-wrapper">
           <div className="Campaign-header">CAMPAIGN STATS</div>
-          <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap'}}>
+          <div>
             <div className="Campaign-stat"/>
             <div className="Campaign-stat"/>
             <div className="Campaign-stat"/>

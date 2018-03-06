@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../../styles/Timeline.css';
+//import '../../styles/Timeline.css';
 
 export default class Timeline extends Component {
   constructor(props){

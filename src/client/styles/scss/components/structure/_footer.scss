@@ -1,8 +1,15 @@
 footer {
-  align-items: 'center';
-  color: $brand-white;
-  display: 'flex';
-  height: 100%;
-  justify-content: 'center';
-  margin-right: 5;
+  background: $brand-black;
+  padding: 1rem;
+}
+
+.App-footer-wrapper-auth {
+  .app-version {
+    align-items: 'center';
+    color: $brand-white;
+    display: 'flex';
+    height: 100%;
+    justify-content: 'center';
+    margin-right: 5;
+  }
 }

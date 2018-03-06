@@ -9,7 +9,7 @@ import AccountData, { accountData } from '../Pages/Account_Data';
 const cookie = new Cookies();
 
 
-import '../../styles/InfoGraphics.css';
+//import '../../styles/InfoGraphics.css';
 
 class InfoGraphicList extends Component {
   constructor(props){
@@ -46,11 +46,11 @@ class InfoGraphicList extends Component {
       <div>
         <div className="IG-list">
           <div className="IG-list-header">{this.title}</div>
-          <div style={{display: 'flex', flexDirection: 'row', width: '100%', height:100}}>
-            <div style={{background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', width: 100, height: '100%'}} >
-              <img style={{borderRadius: 5, border: '1px solid green'}} src={blobImage} width='70px' height="70px"/>
+          <div>
+            <div >
+              <img src={blobImage} width='70px' height="70px"/>
             </div>
-            <div style={{background: this.color}} className="IG-list-wrap">
+            <div className="IG-list-wrap">
                 {this.props.children}
                 <div onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')} className="IG-add" > +</div>
             </div>

@@ -1,4 +1,17 @@
-@import './settings/colors';
 @import './global/reset';
+@import './settings/index';
 @import './global/global';
 
+@import './components/structure/header';
+@import './components/structure/footer';
+
+@import './components/buttons/button';
+
+@import './components/containers/hero-cta';
+@import './components/containers/hero-message';
+@import './components/hero-metric';
+
+@import './display/hero-heading';
+
+@import './utilities/push-up';
+@import './utilities/align--center';

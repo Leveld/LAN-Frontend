@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../../styles/Platform.css';
+//import '../../styles/Platform.css';
 import Platform from './Platform';
 import PlatformSearch from './PlatformSearch';
 import {connect} from 'react-redux';
@@ -40,7 +40,7 @@ class PlatformList extends Component {
       <div className="Platform-list" >
         <PlatformSearch parent={this} />
         <div className="Platform-list-wrapper">
-          {this.platforms.length === 0 ? <div style={{color: 'white'}}> NO PLATFORMS FOUND</div>:null}
+          {this.platforms.length === 0 ? <div> NO PLATFORMS FOUND</div>:null}
           {this.state.filtered.length > 0 ? this.state.filtered : this.state.keyword.length > 0 ? <div className="Platform-no_match">NO MATCH</div> : this.platforms.map((item, i) => <Platform key={i} platform={item} />)}
         </div>
       </div>

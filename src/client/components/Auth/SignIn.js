@@ -36,9 +36,9 @@ export class SignIn extends Component {
     return (
       <div className="App-auth-form">
         <div className="App-auth-form-inputs">
-          <div style={{display: 'flex', flexDirection: 'row'}}>
-            <button style={{color: 'white', background: 'red'}} onClick={this.handleGoogle}>Google</button>
-            <button style={{color: 'white', background: '#03A9F4'}} onClick={this.handleTwitter}>Twitter</button>
+          <div>
+            <button onClick={this.handleGoogle}>Google</button>
+            <button onClick={this.handleTwitter}>Twitter</button>
           </div>
           <br />
           <form onSubmit={this.handleSubmit}>
