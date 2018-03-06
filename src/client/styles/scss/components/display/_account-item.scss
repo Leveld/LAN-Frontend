@@ -1,3 +1,7 @@
 .account-item {
   background-color: $brand-gray;
+  // border: .25rem solid $brand-black;
+  border-radius: .25rem;
+  overflow: hidden;
+  margin-right: 1rem;
 }

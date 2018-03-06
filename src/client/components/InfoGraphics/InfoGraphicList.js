@@ -43,16 +43,18 @@ class InfoGraphicList extends Component {
     if(this.props.info) blobImage = this.props.info.accountImg || 'images/noPhoto.jpg';
 
     return (
-      <div className='inline-list account-list'>
-        <div className="IG-list">
-          <div className="IG-list-header">{this.title}</div>
-          <div>
-            <div >
+      <div className='account-list'>
+        <div>
+          <h3 className='sticky--top-left'>{this.title}</h3>
+          <div className="flex-list">
+            <div className='account-item'>
               <img src={blobImage} width='70px' height="70px"/>
             </div>
-            <div className="IG-list-wrap">
+            <div className='flex-list'>
                 {this.props.children}
-                <div onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')} className="IG-add" > +</div>
+            </div>
+            <div className='button button--color-green' onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')}>
+              &pls;
             </div>
           </div>
         </div>
