@@ -27,7 +27,8 @@ const ver = 'v1.0';
 
 
 import reducers from './reducers';
-import './styles/index.css';
+//import './styles/index.css';
+import './styles/scss/main.scss';
 import Auth from './components/Auth/Auth';
 const auth = new Auth();
 const store = createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); // <--- REDUX DEBUGGER

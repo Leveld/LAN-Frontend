@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 import {Cookies} from 'react-cookie';
-import '../../styles/Auth.css';
+//import '../../styles/Auth.css';
 import axios from 'axios';
 import {setUser, signIn, signOut, toggleSettings} from '../../actions';
 const {apiServerIP, frontServerIP} = require('capstone-utils');
