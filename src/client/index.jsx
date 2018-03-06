@@ -17,7 +17,7 @@ import {
   Error,
   SettingsSidebar,
 } from './components';
-import Test_Form from '../../test';
+
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
 const {apiServerIP} = require('capstone-utils');
 const {accTypes} = require('../server/config.json');
@@ -70,7 +70,6 @@ class App extends Component {
             }/>
             <Route path="/error" component={Error} />
             <Route path='/register' component={() => <Registration auth={auth} /> }/>
-            <Route path='/test' component={Test_Form}/>
           </div>
         <Footer/>        
         </div>   
