@@ -71,14 +71,14 @@ export class SignUp extends Component {
   render() {
     return (
       <div className="App-auth-form">
-        <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center', alignContent: 'center'}}>
+        <div>
           <div className="App-auth-type" style={this.state.type === 'Content Creator' ? {background: 'blue', color: 'white'} : {background: 'orange'}} onClick={this.handleChangeTypeCC}>Content Creator</div>
           <div className="App-auth-type" style={this.state.type === 'Advertiser' ? {background: 'blue', color: 'white'} : {background: 'orange'}} onClick={this.handleChangeTypeAdvertiser}>Advertiser</div> 
         </div>
         <div className="App-auth-form-inputs">
-          <div style={{display: 'flex', flexDirection: 'row'}}>
-            <button style={{color: 'white', background: 'red'}} onClick={this.handleGoogle}>Google</button>
-            <button style={{color: 'white', background: '#03A9F4'}}onClick={this.handleTwitter}>Twitter</button>
+          <div>
+            <button onClick={this.handleGoogle}>Google</button>
+            <buttononClick={this.handleTwitter}>Twitter</button>
           </div>
           <div> or </div>
           <form onSubmit={this.handleSubmit}>
