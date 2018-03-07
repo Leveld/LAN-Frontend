@@ -40,7 +40,7 @@
 
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Merriweather', serif;
+  font-family: 'Volkhov', serif;
   font-size: 2rem;
   
 }
@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5 {
 .App-header {
   width: 100%;
   height: 100px;
-  background: #0d0d1e;
+  background: #12122a;
   display: flex;
   padding: 2% 0;
   flex-direction: row;
@@ -146,7 +146,7 @@ h1, h2, h3, h4, h5 {
   background: green;
 }
 .App-footer-wrapper {
-  background: #0d0d1e;
+  background: #12122a;
   width: 100%;
   height: 40px;
   display: flex;
