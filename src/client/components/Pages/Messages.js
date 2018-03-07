@@ -98,14 +98,14 @@ class Messages extends Component {
         <div className="Messages-ls">
           <div className="Messages-ls-content">
             <div className="Messages-header">{this.props.user._id}</div>
-            {this.state.convos.map((convo, i) => {
+            {Array.isArray(this.state.convos) ? this.state.convos.map((convo, i) => {
               if(convo.messages.length === 1 && convo.messages[0].from === this.props.user._id) return;
               const userids = [];
               for(let i = 0; i < convo.messages.length; i++){
                 if(convo.messages[i].from !== this.props.user._id) userids.push(convo.messages[i].from);
               }
               return <div key={i} onClick={() => this.setState({convoID:convo.id, messages:convo.messages})}>{userids.join("-")}</div>
-            })}
+            }) : null }
           </div>
         </div>
         <div className="Messages-rs">
