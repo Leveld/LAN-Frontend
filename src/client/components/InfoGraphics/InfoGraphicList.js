@@ -19,14 +19,10 @@ class InfoGraphicList extends Component {
   }
   componentDidMount(){
     if(this.props.accounts === 0 && this.props.user.type !== accTypes[0] ) return;
-<<<<<<< HEAD
       if(this.props.children[0]){
         return this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
       }
       this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props.profilePicture, blob: <AccountData />});
-=======
-    if(this.props.children[1].length > 0) this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props, blob: <AccountData />});
->>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
   }
 
   componentWillUnmount(){

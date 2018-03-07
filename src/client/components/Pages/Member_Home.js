@@ -17,19 +17,11 @@ const cookie = new Cookies();
       //   profilePicture: 'http://www.seriouseats.com/recipes/images/2016/10/20161004-baked-potato-vicky-wasik-10-1500x1125.jpg',
       //   type: accTypes[0]
       // },
-<<<<<<< HEAD
-      // { 
-      //   _id: 'jhsdkjhsdkjhsdkjhsd',
-      //   name: 'New Account', 
-      //   profilePicture: 'https://orig00.deviantart.net/41fb/f/2012/351/a/2/random_character_1_by_mnrart-d5odgq0.gif',
-      //   blob:<div style={{color: 'white'}}>SOME OTHER DATA</div>
-=======
       // {
       //   _id: 'jhsdkjhsdkjhsdkjhsd',
       //   name: 'New Account',
       //   profilePicture: 'https://orig00.deviantart.net/41fb/f/2012/351/a/2/random_character_1_by_mnrart-d5odgq0.gif',
       //   blob:<div>SOME OTHER DATA</div>
->>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
       // }
     ];
     // #############
@@ -123,13 +115,8 @@ class MemberHome extends Component {
 
     const accounts = this.props.user.type === accTypes[1] ? this.removeDups(this.data) : list;
 
-<<<<<<< HEAD
     return ( 
       <div style={{width: '100%', height: '100%'}}>
-=======
-    return (
-      <div className='controlpanel'>
->>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
         <InfoGraphicList title="Accounts" accounts={accounts.length} color="rgb(32, 48, 62)" >
           {
             this.props.user.type === accTypes[0] ? (

@@ -10,14 +10,9 @@ import {
   InfoGraphicDisplay,
   Profile,
   Home,
-<<<<<<< HEAD
   Registration, 
   Messages,
   Stats, 
-=======
-  Registration,
-  Stats,
->>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
   Header,
   Footer,
   Error,
@@ -72,11 +67,7 @@ class App extends Component {
             <Route exact path="/" component={() => 
               this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home auth={auth} />
               }/>
-<<<<<<< HEAD
-            <Route path="/profile" component={() => 
-=======
             <Route path="/profile" component={() =>
->>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
               accTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Redirect to={'/register'} /> : history.back()
             }/>
             <Route path="/error" component={Error} />

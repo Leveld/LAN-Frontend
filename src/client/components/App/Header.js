@@ -100,18 +100,11 @@ class Header extends Component {
   render(){
     if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token')) window.localStorage.setItem('access_token', cookie.get('access_token'));
     return (
-<<<<<<< HEAD
-      <div className="App-header">
-        <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.props.toggleSettings() : null } className="App-header-logo" >
-          <img  src={this.props.authenticated ? this.props.user.profilePicture || 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
-          <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
-=======
       <header className="App-header">
           {this.props.authenticated ? <Link to="/" ><img  src={this.props.user.profilePicture ? this.props.user.profilePicture : 'images/noPhoto.jpg'} alt="Profile Pic" style={{height: '50px', width: '50px', borderRadius: '100%', marginLeft: 20}} /></Link> : <img  src={'images/logo/logo.png'} alt="Logo" style={{height: '90%', marginLeft: 20}}/>}      
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}  className="App-header-logo" >
           <div className="App-header-username"> {this.props.user.name}</div>
           {this.props.user.name ? <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}><div className="App-header-settings" onClick={() => this.props.authenticated ? this.props.toggleSettings() : null }>S</div><Link className="App-header-view" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>View Profile</Link></div> : null}
->>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
 
         </div>
         <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
