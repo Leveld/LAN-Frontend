@@ -63,6 +63,9 @@ app.post('/upload', upload, (req, res) => {
 app.get('/error', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));  
 });
+app.get('/messages', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../public/index.html'));  
+});
 
 
 app.get('/*', asyncMiddleware(async (req, res, next) => {
@@ -70,6 +73,11 @@ app.get('/*', asyncMiddleware(async (req, res, next) => {
   //if(!pages.includes(page)) return res.redirect('/error');
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 }));
+
+app.get('/convos', (req, res) => {
+  res.json(convos);
+})
+
 
 app.listen(PORT, () => {
   console.log('Server running on port ' + PORT);

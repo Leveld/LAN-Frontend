@@ -16,7 +16,7 @@ const fr = new FileReader();
 class Registration extends Component {
   constructor(props){
     super();
-    this.state = {selected: 0, name: props.user.name || "", businessName:"", age: null, gender: null, filePreview:null, file: null};
+    this.state = {selected: 0, name: props.user.name || "", businessName:"", age: null, gender: null,taxID:null, filePreview:null, file: null};
   }
 
   setImg = (e) => {
@@ -43,11 +43,13 @@ class Registration extends Component {
     (!this.state.businessName && this.state.selected) ? evnt.target.businessName.style.border = eborder : evnt.target.businessName.style.border = gborder;
     if(type !== 'business'){
       !age || !dob ? evnt.target.age.style.border = eborder : age >= 18 ? evnt.target.age.style.border = gborder : evnt.target.age.style.border = eborder;
-      (age < 18) && type != "business" ? ageError.style.opacity = 1 : ageError.style.opacity = 0;
-      !this.state.gender && type !== "business" ? evnt.target.gender.style.border = eborder : evnt.target.gender.style.border = gborder;
+      (age < 18)? ageError.style.opacity = 1 : ageError.style.opacity = 0;
+      !this.state.gender ? evnt.target.gender.style.border = eborder : evnt.target.gender.style.border = gborder;
+    }else{
+      !this.state.taxID ? evnt.target.taxID.style.border = eborder : evnt.target.taxID.style.border = eborder;
     }
-    
-    if(!this.state.name || (!this.state.businessName && this.state.selected) ||( !age || age < 18 || !dob || !this.state.gender) && type !== 'business') {
+        
+    if(!this.state.name || (!this.state.businessName && this.state.selected) ||( !age || age < 18 || !dob || !this.state.gender) && type !== 'business' || (!this.state.taxID && !this.state.file && type === 'business')) {
       document.getElementById(`form`).style.animation = 'shake 0.5s';
       setTimeout(() => document.getElementById(`form`).style.animation = "none", 500 );
       return ;
@@ -59,6 +61,7 @@ class Registration extends Component {
         name: this.state.name,
         businessName: this.state.businessName,
         age,
+        taxID: this.state.taxID,
         gender: this.state.gender,
       }
     }, {headers:{Authorization:`Bearer ${token}`}})
@@ -120,18 +123,18 @@ class Registration extends Component {
               <input name="name" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} placeholder={this.props.user.name} />
               <input onChange={(e) => this.setState({businessName: e.target.value})} name="businessName" value={this.state.businessName} placeholder="Business Name" />
             </div>
-            <div>
-              <input name="age" type="date" hidden/>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%'}}>
+              <input style={{minWidth:'100px'}} name="age" type="date" hidden/>
               <label>Business Verification:</label>
-              <label>Upload a image of the Business Tax ID or any other relevant document to verify your business</label> 
-              
+              <label style={{fontSize:'10px'}}>Input Tax ID or upload any other relevant document to verify your business</label> 
+              <input name="taxID" onChange={(e) => this.setState({taxID: e.target.value})} placeholder="Tax ID" />
               {/*File Img Preview*/}
               <img src={this.state.filePreview ? this.state.filePreview.result : null} width="30%"/>
-              <div>
-                <input onChange={(e) => this.setImg(e)} type="file"/>
-                <div>UPLOAD</div>
+              <div style={{background: 'red', width: '100px', margin: '1%', overflow: 'hidden', position:'relative', display: 'flex', justifyContent: 'center', alignItems:'center'}}>
+                <input onChange={(e) => this.setImg(e)} type="file" style={{width: '100%', opacity: 0, height: '100%', display: 'flex', position: 'absolute'}}/>
+                <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>UPLOAD</div>
               </div>
-            <input type="submit"/>
+            <input style={{cursor:'pointer'}} type="submit"/>
               
             </div>
           </form>

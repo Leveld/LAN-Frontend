@@ -10,13 +10,15 @@ import {
   InfoGraphicDisplay,
   Profile,
   Home,
-  Registration,
-  Stats,
+  Registration, 
+  Messages,
+  Stats, 
   Header,
   Footer,
   Error,
   SettingsSidebar,
 } from './components';
+import Test_Form from '../../test';
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
 const {apiServerIP} = require('capstone-utils');
 const {accTypes} = require('../server/config.json');
@@ -70,6 +72,7 @@ class App extends Component {
             }/>
             <Route path="/error" component={Error} />
             <Route path='/register' component={() => <Registration auth={auth} /> }/>
+            <Route path='/messages' component={Messages}/>
           </div>
         <Footer/>
         </div>

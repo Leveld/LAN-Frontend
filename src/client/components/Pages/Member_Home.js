@@ -115,8 +115,8 @@ class MemberHome extends Component {
 
     const accounts = this.props.user.type === accTypes[1] ? this.removeDups(this.data) : list;
 
-    return (
-      <div className='controlpanel'>
+    return ( 
+      <div style={{width: '100%', height: '100%'}}>
         <InfoGraphicList title="Accounts" accounts={accounts.length} color="rgb(32, 48, 62)" >
           {
             this.props.user.type === accTypes[0] ? (
