@@ -14,8 +14,8 @@ const InfoGraphic = (props) => {
   console.log(props);
   return (
     <div onClick={() => props.setInfoGraphicBlob({accountImg: props.profilePicture, blob: getBlob()})} className="IG-item">
-      <div className="IG-item-img"><img src={props.profilePicture || 'images/noPhoto.jpg'} alt={'Info Graphic'} width="100%" height="100%"/></div>
-      <div className="IG-item-title">{props.channelName ? props.channelName.split('@')[0] : props.name}</div>
+      <div className="IG-item-img"><img src={props.profilePicture || 'images/noPhoto.jpg'} alt={'Account'} width="100%" height="100%"/></div>
+      <div className="IG-item-title"><div >{props.channelName ? props.channelName.split('@')[0] : props.name}</div></div>
     </div>
   );
 }

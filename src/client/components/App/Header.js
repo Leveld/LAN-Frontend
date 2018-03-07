@@ -90,7 +90,7 @@ class Header extends Component {
     if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token')) window.localStorage.setItem('access_token', cookie.get('access_token'));
     return (
       <div className="App-header">
-          {this.props.authenticated ? <img  src={this.props.user.profilePicture ? this.props.user.profilePicture : 'images/noPhoto.jpg'} alt="Profile Pic" style={{height: '50px', width: '50px', borderRadius: '100%', marginLeft: 20}} /> : <img  src={'images/logo/logo.png'} alt="Logo" style={{height: '90%', marginLeft: 20}}/>}      
+          {this.props.authenticated ? <Link to="/" ><img  src={this.props.user.profilePicture ? this.props.user.profilePicture : 'images/noPhoto.jpg'} alt="Profile Pic" style={{height: '50px', width: '50px', borderRadius: '100%', marginLeft: 20}} /></Link> : <img  src={'images/logo/logo.png'} alt="Logo" style={{height: '90%', marginLeft: 20}}/>}      
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}  className="App-header-logo" >
           <div className="App-header-username"> {this.props.user.name}</div>
           {this.props.user.name ? <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}><div className="App-header-settings" onClick={() => this.props.authenticated ? this.props.toggleSettings() : null }>S</div><Link className="App-header-view" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>View Profile</Link></div> : null}
