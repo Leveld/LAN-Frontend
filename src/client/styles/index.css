@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5 {
 .App-header {
   width: 100%;
   height: 100px;
-  background: #171738;
+  background: #0d0d1e;
   display: flex;
   padding: 2% 0;
   flex-direction: row;
@@ -146,7 +146,7 @@ h1, h2, h3, h4, h5 {
   background: green;
 }
 .App-footer-wrapper {
-  background: #171738;
+  background: #0d0d1e;
   width: 100%;
   height: 40px;
   display: flex;
