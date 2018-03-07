@@ -1,0 +1,16 @@
+button ,
+.button {
+  background-color: $brand-white;
+  border: 0;
+  border-radius: .25rem;
+  color: $brand-black;
+}
+
+.button-cta {
+  font-size: 1.65rem;
+}
+
+.button--color-green {
+  background-color: $brand-green-alt;
+  color: $brand-white;
+}

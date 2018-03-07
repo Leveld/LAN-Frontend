@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import '../../styles/Home.css';
+//import '../../styles/Home.css';
 import { MemberHome} from '../index';
 import {Cookies} from 'react-cookie';
 import { Redirect } from 'react-router-dom';
@@ -11,24 +11,58 @@ const cookie = new Cookies();
 class Home extends Component {
 
   render(){
-     return (
-      <div className="Home-wrapper">
-      {  
+    return (
+      <main className="Home-wrapper">
+      {
       !this.props.authenticated && (!cookie.get('access_token') && !window.localStorage.getItem('access_token')) ?
-      <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <div className="Home-Accounts">
-         <div className="Home-header"> <h1 style={{fontSize: '8vw', textAlign: 'center'}}>START ADVERTISING TODAY!</h1></div>
-          <div onClick={() => { 
-            this.props.auth.login();
-            window.localStorage.clear();
-          }} style={{fontSize: '30px', background: '#00AA5D', padding: '20px', borderRadius: '5px', border: '1px solid black', cursor: 'pointer', color: 'white'}}>Get Started Now!</div>
+      <div>
+        {1 === 2 && <img className="Home-bg" alt="Logo" src={'images/logo/banner.png'}/>}
+        <div className='hero-message'>
+          <h2 className='hero-heading'>Quality Content, meet Quality Advertisers. It&#39;s about time you two met.</h2>
+          <a href='' className='button button-cta align--center'>Register And See</a>
         </div>
+        <section className="Home-Accounts hero-cta push-up">
+          <div className='hero-metric'>
+            <h3>Quality Metrics</h3>
+            <img src='images/inc/engagementSVG/019-leader.svg' />
+            <p>
+              Find the gem in the rough. When you find those audience influencers you can maintain
+              those valuable connections and keep seeing upsticks in engagement.
+            </p>
+          </div>
+
+          <div className='hero-metric'>
+            <h3>Quality Metrics</h3>
+            <img src='images/inc/engagementSVG/013-presentation.svg' />
+            <p>See qaulity metrics straight from your connections and get valuable feedback.</p>
+          </div>
+
+          <div className='hero-metric'>
+            <h3>Make Valuable Connections</h3>
+            <img src='images/inc/engagementSVG/028-connection.svg' />
+            <p>
+              Throwing your ads in a pool with everyone else is gone. Make quality connections
+              directly with audience influencers that feel strongly about your message.
+            </p>
+          </div>
+
+          <section className="Home-Accounts-info">
+            <div className="Home-Accounts-info-title">CONTENT PROVIDER</div>
+            <div className="Home-Accounts-info-content"> ● CONTENT PROVIDER INFO</div>
+
+          </section>
+          <section className="Home-Accounts-info">
+            <div className="Home-Accounts-info-title">ADVERTISER</div>
+            <div className="Home-Accounts-info-content">● ADVERTISER INFO</div>
+
+          </section>
+        </section>
       </div> :
       accTypes.includes(this.props.user.type) ?
       <MemberHome/> :
         <div/>
       }
-      </div>
+    </main>
     );
   }
 }

@@ -64,3 +64,4 @@ src/public/js
 data/*
 src/server/secret.json
 keys.json
+./package-lock.json

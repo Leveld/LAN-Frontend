@@ -9,7 +9,7 @@ import AccountData, { accountData } from '../Pages/Account_Data';
 const cookie = new Cookies();
 
 
-import '../../styles/InfoGraphics.css';
+//import '../../styles/InfoGraphics.css';
 
 class InfoGraphicList extends Component {
   constructor(props){
@@ -40,16 +40,18 @@ class InfoGraphicList extends Component {
     if(this.props.info) blobImage = this.props.info.accountData ? this.props.info.accountData.profilePicture : 'images/noPhoto.jpg';
 
     return (
-      <div>
-        <div className="IG-list">
-          <div className="IG-list-header"><div>{this.title}</div></div>
-          <div style={{display: 'flex', flexDirection: 'row', width: '100%', height:100}}>
-            <div style={{background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', width: 100, height: '100%'}} >
-              <img style={{borderRadius: 5, border: '1px solid green'}} src={blobImage} width='70px' height="70px"/>
+      <div className='account-list'>
+        <div>
+          <h3 className='sticky--top-left'>{this.title}</h3>
+          <div className="flex-list">
+            <div className='account-item'>
+              <img src={blobImage} width='70px' height="70px"/>
             </div>
-            <div  className="IG-list-wrap">
+            <div className='flex-list'>
                 {this.props.children}
-                <div onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')} className="IG-add" > Add Account</div>
+            </div>
+            <div className='button button--color-green' onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')}>
+              &pls;
             </div>
           </div>
         </div>
