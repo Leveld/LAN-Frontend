@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
-import '../../styles/Register.css';
+//import '../../styles/Register.css';
 import { setTimeout } from 'timers';
 import jwt from 'jsonwebtoken';
+<<<<<<< HEAD
 import lz from 'lz-string';
+=======
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
 const {clientSecret} = require('../../../server/secret.json');
 const {apiServerIP, frontServerIP} = require('capstone-utils');
-const TestingData = require('../../../TesingsData');
 const {Cookies} = require('react-cookie');
 const {connect} = require('react-redux');
 const cookie = new Cookies();
@@ -18,7 +20,11 @@ const fr = new FileReader();
 class Registration extends Component {
   constructor(props){
     super();
+<<<<<<< HEAD
     this.state = {selected: 0, name: props.user.name || "", businessName:"", age: null, gender: null,taxID:null, filePreview:null, file: null};
+=======
+    this.state = {selected: 0, name: props.user.name || "", businessName:"", age: null, gender: null, filePreview:null, file: null};
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
   }
 
   setImg = (e) => {
@@ -45,6 +51,7 @@ class Registration extends Component {
     (!this.state.businessName && this.state.selected) ? evnt.target.businessName.style.border = eborder : evnt.target.businessName.style.border = gborder;
     if(type !== 'business'){
       !age || !dob ? evnt.target.age.style.border = eborder : age >= 18 ? evnt.target.age.style.border = gborder : evnt.target.age.style.border = eborder;
+<<<<<<< HEAD
       (age < 18)? ageError.style.opacity = 1 : ageError.style.opacity = 0;
       !this.state.gender ? evnt.target.gender.style.border = eborder : evnt.target.gender.style.border = gborder;
     }else{
@@ -52,6 +59,13 @@ class Registration extends Component {
     }
         
     if(!this.state.name || (!this.state.businessName && this.state.selected) ||( !age || age < 18 || !dob || !this.state.gender) && type !== 'business' || (!this.state.taxID && !this.state.file && type === 'business')) {
+=======
+      (age < 18) && type != "business" ? ageError.style.opacity = 1 : ageError.style.opacity = 0;
+      !this.state.gender && type !== "business" ? evnt.target.gender.style.border = eborder : evnt.target.gender.style.border = gborder;
+    }
+    
+    if(!this.state.name || (!this.state.businessName && this.state.selected) ||( !age || age < 18 || !dob || !this.state.gender) && type !== 'business') {
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
       document.getElementById(`form`).style.animation = 'shake 0.5s';
       setTimeout(() => document.getElementById(`form`).style.animation = "none", 500 );
       return ;
@@ -63,11 +77,15 @@ class Registration extends Component {
         name: this.state.name,
         businessName: this.state.businessName,
         age,
+<<<<<<< HEAD
         taxID: this.state.taxID,
+=======
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
         gender: this.state.gender,
       }
     }, {headers:{Authorization:`Bearer ${token}`}})
     .then((res) => {
+<<<<<<< HEAD
       alert("Registration Complete");      
       if(this.state.file){
         const file = new FormData();
@@ -78,6 +96,13 @@ class Registration extends Component {
         return;
       }
       window.location.replace('/');      
+=======
+      alert("Registration Complete");
+      const file = new FormData();
+      file.append('image',this.state.file);
+      axios.post(`${frontServerIP}upload`, file, {headers:{Authorization: 'Bearer ' + token}})
+      .then(() => window.location.replace('/'));
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
     })
     .catch((err) => {
       alert(err.response.data.message);
@@ -90,7 +115,7 @@ class Registration extends Component {
     return (
       <div className="Register" >
         <div id="Register-wrapper" className="Register-wrapper">
-          <div id="form" style={{display: 'flex', flexDirection: 'column', background: 'red', width: '80%'}}>
+          <div id="form">
           <div className="Register-types">
             <div onClick={()=> this.setState({selected: 0})} style={this.state.selected ? {border: '1px solid black'} : {borderBottom: '1px solid black', borderLeft: '1px solid green',borderTop: '1px solid green',borderRight: '1px solid green'}} className="Register-type"> CONTENT PROVIDER</div>
             <div onClick={()=> this.setState({selected: 1})} style={!this.state.selected ? {border: '1px solid black'} : {borderBottom: '1px solid black', borderLeft: '1px solid green',borderTop: '1px solid green',borderRight: '1px solid green'}}className="Register-type"> ADVERTISER</div>
@@ -101,14 +126,14 @@ class Registration extends Component {
             <label> CONTENT PROVIDER SIGNUP</label>
             <nobr id="ageError-contentproducer" >Must Be 18 years or older to continue registration</nobr>
             
-            <div  style={{display: 'flex', flexDirection: 'row', flex: 1}}>
+            <div >
               <input name="name" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} placeholder={this.props.user.name} />
               <input name="businessName" hidden />
             </div>
-            <div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', alignContent: 'center', justifyContent: 'center'}}>
+            <div>
               <label>DOB</label>
-              <input style={{minWidth:'100px'}} name="age" type="date" />
-              <div style={{whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row'}}>
+              <input name="age" type="date" />
+              <div>
                 <label>GENDER</label>
                 <select onChange={(e) => this.setState({gender: e.target.value})} name="gender">
                   <option>SELECT</option>
@@ -117,7 +142,7 @@ class Registration extends Component {
                 </select>
               </div>
             </div>
-            <input style={{cursor:'pointer'}} type="submit"/>
+            <input type="submit"/>
           </form>
 
 
@@ -126,10 +151,11 @@ class Registration extends Component {
             <label> ADVERTISER SIGNUP</label>
             <div id="ageError-business" >Must Be 18 years or older to continue registration</div>           
             {/*<input type='file' onChange={(e) => this.upload(e)}/>*/}
-            <div style={{display: 'flex', flexDirection: 'row', flex: 1}}>
+            <div>
               <input name="name" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} placeholder={this.props.user.name} />
               <input onChange={(e) => this.setState({businessName: e.target.value})} name="businessName" value={this.state.businessName} placeholder="Business Name" />
             </div>
+<<<<<<< HEAD
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%'}}>
               <input style={{minWidth:'100px'}} name="age" type="date" hidden/>
               <label>Business Verification:</label>
@@ -142,6 +168,20 @@ class Registration extends Component {
                 <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>UPLOAD</div>
               </div>
             <input style={{cursor:'pointer'}} type="submit"/>
+=======
+            <div>
+              <input name="age" type="date" hidden/>
+              <label>Business Verification:</label>
+              <label>Upload a image of the Business Tax ID or any other relevant document to verify your business</label> 
+              
+              {/*File Img Preview*/}
+              <img src={this.state.filePreview ? this.state.filePreview.result : null} width="30%"/>
+              <div>
+                <input onChange={(e) => this.setImg(e)} type="file"/>
+                <div>UPLOAD</div>
+              </div>
+            <input type="submit"/>
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
               
             </div>
           </form>

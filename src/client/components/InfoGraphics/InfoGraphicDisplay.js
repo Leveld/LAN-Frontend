@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setInfoGraphicBlob } from '../../actions';
 
-import '../../styles/InfoGraphics.css';
+//import '../../styles/InfoGraphics.css';
 
 class InfoGraphicDisplay extends Component {
   constructor(props){

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../styles/Profile.css';
+//import '../../styles/Profile.css';
 import PlatformList from '../Platform/PlatformList';
 import ContractList from '../Contracts/ContractList';
 import {frontServerIP, apiServerIP} from 'capstone-utils';
@@ -32,7 +32,7 @@ class Profile extends Component {
     
    if(!user.type) return <div className="Error-wrapper"/>
    if(!accTypes.includes(user.type)) return (
-    <div style={{width: "100%", height:'100%', background: 'grey', display:'flex', justifyContent: 'center', }}>
+    <div>
       <div className="no_user_data">
         NO ACCOUNT SET
       </div>

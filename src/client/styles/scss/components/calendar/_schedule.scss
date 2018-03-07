@@ -1,0 +1,31 @@
+.schedule {
+  border: 1px solid darken($brand-gray, 8%);
+  border-radius: .5rem;
+  margin: .5rem;
+  overflow: hidden;
+
+    header {
+
+    }
+
+    .schedule-view {
+      background-color: $brand-gray;
+
+      .schedule-week {
+
+        h3 {
+
+        }
+
+        .schedule-day {
+          background-color: darken($brand-gray, 8%);
+          color: $brand-white;
+          padding: 1em;
+
+          &:nth-child(even) {
+            background-color: darken($brand-gray, 4%);
+          }
+        }
+      }
+    }
+}

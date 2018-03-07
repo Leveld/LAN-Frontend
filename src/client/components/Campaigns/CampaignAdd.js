@@ -49,8 +49,13 @@ class CampaignAdd extends Component {
         <form className="Campaign-add-form" onSubmit={(e) => this.createCampaign(e)} >
           <div className="Campaign-add-form-header">Create A New Campaign</div>
           <div className="Campaign-add-form-header-info">
+<<<<<<< HEAD
               <span style={{color:'red'}}>UserID: </span> {this.props.user._id} 
               <span style={{color:'red', marginLeft: '20px'}}>Company: </span>{this.props.user.businessName}
+=======
+              <span>UserID: </span> {this.props.user._id} 
+              <span>Company: </span>{this.props.user.businessName}
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
           </div>
           <div className="Campaign-add-form-content">
            
@@ -60,18 +65,30 @@ class CampaignAdd extends Component {
               {
                 this.state.toggles.info ?
                   <div className="Campaign-add-info">
+<<<<<<< HEAD
                     <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+=======
+                    <div>
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
                       <label>Title</label>
                       <input autocomplete="off" type="text" value={this.state.title} onChange={(e) => this.setState({title: e.target.value})}/>
                     </div>
                   
+<<<<<<< HEAD
                     <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+=======
+                    <div>
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
                       <label>Start</label>
                       <input type="date" onChange={(e) => this.setState({start: e.target.value})}/>
                       <label>End</label>
                       <input type="date" onChange={(e) => this.setState({end: e.target.value})}/>
                     </div>
+<<<<<<< HEAD
                     <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+=======
+                    <div>
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
                       <label>Categories:</label>
                       <select>
                         {
@@ -79,7 +96,11 @@ class CampaignAdd extends Component {
                         }
                       </select>
                     </div>
+<<<<<<< HEAD
                     <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+=======
+                    <div>
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
                       <label>Details:</label>
                       <textarea scale="off" />
                     </div>
@@ -100,7 +121,11 @@ class CampaignAdd extends Component {
                         this.state.rules.map((rule, i) => {
                           return (
                             <div className="Campaign-add-rule-item" key={i}>
+<<<<<<< HEAD
                               <div style={{overflow: 'hidden'}} > {i+1}.{rule.toUpperCase()}</div>
+=======
+                              <div > {i+1}.{rule.toUpperCase()}</div>
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
                               <div  className="Campaign-add-rule-remove-btn"><span onClick={()=> this.removeItem('rules',i)}>x</span></div>
                             </div>
                           )
@@ -108,10 +133,17 @@ class CampaignAdd extends Component {
                       }
                     </div>
                     <div className="Campaign-add-rule">
+<<<<<<< HEAD
                       <div style={{margin: '0 1%'}}>Add a New Rule: </div>
                       <input id="rule-input" placeholder="New Rule" autocomplete="off" onKeyDown={(e) => this.inputKeyPress(e, this.addItem, 'rules', 'rule-input')} onChange={(e)=> this.setState({current: e.target.value})} autoFocus />
                       <div  className="Campaign-add-rule-add-btn" onClick={() => this.addItem('rules', 'ruleinput')}>+</div> 
                       <div style={{margin: '0 1%'}}>Total Rules: {this.state.rules.length} </div>
+=======
+                      <div>Add a New Rule: </div>
+                      <input id="rule-input" placeholder="New Rule" autocomplete="off" onKeyDown={(e) => this.inputKeyPress(e, this.addItem, 'rules', 'rule-input')} onChange={(e)=> this.setState({current: e.target.value})} autoFocus />
+                      <div  className="Campaign-add-rule-add-btn" onClick={() => this.addItem('rules', 'ruleinput')}>+</div> 
+                      <div>Total Rules: {this.state.rules.length} </div>
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
                     </div>
                   </div>
                 ) 
@@ -130,7 +162,11 @@ class CampaignAdd extends Component {
                         this.state.tags.map((tag, i) => {
                           return (
                             <div className="Campaign-add-rule-item" key={i}>
+<<<<<<< HEAD
                               <div style={{overflow: 'hidden'}} > #{tag.toUpperCase()}</div>
+=======
+                              <div > #{tag.toUpperCase()}</div>
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
                               <div  className="Campaign-add-rule-remove-btn"><span onClick={()=> this.removeItem('tags',i)}>x</span></div>
                             </div>
                           )
@@ -138,10 +174,17 @@ class CampaignAdd extends Component {
                       }
                     </div>
                     <div className="Campaign-add-rule">
+<<<<<<< HEAD
                       <div style={{marginRight: '1%'}}>Add a New Tag: </div>
                       <input id="tag-input" placeholder="New Rule" autocomplete="off" onKeyDown={(e) => this.inputKeyPress(e, this.addItem, 'tags', 'tag-input')} onChange={(e)=> this.setState({current: e.target.value})} autoFocus />
                       <div  className="Campaign-add-rule-add-btn" onClick={() => this.addItem('tags', 'tag-input')}>+</div> 
                       <div style={{marginLeft: '1%'}}>Total Tags: {this.state.tags.length} </div>
+=======
+                      <div>Add a New Tag: </div>
+                      <input id="tag-input" placeholder="New Rule" autocomplete="off" onKeyDown={(e) => this.inputKeyPress(e, this.addItem, 'tags', 'tag-input')} onChange={(e)=> this.setState({current: e.target.value})} autoFocus />
+                      <div  className="Campaign-add-rule-add-btn" onClick={() => this.addItem('tags', 'tag-input')}>+</div> 
+                      <div>Total Tags: {this.state.tags.length} </div>
+>>>>>>> 7e9ff17d03da2a768e33445fb4c28e9abb6c5951
                     </div>
                   </div>
                 ) 

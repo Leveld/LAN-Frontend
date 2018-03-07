@@ -1,0 +1,6 @@
+.hero-cta {
+  background-color: $brand-gray;
+  padding: 2rem 1rem 0 1rem;
+  -webkit-clip-path: polygon(0 0, 1600px 13%, 1600px 100%, 0 100%);
+  clip-path: polygon(0 0, 1600px 13%, 1600px 100%, 0 100%);
+}
