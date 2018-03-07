@@ -64,4 +64,5 @@ src/public/js
 data/*
 src/server/secret.json
 keys.json
-./package-lock.json
+"package-lock.json"
+src/client/libs/fontawesome/*
