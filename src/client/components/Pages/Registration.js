@@ -4,7 +4,6 @@ import {Redirect} from 'react-router-dom';
 import '../../styles/Register.css';
 import { setTimeout } from 'timers';
 import jwt from 'jsonwebtoken';
-import lz from 'lz-string';
 const {clientSecret} = require('../../../server/secret.json');
 const {apiServerIP, frontServerIP} = require('capstone-utils');
 const {Cookies} = require('react-cookie');

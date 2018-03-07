@@ -1,9 +1,11 @@
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
+const { IS_PRODUCTION } = require('capstone-utils');
 var path = require('path');
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = IS_PRODUCTION;
 const productionPluginDefine = isProduction ? [
   new webpack.DefinePlugin({'process.env': {'NODE_ENV': JSON.stringify('production')}}),
   new webpack.DefinePlugin({
@@ -11,9 +13,8 @@ const productionPluginDefine = isProduction ? [
   }),
 ] : [];
 const clientLoaders = isProduction ? productionPluginDefine.concat([
-  new webpack.optimize.DedupePlugin(),
   new webpack.optimize.OccurrenceOrderPlugin(),
-  new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false }, sourceMap: false }),
+  new UglifyJsPlugin({ compress: { warnings: false }, sourceMap: false }),
   new webpack.DefinePlugin({
     'process.env.BROWSER': true
   }),
@@ -46,10 +47,12 @@ module.exports = [
         },
         {
           test: /\.scss$/,
-          loader: ExtractTextPlugin.extract('css!sass')
+          exclude: /node_modules/,
+          loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: [ 'css-loader', 'sass-loader' ] })
         },
         {
           test: /\.css$/,
+          exclude: /node_modules/,
           loader: ExtractTextPlugin.extract('css-loader')
         },
         {
@@ -63,7 +66,7 @@ module.exports = [
               }
             }
           ]
-        }     
+        }
       ]
     },
     resolve: {

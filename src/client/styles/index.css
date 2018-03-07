@@ -40,7 +40,7 @@
 
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Merriweather', serif;
   
 }
 
@@ -131,9 +131,10 @@ h1, h2, h3, h4, h5 {
 .App-footer-dev-indicator {
   color: white;
   margin-right: 1%;
+  font-size: 0.7rem;
 }
 .App-footer-wrapper-auth {
-  height: 80%;
+  height: 100%;
   right:0;    
   display: flex;
   flex-direction: row;
