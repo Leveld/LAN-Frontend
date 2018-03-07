@@ -40,7 +40,7 @@ class InfoGraphicList extends Component {
   render(){
     let blobImage;
     blobImage = this.props.user.profilePicture || 'images/noPhoto.jpg' ;
-    if(this.props.info.accountData) blobImage = this.props.info.accountData.profilePicture || 'images/noPhoto.jpg';
+    if(this.props.info) blobImage = this.props.info.accountData ? this.props.info.accountData.profilePicture : 'images/noPhoto.jpg';
 
     return (
       <div className='account-list'>
