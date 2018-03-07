@@ -11,7 +11,7 @@ class Footer extends Component {
       <div className="App-footer-wrapper">
         {
           inDev ? 
-            <div className="App-footer-wrapper">
+            <div style={{display: 'flex', flexDirection: 'row', height: '100%', flex: 1, justifyContent: 'flex-end'}}>
               <div className="App-footer-dev-indicator">
                 IN DEVELOPMENT
               </div>        
@@ -23,7 +23,8 @@ class Footer extends Component {
                       <div style={{background: 'red'}} className="App-footer-wrapper-auth-display"> NOT AUTHENTICATED</div>
                   }
               </div>
-            </div> 
+            </div>
+            
           : null
         }
         <div className="App-footer-lambda" ><div className="App-footer-lambda-wrapper" >POWERED BY <div style={{color: 'black', display: 'block'}}>LAMBDASCHOOL</div></div></div>
