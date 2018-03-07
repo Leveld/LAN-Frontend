@@ -10,11 +10,11 @@ class Footer extends Component {
     return (
       <footer className="App-footer-wrapper">
         {
-          inDev ?
-            <div className="App-footer-wrapper">
+          inDev ? 
+            <div style={{display: 'flex', flexDirection: 'row', height: '100%', flex: 1, justifyContent: 'flex-end'}}>
               <div className="App-footer-dev-indicator">
-                IN DEVELOPMENT
-              </div>
+                IN-DEV
+              </div>        
               <div className="App-footer-wrapper-auth">
                 <div className='app-version'> {version} </div>
                   {

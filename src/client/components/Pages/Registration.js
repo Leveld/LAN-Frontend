@@ -6,7 +6,6 @@ import { setTimeout } from 'timers';
 import jwt from 'jsonwebtoken';
 const {clientSecret} = require('../../../server/secret.json');
 const {apiServerIP, frontServerIP} = require('capstone-utils');
-const TestingData = require('../../../TesingsData');
 const {Cookies} = require('react-cookie');
 const {connect} = require('react-redux');
 const cookie = new Cookies();

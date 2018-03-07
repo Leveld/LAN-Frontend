@@ -19,10 +19,7 @@ class InfoGraphicList extends Component {
   }
   componentDidMount(){
     if(this.props.accounts === 0 && this.props.user.type !== accTypes[0] ) return;
-      if(this.props.children[0]){
-        return this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
-      }
-      this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props.profilePicture, blob: <AccountData />});
+    if(this.props.children[1].length > 0) this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props, blob: <AccountData />});
   }
 
   componentWillUnmount(){
@@ -40,7 +37,7 @@ class InfoGraphicList extends Component {
   render(){
     let blobImage;
     blobImage = this.props.user.profilePicture || 'images/noPhoto.jpg' ;
-    if(this.props.info) blobImage = this.props.info.accountImg || 'images/noPhoto.jpg';
+    if(this.props.info.accountData) blobImage = this.props.info.accountData.profilePicture || 'images/noPhoto.jpg';
 
     return (
       <div className='account-list'>

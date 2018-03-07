@@ -17,7 +17,6 @@ import {
   Error,
   SettingsSidebar,
 } from './components';
-
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
 const {apiServerIP} = require('capstone-utils');
 const {accTypes} = require('../server/config.json');
@@ -63,8 +62,8 @@ class App extends Component {
           <Header auth={auth} app={this}/>
           <div>
             <SettingsSidebar />
-            <Route exact path="/" component={() =>
-              this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home />
+            <Route exact path="/" component={() => 
+              this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home auth={auth} />
               }/>
             <Route path="/profile" component={() =>
               accTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Redirect to={'/register'} /> : history.back()
