@@ -1,8 +1,12 @@
 import React from 'react';
-import '../../styles/OverviewPane.css'
+import '../../styles/OverviewPane.css';
 
 const OverviewPane = (props) => {
-  return <div className="OP-item" >{props.index}</div> 
-}
+  return <div className="OP-item" >
+      {props.title && <h3>{props.title}</h3>}
+      {props.dataView}
+      {props.description && <p>{props.description}</p>}
+  </div>;
+};
 
 export default OverviewPane;
