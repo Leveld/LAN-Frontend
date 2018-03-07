@@ -52,7 +52,7 @@ class InfoGraphicList extends Component {
             </div>
             <div style={{background: this.color}} className="IG-list-wrap">
                 {this.props.children}
-                <div onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')} className="IG-add" > +</div>
+                <div onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')} className="IG-add" > Add Account</div>
             </div>
           </div>
         </div>

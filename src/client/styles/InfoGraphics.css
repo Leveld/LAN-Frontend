@@ -14,7 +14,7 @@
   width: 100%;
   color: white;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 0.5% 0;
 }
@@ -83,6 +83,7 @@
   border: 1px solid black;
   margin-right: 10px;
   color: white;
+  background: #67597A;
   text-shadow: 0px 0px black;
   box-shadow: 0px 0px 2px 0px black;
   cursor: pointer;
@@ -111,9 +112,9 @@
 }
 
 .IG-add {
-  background: green; 
-  height:20px; 
-  width: 20px; 
+  background: #00AA5D; 
+  padding: 5px;
+  color: white;
   border-radius: 5px; 
   cursor: pointer; 
   border: 1px solid black; 

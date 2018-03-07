@@ -21,7 +21,7 @@ class Home extends Component {
           <div onClick={() => { 
             this.props.auth.login();
             window.localStorage.clear();
-          }} style={{fontSize: '30px', background: 'green', padding: '20px', borderRadius: '5px', border: '1px solid black', cursor: 'pointer', color: 'white'}}>Get Started Now!</div>
+          }} style={{fontSize: '30px', background: '#00AA5D', padding: '20px', borderRadius: '5px', border: '1px solid black', cursor: 'pointer', color: 'white'}}>Get Started Now!</div>
         </div>
       </div> :
       accTypes.includes(this.props.user.type) ?
