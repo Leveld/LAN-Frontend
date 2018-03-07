@@ -74,12 +74,41 @@ const AccountData = (props) => {
           borderWidth: 1
         }]
       }
+    },
+    {
+      title: 'Generated with title',
+      description: 'bananas sold to potatoes',
+      type: 'Bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      }
     }
   ];
   const panePoints = t.map(point => {
     const p = {
 
-      dataView: <ChartView type={point.type} data={point.data} />
+      dataView: <ChartView type={point.type} data={point.data} options={{responsive: true}} />
     };
     if (point.title) p.title = point.title;
     if (point.description) p.description = point.description;

@@ -21,15 +21,15 @@ class Scheduler extends Component {
   render(){
     const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
     return (
-      <div>
-        <div className="Scheduler-header">SCHEDULER</div>
-        <div className="Scheduler-wrapper">
-          <div className="Scheduler-week">
+      <div className='schedule'>
+        <header className="schedule-header">SCHEDULER</header>
+        <div className="schedule-view">
+          <div className="schedule-week">
             {
               days.map((day) => {
                 return (
-                  <div key={day} className="Scheduler-day" >
-                    <div className="Scheduler-day-title">{day}</div>
+                  <div key={day} className="schedule-day" >
+                    <h3 className="Scheduler-day-title">{day}</h3>
                     <div className="Scheduler-events" >
                       {this.findEvents(day)}
                     </div>
@@ -45,9 +45,9 @@ class Scheduler extends Component {
             </div>
             <div className="Scheduler-details-extra">
               {
-                !this.props.evt.id ? 
-                  <div>NO DATA</div> 
-                  : 
+                !this.props.evt.id ?
+                  <div>NO DATA</div>
+                  :
                   <div className="Scheduler-extra">
                     <div> <span>ID:</span> {this.props.evt.id}</div>
                     <div> <span>NAME:</span> {this.props.evt.name}</div>
@@ -70,5 +70,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Scheduler);
-
-

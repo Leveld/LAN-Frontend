@@ -9,7 +9,7 @@ export default class OverviewPaneList extends Component {
 
   render() {
     return (
-      <div className="OP-list">
+      <div className="">
       {
         this.panes.map((el, i) => <OverviewPane key={i} index={i} {...el} />)
       }

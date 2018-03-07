@@ -24,7 +24,7 @@ class Header extends Component {
       setInterval(() => {
         this.setState({repos: '', data: []});
         this.checkPR();
-      }, 10000);
+    }, 1000000000);
     }
     const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
     if(token && token.length === 32 ){

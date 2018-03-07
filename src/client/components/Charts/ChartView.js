@@ -3,29 +3,6 @@ import { render } from 'react-dom';
 // import Hello from './Hello';
 import { Doughnut, Radar, Line, Bar } from 'react-chartjs-2';
 
-const styles = {
-  fontFamily: 'sans-serif',
-  textAlign: 'center'
-};
-
-const ViewStyles = {
-  margin: '.5em',
-  padding: '.5em',
-  border: '1px solid #eee',
-  listStyle: 'none',
-  display: 'flex',
-  flexDirection: 'row'
-};
-
-const ViewItemStyles = {
-  width: '100',
-  border: '1px solid #eee'
-};
-
-const GraphViewStyles = {
-  display: 'block'
-};
-
 const ban = {
   datasets: [
     {
@@ -46,7 +23,7 @@ const ban2 = {
 
 const ChartView = (props) => {
   return (
-    <div style={GraphViewStyles}>
+    <div className='chartContainer'>
     {
       (() => {
         switch (props.type) {

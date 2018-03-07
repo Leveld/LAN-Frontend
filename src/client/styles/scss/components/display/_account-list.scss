@@ -4,4 +4,24 @@
   background-color: $brand-black;
   border-bottom: 1rem solid $brand-gray;
   color: $brand-gray;
+  padding-left: 11rem;
+
+  > div >div > div:first-of-type {
+    border: .25rem solid $brand-black;
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10rem;
+    height: 10rem;
+
+    img::before {
+      content: '';
+      display: block;
+      width: 1rem;
+      height: 1rem;
+      background-color: $brand-green;
+      z-index: 5;
+    }
+  }
 }
