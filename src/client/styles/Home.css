@@ -61,6 +61,11 @@
   
   color: white;
 }
+.Home-header{
+  width: 100%;
+  display: flex;
+  
+}
 
 .Home-Accounts-info-title {
   width: 100%;

@@ -41,6 +41,7 @@
 
 h1, h2, h3, h4, h5 {
   font-family: 'Merriweather', serif;
+  font-size: 2rem;
   
 }
 
@@ -49,7 +50,7 @@ h1, h2, h3, h4, h5 {
   height: 100px;
   background: rgb(25, 25, 25);
   display: flex;
-  padding: 20px 0;
+  padding: 2% 0;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
@@ -130,7 +131,7 @@ h1, h2, h3, h4, h5 {
 
 .App-footer-dev-indicator {
   color: white;
-  margin-right: 1%;
+  margin-right: 5px;
   font-size: 0.7rem;
   display: flex;
   justify-content: center;

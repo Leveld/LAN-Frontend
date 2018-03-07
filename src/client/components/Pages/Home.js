@@ -17,7 +17,7 @@ class Home extends Component {
       !this.props.authenticated && (!cookie.get('access_token') && !window.localStorage.getItem('access_token')) ?
       <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div className="Home-Accounts">
-          <h1 style={{fontSize: '70px', textAlign: 'center'}}>START ADVERTISING TODAY!</h1>
+         <div className="Home-header"> <h1 style={{fontSize: '8vw', textAlign: 'center'}}>START ADVERTISING TODAY!</h1></div>
           <div onClick={() => { 
             this.props.auth.login();
             window.localStorage.clear();

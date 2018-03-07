@@ -13,7 +13,7 @@ class Footer extends Component {
           inDev ? 
             <div style={{display: 'flex', flexDirection: 'row', height: '100%', flex: 1, justifyContent: 'flex-end'}}>
               <div className="App-footer-dev-indicator">
-                IN DEVELOPMENT
+                IN-DEV
               </div>        
               <div className="App-footer-wrapper-auth">
                 <div style={{color: 'white', marginRight: 5, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}> {version} </div>

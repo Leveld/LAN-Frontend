@@ -90,7 +90,7 @@ class Header extends Component {
     if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token')) window.localStorage.setItem('access_token', cookie.get('access_token'));
     return (
       <div className="App-header">
-          <img  src={this.props.authenticated ? this.props.user.profilePicture || 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: '10%', marginLeft: 20}} />      
+          <img  src={this.props.authenticated ? this.props.user.profilePicture || 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{height: '80%', marginLeft: 20}} />      
         <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.props.toggleSettings() : null } className="App-header-logo" >
           <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
 
