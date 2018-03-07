@@ -54,8 +54,8 @@ h1, h2, h3, h4, h5 {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: 1.5px solid rgb(0, 47, 0);
-  animation: headerGlow 2s alternate-reverse infinite;
+  border-bottom: 1.5px solid #00AA5D;
+  
 }
 .App-header-view {
   text-decoration: none;
@@ -146,7 +146,7 @@ h1, h2, h3, h4, h5 {
   background: green;
 }
 .App-footer-wrapper {
-  background: black;
+  background: #171738;
   width: 100%;
   height: 40px;
   display: flex;
