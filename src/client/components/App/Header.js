@@ -91,11 +91,12 @@ class Header extends Component {
     return (
       <div className="App-header">
           <img  src={this.props.authenticated ? this.props.user.profilePicture || 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{height: '80%', marginLeft: 20}} />      
-        <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.props.toggleSettings() : null } className="App-header-logo" >
-          <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}  className="App-header-logo" >
+          <div className="App-header-username"> {this.props.user.name}</div>
+          {this.props.user.name ? <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}><div className="App-header-settings" onClick={() => this.props.authenticated ? this.props.toggleSettings() : null }>S</div><Link className="App-header-view" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>View Profile</Link></div> : null}
 
         </div>
-        <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, cursor: 'pointer', padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
+        <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
 
           {this.getLinks()}
       </div>
