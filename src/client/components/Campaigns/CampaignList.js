@@ -39,20 +39,15 @@ import {connect} from 'react-redux';
 
   toggleForm = () => this.setState({form: !this.state.form});
 
-  render(){
+  render() {
     return (
       <div className="pane pane-campaign">
         {this.state.form ? <CampaignAdd parent={this}/> : null}
         <div className="Campaign-header"> CAMPAIGNS </div>
-        {this.state.type === accTypes[0] && this.state.owner === this.props.user._id ?
-        <div>
-        <button className="App-auth-link" onClick={()=>this.toggleForm()}>Add Campaign</button></div> : null}
-          // <div className="Campaign-wrapper">
-          <div className="">
+        {this.state.type === accTypes[0] && this.state.owner === this.props.user._id ? <div><button className="App-auth-link" onClick={()=>this.toggleForm()}>Add Campaign</button></div> : null}
+          <div className='campaign-list'>
             {this.state.campaigns.length === 0 ? <div>NO CAMPAIGNS</div> : null}
-            {this.state.campaigns.map((campaign, i) => {
-              return <Campaign key={i} id={i+1} data={campaign} title={`${campaign.title} ${i+1}`} />
-            })}
+            {this.state.campaigns.map((campaign, i) => { return <Campaign key={i} id={i+1} data={campaign} title={`${campaign.title} ${i+1}`} /> })}
           </div>
           <CampaignStats />
       </div>
@@ -61,9 +56,7 @@ import {connect} from 'react-redux';
 }
 
 const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
+    return {user: state.user };
 };
 
 export default connect(mapStateToProps, null)(CampaignList);
