@@ -27,7 +27,7 @@ class Search extends Component {
     return (
       <form style={{background: '#00AA5d', display: 'flex', flexDirection: 'column' }}> 
       <div style={{display: 'flex', flexDirection:'row', flex: 1, fontSize: '0.5rem'}}>
-        <select onChange={(e)=> this.setState({type: e.target.value})} style={{width: '10%'}}>
+        <select onChange={(e)=> this.setState({type: e.target.value})} style={{flex:1}}>
           <option value="name">NAME</option>
           <option value="id">ID</option>
           <option value="type">TYPE</option>
