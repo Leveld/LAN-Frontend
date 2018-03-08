@@ -31,7 +31,10 @@ import reducers from './reducers';
 import './styles/scss/main.scss';
 import Auth from './components/Auth/Auth';
 const auth = new Auth();
-const store = createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); // <--- REDUX DEBUGGER
+// const store = createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); // <--- REDUX DEBUGGER
+const store = createStore(reducers, Object.assign({}, {
+  convos: []
+}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 const cookie = new Cookies();
 
 
@@ -90,17 +93,18 @@ class EventListener extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {convos: props.convos || []};
+    // this.state = {convos: props.convos || []};
+    this.startEventListener = this.startEventListener.bind(this);
   }
 
-  componentWillMount() {
-    this.setState({convos: this.props.convos});
-  }
+  // componentWillMount() {
+  //   this.setState({convos: this.props.convos});
+  // }
 
-  componentWillReceiveProps(props){
-    this.setState({convos: props.convos});
-    console.log('will receive ', props)
-  }
+  // componentWillReceiveProps(props){
+  //   this.setState({convos: props.convos});
+  //   console.log('will receive ', props)
+  // }
 
 
   dispatchEvent(name, data) {
@@ -116,11 +120,13 @@ class EventListener extends Component {
   }
 
   startEventListener() {
-    console.log('starting');
     const EVENT_NAME = EventListener.events.conversationChange;
     if (this.eventListener)
       clearInterval(this.eventListener);
-    this.eventListener = setInterval(async () => {
+    const getConvs = () => {
+      return this.props.convos;
+    }
+    const listener = (async () => {
       const sortByCreatedAt = (a, b) => {
         const aCreated = new Date(a.createdAt);
         const bCreated = new Date(b.createdAt);
@@ -138,14 +144,11 @@ class EventListener extends Component {
           Authorization: `Bearer ${userToken}`
         }
       })).data || [];
-      const reduxConvs = this.props.convos || [];
-      console.log('redux convs: ', reduxConvs)
+      const reduxConvs = this.props.convos;
       reduxConvs.sort(sortByCreatedAt);
       conversations.sort(sortByCreatedAt);
       for (let [conv1, conv2] of zip(reduxConvs, conversations)) {
         if (!conv1 || !conv2 || conv1.id !== conv2.id) {
-          console.log('redux conv: ', conv1);
-          console.log('req conv: ', conv2);
           this.dispatchEvent(EVENT_NAME, { conversation: conv2 });
           continue;
         }
@@ -158,12 +161,13 @@ class EventListener extends Component {
         if (JSON.stringify(conv1.messages) !== JSON.stringify(conv2.messages)) {
           this.dispatchEvent(EVENT_NAME, { conversation: conv2 });
         }
-      };
-    }, 5000);
+      }
+    }).bind(this);
+    listener();
+    this.eventListener = setInterval(listener, 5000);
   }
 
   stopEventListener() {
-    console.log('stopping');
     clearInterval(this.eventListener);
   }
 
@@ -182,7 +186,7 @@ class EventListener extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    convos: state.conversations
+    convos: state.convos
   }
 };
 

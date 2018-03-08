@@ -8,7 +8,7 @@ const ConvosReducer = (convos = [], action) => {
       newConvos.push(newConversation);
       return newConvos;
     default:
-      return convos;
+      return convos || [];
   }
 };
 

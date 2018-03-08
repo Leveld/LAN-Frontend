@@ -31,29 +31,6 @@ class Message extends Component {
   //   this.findUser(this.state.id);
   // }
 
-  // findUser = async (id, type) => {
-  //   try {
-  //     let userData = await axios.get(`${apiServerIP}user`, {
-  //       params: {
-  //         id, type
-  //       },
-  //       headers: {
-  //         Authorization: token
-  //       }
-  //     });
-  //     if (!user || !user.data)
-  //       return;
-  //     user = user.data;
-  //     this.setState({
-  //       name: user.name,
-  //       profilePicture: user.profilePicture,
-  //       type: user.type
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
   decode = (key) => {
     try{
       return jwt.verify(key, clientSecret);
@@ -97,8 +74,9 @@ class Messages extends Component {
       messageType: 'Chat'
     }
     try {
-      const updatedConvo = await axios.post(`${apiServerIP}message`, msg, {headers:{Authorization: token}});
-      this.props.updateConvo(updatedConvo);
+      const updatedConvo = await axios.post(`${apiServerIP}message`, { fields: msg }, {headers:{Authorization: token}});
+      if (updatedConvo && updatedConvo.data)
+        this.props.updateConvo(updatedConvo.data);
     } catch (error) {
       console.error(error);
     }
@@ -111,24 +89,41 @@ class Messages extends Component {
         <div className="Messages-ls">
           <div className="Messages-ls-content">
             <div className="Messages-header">{this.props.user.id}</div>
-            {Array.isArray(this.props.convos) ? await mapAsync(this.props.convos, async (convo, i) => {
-              console.log(convo);
-              if(convo.messages.length === 1 && convo.messages[0].author.authorID === this.props.user.id) return;
+            {Array.isArray(this.props.convos) && this.props.user ? await mapAsync(this.props.convos, async (convo, i) => {
+              const findUser = async (id, type) => {
+                try {
+                  let user = await axios.get(`${apiServerIP}user`, {
+                    params: {
+                      id, type
+                    },
+                    headers: {
+                      Authorization: token
+                    }
+                  });
+                  if (!user || !user.data)
+                    return;
+                  return user.data;
+                } catch (error) {
+                  console.error(error);
+                }
+              };
 
               const users = convo.participants.concat([{ participantID: convo.owner.ownerID, participantType: convo.owner.ownerType }])
-                .filter(({ participantID, participantType }) => participantID !== this.props.user.id && participantType !== this.props.user.type)
-                .map(({ participantID, participantType }) => ({ user: { id: participantID, type: participantType }}));
+                .filter(({ participantID, participantType }) => !(participantID === this.props.user.id && participantType === this.props.user.type))
+                .map(({ participantID, participantType }) => ({ id: participantID, type: participantType }));
 
               await parallelAsync(...users.map((user) => {
                 return async () => {
-                  const { name, profilePicture } = await findUser(user.id, user.type);
+                  const userData = await findUser(user.id, user.type);
+                  if (!userData)
+                    return;
+                  const { name, profilePicture } = userData;
                   user.name = name;
                   user.profilePicture = profilePicture;
                 };
               }));
 
-              users.map((user) => console.log(`User Name: ${user.name}`));
-              return <div key={i} onClick={() => this.setState({ convoID: convo.id, activeMessages: convo.messages, otherUsers: user })}>{users.map((user) => user.id).join("-")}</div>
+              return <div key={i} onClick={() => this.setState({ convoID: convo.id, activeMessages: convo.messages, otherUsers: users })}>{users.map((user) => `${user.name}`).join("-")}</div>
             }) : null }
           </div>
         </div>
