@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import {apiServerIP, frontServerIP} from 'capstone-utils';
+import {apiServerIP, frontServerIP, IS_DEVELOPMENT} from 'capstone-utils';
 import {Cookies} from 'react-cookie';
+import * as actions from '../../actions';
 import '../../styles/Messages.css';
 import jwt from 'jsonwebtoken';
 import {clientSecret} from '../../../server/secret.json';
+
 const cookie = new Cookies();
 const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
 let warning = null;
@@ -13,22 +15,44 @@ let warning = null;
 class Message extends Component {
   constructor(props){
     super(props);
-    this.state = {id: props.from, name: null};
-    this.message = props.message;
-    
-  }
-  componentWillMount(){
-    this.findUser(this.state.id);
+    this.state = {
+      id: props.id,
+      author: props.author, // authorID authorType name profilePicture id type
+      messageType: props.messageType,
+      conversation: props.conversation,
+      message: props.value,
+      createdAt: props.createdAt
+    };
+
   }
 
-  findUser = (id) => {
-    axios.get(`${apiServerIP}user?id=5a9676d9a504fb36602af75a&type=contentproducer`, {headers:{Authorization: token}})
-    .then((res) => {
-      const user = res.data;
-      this.setState({name: user.name});
-    })
-    .catch((err) => alert(err));
-  }
+  // componentWillMount(){
+  //   this.findUser(this.state.id);
+  // }
+
+  // findUser = async (id, type) => {
+  //   try {
+  //     let userData = await axios.get(`${apiServerIP}user`, {
+  //       params: {
+  //         id, type
+  //       },
+  //       headers: {
+  //         Authorization: token
+  //       }
+  //     });
+  //     if (!user || !user.data)
+  //       return;
+  //     user = user.data;
+  //     this.setState({
+  //       name: user.name,
+  //       profilePicture: user.profilePicture,
+  //       type: user.type
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
   decode = (key) => {
     try{
       return jwt.verify(key, clientSecret);
@@ -38,83 +62,82 @@ class Message extends Component {
   }
 
 
-  render(){
-    
-    if(!this.state.name) return <div> LOADING... </div>;
-    if(this.decode(this.message) === "[UNPROTECTED]") return warning = "[WARNING: UNPROTECTED MESSAGE!]";
+  render() {
+    if(!this.state.author.name) return <div> LOADING... </div>;
+    if(this.decode(this.state.message) === "[UNPROTECTED]") return warning = "[WARNING: UNPROTECTED MESSAGE!]";
     return (
-      <div  style={{whiteSpace: 'pre-line'}}>{this.state.name }: {this.decode(this.message)}</div>
+      <div style={{whiteSpace: 'pre-line'}}>{this.state.author.name }: {this.decode(this.state.message)}</div>
     );
   }
 }
 
 class Messages extends Component {
-  constructor(){
-    super();
-    this.state = {convos: [], convoID: null, messages: []}
+  constructor(props){
+    super(props);
+    this.state = { convoID: null, activeMessages: [], otherUsers: [] };
   }
-  componentDidMount = () =>{
+  componentDidMount = () => {
     if(!token) return history.back();
-    axios.get(`${frontServerIP}convos`, {headers:{Authorization: token}})
-    .then((res) => {
-      this.setState({convos: res.data})
-    })
-    .catch((err) => this.setState({convos: ['NO MESSAGES']}));
   }
-  componentWillReceiveProps(props){
-    //console.log(this.state.convos);
-  }
+
   encode = (msg) => jwt.sign(msg, clientSecret);
 
-
-
-  addMessage = (e) => {
+  addMessage = async (e) => {
     e.preventDefault();
     const message = this.encode(e.target.msg.value);
     const msg = {
-      convoID: this.state.convoID,
-      from: this.props.user._id,
-      message,
-      timestamp: Date.now()
+      conversation: this.state.convoID,
+      value: message,
+      messageType: 'Chat'
     }
-    axios.post(`${frontServerIP}message`, msg, {headers:{Authorization: token}})
-    .then((res) => {
-      res.data.forEach((convo) => {
-        
-        if(convo.id === this.state.convoID) this.setState({messages: convo.messages});
-      });
-      this.setState({convos: res.data});
-    })
-    .catch((err) => {
-      alert(err);
-    });
+    try {
+      const updatedConvo = await axios.post(`${apiServerIP}message`, msg, {headers:{Authorization: token}});
+      this.props.updateConvo(updatedConvo);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  
-
-  render(){
+  async render() {
     return (
       <div className="Messages-wrapper">
         <div className="Messages-ls">
           <div className="Messages-ls-content">
-            <div className="Messages-header">{this.props.user._id}</div>
-            {Array.isArray(this.state.convos) ? this.state.convos.map((convo, i) => {
-              if(convo.messages.length === 1 && convo.messages[0].from === this.props.user._id) return;
-              const userids = [];
-              for(let i = 0; i < convo.messages.length; i++){
-                if(convo.messages[i].from !== this.props.user._id) userids.push(convo.messages[i].from);
-              }
-              return <div key={i} onClick={() => this.setState({convoID:convo.id, messages:convo.messages})}>{userids.join("-")}</div>
+            <div className="Messages-header">{this.props.user.id}</div>
+            {Array.isArray(this.props.convos) ? this.props.convos.map((convo, i) => {
+              if(convo.messages.length === 1 && convo.messages[0].author.authorID === this.props.user.id) return;
+
+              const users = convo.participants.concat([{ participantID: convo.owner.ownerID, participantType: convo.owner.ownerType }])
+                .filter(({ participantID, participantType }) => participantID !== this.props.user.id && participantType !== this.props.user.type)
+                .map(({ participantID, participantType }) => ({ user: { id: participantID, type: participantType }}));
+
+              await parrallelAsync(...users.map((user) => {
+                return async () => {
+                  const { name, profilePicture } = await findUser(user.id, user.type);
+                  user.name = name;
+                  user.profilePicture = profilePicture;
+                };
+              }));
+
+              users.map((user) => console.log(`User Name: ${user.name}`));
+              return <div key={i} onClick={() => this.setState({ convoID: convo.id, activeMessages: convo.messages, otherUsers: user })}>{users.map((user) => user.id).join("-")}</div>
             }) : null }
           </div>
         </div>
         <div className="Messages-rs">
           <div className="Messages-header">MESSAGES</div>
-          {!process.env.PRODUCTION && this.state.convoID ? <div className="Messages-header">convo ID: {this.state.convoID}</div> : null}
+          {IS_DEVELOPMENT && this.state.convoID ? <div className="Messages-header">convo ID: {this.state.convoID}</div> : null}
           <div>{warning}</div>
-          {this.state.messages.map((item, i) => {
-            
-            return <Message key={i} {...item} />;
+          {this.state.activeMessages.map((message, i) => {
+            const author = message.author;
+            let user;
+            if (this.props.user.id === author.authorID && this.props.user.type === author.authorType)
+              user = this.props.user;
+            else
+              user = this.state.otherUsers.find((user) => user.id === author.authorID && user.type === author.authorType);
+            if (user)
+              Object.assign(author, user);
+            return <Message key={i} {...message} />;
           })}
           <form onSubmit= {(e) => this.addMessage(e)} className="Messages-rs-form">
             <textarea name="msg" className="Messages-rs-form-input" type="text"/>
@@ -128,8 +151,92 @@ class Messages extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    convos: state.convos
   }
 };
 
-export default connect(mapStateToProps, null)(Messages);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actions, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, null)(Messages);
+
+
+
+/*
+
+{
+  "id": "5a9f1f08f17db837807a5de5",
+  "isGroup": false,
+  "owner": {
+    "ownerID": "5a9f1bbca71f0218b8a0c4dd",
+    "ownerType": "ContentProducer"
+  },
+  "name": null,
+  "description": null,
+  "participants": [
+    {
+      "participantID": "5a9f1bdca71f0218b8a0c4df",
+      "participantType": "ContentProducer"
+    }
+  ],
+  "createdAt": "2018-03-06T23:06:49.004Z",
+  "updatedAt": "2018-03-07T05:01:09.726Z",
+  "messages": [
+    {
+      "id": "5a9f739c7831b9105c2bd90b",
+      "author": {
+        "authorID": "5a9f1bbca71f0218b8a0c4dd",
+        "authorType": "ContentProducer"
+      },
+      "conversation": "5a9f1f08f17db837807a5de5",
+      "messageType": "Chat",
+      "value": "Hey there dood",
+      "createdAt": "2018-03-07T05:07:40.473Z",
+      "updatedAt": "2018-03-07T05:07:40.473Z",
+      "readers": [
+        {
+          "readerID": "5a9f1bdca71f0218b8a0c4df",
+          "readerType": "ContentProducer"
+        }
+      ]
+    }
+  ]
+}
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
