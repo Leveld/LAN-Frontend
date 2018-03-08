@@ -1,0 +1,153 @@
+.Profile-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  .Profile-content {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: flex-start;
+
+    .Profile-content-left {
+      // display: flex;
+      // flex-direction: column;
+      // align-items: center;
+    }
+
+    .Profile-content-right {
+      // flex: 1;
+      // display: flex;
+      // flex-direction: column;
+      // align-items: center;
+      // border-left: 1px solid white;
+    }
+  }
+}
+
+.Profile-banner {
+  // width: 100%;
+  // height: 300px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+}
+.Profile-no_user_data {
+  // width: 70%;
+  // padding: 10px;
+  // margin: 20px;
+  // border-radius: 5px;
+  // border:1px solid black;
+  // color: white;
+}
+
+.Profile-logo {
+  // height: 250px;
+  // width: 250px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+      width: 60%;
+      height: 60%;
+      border-radius: 60%;
+      padding: 1rem;
+  }
+}
+
+.Profile-logo-img {
+  // height: 80%;
+  // width: 80%;
+  // border-radius: 100%;
+  // border: 2px solid white;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // overflow: hidden;
+}
+
+.Profile-header {
+  // width: 100%;
+  // height: 50px;
+  // color: white;
+  // border-bottom: 1px solid white;
+  // font-size: 2em;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+}
+
+.Profile-bio {
+  // width: 80%;
+  // padding: 20px;
+  // margin: 30px;
+  // min-width: 300px;
+  // border-radius: 10px;
+  // border: 1px solid black;
+  // box-shadow:inset 0px 0px 5px 0px black;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+}
+
+.Profile-contact-list {
+  // width: 100%;
+  // background: orange;
+}
+.Profile-tag{
+  // width: 100%;
+  // height: 40px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // color:white;
+}
+.Profile-message {
+  // width:100%;
+  // height: 70px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+}
+.Profile-message-btn {
+  // background: orange;
+  // height: 80%;
+  // width: 80%;
+  // display: flex;
+  // font-size: 1.2em;
+  // justify-content: center;
+  // align-items: center;
+  // border-radius: 5px;
+  // border: 1px solid black;
+}
+.Profile-contact{
+  // width: 100%;
+  // height: 40px;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // font-weight: 700;
+  display: 'none';
+}
+
+.disabled {
+  // position: absolute;
+  // width: 247px;
+  // height: 70px;
+  // border: 1px solid black;
+  // opacity: 0;
+  // font-size: 0.7rem;
+  // z-index: 1;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // font-size: 1em;
+  // color: white;
+  // transition: 1s opacity;
+  // cursor: not-allowed;
+  // border-radius: 2px;
+}
+.disabled:hover {
+  // opacity: 1;
+}
