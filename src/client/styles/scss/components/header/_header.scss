@@ -1,0 +1,47 @@
+.header {
+
+}
+
+.header-sidebar-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: flex-start;
+  background-color: $brand-gray;
+}
+
+.header-sidebar-button {
+  background-color: $brand-green;
+  color: $brand-gray;
+  padding: .5rem 1rem;
+  margin: .5rem;
+  display: inline-block;
+  font-size: 1.25rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: $brand-green-alt;
+    select: false;
+  }
+}
+
+.header-settings-button {
+  background-color: $brand-green;
+  color: $brand-gray;
+  padding: 1rem 2rem;
+  display: inline-block;
+  border-radius: 0 1.25rem 125rem 0;
+  font-size: 1.25rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: $brand-green-alt;
+    select: false;
+  }
+}
