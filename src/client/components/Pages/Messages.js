@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import {apiServerIP, frontServerIP, IS_DEVELOPMENT, parrallelAsync, mapAsync} from 'capstone-utils';
+import {apiServerIP, frontServerIP, IS_DEVELOPMENT, parallelAsync, mapAsync} from 'capstone-utils';
 import {Cookies} from 'react-cookie';
 import * as actions from '../../actions';
 import '../../styles/Messages.css';
@@ -74,11 +75,16 @@ class Message extends Component {
 class Messages extends Component {
   constructor(props){
     super(props);
-    this.state = { convoID: null, activeMessages: [], otherUsers: [] };
+    this.state = { convoID: null, activeMessages: [], otherUsers: [], mainDiv: null };
   }
+
   componentDidMount = () => {
     if(!token) return history.back();
   }
+
+  componentWillReceiveProps = (props) => {
+    this.state.mainDiv = null;
+  };
 
   encode = (msg) => jwt.sign(msg, clientSecret);
 
@@ -98,20 +104,22 @@ class Messages extends Component {
     }
   }
 
-  async render() {
-    return (
+  render () {
+    const loadMessageData = async () => {
+      this.setState({mainDiv: (
       <div className="Messages-wrapper">
         <div className="Messages-ls">
           <div className="Messages-ls-content">
             <div className="Messages-header">{this.props.user.id}</div>
-            {Array.isArray(this.props.convos) ? await asyncMap(this.props.convos, async (convo, i) => {
+            {Array.isArray(this.props.convos) ? await mapAsync(this.props.convos, async (convo, i) => {
+              console.log(convo);
               if(convo.messages.length === 1 && convo.messages[0].author.authorID === this.props.user.id) return;
 
               const users = convo.participants.concat([{ participantID: convo.owner.ownerID, participantType: convo.owner.ownerType }])
                 .filter(({ participantID, participantType }) => participantID !== this.props.user.id && participantType !== this.props.user.type)
                 .map(({ participantID, participantType }) => ({ user: { id: participantID, type: participantType }}));
 
-              await parrallelAsync(...users.map((user) => {
+              await parallelAsync(...users.map((user) => {
                 return async () => {
                   const { name, profilePicture } = await findUser(user.id, user.type);
                   user.name = name;
@@ -145,7 +153,18 @@ class Messages extends Component {
           </form>
         </div>
       </div>
-    );
+      )});
+    }
+
+    if (this.state.mainDiv instanceof Promise) {
+      return (
+        <div> loading... </div>
+      );
+    } else {
+      if (this.state.mainDiv === null)
+        loadMessageData().catch(console.error);
+      return this.state.mainDiv || (<div> Loading... </div>);
+    }
   }
 }
 

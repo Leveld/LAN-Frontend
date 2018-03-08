@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { createStore, applyMiddleware  } from 'redux';
+import { createStore, applyMiddleware, bindActionCreators } from 'redux';
 import { Provider, connect } from 'react-redux';
 import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import axios from 'axios';
@@ -72,7 +72,7 @@ class App extends Component {
             <Route path='/register' component={() => <Registration auth={auth} /> }/>
             <Route path='/messages' component={Messages}/>
           </div>
-        {this.props.children /*event listener*/}
+        <ConnectedEventListener />
         <Footer/>
         </div>
     );
@@ -99,6 +99,7 @@ class EventListener extends Component {
 
   componentWillReceiveProps(props){
     this.setState({convos: props.convos});
+    console.log('will receive ', props)
   }
 
 
@@ -106,7 +107,7 @@ class EventListener extends Component {
     const event = new CustomEvent(name, { detail: data });
     window.dispatchEvent(event);
     switch (name) {
-      case this.events.conversationChange:
+      case EventListener.events.conversationChange:
         this.props.updateConvo(data.conversation);
         break;
       default:
@@ -115,7 +116,8 @@ class EventListener extends Component {
   }
 
   startEventListener() {
-    const EVENT_NAME = this.events.conversationChange;
+    console.log('starting');
+    const EVENT_NAME = EventListener.events.conversationChange;
     if (this.eventListener)
       clearInterval(this.eventListener);
     this.eventListener = setInterval(async () => {
@@ -128,19 +130,22 @@ class EventListener extends Component {
           return 1;
         return 0;
       };
-      const userToken = window.localStroage.getItem('access_token');
+      const userToken = window.localStorage.getItem('access_token');
       if (!userToken)
         return;
-      const conversations = await axios.get(`${apiServerIP}conversations`, {
+      const conversations = (await axios.get(`${apiServerIP}conversations`, {
         headers: {
           Authorization: `Bearer ${userToken}`
         }
-      }) || [];
-      const reduxConvs = this.props.convos;
+      })).data || [];
+      const reduxConvs = this.props.convos || [];
+      console.log('redux convs: ', reduxConvs)
       reduxConvs.sort(sortByCreatedAt);
       conversations.sort(sortByCreatedAt);
       for (let [conv1, conv2] of zip(reduxConvs, conversations)) {
-        if (conv1.id !== conv2.id) {
+        if (!conv1 || !conv2 || conv1.id !== conv2.id) {
+          console.log('redux conv: ', conv1);
+          console.log('req conv: ', conv2);
           this.dispatchEvent(EVENT_NAME, { conversation: conv2 });
           continue;
         }
@@ -157,7 +162,8 @@ class EventListener extends Component {
     }, 5000);
   }
 
-  stopEventListner() {
+  stopEventListener() {
+    console.log('stopping');
     clearInterval(this.eventListener);
   }
 
@@ -165,7 +171,7 @@ class EventListener extends Component {
     this.startEventListener();
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     this.stopEventListener();
   }
 
@@ -184,13 +190,11 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actions, dispatch);
 };
 
-const ConnectedEventListener = connect(mapStateToProps, mapDispatchToProps, {updateConvo, delMsg, addMsg})(EventListener);
+const ConnectedEventListener = connect(mapStateToProps, mapDispatchToProps, null)(EventListener);
 
 render(
   <Router>
     <Provider store={store}>
-      <App>
-        <ConnectedEventListener />
-      </App>
+      <App />
     </Provider>
   </Router>, document.getElementById('root'));
