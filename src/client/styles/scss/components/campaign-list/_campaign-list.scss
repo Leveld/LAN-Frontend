@@ -1,4 +1,20 @@
 .campaign-list {
-  border: 1em solid $brand-green;
-  background-color: red;
+
+}
+
+.campaign--header {
+  text-align: center;
+  background-color: $brand-blue;
+  color: $brand-gray;
+  border-radius: 2px;
+  padding: .5rem;
+}
+
+.campaign--add {
+  text-align: center;
+  padding: .5rem;
+  font-size: 17px;
+  margin:0 auto;
+  display: block;
+  margin-top: .50rem;
 }

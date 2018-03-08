@@ -16,7 +16,7 @@ class CampaignAdd extends Component {
       current: '',
       rules: [],
       tags: [],
-      title: 'Untitled',
+      title: '',
       start: null,
       end: null,
       status: '',
@@ -58,8 +58,8 @@ class CampaignAdd extends Component {
        },
        status : 'Active', // 'Active', 'Inactive', 'Frozen', 'Terminated', 'Closed', 'Completed'
        preferredApplicant: {
-         coType: 'youtube',
-         industry: 'gaming'
+         coType: 'YouTube',
+         industry: 'Gaming'
        },
        description: this.state.description
      };
@@ -77,20 +77,6 @@ class CampaignAdd extends Component {
     })
   }
 
-  //   {
-  //   "fields":{
-  //     "owner": {
-  //       "ownerType": "ContentProducer",
-  //       "ownerID": "507f1f77bcf86cd799439011"
-  //     },
-  //     "status": "active",
-  //     "preferredApplicant" : {
-  //       "coType": "twitter",
-  //       "industry": "fashion"
-  //     }
-  //   }
-  // }
-
   toggle = (section) => {
     const toggles = this.state.toggles;
     toggles[section] = !toggles[section];
@@ -102,86 +88,52 @@ class CampaignAdd extends Component {
       // <div className="Campaign-add-wrapper">
       <div className="modal-campaign">
 
-        <form className="Campaign-add-form" onSubmit={(e) => this.createCampaign(e)} >
-          <div className="Campaign-add-form-header">Create A New Campaign</div>
-          <div className="Campaign-add-form-header-info">
-              <span>UserID: </span> {this.props.user._id}
-              <span>Company: </span>{this.props.user.businessName}
-          </div>
+        <form className="modal-campaign--form" onSubmit={(e) => this.createCampaign(e)} >
+          <h4 className="modal-campaign--header">Create A New Campaign</h4>
+          <hr/>
           <div className="Campaign-add-form-content">
+            <div className="modal-campaign--input-wrapper">
+              <label>Title:</label>
+              <input className="modal-campaign--input" autoComplete="off" type="text" value={this.state.title} onChange={(e) => this.setState({title: e.target.value})}/>
+            </div>
+            <div className="modal-campaign--input-wrapper">
+              <label>Industry:</label>
+              <input className="modal-campaign--input" autoComplete="off" type="text" value={this.state.category} onChange={(e) => this.setState({category: e.target.value})}/>
+            </div>
+            <div className="modal-campaign--input-wrapper">
+              <label className="modal-campaign--block">Description:</label>
+              <textarea className="modal-campaign--input modal-campaign--block modal-campaign--textarea" scale="off" onChange={(e) => this.setState({description: e.target.value})} />
+            </div>
+            {/*
+              <div className="Campaign-add-rule-wrapper">
+                <div className="Campaign-add-rule-display">
+                  {
+                  this.state.rules.map((rule, i) => {
+                    return (
+                      <div className="Campaign-add-rule-item" key={i}>
+                        <div> {i+1}.{rule.toUpperCase()}</div>
+                        <div  className="Campaign-add-rule-remove-btn"><span onClick={()=> this.removeItem('rules',i)}>x</span></div>
+                      </div>
+                      )
+                    })
+                  }
+                </div>
+                <div className="Campaign-add-rule">
+                  <div>Add a New Rule: </div>
+                  <input id="rule-input" placeholder="New Rule" autocomplete="off" onKeyDown={(e) => this.inputKeyPress(e, this.addItem, 'rules', 'rule-input')} onChange={(e)=> this.setState({current: e.target.value})} autoFocus />
+                  <div  className="Campaign-add-rule-add-btn" onClick={() => this.addItem('rules', 'ruleinput')}>+</div>
+                </div>
+              </div>
+                */}
 
-
-              {/*INFO SECTION*/}
-              <div onClick={() => this.toggle('info')} className="Campaign-add-rule-header">INFO</div>
-              {
-                this.state.toggles.info ?
-                  <div className="Campaign-add-info">
-                    <div>
-                      <label>Title</label>
-                      <input autoComplete="off" type="text" value={this.state.title} onChange={(e) => this.setState({title: e.target.value})}/>
-                    </div>
-
-                    <div>
-                      <label>Start</label>
-                      <input type="date" onChange={(e) => this.setState({start: e.target.value})}/>
-                      <label>End</label>
-                      <input type="date" onChange={(e) => this.setState({end: e.target.value})}/>
-                    </div>
-                    <div>
-                      <label>Categories:</label>
-                      <select onChange={(e) => this.setState({category: 'gaming'})}>
-                        {
-                          categories.map((cat, i) => <option value={cat} id={cat} key={i}>{cat}</option>)
-                        }
-                      </select>
-                    </div>
-                    <div>
-                      <label>Description:</label>
-                      <textarea scale="off" onChange={(e) => this.setState({description: e.target.value})} />
-                    </div>
-
-                  </div>
-                : null
-              }
-
-              {/* RULES SECTION */}
-              <div onClick={() => this.toggle('rules')} className="Campaign-add-rule-header">RULES</div>
-              {
-                this.state.toggles.rules ?
-                (
-                  <div className="Campaign-add-rule-wrapper">
-                    <div className="Campaign-add-rule-display">
-                      {/*RULES COLLECTION*/}
-                      {
-                        this.state.rules.map((rule, i) => {
-                          return (
-                            <div className="Campaign-add-rule-item" key={i}>
-                              <div > {i+1}.{rule.toUpperCase()}</div>
-                              <div  className="Campaign-add-rule-remove-btn"><span onClick={()=> this.removeItem('rules',i)}>x</span></div>
-                            </div>
-                          )
-                        })
-                      }
-                    </div>
-                    <div className="Campaign-add-rule">
-                      <div>Add a New Rule: </div>
-                      <input id="rule-input" placeholder="New Rule" autocomplete="off" onKeyDown={(e) => this.inputKeyPress(e, this.addItem, 'rules', 'rule-input')} onChange={(e)=> this.setState({current: e.target.value})} autoFocus />
-                      <div  className="Campaign-add-rule-add-btn" onClick={() => this.addItem('rules', 'ruleinput')}>+</div>
-                      <div>Total Rules: {this.state.rules.length} </div>
-                    </div>
-                  </div>
-                )
-                : null
-              }
-
-              {/*TAGS SECTION*/}
+              {/*TAGS SECTION
               <div onClick={() => this.toggle('tags')} className="Campaign-add-rule-header">TAGS</div>
-              {
+              */}
+              {/*
                 this.state.toggles.tags ?
                 (
                   <div className="Campaign-add-rule-wrapper">
                     <div className="Campaign-add-rule-display">
-                      {/*TAGS COLLECTION*/}
                       {
                         this.state.tags.map((tag, i) => {
                           return (
@@ -197,18 +149,16 @@ class CampaignAdd extends Component {
                       <div>Add a New Tag: </div>
                       <input id="tag-input" placeholder="New Rule" autocomplete="off" onKeyDown={(e) => this.inputKeyPress(e, this.addItem, 'tags', 'tag-input')} onChange={(e)=> this.setState({current: e.target.value})} autoFocus />
                       <div  className="Campaign-add-rule-add-btn" onClick={() => this.addItem('tags', 'tag-input')}>+</div>
-                      <div>Total Tags: {this.state.tags.length} </div>
                     </div>
                   </div>
                 )
                 : null
-              }
+              */}
           </div>
 
-          {/*Controls*/}
-          <div className="Campaign-add-form-controls">
-            <button onClick={() => this.parent.toggleForm()}>Cancel</button>
-            <input type="submit" value="Create" />
+          <div>
+            <input  className="button button--color-green modal-campaign--control" type="submit" value="Create" />
+            <button className="button modal-campaign--control" onClick={() => this.parent.toggleForm()}>Cancel</button>
           </div>
         </form>
 
