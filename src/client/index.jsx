@@ -154,7 +154,7 @@ class EventListener extends Component {
           this.dispatchEvent(EVENT_NAME, { conversation: conv2 });
         }
       };
-    } 5000);
+    }, 5000);
   }
 
   stopEventListner() {

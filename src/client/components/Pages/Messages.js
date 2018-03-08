@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import {apiServerIP, frontServerIP, IS_DEVELOPMENT} from 'capstone-utils';
+import {apiServerIP, frontServerIP, IS_DEVELOPMENT, parrallelAsync, mapAsync} from 'capstone-utils';
 import {Cookies} from 'react-cookie';
 import * as actions from '../../actions';
 import '../../styles/Messages.css';
@@ -104,7 +104,7 @@ class Messages extends Component {
         <div className="Messages-ls">
           <div className="Messages-ls-content">
             <div className="Messages-header">{this.props.user.id}</div>
-            {Array.isArray(this.props.convos) ? this.props.convos.map((convo, i) => {
+            {Array.isArray(this.props.convos) ? await asyncMap(this.props.convos, async (convo, i) => {
               if(convo.messages.length === 1 && convo.messages[0].author.authorID === this.props.user.id) return;
 
               const users = convo.participants.concat([{ participantID: convo.owner.ownerID, participantType: convo.owner.ownerType }])

@@ -7,9 +7,9 @@ export const SIGNIN = 'SIGNIN';
 export const SIGNOUT = 'SIGNOUT';
 export const SET_USER = 'SET_USER';
 export const TOGGLE_SETTINGS = 'TOGGLE_SETTINGS';
-export default ADD_MESSAGE = 'ADD_MESSAGE';
-export default UPDATE_CONVO = 'UPDATE_CONVO';
-export default DEL_MESSAGE = 'DEL_MESSAGE';
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+export const UPDATE_CONVO = 'UPDATE_CONVO';
+export const DEL_MESSAGE = 'DEL_MESSAGE';
 
 
 export const setInfoGraphicBlob = (blob) => {
