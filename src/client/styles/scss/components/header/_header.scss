@@ -1,5 +1,5 @@
 .header {
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
 }
 
 .app-header {
@@ -31,18 +31,23 @@
 }
 
 .profile-icon--round {
-  height: 50px;
-  width: 50px;
+  height: 2.6rem;
+  width: 2.6rem;
   border-radius: 100%;
 }
 
 .app-header-menu {
   text-align: center;
+
+  .app-header-authentication {
+    justify-content: center;
+  }
 }
 
 .app-header-authentication {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .header-sidebar-toolbar {
@@ -51,6 +56,7 @@
   justify-content: left;
   align-items: flex-start;
   background-color: $brand-white;
+  border-bottom: 1rem solid $brand-white;
 }
 
 .header-sidebar-button {

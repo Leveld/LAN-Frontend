@@ -1,15 +1,11 @@
 footer {
   background: $brand-black;
   padding: 1rem;
+  display: flex;
+  color: $brand-white;
+  justify-content: flex-end;
 }
 
-.App-footer-wrapper-auth {
-  .app-version {
-    align-items: 'center';
-    color: $brand-white;
-    display: 'flex';
-    height: 100%;
-    justify-content: 'center';
-    margin-right: 5;
-  }
+.footer-version {
+  margin-left: 0.5rem;
 }
