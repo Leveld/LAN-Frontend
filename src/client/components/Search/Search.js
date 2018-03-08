@@ -25,7 +25,7 @@ class Search extends Component {
 
   render() {
     return (
-      <form style={{background: '#00AA5d', display: 'flex', flexDirection: 'column' }}> 
+      <div style={{background: '#00AA5d', display: 'flex', flexDirection: 'column' }}> 
       <div style={{display: 'flex', flexDirection:'row', flex: 1, fontSize: '0.5rem'}}>
         <select onChange={(e)=> this.setState({type: e.target.value})} style={{flex:1}}>
           <option value="name">NAME</option>
@@ -37,7 +37,7 @@ class Search extends Component {
         </div>
         
         {this.state.display.map((user) => <Link to={`/profile?id=${user.id}&type=${user.type}`} style={{textDecoration: 'none', marginLeft: 5}}>{user.name}</Link>)}
-      </form>
+      </div>
     );
   }
 }
