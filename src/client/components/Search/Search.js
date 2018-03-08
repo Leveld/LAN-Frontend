@@ -30,6 +30,7 @@ class Search extends Component {
         <select onChange={(e)=> this.setState({type: e.target.value})} style={{width: '10%'}}>
           <option value="name">NAME</option>
           <option value="id">ID</option>
+          <option value="type">TYPE</option>
         </select>
         
         <input onChange={(e)=> this.filter(e.target.value)} type="text" style={{width: '90%', fontSize: '1rem'}}/>
