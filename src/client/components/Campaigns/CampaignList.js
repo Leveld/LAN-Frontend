@@ -41,13 +41,14 @@ import {connect} from 'react-redux';
 
   render(){
     return (
-      <div className="Campaign-list">
+      <div className="pane pane-campaign">
         {this.state.form ? <CampaignAdd parent={this}/> : null}
         <div className="Campaign-header"> CAMPAIGNS </div>
         {this.state.type === accTypes[0] && this.state.owner === this.props.user._id ?
         <div>
         <button className="App-auth-link" onClick={()=>this.toggleForm()}>Add Campaign</button></div> : null}
-          <div className="Campaign-wrapper">
+          // <div className="Campaign-wrapper">
+          <div className="">
             {this.state.campaigns.length === 0 ? <div>NO CAMPAIGNS</div> : null}
             {this.state.campaigns.map((campaign, i) => {
               return <Campaign key={i} id={i+1} data={campaign} title={`${campaign.title} ${i+1}`} />
