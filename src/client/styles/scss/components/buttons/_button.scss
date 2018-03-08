@@ -1,9 +1,13 @@
-button ,
+button,
 .button {
   background-color: $brand-white;
   border: 0;
   border-radius: .25rem;
   color: $brand-black;
+  padding: .5rem 1rem;
+  margin: 0 .25rem;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .button-cta {
@@ -17,4 +21,12 @@ button ,
 .button--color-green {
   background-color: $brand-green-alt;
   color: $brand-white;
+}
+
+.register-button {
+
+}
+
+.signin-button, .signout-button {
+
 }

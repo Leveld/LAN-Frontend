@@ -86,7 +86,7 @@ class CampaignAdd extends Component {
   render(){
     return (
       // <div className="Campaign-add-wrapper">
-      <div className="modal-campaign">
+      <div className="pane modal-campaign">
 
         <form className="modal-campaign--form" onSubmit={(e) => this.createCampaign(e)} >
           <h4 className="modal-campaign--header">Create A New Campaign</h4>

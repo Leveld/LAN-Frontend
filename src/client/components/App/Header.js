@@ -90,19 +90,9 @@ class Header extends Component {
     }
   }
 
-  /*
-  <header className="App-header">
-        <div onClick={() => this.props.authenticated ? this.props.toggleSettings() : null } className="App-header-logo" >
-          {1 === 2 && <img  src={this.props.authenticated ? this.props.user.profilePicture || 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" />}
-          <div className="App-header-username"> {this.props.user.name}</div>
-
-        </div>
-        <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, cursor: 'pointer', padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
-        {1 === 2 && <Link to="/" className="App-header-name"><img src={'images/logo/NameLogo.png'} width="100px" /></Link>}
-  */
-
   render(){
-    if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token')) window.localStorage.setItem('access_token', cookie.get('access_token'));
+    if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token'))
+      window.localStorage.setItem('access_token', cookie.get('access_token'));
     return (
       <header className="header app-header">
         <nav className="header-container">
@@ -113,7 +103,9 @@ class Header extends Component {
           <div className="app-header-menu">
             {this.props.authenticated ?
               <Link to="/" >
-                <img  src={this.props.user.profilePicture ? this.props.user.profilePicture : 'images/noPhoto.jpg'} alt="Profile Pic" className="profile-icon profile-icon--round" />
+                <img src={this.props.user.profilePicture ? this.props.user.profilePicture : 'images/noPhoto.jpg'}
+                  alt="Profile Pic"
+                  className="profile-icon profile-icon--round" />
               </Link> :
             null}
             <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>
@@ -121,10 +113,12 @@ class Header extends Component {
         </nav>
         {this.props.user.name && this.props.authenticated ?
         <div className="header-sidebar-toolbar">
-          <div className="header-settings-button no-select" onClick={() => this.props.authenticated ? this.props.toggleSettings() : null }>
+          <div className="header-settings-button no-select"
+            onClick={() => this.props.authenticated ? this.props.toggleSettings() : null }>
             Settings
           </div>
-          <Link className="button button--color-green header-sidebar-button button--round App-header-view" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>View Profile</Link>
+          <Link className="button button--color-green header-sidebar-button button--round App-header-view"
+            to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>View Profile</Link>
         </div> : null}
         <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
       </header>

@@ -10,7 +10,7 @@ const cookie = new Cookies();
 
 const SettingsItem = (props) => {
   return (
-    <div className="Settings-block-item">
+    <div className="settings-block-item">
       {props.blob}
     </div>
   );
@@ -19,8 +19,8 @@ const SettingsItem = (props) => {
 const SettingsBlock = (props) => {
   const blockItems = props.data || [0,0];
   return (
-    <div className="Settings-block">
-      <div>{props.title}</div>
+    <div className="pane settings-block">
+      <h3>{props.title}</h3>
       {
         blockItems.map((item, i) => <SettingsItem key={i} blob={item} />)
       }
@@ -59,7 +59,7 @@ class SettingsSidebar extends Component {
           );
         })}
         <div>
-          <input type="submit" value="UPDATE"/>
+          <input type="submit" value="Save Changes"/>
         </div>
       </form>
     );
@@ -91,7 +91,7 @@ class SettingsSidebar extends Component {
     return (
       <div className="sidebar settings-sidebar" style={this.props.settings ? {width:250} : {width: 0}}>
         <Link onClick={()=>this.props.toggleSettings()} className="settings-profile-link" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>
-          <img src={this.props.user.profilePicture} />
+          <img className="profile-icon profile-icon--round" src={this.props.user.profilePicture} />
         </Link>
         {
           blocks.map((block, i) => <SettingsBlock key={i} title={block.title} data={block.data}/>)
