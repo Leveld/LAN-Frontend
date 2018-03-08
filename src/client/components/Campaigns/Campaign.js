@@ -12,11 +12,10 @@ export default class Campaign extends Component {
   render(){
     return (
       <div className="campaign-item">
-        // <div className="Campaign-item-id">{this.id}</div>
-        <div className="Campaign-item-title">{this.description}</div>
-        <div className="Campaign-item-category">{this.category}</div>
-        <div className="Campaign-item-status">{this.status}</div>
-        <div className="Campaign-item-coType">{this.coType}</div>
+        <p><span className="campaign-item--label">Industry:</span> {this.category}</p>
+        <p><span className="campaign-item--label">Status:</span> {this.status}</p>
+        <p><span className="campaign-item--label">Content Outlet Type:</span> {this.coType}</p>
+        <p><span className="campaign-item--label">Description:</span> {this.description}</p>
       </div>
     )
   }
