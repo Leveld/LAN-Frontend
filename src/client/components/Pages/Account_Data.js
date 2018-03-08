@@ -9,29 +9,16 @@ import ChartView from '../Charts/ChartView';
 import OverviewPane from '../OverviewPane/OverviewPane';
 
 const timelineData = {
-  title: 'Generated with title',
-  description: 'bananas sold to potatoes',
+  title: 'Ad Views',
+  description: 'The number of ad views per week',
   type: 'Line',
   data: {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Nov', 'Dec'],
     datasets: [{
       label: 'Number of Clicks',
-      data: [345, 219, 193, 453, 302, 389],
+      data: [128, 219, 193, 285, 302, 389, 328, 419, 493, 485, 502, 589],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
+        'rgb(103,89,122,0.5)'
       ],
       borderWidth: 1
     }]
@@ -44,67 +31,66 @@ const timelineData = {
 const AccountData = (props) => {
   // Compose graph components from data
   // data points, pane items, get it? hehe
-  console.log(props);
   const t = [
     {
-      title: 'Generated with title',
-      description: 'bananas sold to potatoes',
+      title: 'Number of Impressions',
+      description: 'The number of impressions per week',
       type: 'Bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['Jan 1 2018', 'Jan 8 2018', 'Jan 15 2018', 'Jan 22 2018', 'Jan 29 2018', 'Feb 5 2018','Feb 12 2018', 'Feb 19 2018', 'Feb 26 2018', 'Mar 5 2018'],
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          label: '# of Impressions',
+          data: [275, 285, 302, 340, 328, 360, 400, 430, 452, 475],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
+            'rgb(103,89,122,0.8)',
+            'rgb(103,89,122,0.8)',
+            'rgb(103,89,122,0.8)',
+            'rgb(103,89,122,0.8)',
+            'rgb(103,89,122,0.8)',
+            'rgb(103,89,122,0.8)',
+            'rgb(103,89,122,0.8)',
+            'rgb(103,89,122,0.8)',
+            'rgb(103,89,122,0.8)',
+            'rgb(103,89,122,0.8)'
           ],
           borderWidth: 1
         }]
-      }
+      },
+      options: {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Number of Impressions'
+            }
+          }]
+        }  
+     }
     },
     {
-      title: 'Generated with title',
-      description: 'bananas sold to potatoes',
-      type: 'Bar',
+      title: 'Cost per thousand impressions ',
+      description: 'The cost per thousand impressions per week',
+      type: 'Line',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['Jan 1 2018', 'Jan 8 2018', 'Jan 15 2018', 'Jan 22 2018', 'Jan 29 2018', 'Feb 5 2018','Feb 12 2018', 'Feb 19 2018', 'Feb 26 2018',  'Mar 5 2018'],
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          label: 'CPM',
+          data: [2.05, 1.99, 1.95, 1.97, 1.90, 1.82, 1.85, 1.77, 1.72, 1.70],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
+            'rgb(23,23,56,0.8)'
           ],
           borderWidth: 1
         }]
-      }
-    }
+      },
+      options: {
+        responsive: true,
+     }
+    },
   ];
+// ['Jun', 'Jul', 'Aug', 'Sep', 'Nov', 'Dec','Jan', 'Feb', 'Mar']
+  
+
   const panePoints = t.map(point => {
     const p = {
 
@@ -118,7 +104,7 @@ const AccountData = (props) => {
   return (
     <div className='M-Home'>
     <OverviewPaneList paneList={panePoints} />
-    <OverviewPane title='Timeline' dataView={<ChartView type={timelineData.type} data={timelineData.data} options={timelineData.options} />} />
+    {/*<OverviewPane title='Ad Views' dataView={<ChartView type={timelineData.type} data={timelineData.data} options={timelineData.options} />} /> */}
     {/*<Timeline chartA='http://www.prodevtips.com/wp-content/uploads/2009/09/flare_timeseries_graph.png' chartB='https://chandoo.org/img/pm/5-intermediate-version-of-timeline-chart.png'/>*/}
     <Scheduler />
     {console.log('props=> ',props)}
