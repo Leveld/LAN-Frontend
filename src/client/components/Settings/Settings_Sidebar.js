@@ -34,7 +34,7 @@ class SettingsSidebar extends Component {
     //UJPDATE SETTINGG
   }
 
-  
+
 
   findSettings = (settings) => {
     let blob;
@@ -43,12 +43,12 @@ class SettingsSidebar extends Component {
     if(this.props.user)
     blob = (
       <form onSubmit={(e)=>this.updateSettings(e)}>
-        {settingsKeys.map((key, i) => { 
+        {settingsKeys.map((key, i) => {
           return (
             <div key={i}>
               <div>
                 {String(key).toUpperCase()}:
-              </div> 
+              </div>
               <div>
                 <select name={key}>
                   <option value={settingsValues[i]}>{String(settingsValues[i])}</option>
@@ -58,7 +58,7 @@ class SettingsSidebar extends Component {
             </div>
           );
         })}
-        <div> 
+        <div>
           <input type="submit" value="UPDATE"/>
         </div>
       </form>
@@ -79,17 +79,20 @@ class SettingsSidebar extends Component {
       showPhoneNumber: false,
       showTwitter: false
     };
-    this.props.user.settings ? userSettings = this.props.user.settings : null;    
+    console.log('USER: ', this.props.user);
+    this.props.user.settings ? userSettings = this.props.user.settings : null;
 
     const blocks = [
       {title: 'SETTINGS', data: [this.findSettings(userSettings)]}
     ];
 
     if(!this.props.authenticated) return <div />;
-    
+
     return (
-      <div className="Settings-sidebar" style={this.props.settings ? {width:250} : {width: 0}}>
-        <Link onClick={()=>this.props.toggleSettings()} className="Settings-profile" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>VIEW PROFILE</Link>
+      <div className="sidebar settings-sidebar" style={this.props.settings ? {width:250} : {width: 0}}>
+        <Link onClick={()=>this.props.toggleSettings()} className="settings-profile-link" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>
+          <img src={this.props.user.profilePicture} />
+        </Link>
         {
           blocks.map((block, i) => <SettingsBlock key={i} title={block.title} data={block.data}/>)
         }
