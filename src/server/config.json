@@ -1,16 +1,23 @@
 {
   "version": "v0.1",
   "pages": [
-  "/",
-  "/profile",
-  "/register",
-  "/error"
-],
-"accTypes": [
-  "Business",
-  "ContentProducer"
-],
-"conTypes": [
-  "Business",
-  "Manager"
-]}
+    "/",
+    "/profile",
+    "/register",
+    "/error",
+    "/messages"
+  ],
+  "accTypes": [
+    "Business",
+    "ContentProducer"
+  ],
+  "conTypes": [
+    "Business",
+    "Manager"
+  ],
+  "categories": [
+    "cat 1",
+    "cat 2",
+    "cat 3"
+  ]
+}

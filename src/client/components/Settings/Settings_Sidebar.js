@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../../styles/Settings.css';
+//import '../../styles/Settings.css';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {apiServerIP} from 'capstone-utils';
@@ -20,7 +20,7 @@ const SettingsBlock = (props) => {
   const blockItems = props.data || [0,0];
   return (
     <div className="Settings-block">
-      <div style={{width: '100%', textAlign: 'center', color: 'white', background: 'black', borderBottom: '1px solid green'}}>{props.title}</div>
+      <div>{props.title}</div>
       {
         blockItems.map((item, i) => <SettingsItem key={i} blob={item} />)
       }
@@ -42,14 +42,14 @@ class SettingsSidebar extends Component {
     const settingsValues = Object.values(settings);
     if(this.props.user)
     blob = (
-      <form onSubmit={(e)=>this.updateSettings(e)} style={{width: 250, display: 'flex', flexDirection: 'column', borderBottom: '1px solid white' }}>
+      <form onSubmit={(e)=>this.updateSettings(e)}>
         {settingsKeys.map((key, i) => { 
           return (
-            <div key={i} style={{width: '100%', display: 'flex', background: 'red', flexDirection: 'row'}}>
-              <div style={{flex:1, fontSize: '0.7rem', display: 'flex', alignItems: 'center', background: 'rgb(39,69,100)', color: 'white',borderRight:'1px solid black', borderBottom: '1px solid black', paddingLeft: 5}}>
+            <div key={i}>
+              <div>
                 {String(key).toUpperCase()}:
               </div> 
-              <div style={{ borderBottom: '1px solid black', background: 'rgb(49,49,49)', textAlign: 'right', padding: '0 20px'}}>
+              <div>
                 <select name={key}>
                   <option value={settingsValues[i]}>{String(settingsValues[i])}</option>
                   <option value={!settingsValues[i]}>{String(!settingsValues[i])}</option>
@@ -58,8 +58,8 @@ class SettingsSidebar extends Component {
             </div>
           );
         })}
-        <div style={{display:'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-end', padding: 5, fontSize: 5, background: 'rgb(57,57,57)'}}> 
-          <input style={{cursor: 'pointer'}} type="submit" value="UPDATE"/>
+        <div> 
+          <input type="submit" value="UPDATE"/>
         </div>
       </form>
     );

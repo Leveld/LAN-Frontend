@@ -1,0 +1,10 @@
+.hero-message {
+  background-color: $brand-blue;
+  background-image: url('http://localhost:3000/images/unsplashBack1.png');
+  background-position: right top;
+  background-size: cover;
+  color: $brand-gray;
+  height: 100vw;
+  min-height: 50%;
+  padding-bottom: 2rem;
+}

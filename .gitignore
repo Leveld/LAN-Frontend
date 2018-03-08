@@ -63,5 +63,6 @@ src/public/css
 src/public/js
 data/*
 src/server/secret.json
-src/TestingData/*
 keys.json
+package-lock.json
+src/client/libs/fontawesome/*

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Contract from './Contract';
 import {connect} from 'react-redux';
-import '../../styles/Contracts.css';
+//import '../../styles/Contracts.css';
 import {conTypes} from '../../../server/config.json';
 
 class ContractList extends Component {
@@ -30,7 +30,7 @@ class ContractList extends Component {
           {
             this.state.contracts.length > 0 ? this.state.contracts.map((contract, i) => {
               return <Contract key={i} contract={contract}/>;
-            }) : <div style={{width: '100%', textAlign: 'center'}}>NO CONTRACTS </div>
+            }) : <div>NO CONTRACTS </div>
           }
         </div>
       </div>
