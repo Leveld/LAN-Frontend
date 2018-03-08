@@ -70,17 +70,21 @@ class Header extends Component {
   getLinks(){
     if (this.props.authenticated){
       return (
-        <div className="App-auth">
-          <button className="App-auth-link button--color-green" onClick={() => this.signOut()}>LOGOUT</button>
+        <div className="app-header-authentication">
+          <a className="button button--color-green signout-button" onClick={() => this.signOut()}>Sign Out</a>
         </div>
       );
     } else {
       return (
-        <div className="App-auth">
-          <button className="App-auth-link button--color-green" onClick={() => {
+        <div className="app-header-authentication">
+          <a className="button button--color-green register-button" onClick={() => {
             this.props.auth.login();
             window.localStorage.clear();
-        }}>SIGNIN / SIGNUP</button>
+          }}>Register</a>
+          <a className="button button--color-green signin-button" onClick={() => {
+            this.props.auth.login();
+            window.localStorage.clear();
+          }}>Sign In</a>
         </div>
       );
     }
@@ -100,21 +104,29 @@ class Header extends Component {
   render(){
     if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token')) window.localStorage.setItem('access_token', cookie.get('access_token'));
     return (
-      <header className="header App-header">
-        {this.props.authenticated ? <Link to="/" ><img  src={this.props.user.profilePicture ? this.props.user.profilePicture : 'images/noPhoto.jpg'} alt="Profile Pic" style={{height: '50px', width: '50px', borderRadius: '100%', marginLeft: 20}} /></Link> : <img  src={'images/logo/logo.png'} alt="Logo" style={{height: '90%', marginLeft: 20}}/>}
-        <div  className="App-header-logo" >
-          <div className="App-header-username"> {this.props.user.name}</div>
-        </div>
-        <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
-          {this.getLinks()}
+      <header className="header app-header">
+        <nav className="header-container">
+          <Link className="app-header-logo" to="/" >
+            <img  src={'images/logo/logo.png'} alt="Logo" />
+          </Link>
 
+          <div className="app-header-menu">
+            {this.props.authenticated ?
+              <Link to="/" >
+                <img  src={this.props.user.profilePicture ? this.props.user.profilePicture : 'images/noPhoto.jpg'} alt="Profile Pic" className="profile-icon profile-icon--round" />
+              </Link> :
+            null}
+            <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>
+          </div>
+        </nav>
         {this.props.user.name && this.props.authenticated ?
         <div className="header-sidebar-toolbar">
           <div className="header-settings-button no-select" onClick={() => this.props.authenticated ? this.props.toggleSettings() : null }>
             Settings
           </div>
-          <Link className="button button--color-green header-sidebar-button App-header-view" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>View Profile</Link>
+          <Link className="button button--color-green header-sidebar-button button--round App-header-view" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>View Profile</Link>
         </div> : null}
+        <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
       </header>
     );
   }

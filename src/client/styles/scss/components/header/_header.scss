@@ -1,5 +1,48 @@
 .header {
+  margin-bottom: 1rem;
+}
 
+.app-header {
+
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+
+  > a,
+  > .app-header-logo,
+  > .app-header-menu,
+  > .app-header-authentication {
+    display: inline-block;
+    flex-grow: 2;
+  }
+}
+
+.app-header-logo {
+  height: 100%;
+  position: relative;
+
+  & > img {
+    height: 6rem;
+    width: auto;
+  }
+}
+
+.profile-icon--round {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+}
+
+.app-header-menu {
+  text-align: center;
+}
+
+.app-header-authentication {
+  display: flex;
+  flex-direction: column;
 }
 
 .header-sidebar-toolbar {
@@ -7,7 +50,7 @@
   flex-direction: row;
   justify-content: left;
   align-items: flex-start;
-  background-color: $brand-gray;
+  background-color: $brand-white;
 }
 
 .header-sidebar-button {

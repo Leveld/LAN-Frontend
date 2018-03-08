@@ -10,6 +10,10 @@ button ,
   font-size: 1.65rem;
 }
 
+.button--round {
+  border-radius: 1.25rem;
+}
+
 .button--color-green {
   background-color: $brand-green-alt;
   color: $brand-white;
