@@ -5,6 +5,7 @@ import {Cookies} from 'react-cookie';
 ////import '../../styles/Auth.css';
 import axios from 'axios';
 import {setUser, signIn, signOut, toggleSettings} from '../../actions';
+import {Search} from '../../components';
 const {apiServerIP, frontServerIP} = require('capstone-utils');
 const {accTypes} = require('../../../server/config.json');
 const cookie = new Cookies();
@@ -111,6 +112,7 @@ class Header extends Component {
             <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>
           </div>
         </nav>
+        {this.props.authenticated ? <Search /> : null}
         {this.props.user.name && this.props.authenticated ?
         <div className="header-sidebar-toolbar">
           <div className="header-settings-button no-select"
