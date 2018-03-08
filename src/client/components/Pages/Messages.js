@@ -107,11 +107,12 @@ class Messages extends Component {
                   console.error(error);
                 }
               };
-
-              const users = convo.participants.concat([{ participantID: convo.owner.ownerID, participantType: convo.owner.ownerType }])
+              let users;
+              if(convo.participants){
+                users = convo.participants.concat([{ participantID: convo.owner.ownerID, participantType: convo.owner.ownerType }])
                 .filter(({ participantID, participantType }) => !(participantID === this.props.user.id && participantType === this.props.user.type))
                 .map(({ participantID, participantType }) => ({ id: participantID, type: participantType }));
-
+              
               await parallelAsync(...users.map((user) => {
                 return async () => {
                   const userData = await findUser(user.id, user.type);
@@ -122,8 +123,8 @@ class Messages extends Component {
                   user.profilePicture = profilePicture;
                 };
               }));
-
-              return <div key={i} onClick={() => this.setState({ convoID: convo.id, activeMessages: convo.messages, otherUsers: users })}>{users.map((user) => `${user.name}`).join("-")}</div>
+            }
+              return <div key={i} onClick={() => this.setState({ convoID: convo.id, activeMessages: convo.messages, otherUsers: users })}>{Array.isArray(users) ? users.map((user) => `${user.name}`).join("-") : null}</div>
             }) : null }
           </div>
         </div>
