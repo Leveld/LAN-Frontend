@@ -11,7 +11,7 @@ export default class Campaign extends Component {
   }
   render(){
     return (
-      <div className="Campaign-item">
+      <div className="campaign-item">
         // <div className="Campaign-item-id">{this.id}</div>
         <div className="Campaign-item-title">{this.description}</div>
         <div className="Campaign-item-category">{this.category}</div>
