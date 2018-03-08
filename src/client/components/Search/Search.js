@@ -25,17 +25,17 @@ class Search extends Component {
 
   render() {
     return (
-      <form style={{background: '#00AA5d', display: 'flex', flexDirection: 'column' }}> 
-      <div style={{display: 'flex', flexDirection:'row', flex: 1, fontSize: '0.5rem'}}>
-        <select onChange={(e)=> this.setState({type: e.target.value})} style={{flex:1}}>
-          <option value="name">NAME</option>
-          <option value="id">ID</option>
-          <option value="type">TYPE</option>
-        </select>
-        
-        <input onChange={(e)=> this.filter(e.target.value)} type="text" style={{width: '90%', fontSize: '1rem'}}/>
+      <form className="search-bar" style={{display: 'flex', flexDirection: 'column' }}>
+        <div style={{display: 'flex', flexDirection:'row', flex: 1, fontSize: '0.5rem'}}>
+          <select onChange={(e)=> this.setState({type: e.target.value})} style={{flex:1}}>
+            <option value="name">NAME</option>
+            <option value="id">ID</option>
+            <option value="type">TYPE</option>
+          </select>
+
+          <input onChange={(e)=> this.filter(e.target.value)} type="text" style={{width: '90%', fontSize: '1rem'}}/>
         </div>
-        
+
         {this.state.display.map((user) => <Link to={`/profile?id=${user.id}&type=${user.type}`} style={{textDecoration: 'none', marginLeft: 5}}>{user.name}</Link>)}
       </form>
     );
