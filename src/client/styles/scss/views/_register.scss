@@ -1,0 +1,54 @@
+.Register-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .Register-types, .Register-form {
+    margin-left: -.5rem;
+    margin-right: -.5rem;
+  }
+
+  .Register-types {
+    display: flex;
+    flex-direction: row;
+    margin-top: -.5rem;
+
+    div {
+      width: 50%;
+      display: flex;
+      background-color: darken($brand-gray, 8%);
+      padding: 1rem;
+    }
+  }
+}
+
+.Register-form {
+  display: flex;
+  flex-direction: column;
+  display: block;
+  margin-bottom: -.5rem;
+  padding: 1rem;
+  border-radius: 0 0 .5rem .5rem;
+
+  label, input {
+    display: block;
+  }
+
+  label {
+    font-family: 'Varela Round';
+    font-weight: 700;
+  }
+
+  input:not([type='submit']) {
+    font-size: 1.5rem;
+    padding: .5rem;
+    margin: 1rem 0;
+    border: darken($brand-gray,16%);
+    border-radius: .5rem;
+    box-shadow: 0 0 .5rem darken($brand-gray, 16%);
+    width: 100%;
+  }
+}
+
+.Register-img {
+  margin: 1rem;
+}

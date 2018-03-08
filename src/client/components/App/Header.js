@@ -97,7 +97,7 @@ class Header extends Component {
       <header className="header app-header">
         <nav className="header-container">
           <Link className="app-header-logo" to="/" >
-            <img  src={'images/logo/logo.png'} alt="Logo" />
+            <img  src={'images/logo/logo2.png'} alt="Logo" />
           </Link>
 
           <div className="app-header-menu">

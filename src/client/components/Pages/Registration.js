@@ -26,7 +26,7 @@ class Registration extends Component {
       const type = fr.result.split(';')[0].split(':')[1].split('/')[0];
       if(type !== 'image') return alert('Incorrect Img Format');
       this.setState({filePreview: fr, file: this.state.file});
-    }  
+    }
   }
 
 
@@ -48,7 +48,7 @@ class Registration extends Component {
     }else{
       !this.state.taxID ? evnt.target.taxID.style.border = eborder : evnt.target.taxID.style.border = eborder;
     }
-        
+
     if(!this.state.name || (!this.state.businessName && this.state.selected) ||( !age || age < 18 || !dob || !this.state.gender) && type !== 'business' || (!this.state.taxID && !this.state.file && type === 'business')) {
       document.getElementById(`form`).style.animation = 'shake 0.5s';
       setTimeout(() => document.getElementById(`form`).style.animation = "none", 500 );
@@ -75,25 +75,25 @@ class Registration extends Component {
     .catch((err) => {
       alert(err.response.data.message);
     });
-    
+
   }
   render(){
     if(this.props.user.type !== "User") return <Redirect to={'/'} />;
 
     return (
       <div className="Register" >
-        <div id="Register-wrapper" className="Register-wrapper">
+        <div id="Register-wrapper" className="pane Register-wrapper">
           <div id="form">
           <div className="Register-types">
-            <div onClick={()=> this.setState({selected: 0})} style={this.state.selected ? {border: '1px solid black'} : {borderBottom: '1px solid black', borderLeft: '1px solid green',borderTop: '1px solid green',borderRight: '1px solid green'}} className="Register-type"> CONTENT PROVIDER</div>
-            <div onClick={()=> this.setState({selected: 1})} style={!this.state.selected ? {border: '1px solid black'} : {borderBottom: '1px solid black', borderLeft: '1px solid green',borderTop: '1px solid green',borderRight: '1px solid green'}}className="Register-type"> ADVERTISER</div>
+            <div onClick={()=> this.setState({selected: 0})} style={this.state.selected ? {borderTop: '.25rem solid #c8d6cf'} : {borderTop: '.25rem solid #18A95F', backgroundColor: '#008147', color:'#c8d6cf'}} className="Register-type"> CONTENT PROVIDER</div>
+            <div onClick={()=> this.setState({selected: 1})} style={!this.state.selected ? {borderTop: '.25rem solid #c8d6cf'} : {borderTop: '.25rem solid #18A95F', backgroundColor: '#008147', color:'#c8d6cf'}} className="Register-type"> ADVERTISER</div>
           </div>
-         
+
           {/* CONTENT PROVIDER SIGNUP */}
           <form onSubmit={(e) => this.submit(e, "contentproducer")} style={!this.state.selected ? {display: 'flex'} : {display: 'none'}} id="form0" className="Register-form">
             <label> CONTENT PROVIDER SIGNUP</label>
             <nobr id="ageError-contentproducer" >Must Be 18 years or older to continue registration</nobr>
-            
+
             <div >
               <input name="name" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} placeholder={this.props.user.name} />
               <input name="businessName" hidden />
@@ -110,14 +110,14 @@ class Registration extends Component {
                 </select>
               </div>
             </div>
-            <input type="submit"/>
+            <input style={{cursor:'pointer'}} type="submit" className="button button--color-green" />
           </form>
 
 
           {/* ADVERTISER SIGNUP */}
           <form onSubmit={(e) => this.submit(e, "business")} style={this.state.selected ? {display: 'flex'} : {display: 'none'}} id="form1"  className="Register-form">
             <label> ADVERTISER SIGNUP</label>
-            <div id="ageError-business" >Must Be 18 years or older to continue registration</div>           
+            <div id="ageError-business" >Must Be 18 years or older to continue registration</div>
             {/*<input type='file' onChange={(e) => this.upload(e)}/>*/}
             <div>
               <input name="name" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} placeholder={this.props.user.name} />
@@ -126,7 +126,7 @@ class Registration extends Component {
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%'}}>
               <input style={{minWidth:'100px'}} name="age" type="date" hidden/>
               <label>Business Verification:</label>
-              <label style={{fontSize:'10px'}}>Input Tax ID or upload any other relevant document to verify your business</label> 
+              <label style={{fontSize:'10px'}}>Input Tax ID or upload any other relevant document to verify your business</label>
               <input name="taxID" onChange={(e) => this.setState({taxID: e.target.value})} placeholder="Tax ID" />
               {/*File Img Preview*/}
               <img src={this.state.filePreview ? this.state.filePreview.result : null} width="30%"/>
@@ -134,13 +134,13 @@ class Registration extends Component {
                 <input onChange={(e) => this.setImg(e)} type="file" style={{width: '100%', opacity: 0, height: '100%', display: 'flex', position: 'absolute'}}/>
                 <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>UPLOAD</div>
               </div>
-            <input style={{cursor:'pointer'}} type="submit"/>
-              
+            <input style={{cursor:'pointer'}} type="submit" className="button button--color-green" />
+
             </div>
           </form>
-          </div>      
+          </div>
         </div>
-        <div className="Register-img"><img src={'/images/logo/logo.png'} width="100%" /></div>
+        {this.state.selected && <div className="pane Register-img"><img src="" width="100%" /></div>}
       </div>
     );
   }
@@ -152,4 +152,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(Registration); 
+export default connect(mapStateToProps, null)(Registration);
