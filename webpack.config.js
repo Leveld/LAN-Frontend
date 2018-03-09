@@ -14,7 +14,7 @@ const productionPluginDefine = isProduction ? [
 ] : [];
 const clientLoaders = isProduction ? productionPluginDefine.concat([
   new webpack.optimize.OccurrenceOrderPlugin(),
-  new UglifyJsPlugin({ compress: { warnings: false }, sourceMap: false }),
+  new UglifyJsPlugin(),
   new webpack.DefinePlugin({
     'process.env.BROWSER': true
   }),

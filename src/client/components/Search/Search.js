@@ -47,11 +47,11 @@ class Search extends Component {
           <option value="industry">INDUSTRY</option>
         </select>
         
-        <input onBlur={() => this.setState({display: []})} onChange={(e)=> this.filter(e.target.value)} type="text" style={{width: '90%', fontSize: '1rem'}}/>
+        <input name="search"  onChange={(e)=> this.filter(e.target.value)} type="text" style={{width: '90%', fontSize: '1rem'}}/>
         </div>
         
-        {this.state.type !== 'industry' && this.state.display.length ? this.state.display.map((user, i) => <Link key={i} to={`/profile?id=${user.id}&type=${user.type}`} style={{textDecoration: 'none', marginLeft: 5}}>{user.name} - {user.type}</Link>) : null}
-        {this.state.type === 'industry' && this.state.display.length ? this.state.display.map((campaign, i) => <Link key={i} to={`/profile?id=${campaign.owner.ownerID}&type=${campaign.owner.ownerType}`} style={{textDecoration: 'none', marginLeft: 5}}>{campaign.preferredApplicant.industry} - {campaign.id}</Link>) : null}
+        {this.state.type !== 'industry' && this.state.display.length ? this.state.display.map((user, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${user.id}&type=${user.type}`} style={{textDecoration: 'none', marginLeft: 5}}>{user.name} - {user.type}</Link>) : null}
+        {this.state.type === 'industry' && this.state.display.length ? this.state.display.map((campaign, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${campaign.owner.ownerID}&type=${campaign.owner.ownerType}`} style={{textDecoration: 'none', marginLeft: 5}}>{campaign.preferredApplicant.industry} - {campaign.id}</Link>) : null}
       </div>
     );
   }
