@@ -19,7 +19,7 @@ class Home extends Component {
         {1 === 2 && <img className="Home-bg" alt="Logo" src={'images/logo/banner.png'}/>}
         <div className='hero-message'>
           <h2 className='hero-heading'>Quality Content, meet Quality Advertisers. It&#39;s about time you two met.</h2>
-          <a className='button button-cta hero-anchor' onClick={() => {
+          <a className='button button-cta button--color-green hero-anchor' onClick={() => {
             this.props.auth.login();
             window.localStorage.clear();
           }}>Register And See</a>

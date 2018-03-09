@@ -31,6 +31,13 @@
   text-decoration: none;
   color: $brand-white;
   text-shadow: -0.5px 0 $brand-black, 0 0.5px $brand-black, 0.5px 0 $brand-black, 0 -0.5px $brand-black;
+  border: .25rem solid $brand-white;
+  padding: 1rem 2rem;
   font-size: 2.5rem;
   cursor: pointer;
+  outline: none;
+
+  &:hover {
+      text-decoration: underline;
+  }
 }
