@@ -15,6 +15,7 @@ class Profile extends Component {
   constructor(){
     super();
     this.state = {user: null};
+    this.token = window.localStorage.getItem('access_token') || cookie.get('access_token');
   }
 
   componentDidMount(){
@@ -25,6 +26,23 @@ class Profile extends Component {
     axios.get(`${apiServerIP}user?id=${id}&type=${type}`, {headers:{Authorization: token}})
     .then((res) => this.setState({user: res.data}))
     .catch((err) => console.log(err));
+  }
+
+  newMessage(e) {
+    e.preventDefault();
+    axios.post(apiServerIP + 'conversation', {
+      participants: [
+        {
+          participantID: this.state.user.id,
+          participantType: this.state.user.type
+        }
+      ],
+      headers:{Authorization: this.token}}).then((a) => {
+        console.log(a);
+        history.push('/messages');
+      }).catch((c) => {
+        console.log(c);
+      });
   }
 
   render(){
@@ -49,6 +67,9 @@ class Profile extends Component {
               </div>
             </div>
             <div className="Profile-contact-list">
+            <div className='pane'>
+              <a className='button button--color-gren' onClick={(e) => {this.newMessage(e);}}>Message</a>
+            </div>
             <div className='pane'>
                 <h3>Type:</h3>
                 {user.type === accTypes[0] ? <div className="Profile-tag">Business Advertiser</div> : user.type === accTypes[1] ? <div className="Profile-tag">Content Provider</div> : <div/>}
