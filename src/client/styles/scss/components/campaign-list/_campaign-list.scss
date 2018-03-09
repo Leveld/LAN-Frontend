@@ -1,0 +1,26 @@
+.campaign-list {
+
+}
+
+.campaign--header {
+  background-color: $brand-gray;
+  color: $brand-black;
+  padding: .5rem;
+  padding-bottom: 1rem;
+  margin-top: -.5rem;
+  margin-left: -.5rem;
+  margin-right: -.5rem;
+  border-radius: .25rem .25rem 0 0;
+}
+
+.campaign--add {
+  text-align: center;
+  padding: 2rem;
+  font-size: 17px;
+  margin:0 auto;
+  display: block;
+  margin-top: .50rem;
+  background: $brand-green;
+  color: $brand-white;
+  width: 100%;
+}

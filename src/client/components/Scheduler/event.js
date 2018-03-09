@@ -8,13 +8,13 @@ class Evnt extends Component {
     this.id = props.id;
     this.name = props.name;
     this.details = props.details;
-    this.day = props.day; 
+    this.day = props.day;
   }
   render(){
-   
+
     return (
-      <div className="Scheduler-event" onClick={()=>{this.props.setCurrentEvent({id: this.id, name: this.name, details:this.details, day: this.day })}}>
-        <div className="Scheduler-event-id">{this.id}</div><div className="Scheduler-event-name">{this.name}</div>
+      <div className="schedule-event" onClick={()=>{this.props.setCurrentEvent({id: this.id, name: this.name, details:this.details, day: this.day })}}>
+        <div className="schedule-event-id">{this.id}</div><div className="Scheduler-event-name">{this.name}</div>
       </div>
     );
   }

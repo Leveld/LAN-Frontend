@@ -1,0 +1,11 @@
+footer {
+  background: $brand-black;
+  padding: 1rem;
+  display: flex;
+  color: $brand-white;
+  justify-content: flex-end;
+}
+
+.footer-version {
+  margin-left: 0.5rem;
+}

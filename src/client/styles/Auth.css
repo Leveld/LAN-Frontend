@@ -83,20 +83,15 @@
 }
 
 .App-auth-link {
-  background: rgb(46, 46, 46);
-  margin-right: 10px;
-  padding: 2px 5px;
-  border-radius: 2px;
-  font-size: calc(5px + 1vw);
+  margin-right: 20px;
+  font-size: 17px;
   cursor: pointer;
-  transition: 0.7s border;
-  border: 1px solid rgb(236, 229, 8);
+  transition: 0.7s color;
   white-space: nowrap;
-  color: rgb(249, 250, 184);
-  box-shadow: 1px 1px 5px 0px black;
+  color: white;
   align-self: flex-end;
 }
 
 .App-auth-link:hover {
-  border: 1px solid rgb(30, 177, 0);
+  color: rgb(30, 177, 0);
 }

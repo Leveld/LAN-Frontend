@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 import {Cookies} from 'react-cookie';
-import '../../styles/Auth.css';
+////import '../../styles/Auth.css';
 import axios from 'axios';
 import {setUser, signIn, signOut, toggleSettings} from '../../actions';
+import {Search} from '../../components';
 const {apiServerIP, frontServerIP} = require('capstone-utils');
 const {accTypes} = require('../../../server/config.json');
 const cookie = new Cookies();
@@ -20,11 +21,11 @@ class Header extends Component {
   componentDidMount(){
     // CHECK PULL REQUESTS
     if(!process.env.PRODUCTION){
-      this.checkPR();      
+      this.checkPR();
       setInterval(() => {
         this.setState({repos: '', data: []});
-        this.checkPR(); 
-      }, 10000);
+        this.checkPR();
+    }, 1000000000);
     }
     const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
     if(token && token.length === 32 ){
@@ -33,7 +34,7 @@ class Header extends Component {
         if(res.data.type){
           this.props.setUser(res.data);
           accTypes.includes(res.data.type) ? this.props.signIn() : null;
-        }    
+        }
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -52,9 +53,9 @@ class Header extends Component {
       .then((res) => {
         if(res.data.length > 0) {
           const newdata = this.state.data.concat();
-          newdata.push(res.data);           
+          newdata.push(res.data);
           this.setState({repos: this.state.repos + shortRepo[i], data: newdata});
-        } 
+        }
       });
     });
   };
@@ -70,47 +71,68 @@ class Header extends Component {
   getLinks(){
     if (this.props.authenticated){
       return (
-        <div className="App-auth">
-          <div className="App-auth-link" onClick={() => this.signOut()}>LOGOUT</div>
+        <div className="app-header-authentication">
+          <a className="button button--color-green signout-button" onClick={() => this.signOut()}>Sign Out</a>
         </div>
       );
     } else {
       return (
-        <div className="App-auth">
-          <div className="App-auth-link" onClick={() => { 
+        <div className="app-header-authentication">
+          <a className="button button--color-green register-button" onClick={() => {
             this.props.auth.login();
             window.localStorage.clear();
-          }}>SIGNIN/SIGNUP</div>
+          }}>Register</a>
+          <a className="button button--color-green signin-button" onClick={() => {
+            this.props.auth.login();
+            window.localStorage.clear();
+          }}>Sign In</a>
         </div>
       );
     }
   }
 
   render(){
-    if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token')) window.localStorage.setItem('access_token', cookie.get('access_token'));
+    if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token'))
+      window.localStorage.setItem('access_token', cookie.get('access_token'));
     return (
-      <div className="App-header">
-        <div style={{cursor:'pointer'}} onClick={() => this.props.authenticated ? this.props.toggleSettings() : null } className="App-header-logo" >
-          <img  src={this.props.authenticated ? this.props.user.profilePicture || 'images/noPhoto.jpg' : 'images/logo/logo.png'} alt="Logo" style={{width: 50, height: 50}} />
-          <div className="App-header-username" style={{textDecorationUnderline: 'none'}}> {this.props.user.name}</div>
+      <header className="header app-header">
+        <nav className="header-container">
+          <Link className="app-header-logo" to="/" >
+            <img  src={'images/logo/logo2.png'} alt="Logo" />
+          </Link>
 
-        </div>
-        <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, cursor: 'pointer', padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
-        <Link to="/" className="App-header-name"><img src={'images/logo/NameLogo.png'} width="100px" /></Link>
-
-          {this.getLinks()}
-      </div>
+          <div className="app-header-menu">
+            {this.props.authenticated ?
+              <Link to="/" >
+                <img src={this.props.user.profilePicture ? this.props.user.profilePicture : 'images/noPhoto.jpg'}
+                  alt="Profile Pic"
+                  className="profile-icon profile-icon--round" />
+              </Link> :
+            null}
+            <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>
+          </div>
+        </nav>
+        {this.props.authenticated ? <Search /> : null}
+        {this.props.user.name && this.props.authenticated ?
+        <div className="header-sidebar-toolbar">
+          <div className="header-settings-button no-select"
+            onClick={() => this.props.authenticated ? this.props.toggleSettings() : null }>
+            Settings
+          </div>
+          <Link className="button button--color-green header-sidebar-button button--round App-header-view"
+            to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>View Profile</Link>
+        </div> : null}
+        <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
+      </header>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { 
+  return {
     authenticated: state.auth,
     user: state.user
   };
 };
 
 export default connect(mapStateToProps, {setUser, signIn, signOut, toggleSettings })(Header);
-
-

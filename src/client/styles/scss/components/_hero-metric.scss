@@ -1,0 +1,36 @@
+.hero-metric {
+  background-color: $brand-white;
+  border: 1px solid darken($brand-gray, 8%);
+  border-radius: .25em;
+  box-shadow: 0 4px 4px 0 darken($brand-gray, 8%);
+  margin: 1rem 0;
+  padding: 1rem;
+
+  h2 {
+    margin-bottom: .5rem;
+    text-align: center;
+  }
+
+  p {
+    margin-top: .5rem;
+    padding: .5rem;
+    font-size: 18px;
+  }
+
+  img {
+    display: block;
+    height: auto;
+    margin: 0 auto;
+    padding: 2em;
+    width: 50%;
+  }
+}
+
+.hero-anchor {
+  background-color: transparent;
+  text-decoration: none;
+  color: $brand-white;
+  text-shadow: -0.5px 0 $brand-black, 0 0.5px $brand-black, 0.5px 0 $brand-black, 0 -0.5px $brand-black;
+  font-size: 2.5rem;
+  cursor: pointer;
+}

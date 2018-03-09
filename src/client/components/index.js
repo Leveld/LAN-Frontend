@@ -8,10 +8,11 @@ import Stats from '../components/Stats/Stats';
 import Header from '../components/App/Header';
 import Footer from '../components/App/Footer';
 import Registration from '../components/Pages/Registration';
+import Messages from '../components/Pages/Messages';
 import SettingsSidebar from '../components/Settings/Settings_Sidebar';
 import CampaignAdd from '../components/Campaigns/CampaignAdd';
 import Error from '../components/Pages/Error';
-
+import Search from '../components/Search/Search';
 
 export {
   InfoGraphicList,
@@ -24,7 +25,9 @@ export {
   Header,
   Footer,
   Registration,
+  Messages,
   SettingsSidebar,
   Error,
-  CampaignAdd
+  CampaignAdd,
+  Search
 }

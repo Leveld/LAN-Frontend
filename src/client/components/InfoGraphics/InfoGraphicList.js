@@ -5,10 +5,11 @@ import {apiServerIP} from 'capstone-utils';
 import axios from 'axios';
 import {Cookies} from 'react-cookie';
 import {accTypes} from '../../../server/config.json';
+import AccountData, { accountData } from '../Pages/Account_Data';
 const cookie = new Cookies();
 
 
-import '../../styles/InfoGraphics.css';
+//import '../../styles/InfoGraphics.css';
 
 class InfoGraphicList extends Component {
   constructor(props){
@@ -16,10 +17,13 @@ class InfoGraphicList extends Component {
     this.color = props.color;
     this.title = props.title || "TITLE";
   }
-  // componentDidMount(){
-  //   if(this.props.children.length > 0)
-  //     this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children});
-  // }
+  componentDidMount(){
+    if(this.props.accounts === 0 && this.props.user.type !== accTypes[0] ) return;
+      if(this.props.children[0]){
+        return this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
+      }
+      this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props.profilePicture, blob: <AccountData />});
+  }
 
   componentWillUnmount(){
     this.props.setInfoGraphicBlob(null);
@@ -29,7 +33,6 @@ class InfoGraphicList extends Component {
     const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
     axios.get(`${apiServerIP}coURL`, {params: {type: 'google'},headers: {Authorization: `Bearer ${token}`}})
     .then((res) => {
-      console.log(res.data);
       window.location.replace(res.data.url);
     });
   }
@@ -37,19 +40,21 @@ class InfoGraphicList extends Component {
   render(){
     let blobImage;
     blobImage = this.props.user.profilePicture || 'images/noPhoto.jpg' ;
-    if(this.props.info) blobImage = this.props.info.accountImg || 'images/noPhoto.jpg';
+    if(this.props.info) blobImage = this.props.info.accountData ? this.props.info.accountData.profilePicture : 'images/noPhoto.jpg';
 
     return (
-      <div>
-        <div className="IG-list">
-          <div className="IG-list-header">{this.title}</div>
-          <div style={{display: 'flex', flexDirection: 'row', width: '100%', height:100}}>
-            <div style={{background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', width: 100, height: '100%'}} >
-              <img style={{borderRadius: 5, border: '1px solid green'}} src={blobImage} width='70px' height="70px"/>
+      <div className='account-list'>
+        <div>
+          <h3 className='sticky--top-left'>{this.title}</h3>
+          <div className="flex-list">
+            <div className='account-item'>
+              <img src={blobImage} width='70px' height="70px"/>
             </div>
-            <div style={{background: this.color}} className="IG-list-wrap">
+            <div className='flex-list'>
                 {this.props.children}
-                <div onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')} className="IG-add" > +</div>
+            </div>
+            <div className='button button--color-green' onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')}>
+              &pls;
             </div>
           </div>
         </div>

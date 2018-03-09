@@ -1,16 +1,25 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 export default class Campaign extends Component {
   constructor(props){
     super(props);
-    this.id = props.id;
-    this.title = props.title;
+    console.log('props are ' + JSON.stringify(props.data));
+    this.id = props.data.id;
+    this.description = props.data.description;
+    this.category = props.data.preferredApplicant.industry;
+    this.status = props.data.status;
+    this.coType = props.data.preferredApplicant.coType;
+    this.userID = props.data.owner.ownerID;
   }
   render(){
     return (
-      <div className="Campaign-item">
-        <div className="Campaign-item-id">{this.id}</div>
-        <div className="Campaign-item-title">{this.title}</div> 
+      <div className="pane campaign-item">
+        <p><span className="campaign-item--label">Industry:</span> {this.category}</p>
+        <p><span className="campaign-item--label">Status:</span> {this.status}</p>
+        <p><span className="campaign-item--label">Content Outlet Type:</span> {this.coType}</p>
+        <p style={{marginBottom: '1rem'}} ><span className="campaign-item--label">Description:</span> {this.description}</p>
+        <Link className="button button--color-green" to={`/profile?id=${this.userID}&type=Business#${this.id}`}>View Creator's Profile</Link>
       </div>
     )
   }

@@ -7,7 +7,9 @@ export const SIGNIN = 'SIGNIN';
 export const SIGNOUT = 'SIGNOUT';
 export const SET_USER = 'SET_USER';
 export const TOGGLE_SETTINGS = 'TOGGLE_SETTINGS';
-
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+export const UPDATE_CONVO = 'UPDATE_CONVO';
+export const DEL_MESSAGE = 'DEL_MESSAGE';
 
 
 export const setInfoGraphicBlob = (blob) => {
@@ -57,5 +59,24 @@ export const toggleSettings = () => {
     type: TOGGLE_SETTINGS
   }
 }
+
+export const updateConvo = (data) => {
+  return {
+    type: UPDATE_CONVO,
+    data
+  }
+};
+export const delMsg = (data) => {
+  return {
+    type: DEL_MESSAGE,
+    data
+  }
+};
+export const addMsg = (data) => {
+  return {
+    type: ADD_MESSAGE,
+    data
+  }
+};
 
 
