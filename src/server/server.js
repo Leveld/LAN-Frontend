@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-app.use(express.static('../public', {
+app.use(express.static(path.join(__dirname, '../../public'), {
   index: false
 }));
 
@@ -61,17 +61,17 @@ app.post('/upload', upload, (req, res) => {
 });
 
 app.get('/error', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));
+  res.sendFile(path.resolve(__dirname, '../../public/index.html'));
 });
 app.get('/messages', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));
+  res.sendFile(path.resolve(__dirname, '../../public/index.html'));
 });
 
 
 app.get('/*', asyncMiddleware(async (req, res, next) => {
   const page = String(req.url).toLocaleLowerCase().split('?')[0];
   //if(!pages.includes(page)) return res.redirect('/error');
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));
+  res.sendFile(path.resolve(__dirname, '../../public/index.html'));
 }));
 
 app.get('/convos', (req, res) => {
