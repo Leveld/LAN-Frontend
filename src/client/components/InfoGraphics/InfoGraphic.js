@@ -13,7 +13,7 @@ const InfoGraphic = (props) => {
   };
   console.log(props);
   return (
-    <div className='account-item' onClick={() => props.setInfoGraphicBlob({accountImg: props.profilePicture, blob: getBlob()})}>
+    <div className='account-item' onClick={() => props.setInfoGraphicBlob({accountData: props.profilePicture, blob: getBlob()})}>
       <img src={props.profilePicture || 'images/noPhoto.jpg'} alt={'Info Graphic'} />
       <h4>{props.channelName ? props.channelName.split('@')[0] : props.name}</h4>
     </div>

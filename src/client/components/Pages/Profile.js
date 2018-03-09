@@ -36,10 +36,8 @@ class Profile extends Component {
           participantID: this.state.user.id,
           participantType: this.state.user.type
         }
-      ],
-      headers:{Authorization: this.token}}).then((a) => {
-        console.log(a);
-        history.push('/messages');
+      ]}, { headers:{Authorization: this.token }}).then((a) => {
+        window.location.replace('/messages');
       }).catch((c) => {
         console.log(c);
       });

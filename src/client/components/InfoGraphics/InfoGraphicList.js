@@ -20,7 +20,7 @@ class InfoGraphicList extends Component {
   componentDidMount(){
     if(this.props.accounts === 0 && this.props.user.type !== accTypes[0] ) return;
       if(this.props.children[0]){
-        return this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
+        return this.props.setInfoGraphicBlob({accountData:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
       }
       this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props.profilePicture, blob: <AccountData />});
   }
@@ -40,7 +40,11 @@ class InfoGraphicList extends Component {
   render(){
     let blobImage;
     blobImage = this.props.user.profilePicture || 'images/noPhoto.jpg' ;
-    if(this.props.info) blobImage = this.props.info.accountData ? this.props.info.accountData.profilePicture : 'images/noPhoto.jpg';
+    if (this.props.info) {
+      console.log(this.props.info)
+      blobImage = this.props.info.accountData ?
+          this.props.info.accountData : 'images/noPhoto.jpg';
+    }
 
     return (
       <div className='account-list'>
@@ -54,7 +58,7 @@ class InfoGraphicList extends Component {
                 {this.props.children}
             </div>
             <div className='button button--color-green' onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')}>
-              &pls;
+              Add Outlet
             </div>
           </div>
         </div>

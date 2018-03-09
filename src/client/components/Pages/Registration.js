@@ -66,7 +66,7 @@ class Registration extends Component {
       }
     }, {headers:{Authorization:`Bearer ${token}`}})
     .then((res) => {
-       alert("Registration Complete");
+       // alert("Registration Complete");
        const file = new FormData();
        file.append('image',this.state.file);
        axios.post(`${frontServerIP}upload`, file, {headers:{Authorization: 'Bearer ' + token}})
