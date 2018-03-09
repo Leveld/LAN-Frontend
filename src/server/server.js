@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-app.use(express.static('./src/public', {
+app.use(express.static('../public', {
   index: false
 }));
 
