@@ -122,7 +122,7 @@ class Header extends Component {
           <Link className="button button--color-green header-sidebar-button button--round App-header-view"
             to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>View Profile</Link>
           <Link className="button button--color-green header-sidebar-button button--round App-header-view"
-            to={`/messages?id=${this.props.user._id}&type=${this.props.user.type}`}>Messages</Link>
+            to={`/messages`}>Messages</Link>
         </div> : null}
         <div onClick={()=> console.log(this.state.data)} style={this.state.data.length > 0 ? { position: 'absolute', marginLeft: 5, padding: 5, borderRadius: 5,color:'white', background: 'red', fontSize: '0.7rem'} : {display: 'none'}}>PULL REQUEST FOUND <hr /> {this.state.repos}</div>
       </header>
