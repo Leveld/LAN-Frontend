@@ -12,7 +12,7 @@ import Messages from '../components/Pages/Messages';
 import SettingsSidebar from '../components/Settings/Settings_Sidebar';
 import CampaignAdd from '../components/Campaigns/CampaignAdd';
 import Error from '../components/Pages/Error';
-
+import Search from '../components/Search/Search';
 
 export {
   InfoGraphicList,
@@ -28,5 +28,6 @@ export {
   Messages,
   SettingsSidebar,
   Error,
-  CampaignAdd
+  CampaignAdd,
+  Search
 }

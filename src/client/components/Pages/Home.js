@@ -19,33 +19,36 @@ class Home extends Component {
         {1 === 2 && <img className="Home-bg" alt="Logo" src={'images/logo/banner.png'}/>}
         <div className='hero-message'>
           <h2 className='hero-heading'>Quality Content, meet Quality Advertisers. It&#39;s about time you two met.</h2>
-          <a href='' className='button button-cta align--center'>Register And See</a>
+          <a className='button button-cta hero-anchor' onClick={() => {
+            this.props.auth.login();
+            window.localStorage.clear();
+          }}>Register And See</a>
         </div>
         <section className="Home-Accounts hero-cta push-up">
           <div className='hero-metric'>
-            <h3>Quality Metrics</h3>
+            <h2>Quality Metrics</h2>
             <img src='images/inc/engagementSVG/019-leader.svg' />
             <p>
-              Find the gem in the rough. When you find those audience influencers you can maintain
+              Find the gem in the rough. When you find those audience influencers, you can maintain
               those valuable connections and keep seeing upsticks in engagement.
             </p>
           </div>
 
           <div className='hero-metric'>
-            <h3>Quality Metrics</h3>
+            <h2>Quality Metrics</h2>
             <img src='images/inc/engagementSVG/013-presentation.svg' />
             <p>See qaulity metrics straight from your connections and get valuable feedback.</p>
           </div>
 
           <div className='hero-metric'>
-            <h3>Make Valuable Connections</h3>
+            <h2>Make Valuable Connections</h2>
             <img src='images/inc/engagementSVG/028-connection.svg' />
             <p>
               Throwing your ads in a pool with everyone else is gone. Make quality connections
               directly with audience influencers that feel strongly about your message.
             </p>
           </div>
-
+          {/*
           <section className="Home-Accounts-info">
             <div className="Home-Accounts-info-title">CONTENT PROVIDER</div>
             <div className="Home-Accounts-info-content"> ● CONTENT PROVIDER INFO</div>
@@ -56,6 +59,7 @@ class Home extends Component {
             <div className="Home-Accounts-info-content">● ADVERTISER INFO</div>
 
           </section>
+          */}
         </section>
       </div> :
       accTypes.includes(this.props.user.type) ?

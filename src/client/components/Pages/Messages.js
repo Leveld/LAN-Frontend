@@ -214,7 +214,6 @@ class UserDS {
     this.updatedAt = new Date(updatedAt);
     this.data = rest;
   }
-
   equals(user) {
     if (typeof user !== 'object' || user === null)
       return false;

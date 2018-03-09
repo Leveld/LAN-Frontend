@@ -17,6 +17,7 @@ import {
   Footer,
   Error,
   SettingsSidebar,
+  Search
 } from './components';
 
 import {withCookies ,CookiesProvider, Cookies} from 'react-cookie';
@@ -63,6 +64,7 @@ class App extends Component {
     return (
         <div className="app">
           <Header auth={auth} app={this}/>
+          
           <div>
             <SettingsSidebar />
             <Route exact path="/" component={() =>
@@ -74,6 +76,7 @@ class App extends Component {
             <Route path="/error" component={Error} />
             <Route path='/register' component={() => <Registration auth={auth} /> }/>
             <Route path='/messages' component={Messages}/>
+            
           </div>
         <ConnectedEventListener />
         <Footer/>
@@ -175,7 +178,7 @@ class EventListener extends Component {
     clearInterval(this.eventListener);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.startEventListener();
   }
 

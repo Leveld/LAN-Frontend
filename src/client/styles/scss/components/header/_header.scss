@@ -1,0 +1,96 @@
+.header {
+  // margin-bottom: 1rem;
+}
+
+.app-header {
+
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+
+  > a,
+  > .app-header-logo,
+  > .app-header-menu,
+  > .app-header-authentication {
+    display: inline-block;
+    flex-grow: 2;
+  }
+}
+
+.app-header-logo {
+  height: 100%;
+  position: relative;
+
+  & > img {
+    height: 6rem;
+    width: auto;
+  }
+}
+
+.profile-icon--round {
+  height: 2.6rem;
+  width: 2.6rem;
+  border-radius: 100%;
+}
+
+.app-header-menu {
+  text-align: center;
+
+  .app-header-authentication {
+    justify-content: center;
+  }
+}
+
+.app-header-authentication {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.header-sidebar-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: flex-start;
+  background-color: $brand-white;
+  border-bottom: 1rem solid $brand-white;
+}
+
+.header-sidebar-button {
+  background-color: $brand-green;
+  color: $brand-gray;
+  padding: .5rem 1rem;
+  margin: .5rem;
+  display: inline-block;
+  font-size: 1.25rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: $brand-green-alt;
+    select: false;
+  }
+}
+
+.header-settings-button {
+  background-color: $brand-green;
+  color: $brand-gray;
+  padding: 1rem 2rem;
+  display: inline-block;
+  border-radius: 0 1.25rem 125rem 0;
+  font-size: 1.25rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: $brand-green-alt;
+    select: false;
+  }
+}

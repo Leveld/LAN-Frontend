@@ -3,14 +3,19 @@ import React, {Component} from 'react';
 export default class Campaign extends Component {
   constructor(props){
     super(props);
-    this.id = props.id;
-    this.title = props.title;
+    this.id = props.data.id;
+    this.description = props.data.description;
+    this.category = props.data.preferredApplicant.industry;
+    this.status = props.data.status;
+    this.coType = props.data.preferredApplicant.coType;
   }
   render(){
     return (
-      <div className="Campaign-item">
-        <div className="Campaign-item-id">{this.id}</div>
-        <div className="Campaign-item-title">{this.title}</div> 
+      <div className="pane campaign-item">
+        <p><span className="campaign-item--label">Industry:</span> {this.category}</p>
+        <p><span className="campaign-item--label">Status:</span> {this.status}</p>
+        <p><span className="campaign-item--label">Content Outlet Type:</span> {this.coType}</p>
+        <p><span className="campaign-item--label">Description:</span> {this.description}</p>
       </div>
     )
   }
