@@ -133,9 +133,9 @@ class EventListener extends Component {
       const sortByCreatedAt = (a, b) => {
         const aCreated = new Date(a.createdAt);
         const bCreated = new Date(b.createdAt);
-        if (aCreated < b.createdAt)
+        if (aCreated < bCreated)
           return -1;
-        if (aCreated > b.createdAt)
+        if (aCreated > bCreated)
           return 1;
         return 0;
       };
@@ -152,7 +152,8 @@ class EventListener extends Component {
       conversations.sort(sortByCreatedAt);
       for (let [conv1, conv2] of zip(reduxConvs, conversations)) {
         if (!conv1 || !conv2 || conv1.id !== conv2.id) {
-          this.dispatchEvent(EVENT_NAME, { conversation: conv2 });
+          if (conv2 && conv2.id)
+            this.dispatchEvent(EVENT_NAME, { conversation: conv2 });
           continue;
         }
         if (conv1.messages.length !== conv2.messages.length) {
@@ -161,13 +162,16 @@ class EventListener extends Component {
         }
         conv1.messages.sort(sortByCreatedAt);
         conv2.messages.sort(sortByCreatedAt);
-        if (JSON.stringify(conv1.messages) !== JSON.stringify(conv2.messages)) {
-          this.dispatchEvent(EVENT_NAME, { conversation: conv2 });
+        for (let [m1, m2] of zip(conv1.messages, conv2.messages)) {
+          if (m1.id !== m2.id) {
+            this.dispatchEvent(EVENT_NAME, { conversation: conv2 });
+            break;
+          }
         }
       }
     }).bind(this);
     listener();
-    this.eventListener = setInterval(listener, 5000);
+    this.eventListener = setInterval(listener, 1000);
   }
 
   stopEventListener() {
