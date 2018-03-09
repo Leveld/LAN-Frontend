@@ -112,7 +112,7 @@ class Header extends Component {
             <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>
           </div>
         </nav>
-        {this.props.authenticated ? <Search /> : null}
+        {this.props.authenticated ? <Search type="main"/> : null}
         {this.props.user.name && this.props.authenticated ?
         <div className="header-sidebar-toolbar">
           <div className="header-settings-button no-select"
