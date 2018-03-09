@@ -1,0 +1,34 @@
+.Messages-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .Messages-ls {
+
+  }
+
+  .Messages-rs {
+    background: lighten($brand-purple-accent, 48%);
+
+    > * {
+      background-color: $brand-white;
+    }
+
+  }
+
+  .Messages-rs-form {
+
+  }
+}
+
+.msg {
+  background: black;
+}
+
+.Messages-header {
+  padding: 1rem 0;
+  border-bottom: .25rem solid $brand-purple-accent;
+}
+
+input[type=submit], textarea {
+  margin: .5rem;
+}

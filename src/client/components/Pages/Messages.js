@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {apiServerIP, frontServerIP, IS_DEVELOPMENT, parallelAsync, mapAsync, zip} from 'capstone-utils';
 import {Cookies} from 'react-cookie';
 import * as actions from '../../actions';
-import '../../styles/Messages.css';
+//import '../../styles/Messages.css';
 import jwt from 'jsonwebtoken';
 import {clientSecret} from '../../../server/secret.json';
 import Search from '../Search/search';
@@ -129,10 +130,15 @@ class Message extends Component {
 
   render() {
     const message = this.props.message ? this.message : 'Loading...';
-    const name = this.author && this.author.name ? this.author.name :
-                this.author && this.author.id ? this.author.id : 'Loading...';
+    let name = this.author && this.author.name ? this.author.name :
+                this.author && this.author.id ? this.author.id : null;
+    if (name) {
+      name = <Link to={`/profile?id=${this.author.id}&type=${this.author.type}`}>{name}</Link>
+    } else {
+      name = 'Loading...';
+    }
     return (
-      <div style={{whiteSpace: 'pre-line'}}>{`${name}: ${message}` }</div>
+      <div className="pane" style={{whiteSpace: 'pre-line'}}>{name}{`: ${message}` }</div>
     );
   }
 }
@@ -169,11 +175,11 @@ class MessagePanel extends Component {
   render() {
     return (
       <div className="Messages-rs">
-        <div className="Messages-header">MESSAGES</div>
+        {/*<div className="Messages-header">Conversation:</div>*/}
         <div className="Messages-header">{ this.title || 'TITLE' }</div>
         {
           this.messages.map((message, i) => {
-            return (<Message key={i} message={message} user={this.user} />)
+            return (<Message key={i} message={message} user={this.user} />);
           })
         }
       </div>
@@ -732,7 +738,7 @@ class Messenger extends Component {
             className="Messages-rs-form-input"
             type="text"
             />
-          <input type="submit" value="SEND"/>
+        <input className="button button--color-green" type="submit" value="SEND"/>
         </form>
       </div>
     );
@@ -904,37 +910,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, null)(Messenger);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
