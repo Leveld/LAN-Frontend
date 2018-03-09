@@ -15,6 +15,7 @@ export default class Campaign extends Component {
   render(){
     return (
       <div className="pane campaign-item">
+        <a name={this.id}></a>
         <p><span className="campaign-item--label">Industry:</span> {this.category}</p>
         <p><span className="campaign-item--label">Status:</span> {this.status}</p>
         <p><span className="campaign-item--label">Content Outlet Type:</span> {this.coType}</p>
