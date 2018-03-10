@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-app.use(express.static('./src/public', {
+app.use(express.static(path.join(__dirname, '../../public'), {
   index: false
 }));
 
@@ -32,7 +32,7 @@ const test = multer({storage: imgbuffer});
 const buff = test.single('image');
 
 const storage = (media, type) => multer.diskStorage({destination:async (req, file, cb) => {
-  
+
   const user = await axios.get(`${apiServerIP}user`, {headers:{Authorization: req.headers.authorization}});
   const id = jwt.sign(await user.data._id, clientSecret);
   const m = jwt.sign(media, clientSecret);
@@ -52,26 +52,26 @@ const storage = (media, type) => multer.diskStorage({destination:async (req, fil
 const credentials = multer({storage: storage('images','credentials')});
 const upload = credentials.single('image');
 
-app.post('/upload', upload, (req, res) => {  
-  const img = fs.readFileSync(req.file.path);
-  const base = img.toString('base64');
-  const encode = jwt.sign(base, clientSecret);
-  fs.writeFileSync(req.file.path, encode);
+app.post('/upload', upload, (req, res) => {
+  // const img = fs.readFileSync(req.file.path);
+  // const base = img.toString('base64');
+  // const encode = jwt.sign(base, clientSecret);
+  // fs.writeFileSync(req.file.path, encode);
   res.send('success');
 });
 
 app.get('/error', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));  
+  res.sendFile(path.resolve(__dirname, '../../public/index.html'));
 });
 app.get('/messages', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));  
+  res.sendFile(path.resolve(__dirname, '../../public/index.html'));
 });
 
 
 app.get('/*', asyncMiddleware(async (req, res, next) => {
   const page = String(req.url).toLocaleLowerCase().split('?')[0];
   //if(!pages.includes(page)) return res.redirect('/error');
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));
+  res.sendFile(path.resolve(__dirname, '../../public/index.html'));
 }));
 
 app.get('/convos', (req, res) => {

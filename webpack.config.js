@@ -24,8 +24,8 @@ module.exports = [
   {
     entry: ['babel-polyfill', './src/client/index.jsx'],
     output: {
-      path: path.resolve(__dirname,'./src/public/'),
-      publicPath: path.resolve(__dirname,'./src/public/'),
+      path: path.resolve(__dirname,'./public/'),
+      publicPath: path.resolve(__dirname,'./public/'),
       filename: 'js/bundle.js'
     },
     plugins: clientLoaders.concat([
