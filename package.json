@@ -2,7 +2,7 @@
   "name": "capstone",
   "version": "0.0.1",
   "scripts": {
-    "start": "npm run build && node src/server/server.js",
+    "start": "npm run build & node src/server/server.js",
     "watch": "nodemon src/server/server.js",
     "build": "eslint src/*.js && eslint src/*.jsx && webpack",
     "build-production": "npm run build -- -p",
