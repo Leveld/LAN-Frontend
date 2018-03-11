@@ -1,9 +1,10 @@
+const url = require('url');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const {Cookies} = require('react-cookie');
 const {pages} = require('./config.json');
-const { USER_ERROR, asyncMiddleware, errorHandler,  apiServerIP } = require('capstone-utils');
+const { USER_ERROR, asyncMiddleware, errorHandler,  apiServerIP, frontServerIP } = require('capstone-utils');
 // IMGAGE UPLOADER: FEATURE IN PROGRESS
 const multer = require('multer');
 const axios = require('axios');
@@ -60,24 +61,30 @@ app.post('/upload', upload, (req, res) => {
   res.send('success');
 });
 
-app.get('/error', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../../public/index.html'));
-});
-app.get('/messages', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../../public/index.html'));
-});
-
-
 app.get('/*', asyncMiddleware(async (req, res, next) => {
-  const page = String(req.url).toLocaleLowerCase().split('?')[0];
+  const domain = /^(https?:\/\/)?([^:^\/]*)(:[0-9]*)(\/[^#^?]*)(.*)/g.exec(frontServerIP);
+  const { user, ...rest } = req.query;
+  if (user) {
+    try {
+      const access_token = jwt.verify(user, clientSecret).access_token;
+      return await res
+                      .status(307)
+                      .cookie('access_token', jwt.verify(user, clientSecret).access_token, {
+                        secure: false,
+                        domain: domain[2],
+                        maxAge: 604800
+                      })
+                      .redirect(url.format({
+                        pathname: url.parse(req.url).pathname,
+                        query: rest
+                      }));
+    } catch (error) {}
+  }
+
+  // const page = String(req.url).toLocaleLowerCase().split('?')[0];
   //if(!pages.includes(page)) return res.redirect('/error');
   res.sendFile(path.resolve(__dirname, '../../public/index.html'));
 }));
-
-app.get('/convos', (req, res) => {
-  res.json(convos);
-})
-
 
 app.listen(PORT, () => {
   console.log('Server running on port ' + PORT);
