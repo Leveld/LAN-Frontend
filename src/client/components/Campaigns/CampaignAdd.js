@@ -69,7 +69,10 @@ class CampaignAdd extends Component {
      axios.post(`${apiServerIP}campaign`, {fields}, {headers: { Authorization: `Bearer ${token}`}})
      .then((res) => {
          //window.location.replace(res.data.url);
-       console.log(res.data);
+       console.log("DATA", res.data);
+       const camp = this.parent.state.campaigns.concat();
+       camp.push(res.data);
+       this.parent.setState({campaigns: camp});
       this.parent.toggleForm();
     })
     .catch((err) => {

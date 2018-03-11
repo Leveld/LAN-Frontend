@@ -24909,7 +24909,10 @@ var CampaignAdd = function (_Component) {
       console.log('token is ' + token);
       _axios2.default.post(_capstoneUtils.apiServerIP + 'campaign', { fields: fields }, { headers: { Authorization: 'Bearer ' + token } }).then(function (res) {
         //window.location.replace(res.data.url);
-        console.log(res.data);
+        console.log("DATA", res.data);
+        var camp = _this.parent.state.campaigns.concat();
+        camp.push(res.data);
+        _this.parent.setState({ campaigns: camp });
         _this.parent.toggleForm();
       }).catch(function (err) {
         console.log(err);
