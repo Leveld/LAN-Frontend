@@ -110547,6 +110547,7 @@ var Messenger = function (_Component5) {
     value: function render() {
       var _this16 = this;
 
+      if (!this.props.authenticated) return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
       if (!this.props.user) return _react2.default.createElement(
         'div',
         null,
@@ -110761,6 +110762,7 @@ var Messenger = function (_Component5) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    authenticated: state.auth,
     user: state.user,
     convos: state.convos
   };

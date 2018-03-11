@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {apiServerIP, frontServerIP, IS_DEVELOPMENT, parallelAsync, mapAsync, zip} from 'capstone-utils';
@@ -716,6 +716,7 @@ class Messenger extends Component {
   }
 
   render() {
+    if(!this.props.authenticated) return <Redirect to='/' />;
     if (!this.props.user)
       return (<div> Loading... </div>);
     if (this.activeConversation)
@@ -908,6 +909,7 @@ class Messenger extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    authenticated: state.auth,
     user: state.user,
     convos: state.convos
   }
