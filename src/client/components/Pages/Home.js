@@ -24,7 +24,15 @@ class Home extends Component {
             window.localStorage.clear();
           }}>Register And See</a>
         </div>
+        
         <section className="Home-Accounts hero-cta push-up">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
           <div className='hero-metric'>
             <h2>Quality Metrics</h2>
             <img src='images/inc/engagementSVG/019-leader.svg' />

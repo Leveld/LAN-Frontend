@@ -290,7 +290,9 @@ label {
 
 html, body {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  background: #171738;
+  min-width: 256px; }
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -414,7 +416,7 @@ button,
   cursor: pointer; }
 
 .button-cta {
-  font-size: 1.65rem; }
+  font-size: calc(0.5rem + 2vw); }
 
 .button--round {
   border-radius: 1.25rem; }
@@ -434,7 +436,7 @@ button,
   background-position: right top;
   background-size: cover;
   color: #f7f9f8;
-  height: 120vw;
+  height: 100vh;
   min-height: 50%;
   padding-bottom: 2rem;
   text-align: center; }
@@ -467,7 +469,7 @@ button,
   text-shadow: -0.5px 0 #101, 0 0.5px #101, 0.5px 0 #101, 0 -0.5px #101;
   border: 0.25rem solid #fff;
   padding: 1rem 2rem;
-  font-size: 2.5rem;
+  font-size: calc(1rem + 2vw);
   cursor: pointer;
   outline: none; }
   .hero-anchor:hover {
@@ -476,7 +478,8 @@ button,
 .hero-heading {
   margin: 0 auto;
   padding: 4rem;
-  text-align: center; }
+  text-align: center;
+  font-size: calc(1rem + 4vw); }
 
 .push-up {
   margin-top: -4rem;
