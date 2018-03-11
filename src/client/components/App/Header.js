@@ -61,7 +61,7 @@ class Header extends Component {
   };
 
   signOut = () => {
-    const domain = /^(https?:\/\/)?([^:^\/]*)(:[0-9]*)(\/[^#^?]*)(.*)/g.exec(frontServerIP);
+    const domain = /^(https?:\/\/)?([^:^\/]*)(:[0-9]*)?(\/[^#^?]*)(.*)/g.exec(frontServerIP);
     cookie.remove('access_token', {path:'/', domain: domain[2]});
     cookie.remove('type');
     window.localStorage.clear();
