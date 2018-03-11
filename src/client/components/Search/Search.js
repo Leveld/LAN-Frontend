@@ -50,7 +50,7 @@ class Search extends Component {
         </select>
         
         <input name="search" autoComplete="off"  onChange={(e)=> this.filter(e.target.value)} type="text" style={{width: '90%', fontSize: '1rem', background: "rgb(47, 150, 103)",border: '1px solid black', outline: 'none', color: 'white', fontWeight: 700}}/>
-        <hr/>
+        
         </div>
         
         
