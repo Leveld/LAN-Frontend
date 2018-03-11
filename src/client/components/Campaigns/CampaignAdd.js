@@ -59,7 +59,7 @@ class CampaignAdd extends Component {
        status : 'Active', // 'Active', 'Inactive', 'Frozen', 'Terminated', 'Closed', 'Completed'
        preferredApplicant: {
          coType: 'YouTube',
-         industry: 'Gaming'
+         industry: e.target.industry.value
        },
        description: this.state.description
      };
@@ -69,7 +69,10 @@ class CampaignAdd extends Component {
      axios.post(`${apiServerIP}campaign`, {fields}, {headers: { Authorization: `Bearer ${token}`}})
      .then((res) => {
          //window.location.replace(res.data.url);
-       console.log(res.data);
+       console.log("DATA", res.data);
+       const camp = this.parent.state.campaigns.concat();
+       camp.push(res.data);
+       this.parent.setState({campaigns: camp});
       this.parent.toggleForm();
     })
     .catch((err) => {
@@ -98,7 +101,7 @@ class CampaignAdd extends Component {
             </div>
             <div className="modal-campaign--input-wrapper">
               <label>Industry:</label>
-              <input className="modal-campaign--input" autoComplete="off" type="text" value={this.state.category} onChange={(e) => this.setState({category: e.target.value})}/>
+              <input className="modal-campaign--input" name="industry" autoComplete="off" type="text" value={this.state.category} onChange={(e) => this.setState({category: e.target.value})}/>
             </div>
             <div className="modal-campaign--input-wrapper">
               <label className="modal-campaign--block">Description:</label>
