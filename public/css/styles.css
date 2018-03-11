@@ -662,7 +662,7 @@ button,
   transition: 0.3s color; }
 
 .pane > div a:hover {
-  color: #00AA5D; }
+  color: green; }
 
 .schedule {
   height: 32rem;

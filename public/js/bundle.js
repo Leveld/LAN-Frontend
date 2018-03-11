@@ -109128,13 +109128,14 @@ var Message = function (_Component3) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'pane', style: { display: 'flex', flexDirection: 'row' } },
+        { className: 'pane', style: { fontSize: "calc(1rem + 0.5vw)", display: 'flex', flexDirection: 'column' } },
         _react2.default.createElement(
           'div',
           { style: { whiteSpace: 'nowrap', textDecoration: 'unset', color: 'black' } },
-          name
+          name,
+          ':'
         ),
-        ': ',
+        ' ',
         _react2.default.createElement(
           'div',
           { style: { margin: '0 10px', whiteSpace: 'pre-line' } },
@@ -109142,7 +109143,7 @@ var Message = function (_Component3) {
         ),
         _react2.default.createElement(
           'div',
-          { style: { whiteSpace: 'nowrap', width: '100%', display: 'flex', justifyContent: 'flex-end', flex: 1 } },
+          { style: { whiteSpace: 'nowrap', width: '100%', display: 'flex', justifyContent: 'flex-end', flex: 1, color: "green" } },
           String(this.props.message.updatedAt).split("GMT")[0]
         )
       );
