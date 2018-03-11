@@ -59,7 +59,7 @@ class CampaignAdd extends Component {
        status : 'Active', // 'Active', 'Inactive', 'Frozen', 'Terminated', 'Closed', 'Completed'
        preferredApplicant: {
          coType: 'YouTube',
-         industry: 'Gaming'
+         industry: e.target.industry.value
        },
        description: this.state.description
      };
@@ -98,7 +98,7 @@ class CampaignAdd extends Component {
             </div>
             <div className="modal-campaign--input-wrapper">
               <label>Industry:</label>
-              <input className="modal-campaign--input" autoComplete="off" type="text" value={this.state.category} onChange={(e) => this.setState({category: e.target.value})}/>
+              <input className="modal-campaign--input" name="industry" autoComplete="off" type="text" value={this.state.category} onChange={(e) => this.setState({category: e.target.value})}/>
             </div>
             <div className="modal-campaign--input-wrapper">
               <label className="modal-campaign--block">Description:</label>
