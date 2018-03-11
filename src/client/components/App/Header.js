@@ -94,7 +94,7 @@ class Header extends Component {
   render(){
     if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token'))
       window.localStorage.setItem('access_token', cookie.get('access_token'));
-    if(!this.props.user || !this.props.authenticated) return <div />;
+    if(this.props.authenticated && !this.props.user) return <div />;
     return (
       <header className="header app-header">
         <nav className="header-container">

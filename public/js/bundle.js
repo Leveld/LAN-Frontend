@@ -95803,7 +95803,7 @@ var Header = function (_Component) {
       var _this4 = this;
 
       if (this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token')) window.localStorage.setItem('access_token', cookie.get('access_token'));
-      if (!this.props.user || !this.props.authenticated) return _react2.default.createElement('div', null);
+      if (this.props.authenticated && !this.props.user) return _react2.default.createElement('div', null);
       return _react2.default.createElement(
         'header',
         { className: 'header app-header' },
