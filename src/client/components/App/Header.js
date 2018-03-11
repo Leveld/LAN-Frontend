@@ -6,7 +6,7 @@ import {Cookies} from 'react-cookie';
 import axios from 'axios';
 import {setUser, signIn, signOut, toggleSettings} from '../../actions';
 import {Search} from '../../components';
-const {apiServerIP, frontServerIP} = require('capstone-utils');
+const {apiServerIP, frontServerIP, IN_DEVELOPMENT} = require('capstone-utils');
 const {accTypes} = require('../../../server/config.json');
 const cookie = new Cookies();
 
@@ -100,7 +100,7 @@ class Header extends Component {
           <Link className="app-header-logo" to="/" >
             <img  src={'images/logo/logo2.png'} alt="Logo" />
           </Link>
-
+          {<div>BETA</div>}
           <div className="app-header-menu">
             {this.props.authenticated ?
               <Link to="/" >
