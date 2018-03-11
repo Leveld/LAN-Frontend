@@ -11,6 +11,7 @@ const cookie = new Cookies();
 class Home extends Component {
 
   render(){
+    if(!this.props.user) return <div />;
     return (
       <main className="Home-wrapper">
       {
