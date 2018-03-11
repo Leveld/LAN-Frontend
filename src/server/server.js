@@ -62,7 +62,7 @@ app.post('/upload', upload, (req, res) => {
 });
 
 app.get('/*', asyncMiddleware(async (req, res, next) => {
-  const domain = /^(https?:\/\/)?([^:^\/]*)(:[0-9]*)(\/[^#^?]*)(.*)/g.exec(frontServerIP);
+  const domain = /^(https?:\/\/)?([^:^\/]*)(:[0-9]*)?(\/[^#^?]*)(.*)/g.exec(frontServerIP);
   const { user, ...rest } = req.query;
   if (user) {
     try {
