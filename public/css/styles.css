@@ -335,12 +335,15 @@ footer {
   .header-container > .app-header-logo,
   .header-container > .app-header-menu,
   .header-container > .app-header-authentication {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     flex-grow: 2; }
 
 .app-header-logo {
   height: 100%;
-  position: relative; }
+  position: relative;
+  flex: 0; }
   .app-header-logo > img {
     height: 6rem;
     width: auto; }

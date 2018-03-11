@@ -6,7 +6,7 @@ import {Cookies} from 'react-cookie';
 import axios from 'axios';
 import {setUser, signIn, signOut, toggleSettings} from '../../actions';
 import {Search} from '../../components';
-const {apiServerIP, frontServerIP, IN_DEVELOPMENT} = require('capstone-utils');
+const {apiServerIP, frontServerIP, BETA} = require('capstone-utils');
 const {accTypes} = require('../../../server/config.json');
 const cookie = new Cookies();
 
@@ -97,19 +97,22 @@ class Header extends Component {
     return (
       <header className="header app-header">
         <nav className="header-container">
-          <Link className="app-header-logo" to="/" >
+          <Link className="app-header-logo" style={{flex: 'none'}} to="/" >
             <img  src={'images/logo/logo2.png'} alt="Logo" />
           </Link>
-          {<div>BETA</div>}
+          {BETA ? <div style={{flex:1, display: 'flex', alignItems: 'center', color: '#00AA5D'}}>BETA</div> : null}
           <div className="app-header-menu">
             {this.props.authenticated ?
-              <Link to="/" >
-                <img src={this.props.user.profilePicture ? this.props.user.profilePicture : 'images/noPhoto.jpg'}
-                  alt="Profile Pic"
-                  className="profile-icon profile-icon--round" />
-              </Link> :
+              <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <Link to="/" >
+                  <img src={this.props.user.profilePicture ? this.props.user.profilePicture : 'images/noPhoto.jpg'}
+                    alt="Profile Pic"
+                    className="profile-icon profile-icon--round" />
+                </Link>
+                <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>
+              </div> :
             null}
-            <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>
+            
           </div>
         </nav>
         {this.props.authenticated ? <Search /> : null}

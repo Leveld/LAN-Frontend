@@ -15,7 +15,9 @@
   > .app-header-logo,
   > .app-header-menu,
   > .app-header-authentication {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     flex-grow: 2;
   }
 }
@@ -23,6 +25,7 @@
 .app-header-logo {
   height: 100%;
   position: relative;
+  flex: 0;
 
   & > img {
     height: 6rem;
