@@ -14,14 +14,14 @@ class InfoGraphicDisplay extends Component {
 
   render() {
     return (
-      <div className="IG-display" id="IG-Display" style={
+      <div className="IG-display"  id="IG-Display" style={
         this.props.blob ?
           this.toggle ?
-            {height: this.height, width: this.width} :  //blob 1 toggle 1
-            {height: 'auto', width: this.width} :       //blob 1 toggle 0
+            {height: this.height, width: this.width, background:'whitesmoke'} :  //blob 1 toggle 1
+            {height: 'auto', width: this.width, background:'whitesmoke'} :       //blob 1 toggle 0
           !this.toggle ?
-            {height: 'auto', width: '100%', overflow: 'hidden'} :  // blob 0 toggle 0
-            {height:'0', width: this.width}                       // blob 0 toggle 1
+            {height: 'auto', width: '100%', overflow: 'hidden',background:'whitesmoke'} :  // blob 0 toggle 0
+            {height:'0', width: this.width, background:'whitesmoke'}                       // blob 0 toggle 1
         }>
         {
           this.toggle ?
@@ -29,7 +29,7 @@ class InfoGraphicDisplay extends Component {
               <img onClick={()=>this.props.setInfoGraphicBlob(null)} src={'images/_btn/arrow_up.png'} alt="CLOSE" width="30px"/>
             </div> :  null
         }
-        <div className="IG-display-blob" >
+        <div className="IG-display-blob" style={{background: 'whitesmoke'}}>
           { this.props.info ? this.props.info.blob : <div/>}
         </div>
       </div>

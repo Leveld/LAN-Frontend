@@ -65,8 +65,8 @@ class Profile extends Component {
               </div>
             </div>
             <div className="Profile-contact-list">
-            <div className='pane'>
-              <a className='button button--color-gren' onClick={(e) => {this.newMessage(e);}}>Message</a>
+            <div style={{width: '100%',}}>
+              <a className='button button--color-green button--hover-blue' style={{margin: 20}} onClick={(e) => {this.newMessage(e);}}>Message</a>
             </div>
             <div className='pane'>
                 <h3>Type:</h3>

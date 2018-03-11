@@ -16,10 +16,11 @@ class InfoGraphicList extends Component {
     super(props);
     this.color = props.color;
     this.title = props.title || "TITLE";
+    
   }
   componentDidMount(){
     if(this.props.accounts === 0 && this.props.user.type !== accTypes[0] ) return;
-      if(this.props.children[0]){
+      if(this.props.children[0]){       
         return this.props.setInfoGraphicBlob({accountData:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
       }
       this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props.profilePicture, blob: <AccountData />});
@@ -50,15 +51,12 @@ class InfoGraphicList extends Component {
       <div className='account-list'>
         <div>
           <h3 className='sticky--top-left'>{this.title}</h3>
-          <div className="flex-list">
-            <div className='account-item'>
-              <img src={blobImage} width='70px' height="70px"/>
-            </div>
-            <div className='flex-list'>
-                {this.props.children}
-            </div>
-            <div className='button button--color-green' style={this.props.user.type === accTypes[0] ? {display: 'none'} : null} onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')}>
-              Add Outlet
+          <div className="flex-list" >
+          {this.props.children}
+            <div style={{height: '100%',display: 'flex', alignItems: 'center'}}>
+              <div className='button button--color-green button--hover-white' style={this.props.user.type === accTypes[0] ? {display: 'none'} : {display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center'}} onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')}>
+                Add Outlet
+              </div>
             </div>
           </div>
         </div>

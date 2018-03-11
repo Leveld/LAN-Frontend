@@ -78,11 +78,11 @@ class Header extends Component {
     } else {
       return (
         <div className="app-header-authentication">
-          <a className="button button--color-green register-button" onClick={() => {
+          <a className="button button--color-green button--hover-white" onClick={() => {
             this.props.auth.login();
             window.localStorage.clear();
           }}>Register</a>
-          <a className="button button--color-green signin-button" onClick={() => {
+          <a className="button button--color-green button--hover-white" onClick={() => {
             this.props.auth.login();
             window.localStorage.clear();
           }}>Sign In</a>
@@ -111,7 +111,7 @@ class Header extends Component {
                 </Link>
                 <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>
               </div> :
-            null}
+            <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>}
             
           </div>
         </nav>

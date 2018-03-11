@@ -76573,6 +76573,7 @@ var InfoGraphicList = function (_Component) {
 
     _this.color = props.color;
     _this.title = props.title || "TITLE";
+
     return _this;
   }
 
@@ -76616,22 +76617,17 @@ var InfoGraphicList = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'flex-list' },
+            this.props.children,
             _react2.default.createElement(
               'div',
-              { className: 'account-item' },
-              _react2.default.createElement('img', { src: blobImage, width: '70px', height: '70px' })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'flex-list' },
-              this.props.children
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'button button--color-green', style: this.props.user.type === _config.accTypes[0] ? { display: 'none' } : null, onClick: function onClick() {
-                  return _this2.props.user.type === _config.accTypes[1] ? _this2.addCO() : alert('add manager');
-                } },
-              'Add Outlet'
+              { style: { height: '100%', display: 'flex', alignItems: 'center' } },
+              _react2.default.createElement(
+                'div',
+                { className: 'button button--color-green button--hover-white', style: this.props.user.type === _config.accTypes[0] ? { display: 'none' } : { display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center' }, onClick: function onClick() {
+                    return _this2.props.user.type === _config.accTypes[1] ? _this2.addCO() : alert('add manager');
+                  } },
+                'Add Outlet'
+              )
             )
           )
         )
@@ -94379,10 +94375,10 @@ var InfoGraphicDisplay = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'IG-display', id: 'IG-Display', style: this.props.blob ? this.toggle ? { height: this.height, width: this.width } : //blob 1 toggle 1
-          { height: 'auto', width: this.width } : //blob 1 toggle 0
-          !this.toggle ? { height: 'auto', width: '100%', overflow: 'hidden' } : // blob 0 toggle 0
-          { height: '0', width: this.width // blob 0 toggle 1
+        { className: 'IG-display', id: 'IG-Display', style: this.props.blob ? this.toggle ? { height: this.height, width: this.width, background: 'whitesmoke' } : //blob 1 toggle 1
+          { height: 'auto', width: this.width, background: 'whitesmoke' } : //blob 1 toggle 0
+          !this.toggle ? { height: 'auto', width: '100%', overflow: 'hidden', background: 'whitesmoke' } : // blob 0 toggle 0
+          { height: '0', width: this.width, background: 'whitesmoke' // blob 0 toggle 1
           } },
         this.toggle ? _react2.default.createElement(
           'div',
@@ -94393,7 +94389,7 @@ var InfoGraphicDisplay = function (_Component) {
         ) : null,
         _react2.default.createElement(
           'div',
-          { className: 'IG-display-blob' },
+          { className: 'IG-display-blob', style: { background: 'whitesmoke' } },
           this.props.info ? this.props.info.blob : _react2.default.createElement('div', null)
         )
       );
@@ -94448,13 +94444,17 @@ var InfoGraphic = function InfoGraphic(props) {
   console.log(props);
   return _react2.default.createElement(
     'div',
-    { className: 'account-item', onClick: function onClick() {
+    { className: 'account-item', style: props.parent.state.accSel === props.index ? { border: '3px solid royalblue', borderRadius: 10, cursor: 'pointer' } : { borderRadius: 10, cursor: 'pointer', border: '3px solid black' }, onClick: function onClick() {
         return props.setInfoGraphicBlob({ accountData: props.profilePicture, blob: getBlob() });
       } },
-    _react2.default.createElement('img', { src: props.profilePicture || 'images/noPhoto.jpg', alt: 'Info Graphic' }),
+    _react2.default.createElement('img', { onClick: function onClick() {
+        return props.parent.setState({ accSel: props.index });
+      }, src: props.profilePicture || 'images/noPhoto.jpg', alt: 'Info Graphic' }),
     _react2.default.createElement(
       'h4',
-      null,
+      { style: { textAlign: 'center' }, onClick: function onClick() {
+          return props.parent.setState({ accSel: props.index });
+        } },
       props.channelName ? props.channelName.split('@')[0] : props.name
     )
   );
@@ -94546,6 +94546,7 @@ var MemberHome = function (_Component) {
       return reduced;
     };
 
+    _this.state = { accSel: props.user.type === _config.accTypes[0] ? 'BA' : 0 };
     _this.data = props.user.contentOutlets || list;
     _this.testGraphData = [{
       title: 'Generated with title',
@@ -94594,24 +94595,25 @@ var MemberHome = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: { width: '100%', height: '100%' } },
+        { style: { width: '100%', height: '100%', display: 'flex', flexDirection: 'column' } },
         _react2.default.createElement(
           _components.InfoGraphicList,
           { title: 'Accounts', accounts: accounts.length, color: 'rgb(32, 48, 62)' },
           this.props.user.type === _config.accTypes[0] ? _react2.default.createElement(
             _components.InfoGraphic,
-            this.props.user,
+            _extends({ index: 'BA', parent: this }, this.props.user),
             _react2.default.createElement(_Account_Data2.default, _extends({ overviewDataPoints: this.testGraphData }, this.props.user))
           ) : null,
           accounts.map(function (item, i) {
             return _react2.default.createElement(
               _components.InfoGraphic,
-              _extends({ key: i }, item),
+              _extends({ index: i, key: i, parent: _this2 }, item),
               _react2.default.createElement(_Account_Data2.default, _extends({ overviewDataPoints: _this2.testGraphData }, item))
             );
           })
         ),
-        _react2.default.createElement(_components.InfoGraphicDisplay, { toggle: 0 })
+        _react2.default.createElement(_components.InfoGraphicDisplay, { toggle: 0 }),
+        _react2.default.createElement('div', { style: { background: 'pink', flex: 1, width: '100%' } })
       );
     }
   }]);
@@ -94764,10 +94766,10 @@ var Profile = function (_Component) {
               { className: 'Profile-contact-list' },
               _react2.default.createElement(
                 'div',
-                { className: 'pane' },
+                { style: { width: '100%' } },
                 _react2.default.createElement(
                   'a',
-                  { className: 'button button--color-gren', onClick: function onClick(e) {
+                  { className: 'button button--color-green button--hover-blue', style: { margin: 20 }, onClick: function onClick(e) {
                       _this3.newMessage(e);
                     } },
                   'Message'
@@ -95777,7 +95779,7 @@ var Header = function (_Component) {
           { className: 'app-header-authentication' },
           _react2.default.createElement(
             'a',
-            { className: 'button button--color-green register-button', onClick: function onClick() {
+            { className: 'button button--color-green button--hover-white', onClick: function onClick() {
                 _this3.props.auth.login();
                 window.localStorage.clear();
               } },
@@ -95785,7 +95787,7 @@ var Header = function (_Component) {
           ),
           _react2.default.createElement(
             'a',
-            { className: 'button button--color-green signin-button', onClick: function onClick() {
+            { className: 'button button--color-green button--hover-white', onClick: function onClick() {
                 _this3.props.auth.login();
                 window.localStorage.clear();
               } },
@@ -95837,7 +95839,14 @@ var Header = function (_Component) {
                 ' ',
                 this.getLinks()
               )
-            ) : null
+            ) : _react2.default.createElement(
+              'div',
+              { className: 'App-header-username' },
+              ' ',
+              this.props.user.name,
+              ' ',
+              this.getLinks()
+            )
           )
         ),
         this.props.authenticated ? _react2.default.createElement(_components.Search, null) : null,
@@ -108959,7 +108968,7 @@ var Conversation = function (_Component) {
       );
       return _react2.default.createElement(
         'div',
-        { className: 'button--color-green', style: { margin: '.5rem', cursor: 'pointer', padding: '.2rem' }, onClick: function onClick() {
+        { className: 'button--color-green button--hover-white', style: { margin: '.5rem', cursor: 'pointer', padding: '.2rem' }, onClick: function onClick() {
             return conversation ? _this2.props.selectConversation(conversation) : null;
           } },
         this.title
@@ -109010,7 +109019,7 @@ var ConversationList = function (_Component2) {
           { className: 'Messages-ls-content' },
           _react2.default.createElement(
             'div',
-            { className: 'Messages-header', style: { padding: '.5rem' } },
+            { className: 'Messages-header', style: { padding: '.5rem', background: 'whitesmoke' } },
             "Conversations"
           ),
           this.props.conversations.map(function (conversation, i) {
@@ -109116,11 +109125,26 @@ var Message = function (_Component3) {
       } else {
         name = 'Loading...';
       }
+
       return _react2.default.createElement(
         'div',
-        { className: 'pane', style: { whiteSpace: 'pre-line' } },
-        name,
-        ': ' + message
+        { className: 'pane', style: { display: 'flex', flexDirection: 'row' } },
+        _react2.default.createElement(
+          'div',
+          { style: { whiteSpace: 'nowrap', textDecoration: 'unset', color: 'black' } },
+          name
+        ),
+        ': ',
+        _react2.default.createElement(
+          'div',
+          { style: { margin: '0 10px', whiteSpace: 'pre-line' } },
+          message
+        ),
+        _react2.default.createElement(
+          'div',
+          { style: { whiteSpace: 'nowrap', width: '100%', display: 'flex', justifyContent: 'flex-end', flex: 1 } },
+          String(this.props.message.updatedAt).split("GMT")[0]
+        )
       );
     }
   }, {
@@ -109173,6 +109197,7 @@ var MessagePanel = function (_Component4) {
           ''
         ),
         this.messages.map(function (message, i) {
+          console.log("MESSAGE", message);
           return _react2.default.createElement(Message, { key: i, message: message, user: _this8.user });
         })
       );
@@ -110235,12 +110260,14 @@ var Messenger = function (_Component5) {
         return _jsonwebtoken2.default.sign(msg, _secret.clientSecret);
       };
       var input = event.target.msg || event.target;
+
       if (!input || !input.value || input.value === '') return;
       var message = encode(input.value);
       this.activeConversation.postMessage(message).then(function () {
         _this15.refresh();
         input.value = "";
       });
+      document.getElementById("msg").focus();
     }
   }, {
     key: 'postMessage',
@@ -110540,14 +110567,18 @@ var Messenger = function (_Component5) {
         }),
         this.state.activeConversation && _react2.default.createElement(
           'form',
-          { onSubmit: this.onSubmit, className: 'Messages-rs-form' },
+          { onSubmit: function onSubmit(e) {
+              return _this16.onSubmit(e);
+            }, className: 'Messages-rs-form' },
           _react2.default.createElement('textarea', {
             onKeyPress: function onKeyPress(event) {
-              return event.key === 'Enter' ? _this16.onSubmit(event) : undefined;
+              return event.key === 'Enter' && event.key !== 'Shift' ? _this16.onSubmit(event) : undefined;
             },
             name: 'msg',
+            id: 'msg',
             className: 'Messages-rs-form-input',
-            type: 'text'
+            type: 'text',
+            autoFocus: true
           }),
           _react2.default.createElement('input', { className: 'button button--color-green', type: 'submit', value: 'SEND' })
         )
@@ -110906,7 +110937,7 @@ var SettingsSidebar = function (_Component) {
           { onClick: function onClick() {
               return _this2.props.toggleSettings();
             }, className: 'settings-profile-link', to: '/profile?id=' + this.props.user._id + '&type=' + this.props.user.type },
-          _react2.default.createElement('img', { className: 'profile-icon profile-icon--round', src: this.props.user.profilePicture })
+          _react2.default.createElement('img', { style: { border: '1px solid black' }, className: 'profile-icon profile-icon--round', src: this.props.user.profilePicture })
         ),
         blocks.map(function (block, i) {
           return _react2.default.createElement(SettingsBlock, { key: i, title: block.title, data: block.data });
@@ -110996,6 +111027,8 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _capstoneUtils = __webpack_require__(42);
 
+var _config = __webpack_require__(50);
+
 var _reactRouterDom = __webpack_require__(55);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -111054,6 +111087,7 @@ var Search = function (_Component) {
       var _this3 = this;
 
       console.log(this.state.campaigns);
+
       return _react2.default.createElement(
         'div',
         { className: 'search-bar', style: { display: 'flex', flexDirection: 'column' } },
@@ -111064,7 +111098,7 @@ var Search = function (_Component) {
             'select',
             { onChange: function onChange(e) {
                 return _this3.setState({ type: e.target.value, display: [] });
-              }, style: { flex: 1 } },
+              }, style: { flex: 1, outline: 'none', border: '1px solid black', cursor: 'pointer', color: 'white', fontWeight: 700, background: "rgb(47, 150, 103)" } },
             _react2.default.createElement(
               'option',
               { value: 'name' },
@@ -111086,19 +111120,21 @@ var Search = function (_Component) {
               'INDUSTRY'
             )
           ),
-          _react2.default.createElement('input', { name: 'search', autocomplete: 'off', onChange: function onChange(e) {
+          _react2.default.createElement('input', { name: 'search', autoComplete: 'off', onChange: function onChange(e) {
               return _this3.filter(e.target.value);
-            }, type: 'text', style: { width: '90%', fontSize: '1rem' } })
+            }, type: 'text', style: { width: '90%', fontSize: '1rem', background: "rgb(47, 150, 103)", border: '1px solid black', outline: 'none', color: 'white', fontWeight: 700 } }),
+          _react2.default.createElement('hr', null)
         ),
         this.state.type !== 'industry' && this.state.display.length ? this.state.display.map(function (user, i) {
           return _react2.default.createElement(
             _reactRouterDom.Link,
             { onClick: function onClick() {
                 return _this3.setState({ display: [] });
-              }, key: i, to: '/profile?id=' + user.id + '&type=' + user.type, style: { textDecoration: 'none', marginLeft: 5 } },
-            user.name,
-            ' - ',
-            user.type
+              }, key: i, to: '/profile?id=' + user.id + '&type=' + user.type, style: { textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10 } },
+            '[',
+            user.type === _config.accTypes[0] ? 'BA' : user.type === _config.accTypes[1] ? 'CP' : null,
+            '] ',
+            user.name
           );
         }) : null,
         this.state.type === 'industry' && this.state.display.length ? this.state.display.map(function (campaign, i) {
@@ -111109,7 +111145,7 @@ var Search = function (_Component) {
               }, key: i, to: '/profile?id=' + campaign.owner.ownerID + '&type=' + campaign.owner.ownerType, style: { textDecoration: 'none', marginLeft: 5 } },
             campaign.preferredApplicant.industry,
             ' - ',
-            campaign.id
+            campaign.owner.ownerID
           );
         }) : null
       );

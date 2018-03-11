@@ -17,17 +17,46 @@ button,
 
 .button--round {
   border-radius: 1.25rem;
+  border: 2px solid $brand-white;
+  transition: 0.5s border;
 }
-
+.button--round:hover {
+  border: 2px solid $brand-blue;
+}
+.button--hover-white {
+  border: 1px solid $brand-blue;
+  transition: 0.5s border;
+}
+.button--hover-white:hover {
+  border: 1px solid $brand-white;
+}
+.button--hover-blue {
+  border: 1px solid $brand-white;
+  transition: 0.5s border;
+}
+.button--hover-blue:hover {
+  border: 1px solid $brand-blue;
+}
 .button--color-green {
   background-color: $brand-green-alt;
   color: $brand-white;
 }
 
 .register-button {
+  border: 1px solid $brand-white;
+  transition: 0.5s border;
+}
 
+.register-button:hover {
+  border: 1px solid $brand-blue;
 }
 
 .signin-button, .signout-button {
-
+  border: 1px solid $brand-blue;
+  transition: 0.5s border;
 }
+
+
+.signin-button:hover , .signout-button:hover {
+  border: 1px solid $brand-white;
+} 

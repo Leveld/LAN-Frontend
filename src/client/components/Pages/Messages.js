@@ -41,7 +41,7 @@ class Conversation extends Component {
     if (!conversation)
       return (<div> Loading.... </div>);
     return (
-      <div className="button--color-green" style={{ margin: '.5rem', cursor: 'pointer', padding: '.2rem' }} onClick={() => conversation ? this.props.selectConversation(conversation) : null}>
+      <div className="button--color-green button--hover-white" style={{ margin: '.5rem', cursor: 'pointer', padding: '.2rem' }} onClick={() => conversation ? this.props.selectConversation(conversation) : null}>
         { this.title }
       </div>
     );
@@ -67,7 +67,7 @@ class ConversationList extends Component {
     return (
       <div className="Messages-ls">
         <div className="Messages-ls-content">
-          <div className="Messages-header" style={{ padding: '.5rem' }}>
+          <div className="Messages-header" style={{ padding: '.5rem', background: 'whitesmoke' }}>
             {"Conversations"}
           </div>
           { this.props.conversations.map((conversation, i) => {
@@ -136,8 +136,9 @@ class Message extends Component {
     } else {
       name = 'Loading...';
     }
+    
     return (
-      <div className="pane" style={{whiteSpace: 'pre-line'}}>{name}{`: ${message}` }</div>
+      <div className="pane" style={{display: 'flex', flexDirection: 'row'}}><div style={{whiteSpace: 'nowrap', textDecoration: 'unset', color: 'black'}}>{name}</div>: <div style={{margin: '0 10px',whiteSpace:'pre-line'}}>{message}</div><div style={{whiteSpace: 'nowrap', width: '100%', display: 'flex', justifyContent: 'flex-end', flex: 1}}>{String(this.props.message.updatedAt).split("GMT")[0]}</div></div>
     );
   }
 }
@@ -178,6 +179,7 @@ class MessagePanel extends Component {
         <div className="Messages-header">{ '' }</div>
         {
           this.messages.map((message, i) => {
+            console.log("MESSAGE",message);
             return (<Message key={i} message={message} user={this.user} />);
           })
         }
@@ -637,13 +639,16 @@ class Messenger extends Component {
       return;
     const encode = (msg) => jwt.sign(msg, clientSecret);
     const input = event.target.msg || event.target;
+    
     if (!input || !input.value || input.value === '')
       return;
     const message = encode(input.value);
     this.activeConversation.postMessage(message).then(() => {
       this.refresh();
       input.value = "";
+      
     });
+    document.getElementById("msg").focus();
   }
 
   async postMessage(conversation, message) {
@@ -731,14 +736,16 @@ class Messenger extends Component {
           />
         {/* Submit Button */}
         {this.state.activeConversation &&
-          <form onSubmit= {this.onSubmit} className="Messages-rs-form">
+          <form onSubmit= {(e) => this.onSubmit(e)} className="Messages-rs-form">
             <textarea
-              onKeyPress={(event) => event.key === 'Enter' ? this.onSubmit(event) : undefined}
+              onKeyPress={(event) => event.key === 'Enter' && event.key !== 'Shift' ? this.onSubmit(event) : undefined}
               name="msg"
+              id="msg"
               className="Messages-rs-form-input"
               type="text"
+              autoFocus
               />
-            <input className="button button--color-green" type="submit" value="SEND"/>
+            <input className="button button--color-green" type="submit" value="SEND" />
           </form>
         }
       </div>
