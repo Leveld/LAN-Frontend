@@ -57,7 +57,7 @@ class InfoGraphicList extends Component {
             <div className='flex-list'>
                 {this.props.children}
             </div>
-            <div className='button button--color-green' onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')}>
+            <div className='button button--color-green' style={this.props.user.type === accType[0] ? {display: 'none'} : null} onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')}>
               Add Outlet
             </div>
           </div>
