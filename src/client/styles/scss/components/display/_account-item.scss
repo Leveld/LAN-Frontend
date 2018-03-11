@@ -3,18 +3,13 @@
   color: $brand-black;
   font-size: .8rem;
   // border: .25rem solid $brand-black;
-  border-radius: .25rem;
+  border-radius: 2rem;
   overflow: hidden;
   margin-right: 1rem;
   width: 8rem;
   height: 8rem;
   position: relative;
 
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 
   h4 {
     background-color:$brand-gray;

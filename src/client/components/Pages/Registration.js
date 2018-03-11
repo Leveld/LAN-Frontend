@@ -96,7 +96,7 @@ class Registration extends Component {
 
             <div >
               <input name="name" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} placeholder={this.props.user.name} />
-              <input name="businessName" hidden />
+              <input style={{display: 'none'}} name="businessName" hidden />
             </div>
             <div>
               <label>DOB</label>
@@ -124,23 +124,22 @@ class Registration extends Component {
               <input onChange={(e) => this.setState({businessName: e.target.value})} name="businessName" value={this.state.businessName} placeholder="Business Name" />
             </div>
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%'}}>
-              <input style={{minWidth:'100px'}} name="age" type="date" hidden/>
+              <input style={{minWidth:'100px', display: 'none'}} name="age" type="date" hidden/>
               <label>Business Verification:</label>
               <label style={{fontSize:'10px'}}>Input Tax ID or upload any other relevant document to verify your business</label>
               <input name="taxID" onChange={(e) => this.setState({taxID: e.target.value})} placeholder="Tax ID" />
               {/*File Img Preview*/}
-              <img src={this.state.filePreview ? this.state.filePreview.result : null} width="30%"/>
-              <div style={{background: 'red', width: '100px', margin: '1%', overflow: 'hidden', position:'relative', display: 'flex', justifyContent: 'center', alignItems:'center'}}>
+              {/*<img src={this.state.filePreview ? this.state.filePreview.result : null} width="30%"/>
+               <div style={{background: 'red',  margin: '1%', overflow: 'hidden', position:'relative', display: 'flex', justifyContent: 'center', alignItems:'center'}}>
                 <input onChange={(e) => this.setImg(e)} type="file" style={{width: '100%', opacity: 0, height: '100%', display: 'flex', position: 'absolute'}}/>
-                <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>UPLOAD</div>
-              </div>
+                <div style={{width: '100px', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>UPLOAD</div>
+              </div> */}
             <input style={{cursor:'pointer'}} type="submit" className="button button--color-green" />
 
             </div>
           </form>
           </div>
         </div>
-        {this.state.selected && <div className="pane Register-img"><img src="" width="100%" /></div>}
       </div>
     );
   }

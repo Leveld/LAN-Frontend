@@ -1,8 +1,9 @@
 .Home-wrapper {
-  background: rgb(243, 243, 243);
+  background: #171738;
   width: 100%;
   height: 100%;
   display: flex;
+  position: absolute;
   flex: 1;
   justify-content: flex-start;
   align-items:center;
@@ -44,6 +45,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   flex-direction: column;
+  padding-top: 1000px;
 }
 
 .Home-Accounts-info {

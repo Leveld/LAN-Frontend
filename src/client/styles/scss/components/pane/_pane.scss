@@ -1,13 +1,27 @@
 .pane {
-  border: 1px solid darken($brand-gray, 8%);
+  border: 1px solid darken($brand-black, 8%);
   border-radius: .5rem;
   background-color: $brand-white;
   margin: 1rem;
   padding: .5rem;
-
+  overflow: hidden;
+  text-decoration: none;
+  
+  
+  
   > p:first-of-type {
      border-top: 1px solid lighten($brand-blue, 60%);
      margin: .5rem;
      padding-top: .5rem;
   }
+}
+
+.pane > div  a {
+  text-decoration: unset;
+  color: black;
+  transition: 0.3s color;
+}
+
+.pane > div  a:hover {
+  color: green;
 }

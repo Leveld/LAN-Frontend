@@ -31,6 +31,7 @@ const cookie = new Cookies();
 class MemberHome extends Component {
   constructor(props){
     super(props);
+    this.state = {accSel: props.user.type === accTypes[0] ? 'BA' : 0};
     this.data = props.user.contentOutlets ||  list
     this.testGraphData = [
       {
@@ -116,11 +117,11 @@ class MemberHome extends Component {
     const accounts = this.props.user.type === accTypes[1] ? this.removeDups(this.data) : list;
 
     return ( 
-      <div style={{width: '100%', height: '100%'}}>
+      <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
         <InfoGraphicList title="Accounts" accounts={accounts.length} color="rgb(32, 48, 62)" >
           {
             this.props.user.type === accTypes[0] ? (
-              <InfoGraphic {...this.props.user} >
+              <InfoGraphic index={'BA'} parent={this} {...this.props.user} >
                 <AccountData overviewDataPoints={this.testGraphData} {...this.props.user} />
               </InfoGraphic>
             )
@@ -129,7 +130,7 @@ class MemberHome extends Component {
           {
             accounts.map((item, i) => {
               return (
-                <InfoGraphic key={i} {...item} >
+                <InfoGraphic index={i} key={i} parent={this} {...item} >
                   <AccountData overviewDataPoints={this.testGraphData} {...item} />
                 </InfoGraphic>
               );
@@ -138,6 +139,7 @@ class MemberHome extends Component {
 
         </InfoGraphicList>
         <InfoGraphicDisplay toggle={0}/>
+        <div style={{background: 'pink',flex:1, width: '100%'}}/>
       </div>
 
     );

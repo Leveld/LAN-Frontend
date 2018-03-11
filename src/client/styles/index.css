@@ -40,6 +40,7 @@
   flex-direction: column;
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
+  background: #171738;
 }
 
 
@@ -98,11 +99,13 @@ h1, h2, h3, h4, h5 {
 
 .App-header-logo {
   height: 100%;
+  width: 40px;
+  background: purple;
   display: flex;
   justify-content: flex-start;
   margin-left: 10px;
   align-items: center;
-  flex: 1;
+  
   text-decoration: none;
   color: white;
 }

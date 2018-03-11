@@ -12,9 +12,6 @@ const jwt = require('jsonwebtoken');
 const {clientSecret} = require('./secret.json');
 const fs = require('fs');
 
-
-
-
 const PORT = process.env.PORT || '3000';
 
 const app = express();
@@ -22,11 +19,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 app.use(express.static(path.join(__dirname, '../../public'), {
   index: false
 }));
-
 
 const imgbuffer = multer.memoryStorage();
 const test = multer({storage: imgbuffer});
@@ -47,9 +42,6 @@ const storage = (media, type) => multer.diskStorage({destination:async (req, fil
   }
 });
 
-
-
-
 const credentials = multer({storage: storage('images','credentials')});
 const upload = credentials.single('image');
 
@@ -62,25 +54,6 @@ app.post('/upload', upload, (req, res) => {
 });
 
 app.get('/*', asyncMiddleware(async (req, res, next) => {
-  const domain = /^(https?:\/\/)?([^:^\/]*)(:[0-9]*)?(\/[^#^?]*)(.*)/g.exec(frontServerIP);
-  const { user, ...rest } = req.query;
-  if (user) {
-    try {
-      const access_token = jwt.verify(user, clientSecret).access_token;
-      return await res
-                      .status(307)
-                      .cookie('access_token', jwt.verify(user, clientSecret).access_token, {
-                        secure: false,
-                        domain: domain[2],
-                        maxAge: 604800
-                      })
-                      .redirect(url.format({
-                        pathname: url.parse(req.url).pathname,
-                        query: rest
-                      }));
-    } catch (error) {}
-  }
-
   // const page = String(req.url).toLocaleLowerCase().split('?')[0];
   //if(!pages.includes(page)) return res.redirect('/error');
   res.sendFile(path.resolve(__dirname, '../../public/index.html'));
