@@ -129,8 +129,8 @@ class Registration extends Component {
               <label style={{fontSize:'10px'}}>Input Tax ID or upload any other relevant document to verify your business</label>
               <input name="taxID" onChange={(e) => this.setState({taxID: e.target.value})} placeholder="Tax ID" />
               {/*File Img Preview*/}
-              <img src={this.state.filePreview ? this.state.filePreview.result : null} width="30%"/>
-              {/* <div style={{background: 'red',  margin: '1%', overflow: 'hidden', position:'relative', display: 'flex', justifyContent: 'center', alignItems:'center'}}>
+              {/*<img src={this.state.filePreview ? this.state.filePreview.result : null} width="30%"/>
+               <div style={{background: 'red',  margin: '1%', overflow: 'hidden', position:'relative', display: 'flex', justifyContent: 'center', alignItems:'center'}}>
                 <input onChange={(e) => this.setImg(e)} type="file" style={{width: '100%', opacity: 0, height: '100%', display: 'flex', position: 'absolute'}}/>
                 <div style={{width: '100px', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>UPLOAD</div>
               </div> */}
