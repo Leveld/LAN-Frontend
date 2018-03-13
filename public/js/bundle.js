@@ -24748,21 +24748,12 @@ var CampaignList = function (_Component) {
   _createClass(CampaignList, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
-      var campaigns = _axios2.default.get(_capstoneUtils.apiServerIP + 'campaigns', { headers: { Authorization: 'Bearer ' + this.token } }).then(function (campaigns) {
-        if (campaigns) campaigns = campaigns.data.filter(function (camp) {
-          return camp.owner.ownerID === _this2.props.user._id;
-        });
-        _this2.setState({ campaigns: campaigns });
-      }).catch(function (err) {
-        console.log(err);
-      });
+      this.findCampaigns();
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       return _react2.default.createElement(
         'div',
@@ -24788,7 +24779,7 @@ var CampaignList = function (_Component) {
         this.state.type === _config.accTypes[0] && this.state.owner === this.props.user._id ? _react2.default.createElement(
           'button',
           { className: 'campaign--add', onClick: function onClick() {
-              return _this3.toggleForm();
+              return _this2.toggleForm();
             } },
           'Add A New Campaign'
         ) : null
@@ -24800,14 +24791,25 @@ var CampaignList = function (_Component) {
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-  var _this4 = this;
+  var _this3 = this;
+
+  this.findCampaigns = function () {
+    _axios2.default.get(_capstoneUtils.apiServerIP + 'campaigns', { headers: { Authorization: 'Bearer ' + _this3.token } }).then(function (campaigns) {
+      if (campaigns) campaigns = campaigns.data.filter(function (camp) {
+        return camp.owner.ownerID === _this3.state.owner;
+      });
+      _this3.setState({ campaigns: campaigns });
+    }).catch(function (err) {
+      console.log(err);
+    });
+  };
 
   this.componentWillReceiveProps = function (props) {
-    _this4.setState({ owner: props._id, type: props.type, campaigns: props.campaigns });
+    _this3.setState({ owner: props._id, type: props.type, campaigns: props.campaigns });
   };
 
   this.toggleForm = function () {
-    return _this4.setState({ form: !_this4.state.form });
+    return _this3.setState({ form: !_this3.state.form });
   };
 };
 
@@ -93783,7 +93785,7 @@ var Profile = function (_Component) {
               { style: !user.bio ? { display: 'none' } : { display: 'flex' }, className: 'Profile-bio' },
               user.bio
             ),
-            _react2.default.createElement(_CampaignList2.default, { _id: this.props.owner ? this.props.owner.ownerID : this.props._id, type: this.props.owner ? this.props.owner.ownerType : this.props.type }),
+            _react2.default.createElement(_CampaignList2.default, { _id: this.state.user.id, type: this.state.user.type }),
             _react2.default.createElement(
               'div',
               { style: { display: 'none' } },

@@ -22,10 +22,13 @@ import {connect} from 'react-redux';
   }
 
   componentDidMount() {
-   let campaigns = axios.get(`${apiServerIP}campaigns`, {headers: {Authorization: `Bearer ${this.token}`}})
+    this.findCampaigns();
+  }
+  findCampaigns = () => {
+    axios.get(`${apiServerIP}campaigns`, {headers: {Authorization: `Bearer ${this.token}`}})
        .then((campaigns) => {
        if(campaigns)
-       campaigns = campaigns.data.filter(camp => camp.owner.ownerID === this.props.user._id);
+       campaigns = campaigns.data.filter(camp => camp.owner.ownerID === this.state.owner);
      this.setState({ campaigns })
    })
    .catch((err) => {

@@ -96,7 +96,7 @@ class Profile extends Component {
               : null
             }
             <div style={!user.bio ? {display: 'none'}:{display: 'flex'}} className="Profile-bio">{user.bio}</div>
-                <CampaignList _id={this.props.owner ? this.props.owner.ownerID : this.props._id} type={this.props.owner ? this.props.owner.ownerType : this.props.type}/>
+                <CampaignList _id={this.state.user.id} type={this.state.user.type}/>
             <div style={{display: 'none'}}>{user.type === accTypes[1] ? <PlatformList list={user.contentOutlets || []}/> : user.type === accTypes[0] ? <ContractList /> : <div className="no_user_data">No Data</div>}</div>
           </div>
         </div>
