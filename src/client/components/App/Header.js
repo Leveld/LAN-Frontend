@@ -18,7 +18,7 @@ class Header extends Component {
     this.state = {repos: '', data: []};
   }
 
-  componentDidMount(){
+  componentWillMount(){
     // CHECK PULL REQUESTS
     if (IS_DEVELOPMENT) {
       this.checkPR();
@@ -31,16 +31,12 @@ class Header extends Component {
     if(token && token.length === 32 ){
       axios.get(`${apiServerIP}user`, {headers:{Authorization:`Bearer ${token}`}})
       .then((res) => {
-        if(res.data.type){
+        if (!res.data.type) return this.signOut();
           this.props.setUser(res.data);
           accTypes.includes(res.data.type) ? this.props.signIn() : null;
-        }
       })
       .catch((err) => {
-        alert(err.response.data.message);
-        cookie.remove('access_token');
-        window.localStorage.clear();
-        this.props.auth.login();
+        this.signOut();
       });
     }
   }
