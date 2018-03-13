@@ -13,9 +13,9 @@ const InfoGraphic = (props) => {
   };
   console.log(props);
   return (
-    <div className='account-item' onClick={() => props.setInfoGraphicBlob({accountImg: props.profilePicture, blob: getBlob()})}>
-      <img src={props.profilePicture || 'images/noPhoto.jpg'} alt={'Info Graphic'} />
-      <h4>{props.channelName ? props.channelName.split('@')[0] : props.name}</h4>
+    <div className='account-item' style={props.parent.state.accSel === props.index ? {border: '3px solid royalblue', borderRadius: 10, cursor: 'pointer'} : {borderRadius: 10, cursor: 'pointer', border: '3px solid black',}}onClick={() => props.setInfoGraphicBlob({accountData: props.profilePicture, blob: getBlob()})}>
+      <img onClick={()=> props.parent.setState({accSel:props.index})} src={props.profilePicture || 'images/noPhoto.jpg'} alt={'Info Graphic'} />
+      <h4 style={{textAlign: 'center'}}onClick={()=> props.parent.setState({accSel:props.index})}>{props.channelName ? props.channelName.split('@')[0] : props.name}</h4>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {apiServerIP} from 'capstone-utils';
+import {accTypes} from '../../../server/config.json'
 import {Link} from 'react-router-dom';
 
 
@@ -61,18 +62,21 @@ class Search extends Component {
     (
       <div className="search-bar" style={{display: 'flex', flexDirection: 'column' }}>
       <div style={{display: 'flex', flexDirection:'row', flex: 1, fontSize: '0.5rem'}}>
-        <select onChange={(e)=> this.setState({type: e.target.value, display: []})} style={{flex:1}}>
+        <select onChange={(e)=> this.setState({type: e.target.value, display: []})} style={{flex:1, outline: 'none', border: '1px solid black', cursor: 'pointer', color: 'white', fontWeight: 700, background: "rgb(47, 150, 103)"}}>
           <option value="name">NAME</option>
           <option value="id">ID</option>
           <option value="type">TYPE</option>
           <option value="industry">INDUSTRY</option>
         </select>
         
-        <input name="search"  onChange={(e)=> this.filter(e.target.value)} type="text" style={{width: '90%', fontSize: '1rem'}}/>
+        <input name="search" autoComplete="off"  onChange={(e)=> this.filter(e.target.value)} type="text" style={{width: '90%', fontSize: '1rem', background: "rgb(47, 150, 103)",border: '1px solid black', outline: 'none', color: 'white', fontWeight: 700}}/>
+        <hr/>
         </div>
         
-        {this.state.type !== 'industry' && this.state.display.length ? this.state.display.map((user, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${user.id}&type=${user.type}`} style={{textDecoration: 'none', marginLeft: 5}}>{user.name} - {user.type}</Link>) : null}
-        {this.state.type === 'industry' && this.state.display.length ? this.state.display.map((campaign, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${campaign.owner.ownerID}&type=${campaign.owner.ownerType}`} style={{textDecoration: 'none', marginLeft: 5}}>{campaign.preferredApplicant.industry} - {campaign.id}</Link>) : null}
+        
+  {this.state.type !== 'industry' && this.state.display.length ? this.state.display.map((user, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${user.id}&type=${user.type}`} style={{textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10}}>[{user.type === accTypes[0] ? 'BA' : user.type === accTypes[1] ? 'CP' : null}] {user.name}</Link>) : null}
+          {this.state.type === 'industry' && this.state.display.length ? this.state.display.map((campaign, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${campaign.owner.ownerID}&type=${campaign.owner.ownerType}`} style={{textDecoration: 'none', marginLeft: 5}}>{campaign.preferredApplicant.industry} - {campaign.owner.ownerID}</Link>) : null}
+        
       </div>
     ) :
     this.type === 'messenger' ?

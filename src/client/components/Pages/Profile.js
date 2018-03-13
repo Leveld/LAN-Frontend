@@ -36,10 +36,8 @@ class Profile extends Component {
           participantID: this.state.user.id,
           participantType: this.state.user.type
         }
-      ],
-      headers:{Authorization: this.token}}).then((a) => {
-        console.log(a);
-        history.push('/messages');
+      ]}, { headers:{Authorization: this.token }}).then((a) => {
+        window.location.replace('/messages');
       }).catch((c) => {
         console.log(c);
       });
@@ -67,8 +65,8 @@ class Profile extends Component {
               </div>
             </div>
             <div className="Profile-contact-list">
-            <div className='pane'>
-              <a className='button button--color-gren' onClick={(e) => {this.newMessage(e);}}>Message</a>
+            <div style={{width: '100%',}}>
+              <a className='button button--color-green button--hover-blue' style={{margin: 20}} onClick={(e) => {this.newMessage(e);}}>Message</a>
             </div>
             <div className='pane'>
                 <h3>Type:</h3>

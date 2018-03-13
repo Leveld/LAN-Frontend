@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {apiServerIP, frontServerIP, IS_DEVELOPMENT, parallelAsync, mapAsync, zip} from 'capstone-utils';
@@ -42,7 +42,7 @@ class Conversation extends Component {
     if (!conversation)
       return (<div> Loading.... </div>);
     return (
-      <div onClick={() => conversation ? this.props.selectConversation(conversation) : null}>
+      <div className="button--color-green button--hover-white" style={{ margin: '.5rem', cursor: 'pointer', padding: '.2rem' }} onClick={() => conversation ? this.props.selectConversation(conversation) : null}>
         { this.title }
       </div>
     );
@@ -68,7 +68,7 @@ class ConversationList extends Component {
     return (
       <div className="Messages-ls">
         <div className="Messages-ls-content">
-          <div className="Messages-header">
+          <div className="Messages-header" style={{ padding: '.5rem', background: 'whitesmoke' }}>
             {"Conversations"}
           </div>
           { this.props.conversations.map((conversation, i) => {
@@ -137,8 +137,9 @@ class Message extends Component {
     } else {
       name = 'Loading...';
     }
+    
     return (
-      <div className="pane" style={{whiteSpace: 'pre-line'}}>{name}{`: ${message}` }</div>
+      <div className="pane" style={{fontSize: "calc(1rem + 0.5vw)",display: 'flex', flexDirection: 'column' }}><div style={{whiteSpace: 'nowrap', textDecoration: 'unset', color: 'black'}}>{name}:</div> <div style={{margin: '0 10px',whiteSpace:'pre-line'}}>{message}</div><div style={{whiteSpace: 'nowrap', width: '100%', display: 'flex', justifyContent: 'flex-end', flex: 1, color: "green"}}>{String(this.props.message.updatedAt).split("GMT")[0]}</div></div>
     );
   }
 }
@@ -176,9 +177,10 @@ class MessagePanel extends Component {
     return (
       <div className="Messages-rs">
         {/*<div className="Messages-header">Conversation:</div>*/}
-        <div className="Messages-header">{ this.title || 'TITLE' }</div>
+        <div className="Messages-header">{ '' }</div>
         {
           this.messages.map((message, i) => {
+            console.log("MESSAGE",message);
             return (<Message key={i} message={message} user={this.user} />);
           })
         }
@@ -638,13 +640,16 @@ class Messenger extends Component {
       return;
     const encode = (msg) => jwt.sign(msg, clientSecret);
     const input = event.target.msg || event.target;
+    
     if (!input || !input.value || input.value === '')
       return;
     const message = encode(input.value);
     this.activeConversation.postMessage(message).then(() => {
       this.refresh();
       input.value = "";
+      
     });
+    document.getElementById("msg").focus();
   }
 
   async postMessage(conversation, message) {
@@ -712,10 +717,11 @@ class Messenger extends Component {
   }
 
   render() {
+    if(!this.props.authenticated) return <Redirect to='/' />;
     if (!this.props.user)
       return (<div> Loading... </div>);
     if (this.activeConversation)
-      this.activeConversation.sortMessages(false);
+      this.activeConversation.sortMessages(true);
     return (
       <div className="Messages-wrapper">
         {/* Conversation List */}
@@ -726,20 +732,24 @@ class Messenger extends Component {
           />
         {/* MessagePanel */}
         <MessagePanel
-          title={this.props.user.name || this.props.user.id}
+          title={ "Messages" }
           user={this.props.user}
           messages={this.activeConversation ? this.activeConversation.messages : []}
           />
         {/* Submit Button */}
-        <form onSubmit= {this.onSubmit} className="Messages-rs-form">
-          <textarea
-            onKeyPress={(event) => event.key === 'Enter' ? this.onSubmit(event) : undefined}
-            name="msg"
-            className="Messages-rs-form-input"
-            type="text"
-            />
-        <input className="button button--color-green" type="submit" value="SEND"/>
-        </form>
+        {this.state.activeConversation &&
+          <form onSubmit= {(e) => this.onSubmit(e)} className="Messages-rs-form">
+            <textarea
+              onKeyPress={(event) => event.key === 'Enter' && event.key !== 'Shift' ? this.onSubmit(event) : undefined}
+              name="msg"
+              id="msg"
+              className="Messages-rs-form-input"
+              type="text"
+              autoFocus
+              />
+            <input className="button button--color-green" type="submit" value="SEND" />
+          </form>
+        }
       </div>
     );
   }
@@ -900,6 +910,7 @@ class Messenger extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    authenticated: state.auth,
     user: state.user,
     convos: state.convos
   }

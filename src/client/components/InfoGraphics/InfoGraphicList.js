@@ -16,11 +16,12 @@ class InfoGraphicList extends Component {
     super(props);
     this.color = props.color;
     this.title = props.title || "TITLE";
+    
   }
   componentDidMount(){
     if(this.props.accounts === 0 && this.props.user.type !== accTypes[0] ) return;
-      if(this.props.children[0]){
-        return this.props.setInfoGraphicBlob({accountImg:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
+      if(this.props.children[0]){       
+        return this.props.setInfoGraphicBlob({accountData:this.props.children[0].props.profilePicture || 'images/noPhoto.jpg', blob:this.props.children[0].props.children });
       }
       this.props.setInfoGraphicBlob({accountData: this.props.children[1][0].props.profilePicture, blob: <AccountData />});
   }
@@ -40,21 +41,22 @@ class InfoGraphicList extends Component {
   render(){
     let blobImage;
     blobImage = this.props.user.profilePicture || 'images/noPhoto.jpg' ;
-    if(this.props.info) blobImage = this.props.info.accountData ? this.props.info.accountData.profilePicture : 'images/noPhoto.jpg';
+    if (this.props.info) {
+      console.log(this.props.info)
+      blobImage = this.props.info.accountData ?
+          this.props.info.accountData : 'images/noPhoto.jpg';
+    }
 
     return (
       <div className='account-list'>
         <div>
           <h3 className='sticky--top-left'>{this.title}</h3>
-          <div className="flex-list">
-            <div className='account-item'>
-              <img src={blobImage} width='70px' height="70px"/>
-            </div>
-            <div className='flex-list'>
-                {this.props.children}
-            </div>
-            <div className='button button--color-green' onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')}>
-              &pls;
+          <div className="flex-list" >
+          {this.props.children}
+            <div style={{height: '100%',display: 'flex', alignItems: 'center'}}>
+              <div className='button button--color-green button--hover-white' style={this.props.user.type === accTypes[0] ? {display: 'none'} : {display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center'}} onClick={()=>this.props.user.type === accTypes[1] ? this.addCO() : alert('add manager')}>
+                Add Outlet
+              </div>
             </div>
           </div>
         </div>

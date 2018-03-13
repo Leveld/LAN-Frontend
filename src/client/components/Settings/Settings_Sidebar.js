@@ -90,8 +90,8 @@ class SettingsSidebar extends Component {
 
     return (
       <div className="sidebar settings-sidebar" style={this.props.settings ? {width:250} : {width: 0}}>
-        <Link onClick={()=>this.props.toggleSettings()} className="settings-profile-link" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>
-          <img className="profile-icon profile-icon--round" src={this.props.user.profilePicture} />
+        <Link onClick={()=>this.props.toggleSettings()}  className="settings-profile-link" to={`/profile?id=${this.props.user._id}&type=${this.props.user.type}`}>
+          <img style={{border: '1px solid black'}} className="profile-icon profile-icon--round" src={this.props.user.profilePicture} />
         </Link>
         {
           blocks.map((block, i) => <SettingsBlock key={i} title={block.title} data={block.data}/>)
