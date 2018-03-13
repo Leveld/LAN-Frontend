@@ -62,6 +62,7 @@ class Header extends Component {
     cookie.remove('type');
     window.localStorage.clear();
     window.location.href = "/";
+    this.props.setUser(null);
   }
 
   getLinks(){
@@ -104,7 +105,7 @@ class Header extends Component {
                 </Link>
                 <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>
               </div> :
-            !window.localStorage.getItem('access_token') && !this.props.user ? <div className="App-header-username">{this.getLinks()}</div> : null}
+            !window.localStorage.getItem('access_token')  ? <div className="App-header-username">{this.getLinks()}</div> : null}
             
           </div>
         </nav>
