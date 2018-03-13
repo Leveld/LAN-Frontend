@@ -3,6 +3,7 @@ import axios from 'axios';
 import {apiServerIP} from 'capstone-utils';
 import {accTypes} from '../../../server/config.json'
 import {Link} from 'react-router-dom';
+import CampaignStats from '../Campaigns/CampaignStats';
 
 
 class Search extends Component {
@@ -15,16 +16,27 @@ class Search extends Component {
   componentWillMount(){
     this.convo = this.props.convo;
     //get all users
+    this.findUsers();
+    this.findCampaigns();
+    
+
+  }
+  findUsers = () => {
     axios.get(`${apiServerIP}users`, {headers:{Authorization: window.localStorage.getItem('access_token')}})
     .then((res) => {
       this.setState({users: res.data});
     });
-    //get all campaigns
-    axios.get(`${apiServerIP}campaigns`, {headers:{Authorization: window.localStorage.getItem('access_token')}})
-    .then((res) => {
-      this.setState({campaigns: res.data});
-    });
+  }
 
+  findCampaigns = async () => {
+    //get all campaigns
+    let arr;
+    const campaigns = await axios.get(`${apiServerIP}campaigns`, {headers:{Authorization: window.localStorage.getItem('access_token')}});
+    if (campaigns.data) arr = await campaigns.data.map(async (campaign) => {
+      const user = await axios.get(`${apiServerIP}user?id=${campaign.owner.ownerID}&type=${campaign.owner.ownerType}`, {headers:{Authorization: window.localStorage.getItem('access_token')}});
+      if(user.data) return campaign.owner.ownerName = await user.data.businessName;
+    });
+    await this.setState({campaigns: campaigns.data});
   }
 
   filter = (input) => {
@@ -39,36 +51,7 @@ class Search extends Component {
     }
   }
 
-  findUser = (id, type) => {
-    axios.get(`${apiServerIP}user?id=${id}&type=${type}`, {headers:{Authorization:window.localStorage.getItem('access_token')}})
-    .then((res) => {
-      return res.data.name;
-    })
-    .catch((err) => {
-      alert(err.response.message);
-      return id;
-    });
-  }
-
-  addtoconvo = (participantID, participantType) => {
-    //if(!this.convo) return;
-    console.log(this.convo);
-    const participants = this.convo.participants;
-    participants.push({participantID, participantType});
-    axios.patch(`${apiServerIP}/conversation`, {
-      id: this.convo.id,
-      fields: {
-        participants
-      }
-  }, {headers:{Authorization: window.localStorage.getItem('access_token')}})
-  .then((res) => console.log(res.data))
-  .then((err) => alert(err));
-
-  }
-
   render() {
-    console.log(this.state.campaigns);
-
     return this.type === 'main' ?
     (
       <div className="search-bar" style={{display: 'flex', flexDirection: 'column' }}>
@@ -83,10 +66,9 @@ class Search extends Component {
         <input name="search" autoComplete="off"  onChange={(e)=> this.filter(e.target.value)} type="text" style={{width: '90%', fontSize: '1rem', background: "rgb(47, 150, 103)",border: '1px solid black', outline: 'none', color: 'white', fontWeight: 700}}/>
         
         </div>
-        
-        
+
           {this.state.type !== 'industry' && this.state.display.length ? this.state.display.map((user, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${user.id}&type=${user.type}`} style={{textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10}}>[{user.type === accTypes[0] ? 'BA' : user.type === accTypes[1] ? 'CP' : null}] {user.name}</Link>) : null}
-          {this.state.type === 'industry' && this.state.display.length ? this.state.display.map((campaign, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${campaign.owner.ownerID}&type=${campaign.owner.ownerType}`} style={{textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10}}>{campaign.preferredApplicant.industry} - {this.findUser(campaign.owner.ownerID, campaign.owner.ownerType)}</Link>) : null}
+          {this.state.type === 'industry' && this.state.display.length ? this.state.display.map((campaign, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${campaign.owner.ownerID}&type=${campaign.owner.ownerType}`} style={{textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10}}>{campaign.preferredApplicant.industry} - {campaign.owner.ownerName}</Link>) : null}
         
       </div>
     ) :

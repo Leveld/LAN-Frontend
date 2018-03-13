@@ -109727,7 +109727,13 @@ var _config = __webpack_require__(37);
 
 var _reactRouterDom = __webpack_require__(51);
 
+var _CampaignStats = __webpack_require__(769);
+
+var _CampaignStats2 = _interopRequireDefault(_CampaignStats);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -109739,9 +109745,89 @@ var Search = function (_Component) {
   _inherits(Search, _Component);
 
   function Search(props) {
+    var _this2 = this;
+
     _classCallCheck(this, Search);
 
     var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+
+    _this.findUsers = function () {
+      _axios2.default.get(_capstoneUtils.apiServerIP + 'users', { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
+        _this.setState({ users: res.data });
+      });
+    };
+
+    _this.findCampaigns = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var arr, campaigns;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              //get all campaigns
+              arr = void 0;
+              _context2.next = 3;
+              return _axios2.default.get(_capstoneUtils.apiServerIP + 'campaigns', { headers: { Authorization: window.localStorage.getItem('access_token') } });
+
+            case 3:
+              campaigns = _context2.sent;
+
+              if (!campaigns.data) {
+                _context2.next = 8;
+                break;
+              }
+
+              _context2.next = 7;
+              return campaigns.data.map(function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(campaign) {
+                  var user;
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          _context.next = 2;
+                          return _axios2.default.get(_capstoneUtils.apiServerIP + 'user?id=' + campaign.owner.ownerID + '&type=' + campaign.owner.ownerType, { headers: { Authorization: window.localStorage.getItem('access_token') } });
+
+                        case 2:
+                          user = _context.sent;
+
+                          if (!user.data) {
+                            _context.next = 7;
+                            break;
+                          }
+
+                          _context.next = 6;
+                          return user.data.businessName;
+
+                        case 6:
+                          return _context.abrupt('return', campaign.owner.ownerName = _context.sent);
+
+                        case 7:
+                        case 'end':
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee, _this2);
+                }));
+
+                return function (_x) {
+                  return _ref2.apply(this, arguments);
+                };
+              }());
+
+            case 7:
+              arr = _context2.sent;
+
+            case 8:
+              _context2.next = 10;
+              return _this.setState({ campaigns: campaigns.data });
+
+            case 10:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2);
+    }));
 
     _this.filter = function (input) {
       if (input === "") return _this.setState({ display: [] });
@@ -109759,32 +109845,6 @@ var Search = function (_Component) {
       }
     };
 
-    _this.findUser = function (id, type) {
-      _axios2.default.get(_capstoneUtils.apiServerIP + 'user?id=' + id + '&type=' + type, { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
-        return res.data.name;
-      }).catch(function (err) {
-        alert(err.response.message);
-        return id;
-      });
-    };
-
-    _this.addtoconvo = function (participantID, participantType) {
-      //if(!this.convo) return;
-      console.log(_this.convo);
-      var participants = _this.convo.participants;
-      participants.push({ participantID: participantID, participantType: participantType });
-      _axios2.default.patch(_capstoneUtils.apiServerIP + '/conversation', {
-        id: _this.convo.id,
-        fields: {
-          participants: participants
-        }
-      }, { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
-        return console.log(res.data);
-      }).then(function (err) {
-        return alert(err);
-      });
-    };
-
     _this.state = { users: [], campaigns: [], display: [], type: 'name' };
     _this.type = props.type;
     _this.convo = props.convo;
@@ -109794,24 +109854,15 @@ var Search = function (_Component) {
   _createClass(Search, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var _this2 = this;
-
       this.convo = this.props.convo;
       //get all users
-      _axios2.default.get(_capstoneUtils.apiServerIP + 'users', { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
-        _this2.setState({ users: res.data });
-      });
-      //get all campaigns
-      _axios2.default.get(_capstoneUtils.apiServerIP + 'campaigns', { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
-        _this2.setState({ campaigns: res.data });
-      });
+      this.findUsers();
+      this.findCampaigns();
     }
   }, {
     key: 'render',
     value: function render() {
       var _this3 = this;
-
-      console.log(this.state.campaigns);
 
       return this.type === 'main' ? _react2.default.createElement(
         'div',
@@ -109869,7 +109920,7 @@ var Search = function (_Component) {
               }, key: i, to: '/profile?id=' + campaign.owner.ownerID + '&type=' + campaign.owner.ownerType, style: { textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10 } },
             campaign.preferredApplicant.industry,
             ' - ',
-            _this3.findUser(campaign.owner.ownerID, campaign.owner.ownerType)
+            campaign.owner.ownerName
           );
         }) : null
       ) : this.type === 'messenger' ? _react2.default.createElement(
@@ -110183,7 +110234,13 @@ var _config = __webpack_require__(37);
 
 var _reactRouterDom = __webpack_require__(51);
 
+var _CampaignStats = __webpack_require__(769);
+
+var _CampaignStats2 = _interopRequireDefault(_CampaignStats);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -110195,9 +110252,89 @@ var Search = function (_Component) {
   _inherits(Search, _Component);
 
   function Search(props) {
+    var _this2 = this;
+
     _classCallCheck(this, Search);
 
     var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+
+    _this.findUsers = function () {
+      _axios2.default.get(_capstoneUtils.apiServerIP + 'users', { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
+        _this.setState({ users: res.data });
+      });
+    };
+
+    _this.findCampaigns = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var arr, campaigns;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              //get all campaigns
+              arr = void 0;
+              _context2.next = 3;
+              return _axios2.default.get(_capstoneUtils.apiServerIP + 'campaigns', { headers: { Authorization: window.localStorage.getItem('access_token') } });
+
+            case 3:
+              campaigns = _context2.sent;
+
+              if (!campaigns.data) {
+                _context2.next = 8;
+                break;
+              }
+
+              _context2.next = 7;
+              return campaigns.data.map(function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(campaign) {
+                  var user;
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          _context.next = 2;
+                          return _axios2.default.get(_capstoneUtils.apiServerIP + 'user?id=' + campaign.owner.ownerID + '&type=' + campaign.owner.ownerType, { headers: { Authorization: window.localStorage.getItem('access_token') } });
+
+                        case 2:
+                          user = _context.sent;
+
+                          if (!user.data) {
+                            _context.next = 7;
+                            break;
+                          }
+
+                          _context.next = 6;
+                          return user.data.businessName;
+
+                        case 6:
+                          return _context.abrupt('return', campaign.owner.ownerName = _context.sent);
+
+                        case 7:
+                        case 'end':
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee, _this2);
+                }));
+
+                return function (_x) {
+                  return _ref2.apply(this, arguments);
+                };
+              }());
+
+            case 7:
+              arr = _context2.sent;
+
+            case 8:
+              _context2.next = 10;
+              return _this.setState({ campaigns: campaigns.data });
+
+            case 10:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2);
+    }));
 
     _this.filter = function (input) {
       if (input === "") return _this.setState({ display: [] });
@@ -110215,32 +110352,6 @@ var Search = function (_Component) {
       }
     };
 
-    _this.findUser = function (id, type) {
-      _axios2.default.get(_capstoneUtils.apiServerIP + 'user?id=' + id + '&type=' + type, { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
-        return res.data.name;
-      }).catch(function (err) {
-        alert(err.response.message);
-        return id;
-      });
-    };
-
-    _this.addtoconvo = function (participantID, participantType) {
-      //if(!this.convo) return;
-      console.log(_this.convo);
-      var participants = _this.convo.participants;
-      participants.push({ participantID: participantID, participantType: participantType });
-      _axios2.default.patch(_capstoneUtils.apiServerIP + '/conversation', {
-        id: _this.convo.id,
-        fields: {
-          participants: participants
-        }
-      }, { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
-        return console.log(res.data);
-      }).then(function (err) {
-        return alert(err);
-      });
-    };
-
     _this.state = { users: [], campaigns: [], display: [], type: 'name' };
     _this.type = props.type;
     _this.convo = props.convo;
@@ -110250,24 +110361,15 @@ var Search = function (_Component) {
   _createClass(Search, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var _this2 = this;
-
       this.convo = this.props.convo;
       //get all users
-      _axios2.default.get(_capstoneUtils.apiServerIP + 'users', { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
-        _this2.setState({ users: res.data });
-      });
-      //get all campaigns
-      _axios2.default.get(_capstoneUtils.apiServerIP + 'campaigns', { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
-        _this2.setState({ campaigns: res.data });
-      });
+      this.findUsers();
+      this.findCampaigns();
     }
   }, {
     key: 'render',
     value: function render() {
       var _this3 = this;
-
-      console.log(this.state.campaigns);
 
       return this.type === 'main' ? _react2.default.createElement(
         'div',
@@ -110325,7 +110427,7 @@ var Search = function (_Component) {
               }, key: i, to: '/profile?id=' + campaign.owner.ownerID + '&type=' + campaign.owner.ownerType, style: { textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10 } },
             campaign.preferredApplicant.industry,
             ' - ',
-            _this3.findUser(campaign.owner.ownerID, campaign.owner.ownerType)
+            campaign.owner.ownerName
           );
         }) : null
       ) : this.type === 'messenger' ? _react2.default.createElement(
