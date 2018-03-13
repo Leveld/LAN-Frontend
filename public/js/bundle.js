@@ -109759,6 +109759,15 @@ var Search = function (_Component) {
       }
     };
 
+    _this.findUser = function (id, type) {
+      _axios2.default.get(_capstoneUtils.apiServerIP + 'user?id=' + id + '&type=' + type, { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
+        return res.data.name;
+      }).catch(function (err) {
+        alert(err.response.message);
+        return id;
+      });
+    };
+
     _this.addtoconvo = function (participantID, participantType) {
       //if(!this.convo) return;
       console.log(_this.convo);
@@ -109860,7 +109869,7 @@ var Search = function (_Component) {
               }, key: i, to: '/profile?id=' + campaign.owner.ownerID + '&type=' + campaign.owner.ownerType, style: { textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10 } },
             campaign.preferredApplicant.industry,
             ' - ',
-            campaign.owner.ownerID
+            _this3.findUser(campaign.owner.ownerID, campaign.owner.ownerType)
           );
         }) : null
       ) : this.type === 'messenger' ? _react2.default.createElement(
@@ -110206,6 +110215,15 @@ var Search = function (_Component) {
       }
     };
 
+    _this.findUser = function (id, type) {
+      _axios2.default.get(_capstoneUtils.apiServerIP + 'user?id=' + id + '&type=' + type, { headers: { Authorization: window.localStorage.getItem('access_token') } }).then(function (res) {
+        return res.data.name;
+      }).catch(function (err) {
+        alert(err.response.message);
+        return id;
+      });
+    };
+
     _this.addtoconvo = function (participantID, participantType) {
       //if(!this.convo) return;
       console.log(_this.convo);
@@ -110307,7 +110325,7 @@ var Search = function (_Component) {
               }, key: i, to: '/profile?id=' + campaign.owner.ownerID + '&type=' + campaign.owner.ownerType, style: { textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10 } },
             campaign.preferredApplicant.industry,
             ' - ',
-            campaign.owner.ownerID
+            _this3.findUser(campaign.owner.ownerID, campaign.owner.ownerType)
           );
         }) : null
       ) : this.type === 'messenger' ? _react2.default.createElement(
