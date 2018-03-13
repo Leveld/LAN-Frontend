@@ -70,12 +70,12 @@ class Search extends Component {
         </select>
         
         <input name="search" autoComplete="off"  onChange={(e)=> this.filter(e.target.value)} type="text" style={{width: '90%', fontSize: '1rem', background: "rgb(47, 150, 103)",border: '1px solid black', outline: 'none', color: 'white', fontWeight: 700}}/>
-        <hr/>
+        
         </div>
         
         
   {this.state.type !== 'industry' && this.state.display.length ? this.state.display.map((user, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${user.id}&type=${user.type}`} style={{textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10}}>[{user.type === accTypes[0] ? 'BA' : user.type === accTypes[1] ? 'CP' : null}] {user.name}</Link>) : null}
-          {this.state.type === 'industry' && this.state.display.length ? this.state.display.map((campaign, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${campaign.owner.ownerID}&type=${campaign.owner.ownerType}`} style={{textDecoration: 'none', marginLeft: 5}}>{campaign.preferredApplicant.industry} - {campaign.owner.ownerID}</Link>) : null}
+          {this.state.type === 'industry' && this.state.display.length ? this.state.display.map((campaign, i) => <Link onClick={() => this.setState({display: []})} key={i} to={`/profile?id=${campaign.owner.ownerID}&type=${campaign.owner.ownerType}`} style={{textDecoration: 'none', background: '#171738', color: 'white', margin: 5, padding: 10}}>{campaign.preferredApplicant.industry} - {campaign.owner.ownerID}</Link>) : null}
         
       </div>
     ) :

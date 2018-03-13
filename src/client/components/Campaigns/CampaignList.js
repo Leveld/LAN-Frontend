@@ -34,7 +34,7 @@ import {connect} from 'react-redux';
   }
 
   componentWillReceiveProps = (props) => {
-    this.setState({owner: props._id, type: props.type});
+    this.setState({owner: props._id, type: props.type, campaigns: props.campaigns});
   }
 
   toggleForm = () => this.setState({form: !this.state.form});

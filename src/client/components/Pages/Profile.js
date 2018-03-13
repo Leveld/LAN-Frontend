@@ -37,7 +37,7 @@ class Profile extends Component {
           participantType: this.state.user.type
         }
       ]}, { headers:{Authorization: this.token }}).then((a) => {
-        window.location.replace('/messages');
+        window.location.href = '/messages';
       }).catch((c) => {
         console.log(c);
       });

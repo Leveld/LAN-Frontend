@@ -717,8 +717,8 @@ class Messenger extends Component {
   }
 
   render() {
-    if(!this.props.authenticated) return <Redirect to='/' />;
-    if (!this.props.user)
+    // if(!this.props.authenticated) return <Redirect to='/' />;
+    if (!this.props.user || !this.props.user.name)
       return (<div> Loading... </div>);
     if (this.activeConversation)
       this.activeConversation.sortMessages(true);

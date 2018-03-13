@@ -6,7 +6,7 @@ import {Cookies} from 'react-cookie';
 import axios from 'axios';
 import {setUser, signIn, signOut, toggleSettings} from '../../actions';
 import {Search} from '../../components';
-const {apiServerIP, frontServerIP, BETA} = require('capstone-utils');
+const {apiServerIP, frontServerIP, BETA, IS_DEVELOPMENT} = require('capstone-utils');
 const {accTypes} = require('../../../server/config.json');
 const cookie = new Cookies();
 
@@ -20,7 +20,7 @@ class Header extends Component {
 
   componentDidMount(){
     // CHECK PULL REQUESTS
-    if(!process.env.PRODUCTION){
+    if (IS_DEVELOPMENT) {
       this.checkPR();
       setInterval(() => {
         this.setState({repos: '', data: []});
@@ -65,7 +65,7 @@ class Header extends Component {
     cookie.remove('access_token', {path:'/', domain: domain[2]});
     cookie.remove('type');
     window.localStorage.clear();
-    window.location.replace("/");
+    window.location.href = "/";
   }
 
   getLinks(){
