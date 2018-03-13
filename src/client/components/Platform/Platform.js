@@ -19,7 +19,6 @@ class Platform extends Component {
     const selected = {color: 'white', background: 'red', border: '1px solid white'};
     const platform = this.state.platform;
     const viewer = this.props.user;
-    console.log(platform);
     return (
       <div className="Platform-item">
         <div className="Platform-tabs">

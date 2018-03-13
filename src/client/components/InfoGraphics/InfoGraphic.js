@@ -11,7 +11,6 @@ const InfoGraphic = (props) => {
     if (props.children) return props.children;
     return ( <div> NO BLOB FOUND </div> );
   };
-  console.log(props);
   return (
     <div className='account-item' style={props.parent.state.accSel === props.index ? {border: '3px solid royalblue', borderRadius: 10, cursor: 'pointer'} : {borderRadius: 10, cursor: 'pointer', border: '3px solid black',}}onClick={() => props.setInfoGraphicBlob({accountData: props.profilePicture, blob: getBlob()})}>
       <img onClick={()=> props.parent.setState({accSel:props.index})} src={props.profilePicture || 'images/noPhoto.jpg'} alt={'Info Graphic'} />

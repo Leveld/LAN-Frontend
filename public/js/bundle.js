@@ -24630,7 +24630,6 @@ var AccountData = function AccountData(props) {
     { className: 'M-Home' },
     _react2.default.createElement(_OverviewPaneList2.default, { paneList: panePoints }),
     _react2.default.createElement(_scheduler2.default, null),
-    console.log('props=> ', props),
     _react2.default.createElement(_CampaignList2.default, { _id: props.owner ? props.owner.ownerID : props._id, type: props.owner ? props.owner.ownerType : props.type })
   );
 };
@@ -24657,18 +24656,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // import '../../styles/OverviewPane.css';
 
 var OverviewPane = function OverviewPane(props) {
-    console.log('dataView', props.dataView);
     return _react2.default.createElement(
-        'div',
-        { className: 'pane' },
+        "div",
+        { className: "pane" },
         props.title && _react2.default.createElement(
-            'h3',
+            "h3",
             null,
             props.title
         ),
         props.dataView,
         props.description && _react2.default.createElement(
-            'p',
+            "p",
             null,
             props.description
         )
@@ -75478,7 +75476,6 @@ var InfoGraphicList = function (_Component) {
       var blobImage = void 0;
       blobImage = this.props.user.profilePicture || 'images/noPhoto.jpg';
       if (this.props.info) {
-        console.log(this.props.info);
         blobImage = this.props.info.accountData ? this.props.info.accountData : 'images/noPhoto.jpg';
       }
 
@@ -76714,7 +76711,6 @@ var Campaign = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Campaign.__proto__ || Object.getPrototypeOf(Campaign)).call(this, props));
 
-    console.log('props are ' + JSON.stringify(props.data));
     _this.id = props.data.id;
     _this.description = props.data.description;
     _this.category = props.data.preferredApplicant.industry;
@@ -93376,7 +93372,6 @@ var InfoGraphic = function InfoGraphic(props) {
       ' NO BLOB FOUND '
     );
   };
-  console.log(props);
   return _react2.default.createElement(
     'div',
     { className: 'account-item', style: props.parent.state.accSel === props.index ? { border: '3px solid royalblue', borderRadius: 10, cursor: 'pointer' } : { borderRadius: 10, cursor: 'pointer', border: '3px solid black' }, onClick: function onClick() {
@@ -93990,7 +93985,6 @@ var Platform = function (_Component) {
       var selected = { color: 'white', background: 'red', border: '1px solid white' };
       var platform = this.state.platform;
       var viewer = this.props.user;
-      console.log(platform);
       return _react2.default.createElement(
         'div',
         { className: 'Platform-item' },
@@ -108124,7 +108118,6 @@ var MessagePanel = function (_Component4) {
           ''
         ),
         this.messages.map(function (message, i) {
-          console.log("MESSAGE", message);
           return _react2.default.createElement(Message, { key: i, message: message, user: _this8.user });
         })
       );
@@ -108528,7 +108521,6 @@ var ConversationDS = function () {
 
         if (d1 < d2) return newestFirst ? -1 : 1;
         if (d1 > d2) return newestFirst ? 1 : -1;
-        console.log('hey there');
         return 0;
       };
     };
@@ -108999,10 +108991,9 @@ var Messenger = function (_Component5) {
 
                           case 13:
                             _this13.conversations.push(conversation);
-                            console.log('nothin', conversation);
                             return _context13.abrupt('return', conversation);
 
-                          case 16:
+                          case 15:
                           case 'end':
                             return _context13.stop();
                         }
@@ -110125,7 +110116,6 @@ var SettingsSidebar = function (_Component) {
         showPhoneNumber: false,
         showTwitter: false
       };
-      console.log('USER: ', this.props.user);
       this.props.user.settings ? userSettings = this.props.user.settings : null;
 
       var blocks = [{ title: 'SETTINGS', data: [this.findSettings(userSettings)] }];

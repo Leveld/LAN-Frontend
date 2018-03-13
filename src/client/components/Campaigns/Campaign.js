@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 export default class Campaign extends Component {
   constructor(props){
     super(props);
-    console.log('props are ' + JSON.stringify(props.data));
     this.id = props.data.id;
     this.description = props.data.description;
     this.category = props.data.preferredApplicant.industry;

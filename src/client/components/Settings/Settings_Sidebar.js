@@ -79,7 +79,6 @@ class SettingsSidebar extends Component {
       showPhoneNumber: false,
       showTwitter: false
     };
-    console.log('USER: ', this.props.user);
     this.props.user.settings ? userSettings = this.props.user.settings : null;
 
     const blocks = [

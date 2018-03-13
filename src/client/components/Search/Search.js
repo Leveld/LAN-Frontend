@@ -13,14 +13,14 @@ class Search extends Component {
     this.type = props.type;
     this.convo = props.convo;
   }
+  
   componentWillMount(){
     this.convo = this.props.convo;
     //get all users
     this.findUsers();
     this.findCampaigns();
-    
-
   }
+
   findUsers = () => {
     axios.get(`${apiServerIP}users`, {headers:{Authorization: window.localStorage.getItem('access_token')}})
     .then((res) => {

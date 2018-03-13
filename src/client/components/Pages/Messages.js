@@ -180,7 +180,6 @@ class MessagePanel extends Component {
         <div className="Messages-header">{ '' }</div>
         {
           this.messages.map((message, i) => {
-            console.log("MESSAGE",message);
             return (<Message key={i} message={message} user={this.user} />);
           })
         }
@@ -365,7 +364,6 @@ class ConversationDS {
         return newestFirst ? -1 : 1;
       if (d1 > d2)
         return newestFirst ? 1 : -1;
-      console.log('hey there')
       return 0;
     };
 
@@ -571,7 +569,6 @@ class Messenger extends Component {
         return this.conversastions[index];
       }
       this.conversations.push(conversation);
-      console.log('nothin', conversation)
       return conversation;
     };
 

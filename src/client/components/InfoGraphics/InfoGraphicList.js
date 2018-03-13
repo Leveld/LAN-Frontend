@@ -42,7 +42,6 @@ class InfoGraphicList extends Component {
     let blobImage;
     blobImage = this.props.user.profilePicture || 'images/noPhoto.jpg' ;
     if (this.props.info) {
-      console.log(this.props.info)
       blobImage = this.props.info.accountData ?
           this.props.info.accountData : 'images/noPhoto.jpg';
     }
