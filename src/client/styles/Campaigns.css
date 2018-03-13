@@ -16,6 +16,9 @@
   overflow-x: hidden
 }
 
+.transisiton--opacity {
+  transition: 0.5s opacity, 0.5s width;
+}
 .Campaign-header {
   width: 100%;
   height: 5%;

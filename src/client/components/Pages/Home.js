@@ -11,9 +11,10 @@ const cookie = new Cookies();
 class Home extends Component {
 
   render(){
-    if(!this.props.user) return <div />;
+   
     return (
       <main className="Home-wrapper">
+       {this.props.user && !this.props.authenticated ? <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '5%'}} src={'images/loading.gif'} /></div> : null}
       {
       !this.props.authenticated && (!cookie.get('access_token') && !window.localStorage.getItem('access_token')) ?
       <div>

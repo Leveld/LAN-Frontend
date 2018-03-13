@@ -37,7 +37,7 @@ import {connect} from 'react-redux';
   }
 
   componentWillReceiveProps = (props) => {
-    this.setState({owner: props._id, type: props.type, campaigns: props.campaigns});
+    this.setState({owner: props._id, type: props.type, campaigns: props.campaigns || []});
   }
 
   toggleForm = () => this.setState({form: !this.state.form});
@@ -48,8 +48,8 @@ import {connect} from 'react-redux';
         {this.state.form ? <CampaignAdd parent={this}/> : null}
         <h3 className="campaign--header"> Campaigns </h3>
           <div className='campaign-list'>
-            {this.state.campaigns.length === 0 ? <div>NO CAMPAIGNS</div> : null}
-            {this.state.campaigns.map((campaign, i) => { return <Campaign key={i} id={i+1} data={campaign} title={`${campaign.title} ${i+1}`} /> })}
+            {Array.isArray(this.state.campaigns) ? this.state.campaigns.length === 0 ? <div>NO CAMPAIGNS</div> : null:null}
+            {this.state.campaigns.map((campaign, i) => { return <Campaign key={i} user={this.props.user} key={i} id={i+1} data={campaign} title={`${campaign.title} ${i+1}`} /> })}
           </div>
           {this.state.type === accTypes[0] && this.state.owner === this.props.user._id ? <button className="campaign--add" onClick={()=>this.toggleForm()}>Add A New Campaign</button> : null}
           {/*<CampaignStats />*/}

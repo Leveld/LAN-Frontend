@@ -71,7 +71,7 @@ class App extends Component {
               this.state.type === 'User' ? <Redirect to={'/register'}/> : <Home auth={auth} />
               }/>
             <Route path="/profile" component={() =>
-              accTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Redirect to={'/register'} /> : history.back()
+              accTypes.includes(this.state.type) ? <Profile /> : this.state.type === 'User' ? <Redirect to={'/register'} /> : <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '10%'}} src={'images/loading.gif'} /></div>
             }/>
             <Route path="/error" component={Error} />
             <Route path='/register' component={() => <Registration auth={auth} /> }/>

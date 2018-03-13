@@ -109,7 +109,7 @@ class MemberHome extends Component {
 
 
   render(){
-    if(!accTypes.includes(this.props.user.type) || !this.props.authenticated || (!cookie.get('access_token') && !window.localStorage.getItem('access_token'))) return <div />;
+    if(!accTypes.includes(this.props.user.type) || !this.props.authenticated || (!cookie.get('access_token') && !window.localStorage.getItem('access_token'))) return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '5%'}} src={'images/loading.gif'} /></div>;
 
     if(!accTypes.includes(this.props.user.type)) return <div className="no_user">NO ACCOUNT SET</div>;
 

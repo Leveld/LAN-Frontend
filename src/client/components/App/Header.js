@@ -77,11 +77,7 @@ class Header extends Component {
           <a className="button button--color-green button--hover-white" onClick={() => {
             this.props.auth.login();
             window.localStorage.clear();
-          }}>Register</a>
-          <a className="button button--color-green button--hover-white" onClick={() => {
-            this.props.auth.login();
-            window.localStorage.clear();
-          }}>Sign In</a>
+          }}>Login</a>
         </div>
       );
     }
@@ -108,7 +104,7 @@ class Header extends Component {
                 </Link>
                 <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>
               </div> :
-            <div className="App-header-username"> {this.props.user.name} {this.getLinks()}</div>}
+            !window.localStorage.getItem('access_token') && !this.props.user ? <div className="App-header-username">{this.getLinks()}</div> : null}
             
           </div>
         </nav>

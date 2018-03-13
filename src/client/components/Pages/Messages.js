@@ -22,7 +22,7 @@ class Conversation extends Component {
 
   get title() {
     if (!this.props.conversation || !this.props.conversation.title)
-      return 'Loading...'
+      return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '5%'}} src={'images/loading.gif'} /></div>
     return this.props.conversation.title;
   }
 
@@ -39,7 +39,7 @@ class Conversation extends Component {
   render() {
     const conversation = this.props.conversation;
     if (!conversation)
-      return (<div> Loading.... </div>);
+      return (<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '10%'}} src={'images/loading.gif'} /></div>);
     return (
       <div className="button--color-green button--hover-white" style={{ margin: '.5rem', cursor: 'pointer', padding: '.2rem' }} onClick={() => conversation ? this.props.selectConversation(conversation) : null}>
         { this.title }
@@ -63,7 +63,7 @@ class ConversationList extends Component {
 
   render() {
     if (!this.props.user)
-      return (<div> Loading.... </div>);
+      return (<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '10%'}} src={'images/loading.gif'} /></div>);
     return (
       <div className="Messages-ls">
         <div className="Messages-ls-content">
@@ -128,13 +128,13 @@ class Message extends Component {
   set user(_) {}
 
   render() {
-    const message = this.props.message ? this.message : 'Loading...';
+    const message = this.props.message ? this.message : <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '5%'}} src={'images/loading.gif'} /></div>;
     let name = this.author && this.author.name ? this.author.name :
                 this.author && this.author.id ? this.author.id : null;
     if (name) {
       name = <Link to={`/profile?id=${this.author.id}&type=${this.author.type}`}>{name}</Link>
     } else {
-      name = 'Loading...';
+      name = <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '5%'}} src={'images/loading.gif'} /></div>;
     }
     
     return (
@@ -715,7 +715,7 @@ class Messenger extends Component {
   render() {
     // if(!this.props.authenticated) return <Redirect to='/' />;
     if (!this.props.user || !this.props.user.name)
-      return (<div> Loading... </div>);
+      return (<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '5%'}} src={'images/loading.gif'} /></div>);
     if (this.activeConversation)
       this.activeConversation.sortMessages(true);
     return (

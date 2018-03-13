@@ -45,7 +45,7 @@ class Profile extends Component {
 
   render(){
     const user = this.state.user;
-    if(!this.props.authenticated || !user) return <div className="Error-wrapper" />;
+    if(!this.props.authenticated || !user) return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '5%'}} src={'images/loading.gif'} /></div>;
 
    if(!user.type) return <div className="Error-wrapper"/>
    if(!accTypes.includes(user.type)) return (
@@ -61,6 +61,7 @@ class Profile extends Component {
           <div className="Profile-content-left">
             <div className="Profile-logo">
               <div className="Profile-logo-img">
+              
                 <img src={this.state.user.profilePicture || 'images/noPhoto.jpg'} width="100%"/>
               </div>
             </div>
@@ -96,7 +97,11 @@ class Profile extends Component {
               : null
             }
             <div style={!user.bio ? {display: 'none'}:{display: 'flex'}} className="Profile-bio">{user.bio}</div>
-                <CampaignList _id={this.state.user.id} type={this.state.user.type}/>
+            {this.state.user.type === accTypes[1] ? <div className="pane">
+              <h3>Content Outlets:</h3>
+              {this.state.user.contentOutlets.map((outlet) => <div className="pane">{outlet.channelName}</div>)}
+            </div> : null}
+            <CampaignList _id={this.state.user.id} type={this.state.user.type}/>
             <div style={{display: 'none'}}>{user.type === accTypes[1] ? <PlatformList list={user.contentOutlets || []}/> : user.type === accTypes[0] ? <ContractList /> : <div className="no_user_data">No Data</div>}</div>
           </div>
         </div>
