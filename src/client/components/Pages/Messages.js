@@ -9,6 +9,7 @@ import * as actions from '../../actions';
 //import '../../styles/Messages.css';
 import jwt from 'jsonwebtoken';
 import {clientSecret} from '../../../server/secret.json';
+import Search from '../Search/search';
 
 const cookie = new Cookies();
 const token = window.localStorage.getItem('access_token') || cookie.get('access_token');
