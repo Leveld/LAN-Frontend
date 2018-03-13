@@ -19,7 +19,11 @@ export default class Campaign extends Component {
         <p><span className="campaign-item--label">Status:</span> {this.status}</p>
         <p><span className="campaign-item--label">Content Outlet Type:</span> {this.coType}</p>
         <p style={{marginBottom: '1rem'}} ><span className="campaign-item--label">Description:</span> {this.description}</p>
-        <Link className="button button--color-green" to={`/profile?id=${this.userID}&type=Business#${this.id}`}>View Creator's Profile</Link>
+        {
+          !window.location.href.split('/')[3].toLowerCase().startsWith('profile') ?
+            <Link className="button button--color-green" to={`/profile?id=${this.userID}&type=Business#${this.id}`}>View Creator's Profile</Link> 
+          : null
+        }
       </div>
     )
   }

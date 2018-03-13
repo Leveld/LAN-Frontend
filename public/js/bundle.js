@@ -76773,11 +76773,11 @@ var Campaign = function (_Component) {
           ' ',
           this.description
         ),
-        _react2.default.createElement(
+        !window.location.href.split('/')[3].toLowerCase().startsWith('profile') ? _react2.default.createElement(
           _reactRouterDom.Link,
           { className: 'button button--color-green', to: '/profile?id=' + this.userID + '&type=Business#' + this.id },
           'View Creator\'s Profile'
-        )
+        ) : null
       );
     }
   }]);
