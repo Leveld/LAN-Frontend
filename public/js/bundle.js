@@ -94501,7 +94501,7 @@ var Home = function (_Component) {
       return _react2.default.createElement(
         'main',
         { className: 'Home-wrapper' },
-        window.localStorage.getItem('access_token') && !this.props.authenticated || !this.props.user ? _react2.default.createElement(
+        window.localStorage.getItem('access_token') && (!this.props.authenticated || !Object.entries(this.props.user).length > 0) ? _react2.default.createElement(
           'div',
           { style: { display: 'flex', justifyContent: 'center', alignItems: 'center' } },
           _react2.default.createElement('img', { style: { width: '5%' }, src: 'images/loading.gif' })

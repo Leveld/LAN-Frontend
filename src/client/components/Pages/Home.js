@@ -14,7 +14,7 @@ class Home extends Component {
    
     return (
       <main className="Home-wrapper">
-       {window.localStorage.getItem('access_token') && !this.props.authenticated || !this.props.user  ? <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '5%'}} src={'images/loading.gif'} /></div> : null}
+       {window.localStorage.getItem('access_token') && (!this.props.authenticated || !Object.entries(this.props.user).length > 0)  ? <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img style={{width: '5%'}} src={'images/loading.gif'} /></div> : null}
       {
       !this.props.authenticated && (!cookie.get('access_token') && !window.localStorage.getItem('access_token')) ?
       <div>
