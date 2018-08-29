@@ -5,12 +5,12 @@ const nodeExternals = require('webpack-node-externals');
 const { IS_PRODUCTION } = require('capstone-utils');
 var path = require('path');
 
-const isProduction = IS_PRODUCTION;
-const productionPluginDefine = isProduction ? [
-  new webpack.DefinePlugin({'process.env': {'NODE_ENV': JSON.stringify('production')}}),
+
+const productionPluginDefine = process.env.NODE_ENV === 'production' ? [
   new webpack.DefinePlugin({
-    'process.env.BROWSER': false
+    'process.env.NODE_ENV': JSON.stringify('production')
   }),
+  new webpack.optimize.UglifyJsPlugin()
 ] : [];
 const clientLoaders = isProduction ? productionPluginDefine.concat([
   new webpack.optimize.OccurrenceOrderPlugin(),

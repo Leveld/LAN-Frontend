@@ -2,16 +2,14 @@
   "name": "capstone",
   "version": "0.0.1",
   "scripts": {
-    "start": "npm run build & node src/server/server.js",
+    "start": "set NODE_ENV=production & npm run build & node src/server/server.js",
     "watch": "nodemon src/server/server.js",
     "build": "eslint src/*.js && eslint src/*.jsx && webpack",
-    "build-production": "npm run build -- -p",
     "dev-win": "start npm run build -- --watch && npm run watch",
     "dev-unix": "npm run build -- --watch & npm run watch",
     "devw": "npm run dev-win",
     "devm": "npm run dev-unix",
-    "devl": "npm run dev-unix",
-    "default": "react-scripts start"
+    "devl": "npm run dev-unix"
   },
   "dependencies": {
     "auth0-js": "^9.2.2",
@@ -21,7 +19,7 @@
     "babel-polyfill": "^6.26.0",
     "capstone-utils": "git+https://github.com/leveld/lan-utils.git",
     "chai": "^4.1.2",
-    "chai-http": "^3.0.0",
+    "chai-http": "^4.0.0",
     "chart.js": "^2.7.2",
     "css-loader": "^0.28.10",
     "eslint": "^3.17.1",
@@ -31,7 +29,6 @@
     "eslint-plugin-react": "^6.9.0",
     "express": "^4.16.2",
     "fs": "0.0.1-security",
-    "image-webpack-loader": "^4.0.0",
     "jsonwebtoken": "^8.1.1",
     "mongoose": "^5.0.2",
     "multer": "^1.3.0",
