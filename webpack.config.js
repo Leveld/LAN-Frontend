@@ -5,8 +5,8 @@ const nodeExternals = require('webpack-node-externals');
 const { IS_PRODUCTION } = require('capstone-utils');
 var path = require('path');
 
-
-const productionPluginDefine = process.env.NODE_ENV === 'production' ? [
+const isProduction = process.env.NODE_ENV === 'production';
+const productionPluginDefine = isProduction ? [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('production')
   }),
