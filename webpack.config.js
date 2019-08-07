@@ -10,11 +10,11 @@ const productionPluginDefine = isProduction ? [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('production')
   }),
-  new webpack.optimize.UglifyJsPlugin()
+ null 
 ] : [];
 const clientLoaders = isProduction ? productionPluginDefine.concat([
   new webpack.optimize.OccurrenceOrderPlugin(),
-  new UglifyJsPlugin(),
+  null,
   new webpack.DefinePlugin({
     'process.env.BROWSER': true
   }),
