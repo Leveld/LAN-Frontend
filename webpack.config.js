@@ -29,7 +29,7 @@ module.exports = [
     },
     plugins: clientLoaders.concat([
       new MiniCssExtractPlugin({
-        filename: '[name].[contenthash].css'
+        filename: '/css/styles.css'
       })
     ]),
     module: {
