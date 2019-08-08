@@ -1,6 +1,7 @@
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+//const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+//const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 const { IS_PRODUCTION } = require('capstone-utils');
 var path = require('path');
@@ -27,7 +28,7 @@ module.exports = [
       filename: 'js/bundle.js'
     },
     plugins: clientLoaders.concat([
-      new ExtractTextPlugin('css/styles.css', {
+      new MiniCssExtractPlugin('css/styles.css', {
         allChunks: true
       })
     ]),
@@ -46,12 +47,12 @@ module.exports = [
         {
           test: /\.scss$/,
           exclude: /node_modules/,
-          loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: [ 'css-loader', 'sass-loader' ] })
+          loader: MiniCssExtractPlugin.extract({ fallback: 'style-loader', use: [ 'css-loader', 'sass-loader' ] })
         },
         {
           test: /\.css$/,
           exclude: /node_modules/,
-          loader: ExtractTextPlugin.extract('css-loader')
+          loader: MiniCssExtractPlugin.extract('css-loader')
         },
         {
           test: /\.(png|jpg|gif)$/,
