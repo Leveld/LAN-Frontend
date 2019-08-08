@@ -28,9 +28,6 @@ module.exports = [
       filename: 'js/bundle.js'
     },
     plugins: clientLoaders.concat([
-      new MiniCssExtractPlugin('css/styles.css', {
-        allChunks: true
-      }),
       new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
@@ -53,11 +50,13 @@ module.exports = [
         {
           test: /\.scss$/,
           exclude: /node_modules/,
-          use:[{
-            loader: MiniCssExtractPlugin.loader,
+          use:[
+            {
+              loader: MiniCssExtractPlugin.loader,
+            },
             'css-loader',
             'sass-loader',
-          }],
+          ],
         },
         {
           test: /\.css$/,
