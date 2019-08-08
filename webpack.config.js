@@ -30,7 +30,13 @@ module.exports = [
     plugins: clientLoaders.concat([
       new MiniCssExtractPlugin('css/styles.css', {
         allChunks: true
-      })
+      }),
+      new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: 'css/styles.css',
+      chunkFilename: 'css/styles.css',
+    })
     ]),
     module: {
       loaders: [
@@ -47,13 +53,24 @@ module.exports = [
         {
           test: /\.scss$/,
           exclude: /node_modules/,
-          loader: MiniCssExtractPlugin.extract({ fallback: 'style-loader', use: [ 'css-loader', 'sass-loader' ] })
+          use:[{
+            loader: MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader',
+          }],
         },
         {
           test: /\.css$/,
           exclude: /node_modules/,
-          loader: MiniCssExtractPlugin.extract('css-loader')
-        },
+          use:[
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options:{
+                publicPath:'../
+              }
+            },
+            'css-loader'
+          ],
         {
           test: /\.(png|jpg|gif)$/,
           exclude:/node_modules/,
