@@ -50,7 +50,7 @@
     "webpack": "^3.8.1"
   },
   "devDependencies": {
-    "mini-css-extract-plugin": "^0.8.0"
+    "mini-css-extract-plugin": "^0.8.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
