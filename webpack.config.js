@@ -12,7 +12,7 @@ const productionPluginDefine = isProduction ? [
   })
 ] : [];
 const clientLoaders = isProduction ? productionPluginDefine.concat([
-  new webpack.optimize.OccurrenceOrderPlugin()
+  new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.DefinePlugin({
     'process.env.BROWSER': true
   }),
