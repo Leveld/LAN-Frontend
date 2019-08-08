@@ -9,12 +9,10 @@ const isProduction = process.env.NODE_ENV === 'production';
 const productionPluginDefine = isProduction ? [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('production')
-  }),
-  new webpack.optimize.UglifyJsPlugin()
+  })
 ] : [];
 const clientLoaders = isProduction ? productionPluginDefine.concat([
-  new webpack.optimize.OccurrenceOrderPlugin(),
-  new UglifyJsPlugin(),
+  new webpack.optimize.OccurrenceOrderPlugin()
   new webpack.DefinePlugin({
     'process.env.BROWSER': true
   }),
