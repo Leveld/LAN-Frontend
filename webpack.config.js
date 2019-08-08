@@ -70,6 +70,7 @@ module.exports = [
             },
             'css-loader'
           ],
+          }, 
         {
           test: /\.(png|jpg|gif)$/,
           exclude:/node_modules/,
