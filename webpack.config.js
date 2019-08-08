@@ -29,11 +29,8 @@ module.exports = [
     },
     plugins: clientLoaders.concat([
       new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: 'css/styles.css',
-      chunkFilename: 'css/styles.css',
-    })
+        filename: '[name].[contenthash].css'
+      })
     ]),
     module: {
       loaders: [
@@ -50,13 +47,16 @@ module.exports = [
         {
           test: /\.scss$/,
           exclude: /node_modules/,
-          use:[
-            {
-              loader: MiniCssExtractPlugin.loader,
-            },
-            'css-loader',
-            'sass-loader',
-          ],
+          use: [{
+                    loader: MiniCssExtractPlugin.loader,
+                }, {
+                    loader: 'css-loader',
+                    options: {
+                        minimize: true
+                    }
+                }, {
+                    loader: 'sass-loader'
+                }]
         },
         {
           test: /\.css$/,
