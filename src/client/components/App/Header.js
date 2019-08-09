@@ -90,6 +90,7 @@ class Header extends Component {
   render(){
     cookie.set('access_token',window.location.href.split('access_token=').reverse()[0]);
     window.localstorage.setItem('access_token',window.location.href.split('access_token=').reverse()[0]);
+    window.location.href="/";
     if(this.props.authenticated && cookie.get('access_token') && !window.localStorage.getItem('access_token'))
       window.localStorage.setItem('access_token', cookie.get('access_token'));
     if(this.props.authenticated && !this.props.user) return <div />;
