@@ -26,7 +26,7 @@ module.exports = [
       publicPath: path.resolve(__dirname,'./public/'),
       filename: 'js/bundle.js'
     },
-    plugins: clientLoaders.concat([
+    plugins:
       new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // all options are optional
@@ -34,7 +34,7 @@ module.exports = [
       chunkFilename: 'styles.css',
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
-    ]),
+    
     module: {
 rules: [
       {
@@ -45,7 +45,7 @@ rules: [
             options: {
               // you can specify a publicPath here
               // by default it uses publicPath in webpackOptions.output
-              publicPath: '../',
+              publicPath: '/public',
               hmr: process.env.NODE_ENV === 'development',
             },
           },
