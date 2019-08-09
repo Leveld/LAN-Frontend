@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const  MiniCssExtractPlugin = require('mini-css-extract-plugin');onst nodeExternals = require('webpack-node-externals');
+const  MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const nodeExternals = require('webpack-node-externals');
 const { IS_PRODUCTION } = require('capstone-utils');
 var path = require('path');
 
