@@ -88,7 +88,7 @@ class Header extends Component {
   }
 
   render(){
-    If(!cookie.get('access_token' || !window.localstorage.getItem('access_token')){
+    If(!cookie.get('access_token') || !window.localstorage.getItem('access_token')){
      cookie.set('access_token',window.location.href.split('access_token=').reverse()[0]);
      window.localstorage.setItem('access_token',window.location.href.split('access_token=').reverse()[0]);
      window.location.href="/";
